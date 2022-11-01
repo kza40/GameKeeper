@@ -1,4 +1,4 @@
-package ca.cmpt276.myapplication;
+package ca.cmpt276.myapplication.model;
 
 
 /*
