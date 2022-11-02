@@ -11,7 +11,11 @@ import android.widget.Toast;
 
 public class AddGame extends AppCompatActivity {
 
-    EditText example;
+    EditText edtP1Score;
+    EditText edtP2Score;
+    EditText edtPScore;
+    EditText edtGScore;
+    EditText edtGameName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,7 +24,18 @@ public class AddGame extends AppCompatActivity {
 
 
 
+
+        setupInputFields();
         setupSaveButton();
+    }
+
+    private void setupInputFields() {
+        edtP1Score = findViewById(R.id.p1Score);
+        edtP2Score = findViewById(R.id.p2Score);
+        edtPScore = findViewById(R.id.poorScore);
+        edtGScore = findViewById(R.id.goodScore);
+        edtGameName = findViewById(R.id.gameName);
+
     }
 
     private void setupSaveButton() {
