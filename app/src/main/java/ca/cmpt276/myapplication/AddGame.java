@@ -23,8 +23,6 @@ public class AddGame extends AppCompatActivity {
         setContentView(R.layout.activity_add_game);
 
 
-
-
         setupInputFields();
         setupSaveButton();
     }
@@ -45,8 +43,5 @@ public class AddGame extends AppCompatActivity {
             Toast.makeText(AddGame.this, "Just a demo", Toast.LENGTH_LONG).show();
         });
     }
-
-    public static Intent makeIntent(Context context){
-        return new Intent(context, AddGame.class);
-    }
 }
+
