@@ -11,11 +11,11 @@ import android.widget.Toast;
 
 public class AddGame extends AppCompatActivity {
 
-    EditText p1Score;
-    EditText p2Score;
-    EditText pScore;
-    EditText gScore;
-    EditText gameName;
+    EditText edtP1Score;
+    EditText edtP2Score;
+    EditText edtPScore;
+    EditText edtGScore;
+    EditText edtGameName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,13 +23,19 @@ public class AddGame extends AppCompatActivity {
         setContentView(R.layout.activity_add_game);
 
 
-        p1Score = findViewById(R.id.p1Score);
-        p2Score = findViewById(R.id.p2Score);
-        pScore = findViewById(R.id.poorScore);
-        gScore = findViewById(R.id.goodScore);
-        gameName = findViewById(R.id.gameName);
 
+
+        setupInputFields();
         setupSaveButton();
+    }
+
+    private void setupInputFields() {
+        edtP1Score = findViewById(R.id.p1Score);
+        edtP2Score = findViewById(R.id.p2Score);
+        edtPScore = findViewById(R.id.poorScore);
+        edtGScore = findViewById(R.id.goodScore);
+        edtGameName = findViewById(R.id.gameName);
+
     }
 
     private void setupSaveButton() {
