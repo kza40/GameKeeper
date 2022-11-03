@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class PreviewAchievements extends AppCompatActivity {
@@ -85,13 +86,13 @@ public class PreviewAchievements extends AppCompatActivity {
         return intent;
     }
 
-    public void updateAchievements(int numPlayers) {
+    private void updateAchievements(int numPlayers) {
         minScores.clear();
 
-        int lowerBound = numPlayers * poorScore;        // Set Level 1 achievement
+        int lowerBound = Math.min(numPlayers * poorScore, numPlayers * greatScore);
         minScores.add(lowerBound);
 
-        int upperBound = numPlayers * greatScore;       // Set Level 8 achievement
+        int upperBound = Math.max(numPlayers * poorScore, numPlayers * greatScore);
 
         int numIntervals = NUM_ACHIEVEMENTS - 1;
         int range = upperBound - lowerBound;
@@ -101,7 +102,7 @@ public class PreviewAchievements extends AppCompatActivity {
         // In case jumpAmt calculation is not a whole number, the space between Level 7 and Level 8
         // will be larger than the jumpAmt. The rest of the levels will be adjusted
 
-        int extraAmt = range % numIntervals;     // Between 0 - 6
+        int extraAmt = range % numIntervals;     // Between 0 to 6
         int indexToBeAdjusted = 0;      // Start adjusting the levels from Level 2
         int timesAdjusted = 0;
 
@@ -110,14 +111,17 @@ public class PreviewAchievements extends AppCompatActivity {
             currScore += jumpAmt;
             if (i == indexToBeAdjusted && timesAdjusted < extraAmt) {
                 currScore++;
-                indexToBeAdjusted += ((NUM_ACHIEVEMENTS - 2) / extraAmt);
+                indexToBeAdjusted += ((NUM_ACHIEVEMENTS - 2) /  extraAmt);
                 timesAdjusted++;
             }
 
             minScores.add(currScore);
         }
-
         minScores.add(upperBound);
+
+        if (numPlayers * poorScore > numPlayers * greatScore) {
+            Collections.reverse(minScores);
+        }
     }
 
 }
