@@ -11,7 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 
-public class AddGame extends AppCompatActivity {
+public class AddConfig extends AppCompatActivity {
 
     EditText edtPScore;
     EditText edtGScore;
@@ -22,7 +22,7 @@ public class AddGame extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_game);
+        setContentView(R.layout.activity_add_config);
 
         btnPreview = findViewById(R.id.previewBtn);
 
@@ -43,7 +43,7 @@ public class AddGame extends AppCompatActivity {
     private void setupPreviewButton() {
         btnPreview.setOnClickListener(view -> {
             Intent intent = PreviewAchievements.makeIntent(
-                        AddGame.this,
+                        AddConfig.this,
                         Integer.parseInt(edtPScore.getText().toString()),
                         Integer.parseInt(edtGScore.getText().toString())
             );
@@ -55,7 +55,7 @@ public class AddGame extends AppCompatActivity {
         Button btnSave = findViewById(R.id.saveBtn);
         btnSave.setOnClickListener(view -> {
             //this is just for now
-            Toast.makeText(AddGame.this, "Just a demo", Toast.LENGTH_LONG).show();
+            Toast.makeText(AddConfig.this, "Just a demo", Toast.LENGTH_LONG).show();
         });
     }
 
