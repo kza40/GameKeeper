@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private void setupAddButton() {
         ImageButton add = findViewById(R.id.addButton);
         add.setOnClickListener(view -> {
-            Intent intent = new Intent(MainActivity.this, AddGame.class);
+            Intent intent = new Intent(MainActivity.this, AddConfig.class);
             startActivity(intent);
         });
     }
