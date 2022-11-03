@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PreviewAchievements">
+
+    <EditText
+        android:id="@+id/edtNumPlayers"
+        android:layout_width="214dp"
+        android:layout_height="43dp"
+        android:ems="10"
+        android:hint="Total players"
+        android:inputType="number"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="#673AB7"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.81" />
+
+    <TextView
+        android:id="@+id/tvScoreLevel7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Level 7"
+        app:layout_constraintEnd_toEndOf="@+id/tvScoreLevel6"
+        app:layout_constraintStart_toStartOf="@+id/tvScoreLevel6"
+        app:layout_constraintTop_toBottomOf="@+id/tvScoreLevel6" />
+
+    <TextView
+        android:id="@+id/tvScoreLevel8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Level 8"
+        app:layout_constraintEnd_toEndOf="@+id/tvScoreLevel7"
+        app:layout_constraintStart_toStartOf="@+id/tvScoreLevel7"
+        app:layout_constraintTop_toBottomOf="@+id/tvScoreLevel7" />
+
+    <TextView
+        android:id="@+id/tvScoreLevel5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Level 5"
+        app:layout_constraintEnd_toEndOf="@+id/tvScoreLevel4"
+        app:layout_constraintStart_toStartOf="@+id/tvScoreLevel4"
+        app:layout_constraintTop_toBottomOf="@+id/tvScoreLevel4" />
+
+    <TextView
+        android:id="@+id/tvScoreLevel6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Level 6"
+        app:layout_constraintEnd_toEndOf="@+id/tvScoreLevel5"
+        app:layout_constraintStart_toStartOf="@+id/tvScoreLevel5"
+        app:layout_constraintTop_toBottomOf="@+id/tvScoreLevel5" />
+
+    <TextView
+        android:id="@+id/tvScores"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Scores"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.19" />
+
+    <TextView
+        android:id="@+id/tvScoreLevel1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Level 1"
+        app:layout_constraintEnd_toEndOf="@+id/tvScores"
+        app:layout_constraintStart_toStartOf="@+id/tvScores"
+        app:layout_constraintTop_toBottomOf="@+id/tvScores" />
+
+    <TextView
+        android:id="@+id/tvScoreLevel3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Level 3"
+        app:layout_constraintEnd_toEndOf="@+id/tvScoreLevel2"
+        app:layout_constraintStart_toStartOf="@+id/tvScoreLevel2"
+        app:layout_constraintTop_toBottomOf="@+id/tvScoreLevel2" />
+
+    <TextView
+        android:id="@+id/tvScoreLevel4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Level 4"
+        app:layout_constraintEnd_toEndOf="@+id/tvScoreLevel3"
+        app:layout_constraintStart_toStartOf="@+id/tvScoreLevel3"
+        app:layout_constraintTop_toBottomOf="@+id/tvScoreLevel3" />
+
+    <TextView
+        android:id="@+id/tvScoreLevel2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Level 2"
+        app:layout_constraintEnd_toEndOf="@+id/tvScoreLevel1"
+        app:layout_constraintStart_toStartOf="@+id/tvScoreLevel1"
+        app:layout_constraintTop_toBottomOf="@+id/tvScoreLevel1" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
