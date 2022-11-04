@@ -1,5 +1,6 @@
 package ca.cmpt276.myapplication;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -34,6 +35,9 @@ public class PreviewAchievements extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preview_achievements);
+
+        ActionBar ab = getSupportActionBar();
+        ab.setTitle("Achievements Preview");
 
         Intent intent = getIntent();
         poorScore = intent.getIntExtra(EXTRA_POOR_SCORE, 0);
