@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">My Application</string>
+    <string name="name">Name</string>
+    <string name="achievement_1_name">Name 1</string>
+    <string name="achievement_2_name">Name 2</string>
+    <string name="achievement_3_name">Name 3</string>
+    <string name="achievement_4_name">Name 4</string>
+    <string name="achievement_5_name">Name 5</string>
+    <string name="achievement_6_name">Name 6</string>
+    <string name="achievement_7_name">Name 7</string>
+    <string name="achievement_8_name">Name 8</string>
+    <string name="points">Points</string>
+    <string name="blank_field">-</string>
+    <string name="number_of_players">Number of players</string>
+    <string name="AchievementsTitle">Achievements</string>
 </resources>
