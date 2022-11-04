@@ -40,11 +40,11 @@ public class MainActivity extends AppCompatActivity {
         }
 
         List<String> theConfigs = new ArrayList<>();
-        for(Game game: gameManager){        //not sure what the problem is here
-            theConfigs.add(game.getGameTitle());
+        for(Game game: gameManager){
+            theConfigs.add(game.getGameTitle()+"\n");
         }
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.configs_layout, theConfigs );
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.configs_layout, theConfigs);
         ListView list = findViewById(R.id.listOfConfigs);
         list.setAdapter(adapter);
     }

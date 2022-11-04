@@ -58,8 +58,8 @@ public class AddConfig extends AppCompatActivity {
     private void setupSaveButton() {
         Button btnSave = findViewById(R.id.saveBtn);
         btnSave.setOnClickListener(view -> {
-            game = new Game(edtConfigName.getText().toString(), Integer.parseInt(edtPScore.toString()), Integer.parseInt(edtGScore.toString()));
-
+            game = new Game(edtConfigName.getText().toString(), Integer.parseInt(edtPScore.getText().toString()), Integer.parseInt(edtGScore.getText().toString()));
+            finish();
         });
     }
 
