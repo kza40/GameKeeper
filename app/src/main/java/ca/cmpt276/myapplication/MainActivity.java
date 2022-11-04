@@ -10,6 +10,10 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import ca.cmpt276.myapplication.model.Game;
 import ca.cmpt276.myapplication.model.GameManager;
 
 public class MainActivity extends AppCompatActivity {
@@ -35,9 +39,14 @@ public class MainActivity extends AppCompatActivity {
             emptyState(View.INVISIBLE);
         }
 
-        // ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.)
-//        ListView list = findViewById(R.id.ListGameConfigs);
-//        list.setAdapter(adapter)
+        List<String> theConfigs = new ArrayList<>();
+        for(Game game: gameManager){        //not sure what the problem is here
+            theConfigs.add(game.getGameTitle());
+        }
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.configs_layout, theConfigs );
+        ListView list = findViewById(R.id.listOfConfigs);
+        list.setAdapter(adapter);
     }
 
     private void setupAddButton() {
