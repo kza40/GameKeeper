@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import ca.cmpt276.myapplication.model.Game;
+
 
 public class AddConfig extends AppCompatActivity {
 
@@ -18,6 +20,8 @@ public class AddConfig extends AppCompatActivity {
     EditText edtConfigName;
 
     Button btnPreview;
+
+    Game game;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +58,8 @@ public class AddConfig extends AppCompatActivity {
     private void setupSaveButton() {
         Button btnSave = findViewById(R.id.saveBtn);
         btnSave.setOnClickListener(view -> {
-            //this is just for now
-            Toast.makeText(AddConfig.this, "Just a demo", Toast.LENGTH_LONG).show();
+            game = new Game(edtConfigName.getText().toString(), Integer.parseInt(edtPScore.toString()), Integer.parseInt(edtGScore.toString()));
+
         });
     }
 
