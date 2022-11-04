@@ -1,6 +1,5 @@
 package ca.cmpt276.myapplication;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -16,34 +15,34 @@ import java.util.Collections;
 import java.util.List;
 
 public class PreviewAchievements extends AppCompatActivity {
-
     private static final String EXTRA_POOR_SCORE = "ca.cmpt276.assignment2: poor score";
     private static final String EXTRA_GREAT_SCORE = "ca.cmpt276.assignment2: great score";
-
-    int[] scoresIDs;
-
-    EditText edtNumPlayers;
-
     private static final int NUM_ACHIEVEMENTS = 8;
 
     private int poorScore;
     private int greatScore;
-
-    private List<Integer> minScores;
+    private List<Integer> scoreBoundaries;
+    private int[] scoresIDs;
+    private EditText edtNumPlayers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preview_achievements);
 
-        ActionBar ab = getSupportActionBar();
-        ab.setTitle("Achievements Preview");
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(R.string.AchievementsTitle);
+        }
 
+        setUpMemberVariables();
+    }
+
+    private void setUpMemberVariables() {
         Intent intent = getIntent();
         poorScore = intent.getIntExtra(EXTRA_POOR_SCORE, 0);
         greatScore = intent.getIntExtra(EXTRA_GREAT_SCORE, 0);
 
-        minScores = new ArrayList<>();
+        scoreBoundaries = new ArrayList<>();
 
         scoresIDs = new int[] {R.id.tvScoreLevel1, R.id.tvScoreLevel2, R.id.tvScoreLevel3,
                 R.id.tvScoreLevel4, R.id.tvScoreLevel5, R.id.tvScoreLevel6, R.id.tvScoreLevel7,
@@ -51,14 +50,11 @@ public class PreviewAchievements extends AppCompatActivity {
 
         edtNumPlayers = findViewById(R.id.edtNumPlayers);
         edtNumPlayers.addTextChangedListener(scoreTextWatcher);
-
     }
 
-    private TextWatcher scoreTextWatcher = new TextWatcher() {
+    private final TextWatcher scoreTextWatcher = new TextWatcher() {
         @Override
-        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-        }
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
         @Override
         public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -69,32 +65,24 @@ public class PreviewAchievements extends AppCompatActivity {
         }
 
         @Override
-        public void afterTextChanged(Editable editable) {
-
-        }
+        public void afterTextChanged(Editable editable) {}
     };
 
     private void updateScoreFields(int players) {
-        updateAchievements(players);
+        updateAchievementScoreBoundaries(players);
         for (int i = 0; i < NUM_ACHIEVEMENTS; i++) {
             int currID = scoresIDs[i];
-            TextView tv = findViewById(currID);
-            tv.setText(Integer.toString(minScores.get(i)));
+            TextView currScoreField = findViewById(currID);
+            String currScore = Integer.toString(scoreBoundaries.get(i));
+            currScoreField.setText(currScore);
         }
     }
 
-    public static Intent makeIntent(Context context, int poorScore, int greatScore) {
-        Intent intent = new Intent(context, PreviewAchievements.class);
-        intent.putExtra(EXTRA_POOR_SCORE, poorScore);
-        intent.putExtra(EXTRA_GREAT_SCORE, greatScore);
-        return intent;
-    }
-
-    private void updateAchievements(int numPlayers) {
-        minScores.clear();
+    private void updateAchievementScoreBoundaries(int numPlayers) {
+        scoreBoundaries.clear();
 
         int lowerBound = Math.min(numPlayers * poorScore, numPlayers * greatScore);
-        minScores.add(lowerBound);
+        scoreBoundaries.add(lowerBound);
 
         int upperBound = Math.max(numPlayers * poorScore, numPlayers * greatScore);
 
@@ -104,13 +92,15 @@ public class PreviewAchievements extends AppCompatActivity {
         int jumpAmt = range / numIntervals;
 
         // In case jumpAmt calculation is not a whole number, the space between Level 7 and Level 8
-        // will be larger than the jumpAmt. The rest of the levels will be adjusted
+        // will be larger than jumpAmt. So, some intervals further down will be adjusted
 
         int extraAmt = range % numIntervals;     // Between 0 to 6
-        int indexToBeAdjusted = 0;      // Start adjusting the levels from Level 2
+        int indexToBeAdjusted = 0;
         int timesAdjusted = 0;
 
         int currScore = lowerBound;
+
+        // Set the levels between 1 and 8, adjusting if necessary
         for (int i = 0; i < NUM_ACHIEVEMENTS - 2; i++) {
             currScore += jumpAmt;
             if (i == indexToBeAdjusted && timesAdjusted < extraAmt) {
@@ -118,14 +108,20 @@ public class PreviewAchievements extends AppCompatActivity {
                 indexToBeAdjusted += ((NUM_ACHIEVEMENTS - 2) /  extraAmt);
                 timesAdjusted++;
             }
-
-            minScores.add(currScore);
+            scoreBoundaries.add(currScore);
         }
-        minScores.add(upperBound);
+        scoreBoundaries.add(upperBound);
 
         if (numPlayers * poorScore > numPlayers * greatScore) {
-            Collections.reverse(minScores);
+            Collections.reverse(scoreBoundaries);
         }
+    }
+
+    public static Intent makeIntent(Context context, int poorScore, int greatScore) {
+        Intent intent = new Intent(context, PreviewAchievements.class);
+        intent.putExtra(EXTRA_POOR_SCORE, poorScore);
+        intent.putExtra(EXTRA_GREAT_SCORE, greatScore);
+        return intent;
     }
 
 }

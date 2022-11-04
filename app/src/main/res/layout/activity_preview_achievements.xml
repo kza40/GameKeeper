@@ -14,7 +14,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="#673AB7"
         app:layout_constraintBottom_toTopOf="@+id/tvNameLvl1"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineLeft"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineCenter"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guidelineTop" />
@@ -27,7 +27,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/tvNameLvl2"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineLeft"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineCenter"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvTitles" />
@@ -40,7 +40,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/tvNameLvl3"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineLeft"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineCenter"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvNameLvl1" />
@@ -53,7 +53,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/tvNameLvl4"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineLeft"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineCenter"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvNameLvl2" />
@@ -66,7 +66,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/tvNameLvl5"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineLeft"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineCenter"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvNameLvl3" />
@@ -79,7 +79,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/tvNameLvl6"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineLeft"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineCenter"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvNameLvl4" />
@@ -92,7 +92,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/tvNameLvl7"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineLeft"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineCenter"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvNameLvl5" />
@@ -105,7 +105,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/tvNameLvl8"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineLeft"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineCenter"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvNameLvl6" />
@@ -118,7 +118,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/guidelineLow"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineLeft"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineCenter"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvNameLvl7" />
@@ -133,7 +133,7 @@
         app:layout_constraintBottom_toTopOf="@+id/tvScoreLevel1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/guidelineRight"
+        app:layout_constraintStart_toStartOf="@+id/guidelineCenter"
         app:layout_constraintTop_toTopOf="@+id/guidelineTop" />
 
     <TextView
@@ -145,7 +145,7 @@
         app:layout_constraintBottom_toTopOf="@+id/tvScoreLevel2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/guidelineRight"
+        app:layout_constraintStart_toStartOf="@+id/guidelineCenter"
         app:layout_constraintTop_toBottomOf="@+id/tvScores" />
 
     <TextView
@@ -157,7 +157,7 @@
         app:layout_constraintBottom_toTopOf="@+id/tvScoreLevel3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/guidelineRight"
+        app:layout_constraintStart_toStartOf="@+id/guidelineCenter"
         app:layout_constraintTop_toBottomOf="@+id/tvScoreLevel1" />
 
     <TextView
@@ -169,7 +169,7 @@
         app:layout_constraintBottom_toTopOf="@+id/tvScoreLevel4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/guidelineRight"
+        app:layout_constraintStart_toStartOf="@+id/guidelineCenter"
         app:layout_constraintTop_toBottomOf="@+id/tvScoreLevel2" />
 
     <TextView
@@ -181,7 +181,7 @@
         app:layout_constraintBottom_toTopOf="@+id/tvScoreLevel5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/guidelineRight"
+        app:layout_constraintStart_toStartOf="@+id/guidelineCenter"
         app:layout_constraintTop_toBottomOf="@+id/tvScoreLevel3" />
 
     <TextView
@@ -193,7 +193,7 @@
         app:layout_constraintBottom_toTopOf="@+id/tvScoreLevel6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/guidelineRight"
+        app:layout_constraintStart_toStartOf="@+id/guidelineCenter"
         app:layout_constraintTop_toBottomOf="@+id/tvScoreLevel4" />
 
     <TextView
@@ -205,7 +205,7 @@
         app:layout_constraintBottom_toTopOf="@+id/tvScoreLevel7"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/guidelineRight"
+        app:layout_constraintStart_toStartOf="@+id/guidelineCenter"
         app:layout_constraintTop_toBottomOf="@+id/tvScoreLevel5" />
 
     <TextView
@@ -217,7 +217,7 @@
         app:layout_constraintBottom_toTopOf="@+id/tvScoreLevel8"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/guidelineRight"
+        app:layout_constraintStart_toStartOf="@+id/guidelineCenter"
         app:layout_constraintTop_toBottomOf="@+id/tvScoreLevel6" />
 
     <TextView
@@ -229,7 +229,7 @@
         app:layout_constraintBottom_toTopOf="@+id/guidelineLow"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/guidelineRight"
+        app:layout_constraintStart_toStartOf="@+id/guidelineCenter"
         app:layout_constraintTop_toBottomOf="@+id/tvScoreLevel7" />
 
     <EditText
@@ -248,18 +248,11 @@
         app:layout_constraintTop_toTopOf="@+id/guidelineLow" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineLeft"
+        android:id="@+id/guidelineCenter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.35" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineRight"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.65" />
+        app:layout_constraintGuide_percent="0.50" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineLow"
