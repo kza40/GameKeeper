@@ -1,31 +1,28 @@
 package ca.cmpt276.myapplication.model;
 
-/*
-This will be the class holding the scores, and I suspect our categorization of the points (ugly unicorn)
- */
-
 public class Game {
+    private int numOfPlayers;
+    private int score;
 
 
-
-    private String gameTitle;
-    private int poorScore;
-    private int goodScore;
-
-
-    public Game(String gameTitle, int poorScore, int goodScore) {
-        this.gameTitle = gameTitle;
-        this.poorScore = poorScore;
-        this.goodScore = goodScore;
+    public Game(int numOfPlayers, int score) {
+        this.numOfPlayers = numOfPlayers;
+        this.score = score;
     }
 
-    public String getGameTitle() {
-        return gameTitle;
+    public int getNumOfPlayers() {
+        return numOfPlayers;
     }
 
-    public void setGameTitle(String gameTitle) {
-        this.gameTitle = gameTitle;
+    public void setNumOfPlayers(int numOfPlayers) {
+        this.numOfPlayers = numOfPlayers;
     }
 
+    public int getScore() {
+        return score;
+    }
 
+    public void setScore(int score) {
+        this.score = score;
+    }
 }

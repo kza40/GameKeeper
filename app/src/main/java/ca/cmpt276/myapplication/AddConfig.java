@@ -8,9 +8,8 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
-import ca.cmpt276.myapplication.model.Game;
+import ca.cmpt276.myapplication.model.GameConfig;
 import ca.cmpt276.myapplication.model.GameManager;
 
 
@@ -23,7 +22,7 @@ public class AddConfig extends AppCompatActivity {
     Button btnPreview;
 
     GameManager gameManager;
-    Game game;
+    GameConfig gameConfig;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,8 +60,8 @@ public class AddConfig extends AppCompatActivity {
     private void setupSaveButton() {
         Button btnSave = findViewById(R.id.saveBtn);
         btnSave.setOnClickListener(view -> {
-            game = new Game(edtConfigName.getText().toString(), Integer.parseInt(edtPScore.getText().toString()), Integer.parseInt(edtGScore.getText().toString()));
-            gameManager.addGame(game);
+            gameConfig = new GameConfig(edtConfigName.getText().toString(), Integer.parseInt(edtPScore.getText().toString()), Integer.parseInt(edtGScore.getText().toString()));
+            gameManager.addGame(gameConfig);
             finish();
         });
     }
