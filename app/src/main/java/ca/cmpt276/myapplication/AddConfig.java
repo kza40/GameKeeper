@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import ca.cmpt276.myapplication.model.Game;
+import ca.cmpt276.myapplication.model.GameManager;
 
 
 public class AddConfig extends AppCompatActivity {
@@ -21,6 +22,7 @@ public class AddConfig extends AppCompatActivity {
 
     Button btnPreview;
 
+    GameManager gameManager;
     Game game;
 
     @Override
@@ -29,6 +31,7 @@ public class AddConfig extends AppCompatActivity {
         setContentView(R.layout.activity_add_config);
 
         btnPreview = findViewById(R.id.previewBtn);
+        gameManager = GameManager.getInstance();
 
         setupInputFields();
         setupPreviewButton();
@@ -59,6 +62,7 @@ public class AddConfig extends AppCompatActivity {
         Button btnSave = findViewById(R.id.saveBtn);
         btnSave.setOnClickListener(view -> {
             game = new Game(edtConfigName.getText().toString(), Integer.parseInt(edtPScore.getText().toString()), Integer.parseInt(edtGScore.getText().toString()));
+            gameManager.addGame(game);
             finish();
         });
     }
