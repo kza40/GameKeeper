@@ -32,6 +32,12 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        populateListView();
+    }
+
     private void populateListView() {
         if(gameManager.isEmpty()){
             emptyState(View.VISIBLE);
@@ -48,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
         ListView list = findViewById(R.id.listOfConfigs);
         list.setAdapter(adapter);
     }
+
+
 
     private void setupAddButton() {
         ImageButton add = findViewById(R.id.addButton);
