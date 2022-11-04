@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         } else {
             emptyState(View.INVISIBLE);
         }
-
+        //just strings in this list
         List<String> theConfigs = new ArrayList<>();
         for(Game game: gameManager){
             theConfigs.add(game.getGameTitle()+"\n");
