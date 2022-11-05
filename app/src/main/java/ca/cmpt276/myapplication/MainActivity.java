@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -57,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                Intent intent=theGames.makeIntent(MainActivity.this,position);
+                Intent intent= TheGames.makeIntent(MainActivity.this,position);
                 startActivity(intent);
             }
         });
@@ -75,6 +76,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void emptyState(int visible){
         TextView emptyText = findViewById(R.id.emptyMessage);
+        ImageView emptyImg = findViewById(R.id.emptyStateImg);
         emptyText.setVisibility(visible);
+        emptyImg.setVisibility(visible);
     }
 }
