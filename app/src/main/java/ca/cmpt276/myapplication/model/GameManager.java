@@ -22,7 +22,12 @@ public class GameManager implements Iterable<GameConfig> {
         return instance;
     }
 
+    public List<GameConfig> getGameConfigs() {
+        return gameConfigs;
+    }
+
     public void addGame(GameConfig gameConfig){ gameConfigs.add(gameConfig); }
+
 
     public boolean isEmpty() { return gameConfigs.isEmpty(); }
 
