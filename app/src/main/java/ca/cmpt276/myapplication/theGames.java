@@ -35,11 +35,8 @@ public class theGames extends AppCompatActivity {
         //You can now get the value of Game config from GameManager class as you have the position of the
 
         gameManager = GameManager.getInstance();
-        GameConfig gameConfig=gameManager.getGameConfigs().get(pos);
+        gameConfig=gameManager.getGameConfigs().get(pos);
         setTitle(gameConfig.getGameTitle());
-        gameManager = GameManager.getInstance();
-
-        gameConfig = gameManager.getGameConfigs().get(pos);
 
         setUpSaveButton();
         populateListView();
@@ -58,8 +55,6 @@ public class theGames extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.configs_layout, theGames);
         ListView list = findViewById(R.id.listOfGames);
         list.setAdapter(adapter);
-
-
     }
 
     private void emptyState(int visible){
