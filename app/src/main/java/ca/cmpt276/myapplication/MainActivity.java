@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                Intent intent=NewGame.makeIntent(MainActivity.this,position);
+                Intent intent=theGames.makeIntent(MainActivity.this,position);
                 startActivity(intent);
             }
         });
