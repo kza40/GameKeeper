@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -14,12 +15,14 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import ca.cmpt276.myapplication.model.Game;
 import ca.cmpt276.myapplication.model.GameConfig;
 import ca.cmpt276.myapplication.model.GameManager;
 
 public class theGames extends AppCompatActivity {
+    private GameManager gameManager;
     private GameConfig gameConfig;
-    GameManager gameManager;
+
     private static final String POSITION_VALUE ="POSITION_VALUE";
 //this is where the list of Games should show when you click on a gameConfig
     @Override
@@ -34,7 +37,9 @@ public class theGames extends AppCompatActivity {
         gameManager = GameManager.getInstance();
         GameConfig gameConfig=gameManager.getGameConfigs().get(pos);
         setTitle(gameConfig.getGameTitle());
-        //gotta retrieve the clicked on gameConfig somehow from MainActivity when its clicked
+        gameManager = GameManager.getInstance();
+
+        gameConfig = gameManager.getGameConfigs().get(pos);
 
         setUpSaveButton();
         populateListView();
@@ -45,7 +50,14 @@ public class theGames extends AppCompatActivity {
     }
 
     private void populateListView() {
+        List<String> theGames = new ArrayList<>();
+        for(Game game : gameConfig){
+            theGames.add(game.getNumOfPlayers()+"\n"+game.getScore()+"\n");
+        }
 
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.configs_layout, theGames);
+        ListView list = findViewById(R.id.listOfGames);
+        list.setAdapter(adapter);
 
 
     }
