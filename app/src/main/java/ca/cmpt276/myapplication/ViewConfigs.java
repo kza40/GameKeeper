@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -15,6 +14,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 import java.util.List;
 
+import ca.cmpt276.myapplication.adapter.GameConfigAdapter;
 import ca.cmpt276.myapplication.model.GameConfig;
 import ca.cmpt276.myapplication.model.ConfigManager;
 
@@ -22,6 +22,7 @@ public class ViewConfigs extends AppCompatActivity {
 
     private ConfigManager configManager;
     private ListView configsList;
+    private GameConfigAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +33,7 @@ public class ViewConfigs extends AppCompatActivity {
         configManager = ConfigManager.getInstance();
         configsList = findViewById(R.id.listOfConfigs);
 
+        setEmptyState();
         populateListView();
         setupAddConfig();
         setupViewGames();
@@ -40,28 +42,24 @@ public class ViewConfigs extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        populateListView();
+        adapter.notifyDataSetChanged();
+        setEmptyState();
     }
 
     private void populateListView() {
-        if (configManager.isEmpty()) {
-            setEmptyState(View.VISIBLE);
-        } else {
-            setEmptyState(View.INVISIBLE);
-
-            List<String> theConfigs = new ArrayList<>();
-            for (GameConfig gameConfig : configManager) {
-                theConfigs.add(gameConfig.getGameTitle());
-            }
-            ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.configs_layout, theConfigs);
-            configsList.setAdapter(adapter);
+        List<String> theConfigs = new ArrayList<>();
+        for (GameConfig gameConfig : configManager) {
+            theConfigs.add(gameConfig.getGameTitle());
         }
+
+        adapter=new GameConfigAdapter(ViewConfigs.this,R.layout.adapter_view,configManager.getGameConfigs());
+        configsList.setAdapter(adapter);
     }
 
     private void setupAddConfig() {
         FloatingActionButton addConfig = findViewById(R.id.btnAddConfig);
         addConfig.setOnClickListener(view -> {
-            Intent intent = AddConfig.makeIntent(ViewConfigs.this);
+            Intent intent = AddConfig.makeIntent(ViewConfigs.this,false,-1);
             startActivity(intent);
         });
     }
@@ -73,10 +71,16 @@ public class ViewConfigs extends AppCompatActivity {
         });
     }
 
-    private void setEmptyState(int visible){
+    public void setEmptyState(){
         TextView emptyText = findViewById(R.id.emptyMessage);
         ImageView emptyImg = findViewById(R.id.emptyStateImg);
-        emptyText.setVisibility(visible);
-        emptyImg.setVisibility(visible);
+        if (configManager.isEmpty()) {
+            emptyText.setVisibility(View.VISIBLE);
+            emptyImg.setVisibility(View.VISIBLE);
+        }
+        else {
+            emptyText.setVisibility(View.GONE);
+            emptyImg.setVisibility(View.GONE);
+        }
     }
 }
