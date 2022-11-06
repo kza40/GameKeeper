@@ -30,7 +30,7 @@ public class AddGame extends AppCompatActivity {
         Intent intent = getIntent();
         int configPos = intent.getIntExtra(CONFIG_POSITION,-1);
         configManager = ConfigManager.getInstance();
-        gameConfig = configManager.getGameConfigs().get(configPos);
+        gameConfig = configManager.getGameConfigAtIndex(configPos);
         setTitle("Add Game");
 
         setupEditTextFields();

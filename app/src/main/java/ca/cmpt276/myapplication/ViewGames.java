@@ -36,7 +36,7 @@ public class ViewGames extends AppCompatActivity {
         configPos = intent.getIntExtra(CONFIG_POSITION,-1);
 
         configManager = ConfigManager.getInstance();
-        gameConfig = configManager.getGameConfigs().get(configPos);
+        gameConfig = configManager.getGameConfigAtIndex(configPos);
         setTitle(gameConfig.getGameTitle());
 
         setupAddGame();

@@ -26,10 +26,10 @@ public class ConfigManager implements Iterable<GameConfig> {
         gameConfigs = new ArrayList<>();
     }
 
-    public List<GameConfig> getGameConfigs() {
-        return gameConfigs;
+    public GameConfig getGameConfigAtIndex(int configPos)
+    {
+        return gameConfigs.get(configPos);
     }
-
     public void addGame(GameConfig gameConfig) {
         gameConfigs.add(gameConfig);
     }
