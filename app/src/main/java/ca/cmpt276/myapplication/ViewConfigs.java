@@ -46,14 +46,32 @@ public class ViewConfigs extends AppCompatActivity {
         setEmptyState();
     }
 
+
     private void populateListView() {
-        List<String> theConfigs = new ArrayList<>();
-        for (GameConfig gameConfig : configManager) {
-            theConfigs.add(gameConfig.getGameTitle());
+        if (configManager.isEmpty()) {
+            restoreGameConfigsFromSharedPreferences();
+        }
+        if (AddConfig.getCountFromSharedPreferences(this) == 0) {
+            setEmptyState();
+        }
+        else
+        {
+            List<String> theConfigs = new ArrayList<>();
+            for (GameConfig gameConfig : configManager) {
+                theConfigs.add(gameConfig.getGameTitle());
+            }
+            adapter=new GameConfigAdapter(ViewConfigs.this,R.layout.adapter_view,configManager.getGameConfigs());
+            configsList.setAdapter(adapter);
         }
 
-        adapter=new GameConfigAdapter(ViewConfigs.this,R.layout.adapter_view,configManager.getGameConfigs());
-        configsList.setAdapter(adapter);
+
+
+    }
+
+    private void restoreGameConfigsFromSharedPreferences() {
+        for(int i = 0; i < AddConfig.getCountFromSharedPreferences(this); i++) {
+            configManager.addGame(AddConfig.getGameConfigFromSharedPreferences(this, i));
+        }
     }
 
     private void setupAddConfig() {

@@ -34,6 +34,7 @@ public class ConfigManager implements Iterable<GameConfig> {
     {
         return gameConfigs.get(configPos);
     }
+    public int size() { return gameConfigs.size(); }
     public void addGame(GameConfig gameConfig) {
         gameConfigs.add(gameConfig);
     }
