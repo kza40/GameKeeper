@@ -4,13 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
-
-
-
+    tools:context=".ViewConfigs">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/addBtn"
+        android:id="@+id/btnAddGame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
@@ -55,7 +52,7 @@
         android:layout_marginTop="47dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="24dp"
-        app:layout_constraintBottom_toTopOf="@+id/addBtn"
+        app:layout_constraintBottom_toTopOf="@+id/btnAddGame"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
