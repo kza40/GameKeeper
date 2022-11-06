@@ -2,29 +2,35 @@ package ca.cmpt276.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
+
+import ca.cmpt276.myapplication.model.GameConfig;
+import ca.cmpt276.myapplication.model.ConfigManager;
 
 
 public class AddConfig extends AppCompatActivity {
 
-    EditText edtPScore;
-    EditText edtGScore;
-    EditText edtConfigName;
+    private EditText edtPoorScore;
+    private EditText edtGoodScore;
+    private EditText edtConfigName;
+    private Button btnPreview;
 
-    Button btnPreview;
+    private ConfigManager configManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_config);
+        setTitle("Add Config");
 
         btnPreview = findViewById(R.id.previewBtn);
+        configManager = ConfigManager.getInstance();
 
         setupInputFields();
         setupPreviewButton();
@@ -32,20 +38,20 @@ public class AddConfig extends AppCompatActivity {
     }
 
     private void setupInputFields() {
-        edtPScore = findViewById(R.id.poorScore);
-        edtGScore = findViewById(R.id.goodScore);
+        edtPoorScore = findViewById(R.id.poorScore);
+        edtGoodScore = findViewById(R.id.goodScore);
         edtConfigName = findViewById(R.id.configName);
 
-        edtPScore.addTextChangedListener(previewTextWatcher);
-        edtGScore.addTextChangedListener(previewTextWatcher);
+        edtPoorScore.addTextChangedListener(previewTextWatcher);
+        edtGoodScore.addTextChangedListener(previewTextWatcher);
     }
 
     private void setupPreviewButton() {
         btnPreview.setOnClickListener(view -> {
             Intent intent = PreviewAchievements.makeIntent(
                         AddConfig.this,
-                        Integer.parseInt(edtPScore.getText().toString()),
-                        Integer.parseInt(edtGScore.getText().toString())
+                        Integer.parseInt(edtPoorScore.getText().toString()),
+                        Integer.parseInt(edtGoodScore.getText().toString())
             );
             startActivity(intent);
         });
@@ -54,9 +60,19 @@ public class AddConfig extends AppCompatActivity {
     private void setupSaveButton() {
         Button btnSave = findViewById(R.id.saveBtn);
         btnSave.setOnClickListener(view -> {
-            //this is just for now
-            Toast.makeText(AddConfig.this, "Just a demo", Toast.LENGTH_LONG).show();
+            // If good/poor score fields are not empty
+            saveConfig();
+            finish();
         });
+    }
+
+    private void saveConfig() {
+        GameConfig gameConfig = new GameConfig(
+                edtConfigName.getText().toString(),
+                Integer.parseInt(edtPoorScore.getText().toString()),
+                Integer.parseInt(edtGoodScore.getText().toString())
+        );
+        configManager.addGame(gameConfig);
     }
 
     private TextWatcher previewTextWatcher = new TextWatcher() {
@@ -65,8 +81,8 @@ public class AddConfig extends AppCompatActivity {
 
         @Override
         public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            String pScoreInput = edtPScore.getText().toString();
-            String gScoreInput = edtGScore.getText().toString();
+            String pScoreInput = edtPoorScore.getText().toString();
+            String gScoreInput = edtGoodScore.getText().toString();
 
             btnPreview.setEnabled(!pScoreInput.isEmpty() && !gScoreInput.isEmpty());
         }
@@ -75,5 +91,9 @@ public class AddConfig extends AppCompatActivity {
         public void afterTextChanged(Editable editable) {}
     };
 
+    public static Intent makeIntent(Context context) {
+        Intent intent = new Intent(context, AddConfig.class);
+        return intent;
+    }
 }
 
