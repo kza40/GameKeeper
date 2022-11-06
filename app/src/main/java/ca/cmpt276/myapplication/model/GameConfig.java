@@ -24,6 +24,10 @@ public class GameConfig implements Iterable<Game>{
         this.goodScore = goodScore;
     }
 
+    public List<Game> getGames() {
+        return games;
+    }
+
     public String getGameTitle() {
         return gameTitle;
     }
