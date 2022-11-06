@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">My Application</string>
+    <string name="config_name">Config Name</string>
+    <string name="poor_score">Poor Score</string>
+    <string name="great_score">Great Score</string>
+    <string name="preview">Preview</string>
+    <string name="save">Save</string>
 </resources>
