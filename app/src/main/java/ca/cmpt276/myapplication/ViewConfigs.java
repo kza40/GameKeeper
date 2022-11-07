@@ -28,7 +28,7 @@ public class ViewConfigs extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_view_configs);
         setTitle("Game Configs");
 
         configManager=new SharedPreferenceManager(getApplicationContext()).getConfigManager();

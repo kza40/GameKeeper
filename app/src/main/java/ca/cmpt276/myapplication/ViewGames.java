@@ -35,7 +35,7 @@ public class ViewGames extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_games_list);
+        setContentView(R.layout.activity_view_games);
 
         Intent intent = getIntent();
         configPos = intent.getIntExtra(CONFIG_POSITION,-1);

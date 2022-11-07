@@ -6,103 +6,105 @@
     android:layout_height="match_parent"
     tools:context=".AddConfig">
 
-
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appBarLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        tools:ignore="MissingConstraints">
-    </com.google.android.material.appbar.AppBarLayout>
-
     <EditText
         android:id="@+id/configName"
-        android:layout_width="214dp"
-        android:layout_height="43dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:ems="10"
+        android:gravity="center"
+        android:hint="@string/config_name"
         android:inputType="text"
-        android:hint="Config Name"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="#673AB7"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.094" />
-
-    <EditText
-        android:id="@+id/goodScore"
-        android:layout_width="116dp"
-        android:layout_height="45dp"
-        android:inputType="number"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.437"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.588" />
+        app:layout_constraintBottom_toTopOf="@+id/poorScore"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineRightName"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/guidelineLeftName"
+        app:layout_constraintTop_toTopOf="@+id/guidelineTopText" />
 
     <EditText
         android:id="@+id/poorScore"
-        android:layout_width="118dp"
-        android:layout_height="38dp"
-        android:inputType="number"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.44"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.499" />
-
-    <Button
-        android:id="@+id/saveBtn"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="SAVE"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.916"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.676" />
+        android:gravity="center"
+        android:hint="@string/poor_score"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:inputType="number"
+        app:layout_constraintBottom_toTopOf="@+id/goodScore"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineRightName"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/guidelineLeftName"
+        app:layout_constraintTop_toBottomOf="@+id/configName" />
+
+    <EditText
+        android:id="@+id/goodScore"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:hint="@string/great_score"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:inputType="number"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineBottomText"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineRightName"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/guidelineLeftName"
+        app:layout_constraintTop_toBottomOf="@+id/poorScore" />
 
     <Button
         android:id="@+id/previewBtn"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
         android:enabled="false"
-        android:text="Preview Achievements"
-        app:layout_constraintEnd_toEndOf="@+id/configName"
-        app:layout_constraintStart_toStartOf="@+id/configName"
-        app:layout_constraintTop_toBottomOf="@+id/configName" />
+        android:text="@string/preview"
+        app:layout_constraintBottom_toTopOf="@+id/saveBtn"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineRightName"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guidelineLeftName"
+        app:layout_constraintTop_toTopOf="@+id/guidelineBottomText"
+        app:layout_constraintVertical_bias="0.8" />
 
-    <TextView
-        android:id="@+id/pScoreTitle"
+    <Button
+        android:id="@+id/saveBtn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/save"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineBottomBtns"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineRightName"
+        app:layout_constraintStart_toStartOf="@+id/guidelineLeftName" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineLeftName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Poor Score"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        android:textColor="#673AB7"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/poorScore"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.25" />
 
-    <TextView
-        android:id="@+id/gScoreTitle"
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineRightName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Good Score"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        android:textColor="#673AB7"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/goodScore"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pScoreTitle"
-        app:layout_constraintVertical_bias="0.139" />
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.75" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineBottomText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.55" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineTopText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.10" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineBottomBtns"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.75" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
