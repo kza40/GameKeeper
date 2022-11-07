@@ -11,7 +11,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:autoSizeTextType="uniform"
-        android:text="Oh... seems like there arent any game configurations yet. Tap the add button to set one!"
+        android:text="Oh... seems like there arent any game configurations yet. Tap the + icon to set one!"
         android:textAlignment="center"
         android:textColor="#000000"
         app:layout_constraintBottom_toTopOf="@+id/guidelineBottomMsg"
