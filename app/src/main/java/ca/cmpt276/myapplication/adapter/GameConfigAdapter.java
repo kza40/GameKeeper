@@ -18,6 +18,7 @@ import ca.cmpt276.myapplication.R;
 import ca.cmpt276.myapplication.ViewConfigs;
 import ca.cmpt276.myapplication.model.ConfigManager;
 import ca.cmpt276.myapplication.model.GameConfig;
+import ca.cmpt276.myapplication.model.SharedPreferenceManager;
 
 public class GameConfigAdapter extends ArrayAdapter<GameConfig> {
     private static final String TAG="GamesListAdapter";
@@ -70,7 +71,9 @@ public class GameConfigAdapter extends ArrayAdapter<GameConfig> {
 
                         switch (i) {
                             case DialogInterface.BUTTON_POSITIVE:
-                                ConfigManager.getInstance().removeConfigAtIndex(position);
+                                ConfigManager configManager=ConfigManager.getInstance();
+                                configManager.removeConfigAtIndex(position);
+                                new SharedPreferenceManager(context).updateConfigManager(configManager);
                                 notifyDataSetChanged();
                                 ((ViewConfigs)context).setEmptyState();
                                 break;
