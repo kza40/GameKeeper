@@ -20,7 +20,6 @@ public class AddConfig extends AppCompatActivity {
     private EditText edtPoorScore;
     private EditText edtGoodScore;
     private EditText edtConfigName;
-    private Button btnPreview;
     private Boolean isEdit;
 
     private ConfigManager configManager;
@@ -31,12 +30,10 @@ public class AddConfig extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_config);
         setTitle("Add Config");
-        btnPreview = findViewById(R.id.previewBtn);
         configManager = ConfigManager.getInstance();
         int position=-1;
 
         setupInputFields();
-        setupPreviewButton();
         setupSaveButton();
 
         if(getIntent().getExtras()!=null)
@@ -62,20 +59,6 @@ public class AddConfig extends AppCompatActivity {
         edtPoorScore = findViewById(R.id.poorScore);
         edtGoodScore = findViewById(R.id.goodScore);
         edtConfigName = findViewById(R.id.configName);
-
-        edtPoorScore.addTextChangedListener(previewTextWatcher);
-        edtGoodScore.addTextChangedListener(previewTextWatcher);
-    }
-
-    private void setupPreviewButton() {
-        btnPreview.setOnClickListener(view -> {
-            Intent intent = PreviewAchievements.makeIntent(
-                        AddConfig.this,
-                        Integer.parseInt(edtPoorScore.getText().toString()),
-                        Integer.parseInt(edtGoodScore.getText().toString())
-            );
-            startActivity(intent);
-        });
     }
 
     private void setupSaveButton() {
@@ -106,22 +89,6 @@ public class AddConfig extends AppCompatActivity {
         }
         new SharedPreferenceManager(getApplicationContext()).updateConfigManager(configManager);
     }
-
-    private TextWatcher previewTextWatcher = new TextWatcher() {
-        @Override
-        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
-
-        @Override
-        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            String pScoreInput = edtPoorScore.getText().toString();
-            String gScoreInput = edtGoodScore.getText().toString();
-
-            btnPreview.setEnabled(!pScoreInput.isEmpty() && !gScoreInput.isEmpty());
-        }
-
-        @Override
-        public void afterTextChanged(Editable editable) {}
-    };
 
     public static Intent makeIntent(Context context,boolean isEdit,int position) {
         Intent intent = new Intent(context, AddConfig.class);
