@@ -21,6 +21,11 @@ import ca.cmpt276.myapplication.model.ConfigManager;
 import ca.cmpt276.myapplication.model.GameConfig;
 import ca.cmpt276.myapplication.model.SharedPreferenceManager;
 
+/**
+ * GameConfigAdapter class enables a complex ListView for viewing, editing, deleting, and
+ * previewing achievements of game configurations.
+ */
+
 public class GameConfigAdapter extends ArrayAdapter<GameConfig> {
     private static final String TAG="GamesListAdapter";
     private Context context;

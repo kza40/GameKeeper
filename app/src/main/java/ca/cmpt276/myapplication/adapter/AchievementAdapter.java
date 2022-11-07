@@ -16,6 +16,11 @@ import ca.cmpt276.myapplication.R;
 import ca.cmpt276.myapplication.model.AchievementLevel;
 import ca.cmpt276.myapplication.model.Game;
 
+/**
+ * AchievementAdapter class enables a complex ListView for previewing the achievement levels of
+ * a config.
+ */
+
 public class AchievementAdapter extends ArrayAdapter<AchievementLevel> {
     private Context context;
     private int resource;

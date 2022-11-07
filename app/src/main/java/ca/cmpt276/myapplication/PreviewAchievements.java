@@ -15,23 +15,21 @@ import java.util.List;
 
 import ca.cmpt276.myapplication.adapter.AchievementAdapter;
 import ca.cmpt276.myapplication.model.AchievementLevel;
-import ca.cmpt276.myapplication.model.Achievements;
+import ca.cmpt276.myapplication.model.AchievementCalculator;
 
 public class PreviewAchievements extends AppCompatActivity {
-    private static final String EXTRA_POOR_SCORE = "ca.cmpt276.assignment2: poor score";
-    private static final String EXTRA_GREAT_SCORE = "ca.cmpt276.assignment2: great score";
+    private static final String EXTRA_POOR_SCORE = "ca.cmpt276.myapplication: poor score";
+    private static final String EXTRA_GREAT_SCORE = "ca.cmpt276.myapplication: great score";
     private static final int NUM_ACHIEVEMENTS = 8;
-
-    private String[] titles = new String[] { "Lvl 1", "Lvl 2", "Lvl 3", "Lvl 4", "Lvl 5",
-            "Lvl 6", "Lvl 7", "Lvl 8" };
-    private List<AchievementLevel> achievementLevels;
 
     private int poorScore;
     private int greatScore;
-    private List<Integer> scoreBoundaries;
     private EditText edtNumPlayers;
     private ListView list;
     private AchievementAdapter adapter;
+
+    private String[] titles;
+    private List<AchievementLevel> achievementLevels;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,17 +45,16 @@ public class PreviewAchievements extends AppCompatActivity {
         Intent intent = getIntent();
         poorScore = intent.getIntExtra(EXTRA_POOR_SCORE, 0);
         greatScore = intent.getIntExtra(EXTRA_GREAT_SCORE, 0);
-
-        scoreBoundaries = new ArrayList<>();
-
         edtNumPlayers = findViewById(R.id.edtNumPlayers);
         edtNumPlayers.addTextChangedListener(scoreTextWatcher);
-
         list = findViewById(R.id.achievementLevels);
+
+        titles = new String[] { "Lvl 1", "Lvl 2", "Lvl 3", "Lvl 4", "Lvl 5",
+                                "Lvl 6", "Lvl 7", "Lvl 8" };
+        achievementLevels = new ArrayList<>();
     }
 
     private void setupAchievementLevels() {
-        achievementLevels = new ArrayList<>();
         for(int i = 0; i < NUM_ACHIEVEMENTS; i++) {
             AchievementLevel newLevel = new AchievementLevel(titles[i]);
             achievementLevels.add(newLevel);
@@ -83,10 +80,10 @@ public class PreviewAchievements extends AppCompatActivity {
     };
 
     private void updateListView(int numPlayers) {
-        List<Integer> boundaries = Achievements.getBoundaries(numPlayers, poorScore, greatScore);
+        List<Integer> boundaries = AchievementCalculator.getBoundaries(numPlayers, poorScore, greatScore);
         for(int i = 0; i < NUM_ACHIEVEMENTS; i++) {
-            String num = Integer.toString(boundaries.get(i));
-            achievementLevels.get(i).setBoundary(num);
+            String value = Integer.toString(boundaries.get(i));
+            achievementLevels.get(i).setBoundary(value);
         }
         adapter.notifyDataSetChanged();
     }
@@ -97,5 +94,4 @@ public class PreviewAchievements extends AppCompatActivity {
         intent.putExtra(EXTRA_GREAT_SCORE, greatScore);
         return intent;
     }
-
 }

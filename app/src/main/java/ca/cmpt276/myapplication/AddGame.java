@@ -11,9 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import java.util.List;
-
-import ca.cmpt276.myapplication.model.Achievements;
+import ca.cmpt276.myapplication.model.AchievementCalculator;
 import ca.cmpt276.myapplication.model.Game;
 import ca.cmpt276.myapplication.model.GameConfig;
 import ca.cmpt276.myapplication.model.ConfigManager;
@@ -43,7 +41,6 @@ public class AddGame extends AppCompatActivity {
 
         setupEditTextFields();
         setupSaveButton();
-
     }
 
     private void setupEditTextFields() {
@@ -65,8 +62,8 @@ public class AddGame extends AppCompatActivity {
             String scoreInput = edtScore.getText().toString();
             String numPlayersInput = edtNumPlayers.getText().toString();
 
-            if(!scoreInput.isEmpty() && !numPlayersInput.isEmpty()) {
-                String temp = Achievements
+            if (!scoreInput.isEmpty() && !numPlayersInput.isEmpty()) {
+                String temp = AchievementCalculator
                         .getAchievementEarned(titles, Integer.parseInt(numPlayersInput),
                                 gameConfig.getPoorScore(), gameConfig.getGoodScore(),
                                 Integer.parseInt(scoreInput));

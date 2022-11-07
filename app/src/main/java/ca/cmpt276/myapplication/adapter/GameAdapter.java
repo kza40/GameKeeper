@@ -15,6 +15,10 @@ import java.util.List;
 import ca.cmpt276.myapplication.R;
 import ca.cmpt276.myapplication.model.Game;
 
+/**
+ * GameAdapter class enables a complex ListView for viewing the games within a config.
+ */
+
 public class GameAdapter extends ArrayAdapter<Game> {
     private Context context;
     private int resource;
