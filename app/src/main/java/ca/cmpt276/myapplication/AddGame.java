@@ -13,14 +13,13 @@ import ca.cmpt276.myapplication.model.GameConfig;
 import ca.cmpt276.myapplication.model.ConfigManager;
 
 public class AddGame extends AppCompatActivity {
-
     private EditText edtScore;
     private EditText edtNumPlayers;
 
     private ConfigManager configManager;
     private GameConfig gameConfig;
 
-    private static final String CONFIG_POSITION = "AddGame: Config position";
+    public static final String CONFIG_POSITION = "AddGame: Config position";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

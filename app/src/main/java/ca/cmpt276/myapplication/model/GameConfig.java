@@ -11,8 +11,6 @@ import java.util.Iterator;
 import java.util.List;
 
 public class GameConfig implements Iterable<Game>{
-
-
     private final List<Game> games = new ArrayList<>();
 
     private String gameTitle;
