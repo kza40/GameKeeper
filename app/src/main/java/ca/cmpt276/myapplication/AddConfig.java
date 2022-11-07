@@ -21,21 +21,41 @@ public class AddConfig extends AppCompatActivity {
     private EditText edtGoodScore;
     private EditText edtConfigName;
     private Button btnPreview;
+    private Boolean isEdit;
 
     private ConfigManager configManager;
+    GameConfig gameConfig;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_config);
         setTitle("Add Config");
-
         btnPreview = findViewById(R.id.previewBtn);
         configManager = ConfigManager.getInstance();
+        int position=-1;
 
         setupInputFields();
         setupPreviewButton();
         setupSaveButton();
+
+        if(getIntent().getExtras()!=null)
+        {
+            isEdit=true;
+            setTitle("Edit Config");
+            position=getIntent().getIntExtra(AddGame.CONFIG_POSITION,-1);
+            loadInputFields(position);
+        }
+        else
+            isEdit=false;
+    }
+
+    private void loadInputFields(int position) {
+        gameConfig=configManager.getGameConfigAtIndex(position);
+        edtPoorScore.setText(Integer.toString(gameConfig.getPoorScore()));
+        edtGoodScore.setText(Integer.toString(gameConfig.getGoodScore()));
+        edtConfigName.setText(gameConfig.getGameTitle());
+
     }
 
     private void setupInputFields() {
@@ -61,7 +81,7 @@ public class AddConfig extends AppCompatActivity {
     private void setupSaveButton() {
         Button btnSave = findViewById(R.id.saveBtn);
         btnSave.setOnClickListener(view -> {
-            // If good/poor score fields are not empty
+            //TO DO: If good/poor score fields are not empty
             saveConfig();
             finish();
         });
@@ -105,13 +125,22 @@ public class AddConfig extends AppCompatActivity {
     }
 
     private void saveConfig() {
-        GameConfig gameConfig = new GameConfig(
-                edtConfigName.getText().toString(),
-                Integer.parseInt(edtPoorScore.getText().toString()),
-                Integer.parseInt(edtGoodScore.getText().toString())
-        );
-        configManager.addGame(gameConfig);
-        storeGameConfigToSharedPreferences(configManager);
+        if(isEdit)
+        {
+            gameConfig.setGoodScore(Integer.parseInt(edtGoodScore.getText().toString()));
+            gameConfig.setPoorScore(Integer.parseInt(edtPoorScore.getText().toString()));
+            gameConfig.setGameTitle(edtConfigName.getText().toString());
+        }
+        else
+        {
+            GameConfig gameConfig = new GameConfig(
+                    edtConfigName.getText().toString(),
+                    Integer.parseInt(edtPoorScore.getText().toString()),
+                    Integer.parseInt(edtGoodScore.getText().toString())
+            );
+            configManager.addGame(gameConfig);
+            storeGameConfigToSharedPreferences(configManager);
+        }
     }
 
     private TextWatcher previewTextWatcher = new TextWatcher() {
@@ -130,8 +159,10 @@ public class AddConfig extends AppCompatActivity {
         public void afterTextChanged(Editable editable) {}
     };
 
-    public static Intent makeIntent(Context context) {
+    public static Intent makeIntent(Context context,boolean isEdit,int position) {
         Intent intent = new Intent(context, AddConfig.class);
+        if(isEdit)
+            intent.putExtra(AddGame.CONFIG_POSITION, position);
         return intent;
     }
 }

@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">My Application</string>
+    <string name="confirm_dialog_message">Are you sure you want to delete your config?</string>
+    <string name="confirm_dialog_title">Delete Config?</string>
+    <string name="confirm">OK</string>
     <string name="name">Name</string>
     <string name="achievement_1_name">Name 1</string>
     <string name="achievement_2_name">Name 2</string>
