@@ -16,6 +16,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 import java.util.List;
 
+import ca.cmpt276.myapplication.adapter.GameAdapter;
+import ca.cmpt276.myapplication.adapter.GameConfigAdapter;
 import ca.cmpt276.myapplication.model.Game;
 import ca.cmpt276.myapplication.model.GameConfig;
 import ca.cmpt276.myapplication.model.ConfigManager;
@@ -24,6 +26,9 @@ public class ViewGames extends AppCompatActivity {
     private ConfigManager configManager;
     private GameConfig gameConfig;
     private int configPos;
+
+    private GameAdapter gameAdapter;
+    private ListView gamesList;
 
     private static final String CONFIG_POSITION = "ViewGames: Config position";
 
@@ -34,6 +39,8 @@ public class ViewGames extends AppCompatActivity {
 
         Intent intent = getIntent();
         configPos = intent.getIntExtra(CONFIG_POSITION,-1);
+
+        gamesList = findViewById(R.id.listOfGames);
 
         configManager = ConfigManager.getInstance();
         gameConfig = configManager.getGameConfigAtIndex(configPos);
@@ -46,23 +53,13 @@ public class ViewGames extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        populateListView();
+        gameAdapter.notifyDataSetChanged();
+        setEmptyState();
     }
 
     private void populateListView() {
-        if (gameConfig.isEmpty()) {
-            setEmptyState(View.VISIBLE);
-        } else {
-            setEmptyState(View.INVISIBLE);
-            List<String> theGames = new ArrayList<>();
-
-            for (Game game : gameConfig) {
-                theGames.add(game.getNumOfPlayers() + "\n" + game.getScore() + "\n");
-            }
-            ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.configs_layout, theGames);
-            ListView list = findViewById(R.id.listOfGames);
-            list.setAdapter(adapter);
-        }
+        gameAdapter = new GameAdapter(this, R.layout.adapter_view2, gameConfig.getGames());
+        gamesList.setAdapter(gameAdapter);
     }
 
     private void setupAddGame() {
@@ -73,12 +70,19 @@ public class ViewGames extends AppCompatActivity {
         });
     }
 
-    private void setEmptyState(int visible){
+    private void setEmptyState(){
         TextView emptyText = findViewById(R.id.emptyMsg);
         ImageView emptyImg = findViewById(R.id.emptyImg);
-        emptyText.setVisibility(visible);
-        emptyImg.setVisibility(visible);
+
+        if (gameConfig.isEmpty()) {
+            emptyText.setVisibility(View.VISIBLE);
+            emptyImg.setVisibility(View.VISIBLE);
+        } else {
+            emptyText.setVisibility(View.GONE);
+            emptyImg.setVisibility(View.GONE);
+        }
     }
+
 
     public static Intent makeIntent(Context context, int position) {
         Intent intent = new Intent(context, ViewGames.class);

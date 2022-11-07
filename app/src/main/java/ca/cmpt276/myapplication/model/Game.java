@@ -1,28 +1,51 @@
 package ca.cmpt276.myapplication.model;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+
+/**
+ * Game class contains the details of a single game: the date it was played, the number of players,
+ * and the achievement earned.
+ */
+
 public class Game {
     private int numOfPlayers;
-    private int score;
+    private int groupScore;
+    private String datePlayed;
+    private String achievementEarned;
 
-
-    public Game(int numOfPlayers, int score) {
+    public Game(String[] names, int numOfPlayers, int groupScore, int poorScore, int greatScore) {
         this.numOfPlayers = numOfPlayers;
-        this.score = score;
+        this.groupScore = groupScore;
+        setDate();
+        setAchievementEarned(names, poorScore, greatScore);
+    }
+
+    private void setDate() {
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("MMM dd, hh:mm a");
+        LocalDateTime now = LocalDateTime.now();
+        datePlayed = now.format(format);
+    }
+
+    private void setAchievementEarned(String[] names, int poorScore, int greatScore) {
+        achievementEarned = Achievements
+                            .getAchievementEarned(names, numOfPlayers, poorScore, greatScore, groupScore);
     }
 
     public int getNumOfPlayers() {
         return numOfPlayers;
     }
 
-    public void setNumOfPlayers(int numOfPlayers) {
-        this.numOfPlayers = numOfPlayers;
+    public String getDatePlayed() {
+        return datePlayed;
     }
 
-    public int getScore() {
-        return score;
+    public String getAchievementEarned() {
+        return achievementEarned;
     }
 
-    public void setScore(int score) {
-        this.score = score;
+    public int getGroupScore() {
+        return groupScore;
     }
 }
