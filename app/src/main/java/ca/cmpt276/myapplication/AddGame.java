@@ -17,6 +17,7 @@ import ca.cmpt276.myapplication.model.Achievements;
 import ca.cmpt276.myapplication.model.Game;
 import ca.cmpt276.myapplication.model.GameConfig;
 import ca.cmpt276.myapplication.model.ConfigManager;
+import ca.cmpt276.myapplication.model.SharedPreferenceManager;
 
 public class AddGame extends AppCompatActivity {
     private EditText edtScore;
@@ -83,7 +84,7 @@ public class AddGame extends AppCompatActivity {
     private void setupSaveButton() {
         Button btnSave = findViewById(R.id.btnSave);
         btnSave.setOnClickListener(view -> {
-            // TO DO: If fields are not empty
+            //TO DO: If fields are not empty
             saveGame();
             finish();
         });
@@ -94,6 +95,7 @@ public class AddGame extends AppCompatActivity {
         int groupScore = Integer.parseInt(edtScore.getText().toString());
         Game game = new Game(titles, numPlayers, groupScore, gameConfig.getPoorScore(), gameConfig.getGoodScore());
         gameConfig.addGame(game);
+        new SharedPreferenceManager(getApplicationContext()).updateConfigManager(configManager);
     }
 
     public static Intent makeIntent(Context context, int position) {

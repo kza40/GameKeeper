@@ -6,111 +6,266 @@
     android:layout_height="match_parent"
     tools:context=".PreviewAchievements">
 
-    <EditText
-        android:id="@+id/edtNumPlayers"
-        android:layout_width="214dp"
-        android:layout_height="43dp"
-        android:ems="10"
-        android:hint="Total players"
-        android:inputType="number"
+    <TextView
+        android:id="@+id/tvTitles"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/name"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="#673AB7"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintBottom_toTopOf="@+id/tvNameLvl1"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineCenter"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.81" />
+        app:layout_constraintTop_toTopOf="@+id/guidelineTop" />
 
     <TextView
-        android:id="@+id/tvScoreLevel7"
+        android:id="@+id/tvNameLvl1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Level 7"
-        app:layout_constraintEnd_toEndOf="@+id/tvScoreLevel6"
-        app:layout_constraintStart_toStartOf="@+id/tvScoreLevel6"
-        app:layout_constraintTop_toBottomOf="@+id/tvScoreLevel6" />
+        android:text="@string/achievement_1_name"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/tvNameLvl2"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineCenter"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitles" />
 
     <TextView
-        android:id="@+id/tvScoreLevel8"
+        android:id="@+id/tvNameLvl2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Level 8"
-        app:layout_constraintEnd_toEndOf="@+id/tvScoreLevel7"
-        app:layout_constraintStart_toStartOf="@+id/tvScoreLevel7"
-        app:layout_constraintTop_toBottomOf="@+id/tvScoreLevel7" />
+        android:text="@string/achievement_2_name"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/tvNameLvl3"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineCenter"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvNameLvl1" />
 
     <TextView
-        android:id="@+id/tvScoreLevel5"
+        android:id="@+id/tvNameLvl3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Level 5"
-        app:layout_constraintEnd_toEndOf="@+id/tvScoreLevel4"
-        app:layout_constraintStart_toStartOf="@+id/tvScoreLevel4"
-        app:layout_constraintTop_toBottomOf="@+id/tvScoreLevel4" />
+        android:text="@string/achievement_3_name"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/tvNameLvl4"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineCenter"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvNameLvl2" />
 
     <TextView
-        android:id="@+id/tvScoreLevel6"
+        android:id="@+id/tvNameLvl4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Level 6"
-        app:layout_constraintEnd_toEndOf="@+id/tvScoreLevel5"
-        app:layout_constraintStart_toStartOf="@+id/tvScoreLevel5"
-        app:layout_constraintTop_toBottomOf="@+id/tvScoreLevel5" />
+        android:text="@string/achievement_4_name"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/tvNameLvl5"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineCenter"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvNameLvl3" />
+
+    <TextView
+        android:id="@+id/tvNameLvl5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/achievement_5_name"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/tvNameLvl6"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineCenter"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvNameLvl4" />
+
+    <TextView
+        android:id="@+id/tvNameLvl6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/achievement_6_name"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/tvNameLvl7"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineCenter"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvNameLvl5" />
+
+    <TextView
+        android:id="@+id/tvNameLvl7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/achievement_7_name"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/tvNameLvl8"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineCenter"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvNameLvl6" />
+
+    <TextView
+        android:id="@+id/tvNameLvl8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/achievement_8_name"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineLow"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineCenter"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvNameLvl7" />
 
     <TextView
         android:id="@+id/tvScores"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Scores"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="@string/points"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="#673AB7"
+        app:layout_constraintBottom_toTopOf="@+id/tvScoreLevel1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.19" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/guidelineCenter"
+        app:layout_constraintTop_toTopOf="@+id/guidelineTop" />
 
     <TextView
         android:id="@+id/tvScoreLevel1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Level 1"
-        app:layout_constraintEnd_toEndOf="@+id/tvScores"
-        app:layout_constraintStart_toStartOf="@+id/tvScores"
+        android:text="@string/blank_field"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintBottom_toTopOf="@+id/tvScoreLevel2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/guidelineCenter"
         app:layout_constraintTop_toBottomOf="@+id/tvScores" />
+
+    <TextView
+        android:id="@+id/tvScoreLevel2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/blank_field"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintBottom_toTopOf="@+id/tvScoreLevel3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/guidelineCenter"
+        app:layout_constraintTop_toBottomOf="@+id/tvScoreLevel1" />
 
     <TextView
         android:id="@+id/tvScoreLevel3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Level 3"
-        app:layout_constraintEnd_toEndOf="@+id/tvScoreLevel2"
-        app:layout_constraintStart_toStartOf="@+id/tvScoreLevel2"
+        android:text="@string/blank_field"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintBottom_toTopOf="@+id/tvScoreLevel4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/guidelineCenter"
         app:layout_constraintTop_toBottomOf="@+id/tvScoreLevel2" />
 
     <TextView
         android:id="@+id/tvScoreLevel4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Level 4"
-        app:layout_constraintEnd_toEndOf="@+id/tvScoreLevel3"
-        app:layout_constraintStart_toStartOf="@+id/tvScoreLevel3"
+        android:text="@string/blank_field"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintBottom_toTopOf="@+id/tvScoreLevel5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/guidelineCenter"
         app:layout_constraintTop_toBottomOf="@+id/tvScoreLevel3" />
 
     <TextView
-        android:id="@+id/tvScoreLevel2"
+        android:id="@+id/tvScoreLevel5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Level 2"
-        app:layout_constraintEnd_toEndOf="@+id/tvScoreLevel1"
-        app:layout_constraintStart_toStartOf="@+id/tvScoreLevel1"
-        app:layout_constraintTop_toBottomOf="@+id/tvScoreLevel1" />
+        android:text="@string/blank_field"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintBottom_toTopOf="@+id/tvScoreLevel6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/guidelineCenter"
+        app:layout_constraintTop_toBottomOf="@+id/tvScoreLevel4" />
+
+    <TextView
+        android:id="@+id/tvScoreLevel6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/blank_field"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintBottom_toTopOf="@+id/tvScoreLevel7"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/guidelineCenter"
+        app:layout_constraintTop_toBottomOf="@+id/tvScoreLevel5" />
+
+    <TextView
+        android:id="@+id/tvScoreLevel7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/blank_field"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintBottom_toTopOf="@+id/tvScoreLevel8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/guidelineCenter"
+        app:layout_constraintTop_toBottomOf="@+id/tvScoreLevel6" />
+
+    <TextView
+        android:id="@+id/tvScoreLevel8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/blank_field"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineLow"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/guidelineCenter"
+        app:layout_constraintTop_toBottomOf="@+id/tvScoreLevel7" />
+
+    <EditText
+        android:id="@+id/edtNumPlayers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/number_of_players"
+        android:gravity="center"
+        android:inputType="number"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="#673AB7"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guidelineLow" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineCenter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.50" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineLow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.70" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.05" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

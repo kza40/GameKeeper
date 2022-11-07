@@ -17,6 +17,7 @@ import java.util.List;
 import ca.cmpt276.myapplication.adapter.GameConfigAdapter;
 import ca.cmpt276.myapplication.model.GameConfig;
 import ca.cmpt276.myapplication.model.ConfigManager;
+import ca.cmpt276.myapplication.model.SharedPreferenceManager;
 
 public class ViewConfigs extends AppCompatActivity {
 
@@ -30,7 +31,7 @@ public class ViewConfigs extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         setTitle("Game Configs");
 
-        configManager = ConfigManager.getInstance();
+        configManager=new SharedPreferenceManager(getApplicationContext()).getConfigManager();
         configsList = findViewById(R.id.listOfConfigs);
 
         setEmptyState();
@@ -46,14 +47,15 @@ public class ViewConfigs extends AppCompatActivity {
         setEmptyState();
     }
 
-    private void populateListView() {
-        List<String> theConfigs = new ArrayList<>();
-        for (GameConfig gameConfig : configManager) {
-            theConfigs.add(gameConfig.getGameTitle());
-        }
 
-        adapter=new GameConfigAdapter(ViewConfigs.this,R.layout.adapter_view,configManager.getGameConfigs());
-        configsList.setAdapter(adapter);
+    private void populateListView() {
+            List<String> theConfigs = new ArrayList<>();
+            for (GameConfig gameConfig : configManager) {
+                theConfigs.add(gameConfig.getGameTitle());
+            }
+            adapter=new GameConfigAdapter(ViewConfigs.this,R.layout.adapter_view,configManager.getGameConfigs());
+            configsList.setAdapter(adapter);
+
     }
 
     private void setupAddConfig() {

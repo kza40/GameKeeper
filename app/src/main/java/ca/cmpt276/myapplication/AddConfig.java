@@ -12,6 +12,7 @@ import android.widget.EditText;
 
 import ca.cmpt276.myapplication.model.GameConfig;
 import ca.cmpt276.myapplication.model.ConfigManager;
+import ca.cmpt276.myapplication.model.SharedPreferenceManager;
 
 
 public class AddConfig extends AppCompatActivity {
@@ -86,6 +87,7 @@ public class AddConfig extends AppCompatActivity {
         });
     }
 
+
     private void saveConfig() {
         if(isEdit)
         {
@@ -102,6 +104,7 @@ public class AddConfig extends AppCompatActivity {
             );
             configManager.addGame(gameConfig);
         }
+        new SharedPreferenceManager(getApplicationContext()).updateConfigManager(configManager);
     }
 
     private TextWatcher previewTextWatcher = new TextWatcher() {
