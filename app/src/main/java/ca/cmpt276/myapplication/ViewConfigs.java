@@ -51,20 +51,12 @@ public class ViewConfigs extends AppCompatActivity {
         if (configManager.isEmpty()) {
             restoreGameConfigsFromSharedPreferences();
         }
-        if (AddConfig.getCountFromSharedPreferences(this) == 0) {
-            setEmptyState();
-        }
-        else
-        {
             List<String> theConfigs = new ArrayList<>();
             for (GameConfig gameConfig : configManager) {
                 theConfigs.add(gameConfig.getGameTitle());
             }
             adapter=new GameConfigAdapter(ViewConfigs.this,R.layout.adapter_view,configManager.getGameConfigs());
             configsList.setAdapter(adapter);
-        }
-
-
 
     }
 
@@ -92,7 +84,7 @@ public class ViewConfigs extends AppCompatActivity {
     public void setEmptyState(){
         TextView emptyText = findViewById(R.id.emptyMessage);
         ImageView emptyImg = findViewById(R.id.emptyStateImg);
-        if (configManager.isEmpty()) {
+        if (AddConfig.getCountFromSharedPreferences(this) == 0) {
             emptyText.setVisibility(View.VISIBLE);
             emptyImg.setVisibility(View.VISIBLE);
         }
