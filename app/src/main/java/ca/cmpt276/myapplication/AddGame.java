@@ -5,11 +5,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import java.util.List;
 
+import ca.cmpt276.myapplication.model.Achievements;
 import ca.cmpt276.myapplication.model.Game;
 import ca.cmpt276.myapplication.model.GameConfig;
 import ca.cmpt276.myapplication.model.ConfigManager;
@@ -44,7 +48,37 @@ public class AddGame extends AppCompatActivity {
     private void setupEditTextFields() {
         edtScore = findViewById(R.id.edtScoreDisplay);
         edtNumPlayers = findViewById(R.id.edtNumPlayersDisplay);
+
+        edtScore.addTextChangedListener(scoreTextWatcher);
+        edtNumPlayers.addTextChangedListener(scoreTextWatcher);
     }
+
+    private TextWatcher scoreTextWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            String scoreInput = edtScore.getText().toString();
+            String numPlayersInput = edtNumPlayers.getText().toString();
+
+            if(!scoreInput.isEmpty() && !numPlayersInput.isEmpty()) {
+                String temp = Achievements
+                        .getAchievementEarned(titles, Integer.parseInt(numPlayersInput),
+                                gameConfig.getPoorScore(), gameConfig.getGoodScore(),
+                                Integer.parseInt(scoreInput));
+                TextView showAchievement = findViewById(R.id.tvAchievement);
+                showAchievement.setText("You got " + temp + "!");
+            }
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+
+        }
+    };
 
     private void setupSaveButton() {
         Button btnSave = findViewById(R.id.btnSave);

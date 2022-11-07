@@ -8,39 +8,86 @@
 
     <EditText
         android:id="@+id/edtScoreDisplay"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="textPersonName"
         android:hint="Score"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.291" />
+        android:inputType="number"
+        app:layout_constraintBottom_toTopOf="@+id/edtNumPlayersDisplay"
+        app:layout_constraintEnd_toStartOf="@+id/guideline75p"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/guideline25p"
+        app:layout_constraintTop_toTopOf="@+id/guideline10p"
+        app:layout_constraintVertical_chainStyle="packed" />
 
     <EditText
         android:id="@+id/edtNumPlayersDisplay"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="#Players"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.413" />
+        android:hint="Total Players"
+        android:inputType="number"
+        app:layout_constraintBottom_toTopOf="@+id/guideline45p"
+        app:layout_constraintEnd_toStartOf="@+id/guideline75p"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/guideline25p"
+        app:layout_constraintTop_toBottomOf="@+id/edtScoreDisplay" />
 
     <Button
         android:id="@+id/btnSave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Save"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.86"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.701" />
+        app:layout_constraintEnd_toStartOf="@+id/guideline75p"
+        app:layout_constraintStart_toStartOf="@+id/guideline25p"
+        app:layout_constraintTop_toTopOf="@+id/guideline60p" />
+
+    <TextView
+        android:id="@+id/tvAchievement"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text=""
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintBottom_toTopOf="@+id/guideline60p"
+        app:layout_constraintEnd_toStartOf="@+id/guideline75p"
+        app:layout_constraintStart_toStartOf="@+id/guideline25p"
+        app:layout_constraintTop_toTopOf="@+id/guideline45p" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline25p"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.25" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline75p"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.75" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline60p"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.6" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline45p"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.45" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline10p"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.1" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
