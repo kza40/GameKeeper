@@ -14,6 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import java.util.List;
 import ca.cmpt276.myapplication.AddConfig;
+import ca.cmpt276.myapplication.PreviewAchievements;
 import ca.cmpt276.myapplication.R;
 import ca.cmpt276.myapplication.ViewConfigs;
 import ca.cmpt276.myapplication.model.ConfigManager;
@@ -40,6 +41,7 @@ public class GameConfigAdapter extends ArrayAdapter<GameConfig> {
         TextView title=convertView.findViewById(R.id.tvTitle);
         TextView poorScore=convertView.findViewById(R.id.tvPoorScore);
         TextView goodScore=convertView.findViewById(R.id.tvGoodScore);
+        ImageButton btnAchievement=convertView.findViewById(R.id.btnAchievement);
         ImageButton btnEdit=convertView.findViewById(R.id.btnEdit);
         ImageButton btnDelete=convertView.findViewById(R.id.btnDelete);
 
@@ -47,11 +49,17 @@ public class GameConfigAdapter extends ArrayAdapter<GameConfig> {
         title.setText(gameConfig.getGameTitle());
         poorScore.setText("Poor Score: "+Integer.toString(gameConfig.getPoorScore()));
         goodScore.setText("Good Score: "+Integer.toString(gameConfig.getGoodScore()));
-        setupClickListenersOnButton(parent,position,btnEdit,btnDelete);
+        setupClickListenersOnButton(gameConfig,parent,position,btnEdit,btnDelete,btnAchievement);
         return convertView;
     }
 
-    private void setupClickListenersOnButton(ViewGroup parent, int position, ImageButton btnEdit, ImageButton btnDelete) {
+    private void setupClickListenersOnButton(GameConfig gameConfig, ViewGroup parent, int position, ImageButton btnEdit, ImageButton btnDelete, ImageButton btnAchievement) {
+        btnAchievement.setOnClickListener((View view)->{
+            Intent intent= PreviewAchievements.makeIntent(context,gameConfig.getPoorScore(),gameConfig.getGoodScore());
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
+        });
+
         btnEdit.setOnClickListener((View view) ->{
                 Intent intent=AddConfig.makeIntent(context,true,position);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
