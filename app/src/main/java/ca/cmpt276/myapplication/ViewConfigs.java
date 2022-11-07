@@ -17,6 +17,7 @@ import java.util.List;
 import ca.cmpt276.myapplication.adapter.GameConfigAdapter;
 import ca.cmpt276.myapplication.model.GameConfig;
 import ca.cmpt276.myapplication.model.ConfigManager;
+import ca.cmpt276.myapplication.model.SharedPreferenceManager;
 
 public class ViewConfigs extends AppCompatActivity {
 
@@ -30,7 +31,7 @@ public class ViewConfigs extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         setTitle("Game Configs");
 
-        configManager = ConfigManager.getInstance();
+        configManager=new SharedPreferenceManager(getApplicationContext()).getConfigManager();
         configsList = findViewById(R.id.listOfConfigs);
 
         setEmptyState();
@@ -48,9 +49,6 @@ public class ViewConfigs extends AppCompatActivity {
 
 
     private void populateListView() {
-        if (configManager.isEmpty()) {
-            restoreGameConfigsFromSharedPreferences();
-        }
             List<String> theConfigs = new ArrayList<>();
             for (GameConfig gameConfig : configManager) {
                 theConfigs.add(gameConfig.getGameTitle());
@@ -58,12 +56,6 @@ public class ViewConfigs extends AppCompatActivity {
             adapter=new GameConfigAdapter(ViewConfigs.this,R.layout.adapter_view,configManager.getGameConfigs());
             configsList.setAdapter(adapter);
 
-    }
-
-    private void restoreGameConfigsFromSharedPreferences() {
-        for(int i = 0; i < AddConfig.getCountFromSharedPreferences(this); i++) {
-            configManager.addGame(AddConfig.getGameConfigFromSharedPreferences(this, i));
-        }
     }
 
     private void setupAddConfig() {
@@ -84,7 +76,7 @@ public class ViewConfigs extends AppCompatActivity {
     public void setEmptyState(){
         TextView emptyText = findViewById(R.id.emptyMessage);
         ImageView emptyImg = findViewById(R.id.emptyStateImg);
-        if (AddConfig.getCountFromSharedPreferences(this) == 0) {
+        if (configManager.isEmpty()) {
             emptyText.setVisibility(View.VISIBLE);
             emptyImg.setVisibility(View.VISIBLE);
         }

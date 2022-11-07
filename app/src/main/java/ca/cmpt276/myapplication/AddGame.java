@@ -11,6 +11,7 @@ import android.widget.EditText;
 import ca.cmpt276.myapplication.model.Game;
 import ca.cmpt276.myapplication.model.GameConfig;
 import ca.cmpt276.myapplication.model.ConfigManager;
+import ca.cmpt276.myapplication.model.SharedPreferenceManager;
 
 public class AddGame extends AppCompatActivity {
     private EditText edtScore;
@@ -45,7 +46,7 @@ public class AddGame extends AppCompatActivity {
     private void setupSaveButton() {
         Button btnSave = findViewById(R.id.btnSave);
         btnSave.setOnClickListener(view -> {
-            // If fields are not empty
+            //TO DO: If fields are not empty
             saveGame();
             finish();
         });
@@ -55,6 +56,7 @@ public class AddGame extends AppCompatActivity {
         Game game = new Game(Integer.parseInt(edtNumPlayers.getText().toString()),
                              Integer.parseInt(edtScore.getText().toString()));
         gameConfig.addGame(game);
+        new SharedPreferenceManager(getApplicationContext()).updateConfigManager(configManager);
     }
 
     public static Intent makeIntent(Context context, int position) {
