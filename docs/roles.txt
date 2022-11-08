@@ -1,0 +1,4 @@
+Scrum master: Peeyush
+Product owner: Divesh
+Repo manager: Kiarash
+Team member: Maria
