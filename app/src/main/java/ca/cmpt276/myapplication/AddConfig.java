@@ -30,7 +30,7 @@ public class AddConfig extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_config);
-        setTitle("Add Config");
+        setTitle(getString(R.string.addConfigTitle));
         configManager = ConfigManager.getInstance();
         int position=-1;
 
@@ -40,7 +40,7 @@ public class AddConfig extends AppCompatActivity {
         if(getIntent().getExtras()!=null)
         {
             isEdit=true;
-            setTitle("Edit Config");
+            setTitle(getString(R.string.editConfigTitle));
             position=getIntent().getIntExtra(AddGame.CONFIG_POSITION,-1);
             loadInputFields(position);
         }

@@ -36,7 +36,7 @@ public class PreviewAchievements extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preview_achievements);
 
-        setTitle(R.string.AchievementsTitle);
+        setTitle(R.string.achievementsTitle);
         setUpMemberVariables();
         setupAchievementLevels();
     }

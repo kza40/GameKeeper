@@ -12,7 +12,7 @@
     <string name="points">Points</string>
     <string name="blank_field">-</string>
     <string name="number_of_players">Number of players</string>
-    <string name="AchievementsTitle">Achievements</string>
+    <string name="achievementsTitle">Achievements</string>
     <string name="achievementOne">The Fledglings</string>
     <string name="achievementTwo">The Casual Ones</string>
     <string name="achievementThree">A Budding Alliance</string>
@@ -26,4 +26,15 @@
     <string name="you_got">"You got "</string>
     <string name="exclamation">!</string>
     <string name="addEmptyMsg">Could not save. One or more fields are empty.</string>
+    <string name="configsEmptyStateMsg">Oh... seems like there arent any game configurations yet. Tap the + icon to add one!</string>
+    <string name="gamesEmptyStateMsg">No games to show. Tap the + icon to add one!</string>
+    <string name="score">Score</string>
+    <string name="total_players">Total Players</string>
+    <string name="addConfigTitle">Add Config</string>
+    <string name="editConfigTitle">Edit Config</string>
+    <string name="viewConfigsTitle">Game Configs</string>
+    <string name="players">" players"</string>
+    <string name="poor_score_colon">"Poor Score: "</string>
+    <string name="good_score_colon">"Good Score: "</string>
+    <string name="score_colon">"Score: "</string>
 </resources>

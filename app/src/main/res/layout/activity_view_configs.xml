@@ -11,12 +11,13 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:autoSizeTextType="uniform"
-        android:text="Oh... seems like there arent any game configurations yet. Tap the + icon to set one!"
+        android:autoSizeMaxTextSize="22sp"
+        android:text="@string/configsEmptyStateMsg"
         android:textAlignment="center"
         android:textColor="#000000"
-        app:layout_constraintBottom_toTopOf="@+id/guidelineBottomMsg"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineRightMsg"
-        app:layout_constraintStart_toStartOf="@+id/guidelineLeftMsg"
+        app:layout_constraintBottom_toBottomOf="@+id/guidelineBottomMsg"
+        app:layout_constraintEnd_toEndOf="@+id/guidelineRightEmptyMsg"
+        app:layout_constraintStart_toStartOf="@+id/guidelineLeftEmptyMsg"
         app:layout_constraintTop_toTopOf="@+id/guidelineTopMsg" />
 
     <ListView
@@ -24,8 +25,8 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/guidelineRightMsg"
-        app:layout_constraintStart_toStartOf="@+id/guidelineLeftMsg"
+        app:layout_constraintEnd_toEndOf="@+id/guidelineRightList"
+        app:layout_constraintStart_toStartOf="@+id/guidelineLeftList"
         app:layout_constraintTop_toTopOf="parent">
     </ListView>
 
@@ -35,6 +36,21 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.15" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineLeftEmptyMsg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.25" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineRightEmptyMsg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.75" />
+
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineBottomImg"
@@ -58,18 +74,18 @@
         app:layout_constraintGuide_percent="0.75" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineLeftMsg"
+        android:id="@+id/guidelineLeftList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.10"/>
+        app:layout_constraintGuide_percent="0.05"/>
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineRightMsg"
+        android:id="@+id/guidelineRightList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.90"/>
+        app:layout_constraintGuide_percent="0.95"/>
 
     <ImageView
         android:id="@+id/emptyStateImg"

@@ -22,7 +22,7 @@ public class Game {
     }
 
     private void setDate() {
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("MMM dd, hh:mm a");
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("MMM dd");
         LocalDateTime now = LocalDateTime.now();
         datePlayed = now.format(format);
     }
