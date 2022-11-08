@@ -29,7 +29,7 @@ public class ViewConfigs extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_configs);
-        setTitle("Game Configs");
+        setTitle(getString(R.string.viewConfigsTitle));
 
         configManager=new SharedPreferenceManager(getApplicationContext()).getConfigManager();
         configsList = findViewById(R.id.listOfConfigs);

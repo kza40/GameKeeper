@@ -24,10 +24,17 @@
                 android:id="@+id/tvAchievementView"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:layout_weight="100"
+                android:layout_weight="20"
                 android:text="Achievement"
                 android:textSize="18sp"
                 android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvDateView"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_weight="80"
+                android:text="Date" />
 
         </LinearLayout>
 
@@ -37,22 +44,16 @@
             android:layout_height="match_parent"
             android:weightSum="100">
             <TextView
-                android:id="@+id/tvDateView"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_weight="30"
-                android:text="Date" />
-            <TextView
                 android:id="@+id/tvNumPlayersView"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:layout_weight="35"
+                android:layout_weight="50"
                 android:text="# Players" />
             <TextView
                 android:id="@+id/tvScoreView"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:layout_weight="35"
+                android:layout_weight="50"
                 android:text="Score" />
 
         </LinearLayout>

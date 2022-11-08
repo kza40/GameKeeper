@@ -42,9 +42,9 @@ public class GameAdapter extends ArrayAdapter<Game> {
 
         achievementView.setText(getItem(position).getAchievementEarned());
         dateView.setText(getItem(position).getDatePlayed());
-        String numPlayers = getItem(position).getNumOfPlayers() + " players";
+        String numPlayers = getItem(position).getNumOfPlayers() + context.getString(R.string.players);
         numPlayersView.setText(numPlayers);
-        groupScore.setText("Score: " + getItem(position).getGroupScore());
+        groupScore.setText(context.getString(R.string.score_colon) + getItem(position).getGroupScore());
 
         return convertView;
     }

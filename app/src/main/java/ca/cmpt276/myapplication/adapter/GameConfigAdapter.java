@@ -52,8 +52,8 @@ public class GameConfigAdapter extends ArrayAdapter<GameConfig> {
 
 
         title.setText(gameConfig.getGameTitle());
-        poorScore.setText("Poor Score: "+Integer.toString(gameConfig.getPoorScore()));
-        goodScore.setText("Good Score: "+Integer.toString(gameConfig.getGoodScore()));
+        poorScore.setText(context.getString(R.string.poor_score_colon)+Integer.toString(gameConfig.getPoorScore()));
+        goodScore.setText(context.getString(R.string.good_score_colon)+Integer.toString(gameConfig.getGoodScore()));
         setupClickListenersOnButton(gameConfig,parent,position,btnEdit,btnDelete,btnAchievement);
         return convertView;
     }
