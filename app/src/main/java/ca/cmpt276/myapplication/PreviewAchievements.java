@@ -87,6 +87,7 @@ public class PreviewAchievements extends AppCompatActivity {
             String value = Integer.toString(boundaries.get(i));
             achievementLevels.get(i).setBoundary(value);
         }
+
         adapter.notifyDataSetChanged();
     }
 
