@@ -10,6 +10,7 @@ import android.text.TextWatcher;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import ca.cmpt276.myapplication.model.AchievementCalculator;
 import ca.cmpt276.myapplication.model.Game;
@@ -86,15 +87,21 @@ public class AddGame extends AppCompatActivity {
     private void setupSaveButton() {
         Button btnSave = findViewById(R.id.btnSave);
         btnSave.setOnClickListener(view -> {
-            //TO DO: If fields are not empty
-            saveGame();
-            finish();
+
+            String numPlayers = edtNumPlayers.getText().toString();
+            String groupScore = edtScore.getText().toString();
+            if (!numPlayers.isEmpty() && !groupScore.isEmpty()) {
+                saveGame(Integer.parseInt(numPlayers), Integer.parseInt(groupScore));
+                finish();
+            }
+            else {
+                Toast.makeText(AddGame.this, R.string.addEmptyMsg, Toast.LENGTH_LONG)
+                        .show();
+            }
         });
     }
 
-    private void saveGame() {
-        int numPlayers = Integer.parseInt(edtNumPlayers.getText().toString());
-        int groupScore = Integer.parseInt(edtScore.getText().toString());
+    private void saveGame(int numPlayers, int groupScore) {
         Game game = new Game(titles, numPlayers, groupScore, gameConfig.getPoorScore(), gameConfig.getGoodScore());
         gameConfig.addGame(game);
         new SharedPreferenceManager(getApplicationContext()).updateConfigManager(configManager);

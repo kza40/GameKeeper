@@ -25,6 +25,7 @@
     <string name="add_game">Add Game</string>
     <string name="you_got">"You got "</string>
     <string name="exclamation">!</string>
+    <string name="addEmptyMsg">Could not save. One or more fields are empty.</string>
     <string name="configsEmptyStateMsg">Oh... seems like there arent any game configurations yet. Tap the + icon to add one!</string>
     <string name="gamesEmptyStateMsg">No games to show. Tap the + icon to add one!</string>
     <string name="score">Score</string>
