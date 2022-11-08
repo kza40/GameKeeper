@@ -22,14 +22,10 @@ public class AchievementCalculator {
 
         int numIntervals = NUM_ACHIEVEMENTS - 1;
         int range = upperBound - lowerBound;
-        // Approximately how much each level should be spaced out (rounded down)
         int jumpAmt = range / numIntervals;
 
-        // In case jumpAmt calculation is not a whole number, the space between Level 7 and Level 8
-        // will be larger than the jumpAmt. The rest of the levels will be adjusted
-
-        int extraAmt = range % numIntervals;     // Between 0 to 6
-        int indexToBeAdjusted = 0;      // Start adjusting the levels from Level 2
+        int extraAmt = range % numIntervals;
+        int indexToBeAdjusted = 0;
         int timesAdjusted = 0;
 
         int currScore = lowerBound;
@@ -40,7 +36,6 @@ public class AchievementCalculator {
                 indexToBeAdjusted += ((NUM_ACHIEVEMENTS - 2) /  extraAmt);
                 timesAdjusted++;
             }
-
             boundaries.add(currScore);
         }
         boundaries.add(upperBound);
@@ -60,7 +55,7 @@ public class AchievementCalculator {
             isReversed = true;
         }
 
-        while(index < AchievementCalculator.NUM_ACHIEVEMENTS) {
+        while(index < NUM_ACHIEVEMENTS) {
             if (isReversed && groupScore > boundaries.get(index)) {
                 break;
             }

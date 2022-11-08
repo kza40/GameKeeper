@@ -10,6 +10,10 @@ import androidx.annotation.NonNull;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+/**
+ * The SharedPreferenceManager class provides a model for saving game configurations and games.
+ */
+
 public class SharedPreferenceManager {
 
     SharedPreferences mPrefs;
