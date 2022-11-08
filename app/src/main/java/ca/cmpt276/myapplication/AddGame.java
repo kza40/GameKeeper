@@ -18,15 +18,14 @@ import ca.cmpt276.myapplication.model.ConfigManager;
 import ca.cmpt276.myapplication.model.SharedPreferenceManager;
 
 public class AddGame extends AppCompatActivity {
+    public static final String CONFIG_POSITION = "AddGame: Config position";
+
     private EditText edtScore;
     private EditText edtNumPlayers;
-    private String[] titles = new String[] { "Lvl 0", "Lvl 1", "Lvl 2", "Lvl 3", "Lvl 4", "Lvl 5",
-            "Lvl 6", "Lvl 7", "Lvl 8" };
-
     private ConfigManager configManager;
     private GameConfig gameConfig;
 
-    public static final String CONFIG_POSITION = "AddGame: Config position";
+    private String[] titles;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +37,10 @@ public class AddGame extends AppCompatActivity {
         configManager = ConfigManager.getInstance();
         gameConfig = configManager.getGameConfigAtIndex(configPos);
         setTitle("Add Game");
+
+        titles = new String[] { "The First-Timers", "The Fledglings", "The Casual Ones",
+                                "A Budding Alliance", "A Clever Crew", "The Go-Getters",
+                                "A Brilliant Bunch", "The Remarkable Ones", "Real Deal" };
 
         setupEditTextFields();
         setupSaveButton();
