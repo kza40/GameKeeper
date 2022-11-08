@@ -49,8 +49,10 @@ public class PreviewAchievements extends AppCompatActivity {
         edtNumPlayers.addTextChangedListener(scoreTextWatcher);
         list = findViewById(R.id.achievementLevels);
 
-        titles = new String[] { "Lvl 1", "Lvl 2", "Lvl 3", "Lvl 4", "Lvl 5",
-                                "Lvl 6", "Lvl 7", "Lvl 8" };
+        titles = new String[] { getString(R.string.achievementOne), getString(R.string.achievementTwo),
+                                getString(R.string.achievementThree), getString(R.string.achievementFour),
+                                getString(R.string.achievementFive), getString(R.string.achievementSix),
+                                getString(R.string.achievementSeven), getString(R.string.achievementEight) };
         achievementLevels = new ArrayList<>();
     }
 

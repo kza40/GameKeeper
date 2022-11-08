@@ -18,15 +18,14 @@ import ca.cmpt276.myapplication.model.ConfigManager;
 import ca.cmpt276.myapplication.model.SharedPreferenceManager;
 
 public class AddGame extends AppCompatActivity {
+    public static final String CONFIG_POSITION = "AddGame: Config position";
+
     private EditText edtScore;
     private EditText edtNumPlayers;
-    private String[] titles = new String[] { "Lvl 0", "Lvl 1", "Lvl 2", "Lvl 3", "Lvl 4", "Lvl 5",
-            "Lvl 6", "Lvl 7", "Lvl 8" };
-
     private ConfigManager configManager;
     private GameConfig gameConfig;
 
-    public static final String CONFIG_POSITION = "AddGame: Config position";
+    private String[] titles;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +36,13 @@ public class AddGame extends AppCompatActivity {
         int configPos = intent.getIntExtra(CONFIG_POSITION,-1);
         configManager = ConfigManager.getInstance();
         gameConfig = configManager.getGameConfigAtIndex(configPos);
-        setTitle("Add Game");
+        setTitle(getString(R.string.add_game));
 
+        titles = new String[] { getString(R.string.achievementZero), getString(R.string.achievementOne),
+                                getString(R.string.achievementTwo), getString(R.string.achievementThree),
+                                getString(R.string.achievementFour), getString(R.string.achievementFive),
+                                getString(R.string.achievementSix), getString(R.string.achievementSeven),
+                                getString(R.string.achievementEight) };
         setupEditTextFields();
         setupSaveButton();
     }
@@ -68,7 +72,8 @@ public class AddGame extends AppCompatActivity {
                                 gameConfig.getPoorScore(), gameConfig.getGoodScore(),
                                 Integer.parseInt(scoreInput));
                 TextView showAchievement = findViewById(R.id.tvAchievement);
-                showAchievement.setText("You got " + temp + "!");
+                String message = getString(R.string.you_got) + temp + getString(R.string.exclamation);
+                showAchievement.setText(message);
             }
         }
 
