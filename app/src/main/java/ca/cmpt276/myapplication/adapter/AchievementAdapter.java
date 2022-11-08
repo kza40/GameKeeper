@@ -13,17 +13,19 @@ import androidx.annotation.Nullable;
 import java.util.List;
 
 import ca.cmpt276.myapplication.R;
+import ca.cmpt276.myapplication.model.AchievementLevel;
 import ca.cmpt276.myapplication.model.Game;
 
 /**
- * GameAdapter class enables a complex ListView for viewing the games within a config.
+ * AchievementAdapter class enables a complex ListView for previewing the achievement levels of
+ * a config.
  */
 
-public class GameAdapter extends ArrayAdapter<Game> {
+public class AchievementAdapter extends ArrayAdapter<AchievementLevel> {
     private Context context;
     private int resource;
 
-    public GameAdapter(@NonNull Context context, int resource, @NonNull List<Game> objects) {
+    public AchievementAdapter(@NonNull Context context, int resource, @NonNull List<AchievementLevel> objects) {
         super(context, resource, objects);
         this.context = context;
         this.resource = resource;
@@ -35,16 +37,11 @@ public class GameAdapter extends ArrayAdapter<Game> {
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         convertView = layoutInflater.inflate(resource, parent, false);
 
-        TextView achievementView = convertView.findViewById(R.id.tvAchievementView);
-        TextView dateView = convertView.findViewById(R.id.tvDateView);
-        TextView numPlayersView = convertView.findViewById(R.id.tvNumPlayersView);
-        TextView groupScore = convertView.findViewById(R.id.tvScoreView);
+        TextView achievementName = convertView.findViewById(R.id.tvAchievementName);
+        TextView minScore = convertView.findViewById(R.id.tvMinScore);
 
-        achievementView.setText(getItem(position).getAchievementEarned());
-        dateView.setText(getItem(position).getDatePlayed());
-        String numPlayers = getItem(position).getNumOfPlayers() + " players";
-        numPlayersView.setText(numPlayers);
-        groupScore.setText("Score: " + getItem(position).getGroupScore());
+        minScore.setText(getItem(position).getBoundary());
+        achievementName.setText(getItem(position).getName());
 
         return convertView;
     }

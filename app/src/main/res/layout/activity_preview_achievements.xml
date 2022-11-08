@@ -8,229 +8,31 @@
 
     <TextView
         android:id="@+id/tvTitles"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:text="@string/name"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="#673AB7"
-        app:layout_constraintBottom_toTopOf="@+id/tvNameLvl1"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineUnderTitles"
         app:layout_constraintEnd_toStartOf="@+id/guidelineCenter"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guidelineTop" />
-
-    <TextView
-        android:id="@+id/tvNameLvl1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/achievement_1_name"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/tvNameLvl2"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineCenter"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTitles" />
-
-    <TextView
-        android:id="@+id/tvNameLvl2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/achievement_2_name"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/tvNameLvl3"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineCenter"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvNameLvl1" />
-
-    <TextView
-        android:id="@+id/tvNameLvl3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/achievement_3_name"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/tvNameLvl4"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineCenter"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvNameLvl2" />
-
-    <TextView
-        android:id="@+id/tvNameLvl4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/achievement_4_name"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/tvNameLvl5"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineCenter"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvNameLvl3" />
-
-    <TextView
-        android:id="@+id/tvNameLvl5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/achievement_5_name"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/tvNameLvl6"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineCenter"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvNameLvl4" />
-
-    <TextView
-        android:id="@+id/tvNameLvl6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/achievement_6_name"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/tvNameLvl7"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineCenter"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvNameLvl5" />
-
-    <TextView
-        android:id="@+id/tvNameLvl7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/achievement_7_name"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/tvNameLvl8"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineCenter"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvNameLvl6" />
-
-    <TextView
-        android:id="@+id/tvNameLvl8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/achievement_8_name"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/guidelineLow"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineCenter"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvNameLvl7" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guidelineLeftMargin"
+        app:layout_constraintTop_toTopOf="@+id/guidelineTop"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/tvScores"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:text="@string/points"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="#673AB7"
-        app:layout_constraintBottom_toTopOf="@+id/tvScoreLevel1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineUnderTitles"
+        app:layout_constraintEnd_toEndOf="@+id/guidelineRightMargin"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guidelineCenter"
-        app:layout_constraintTop_toTopOf="@+id/guidelineTop" />
-
-    <TextView
-        android:id="@+id/tvScoreLevel1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/blank_field"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        app:layout_constraintBottom_toTopOf="@+id/tvScoreLevel2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/guidelineCenter"
-        app:layout_constraintTop_toBottomOf="@+id/tvScores" />
-
-    <TextView
-        android:id="@+id/tvScoreLevel2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/blank_field"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        app:layout_constraintBottom_toTopOf="@+id/tvScoreLevel3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/guidelineCenter"
-        app:layout_constraintTop_toBottomOf="@+id/tvScoreLevel1" />
-
-    <TextView
-        android:id="@+id/tvScoreLevel3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/blank_field"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        app:layout_constraintBottom_toTopOf="@+id/tvScoreLevel4"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/guidelineCenter"
-        app:layout_constraintTop_toBottomOf="@+id/tvScoreLevel2" />
-
-    <TextView
-        android:id="@+id/tvScoreLevel4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/blank_field"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        app:layout_constraintBottom_toTopOf="@+id/tvScoreLevel5"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/guidelineCenter"
-        app:layout_constraintTop_toBottomOf="@+id/tvScoreLevel3" />
-
-    <TextView
-        android:id="@+id/tvScoreLevel5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/blank_field"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        app:layout_constraintBottom_toTopOf="@+id/tvScoreLevel6"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/guidelineCenter"
-        app:layout_constraintTop_toBottomOf="@+id/tvScoreLevel4" />
-
-    <TextView
-        android:id="@+id/tvScoreLevel6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/blank_field"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        app:layout_constraintBottom_toTopOf="@+id/tvScoreLevel7"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/guidelineCenter"
-        app:layout_constraintTop_toBottomOf="@+id/tvScoreLevel5" />
-
-    <TextView
-        android:id="@+id/tvScoreLevel7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/blank_field"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        app:layout_constraintBottom_toTopOf="@+id/tvScoreLevel8"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/guidelineCenter"
-        app:layout_constraintTop_toBottomOf="@+id/tvScoreLevel6" />
-
-    <TextView
-        android:id="@+id/tvScoreLevel8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/blank_field"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        app:layout_constraintBottom_toTopOf="@+id/guidelineLow"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/guidelineCenter"
-        app:layout_constraintTop_toBottomOf="@+id/tvScoreLevel7" />
+        app:layout_constraintTop_toTopOf="@+id/guidelineTop"
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/edtNumPlayers"
@@ -247,12 +49,35 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guidelineLow" />
 
+    <ListView
+        android:id="@+id/achievementLevels"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/guidelineLow"
+        app:layout_constraintEnd_toEndOf="@+id/guidelineRightMargin"
+        app:layout_constraintStart_toStartOf="@+id/guidelineLeftMargin"
+        app:layout_constraintTop_toTopOf="@id/guidelineUnderTitles" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineCenter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.50" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineRightMargin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.95" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineLeftMargin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.05" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineLow"
@@ -267,5 +92,12 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.05" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineUnderTitles"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.10" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

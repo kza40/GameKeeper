@@ -4,7 +4,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Achievements {
+/**
+ * This class contains methods that calculate: the boundaries for a set of achievements,
+ * and the achievement earned given a score.
+ */
+
+public class AchievementCalculator {
     public static final int NUM_ACHIEVEMENTS = 8;
 
     public static List<Integer> getBoundaries(int numPlayers, int poorScore, int greatScore) {
@@ -55,7 +60,7 @@ public class Achievements {
             isReversed = true;
         }
 
-        while(index < Achievements.NUM_ACHIEVEMENTS) {
+        while(index < AchievementCalculator.NUM_ACHIEVEMENTS) {
             if (isReversed && groupScore > boundaries.get(index)) {
                 break;
             }

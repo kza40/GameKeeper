@@ -2,11 +2,10 @@ package ca.cmpt276.myapplication.model;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 
 /**
- * Game class contains the details of a single game: the date it was played, the number of players,
- * and the achievement earned.
+ * Game class contains the details of a single game: the date it was played, group score,
+ * number of players, and the achievement earned.
  */
 
 public class Game {
@@ -29,7 +28,7 @@ public class Game {
     }
 
     private void setAchievementEarned(String[] names, int poorScore, int greatScore) {
-        achievementEarned = Achievements
+        achievementEarned = AchievementCalculator
                             .getAchievementEarned(names, numOfPlayers, poorScore, greatScore, groupScore);
     }
 
