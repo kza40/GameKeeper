@@ -9,6 +9,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import ca.cmpt276.myapplication.model.GameConfig;
 import ca.cmpt276.myapplication.model.ConfigManager;
@@ -64,9 +65,18 @@ public class AddConfig extends AppCompatActivity {
     private void setupSaveButton() {
         Button btnSave = findViewById(R.id.saveBtn);
         btnSave.setOnClickListener(view -> {
-            //TO DO: If good/poor score fields are not empty
-            saveConfig();
-            finish();
+
+            String goodScore = edtGoodScore.getText().toString();
+            String poorScore = edtPoorScore.getText().toString();
+            String configName = edtConfigName.getText().toString();
+            if (!goodScore.isEmpty() && !poorScore.isEmpty() && !configName.isEmpty()) {
+                saveConfig();
+                finish();
+            }
+            else {
+                Toast.makeText(AddConfig.this, R.string.addEmptyMsg, Toast.LENGTH_LONG)
+                        .show();
+            }
         });
     }
 

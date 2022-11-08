@@ -25,4 +25,5 @@
     <string name="add_game">Add Game</string>
     <string name="you_got">"You got "</string>
     <string name="exclamation">!</string>
+    <string name="addEmptyMsg">Could not save. One or more fields are empty.</string>
 </resources>
