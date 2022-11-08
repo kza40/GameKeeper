@@ -36,12 +36,13 @@ public class AddGame extends AppCompatActivity {
         int configPos = intent.getIntExtra(CONFIG_POSITION,-1);
         configManager = ConfigManager.getInstance();
         gameConfig = configManager.getGameConfigAtIndex(configPos);
-        setTitle("Add Game");
+        setTitle(getString(R.string.add_game));
 
-        titles = new String[] { "The First-Timers", "The Fledglings", "The Casual Ones",
-                                "A Budding Alliance", "A Clever Crew", "The Go-Getters",
-                                "A Brilliant Bunch", "The Remarkable Ones", "Real Deal" };
-
+        titles = new String[] { getString(R.string.achievementZero), getString(R.string.achievementOne),
+                                getString(R.string.achievementTwo), getString(R.string.achievementThree),
+                                getString(R.string.achievementFour), getString(R.string.achievementFive),
+                                getString(R.string.achievementSix), getString(R.string.achievementSeven),
+                                getString(R.string.achievementEight) };
         setupEditTextFields();
         setupSaveButton();
     }
@@ -71,7 +72,8 @@ public class AddGame extends AppCompatActivity {
                                 gameConfig.getPoorScore(), gameConfig.getGoodScore(),
                                 Integer.parseInt(scoreInput));
                 TextView showAchievement = findViewById(R.id.tvAchievement);
-                showAchievement.setText("You got " + temp + "!");
+                String message = getString(R.string.you_got) + temp + getString(R.string.exclamation);
+                showAchievement.setText(message);
             }
         }
 

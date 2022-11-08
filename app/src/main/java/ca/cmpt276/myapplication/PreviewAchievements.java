@@ -49,8 +49,10 @@ public class PreviewAchievements extends AppCompatActivity {
         edtNumPlayers.addTextChangedListener(scoreTextWatcher);
         list = findViewById(R.id.achievementLevels);
 
-        titles = new String[] { "The Fledglings", "The Casual Ones", "A Budding Alliance", "A Clever Crew",
-                                "The Go-Getters", "A Brilliant Bunch", "The Remarkable Ones", "Real Deal" };
+        titles = new String[] { getString(R.string.achievementOne), getString(R.string.achievementTwo),
+                                getString(R.string.achievementThree), getString(R.string.achievementFour),
+                                getString(R.string.achievementFive), getString(R.string.achievementSix),
+                                getString(R.string.achievementSeven), getString(R.string.achievementEight) };
         achievementLevels = new ArrayList<>();
     }
 
