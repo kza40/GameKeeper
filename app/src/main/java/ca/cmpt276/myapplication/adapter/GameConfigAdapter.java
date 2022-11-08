@@ -23,7 +23,7 @@ import ca.cmpt276.myapplication.model.SharedPreferenceManager;
 
 /**
  * GameConfigAdapter class enables a complex ListView for viewing, editing, deleting, and
- * previewing achievements of game configurations.
+ * previewing achievements of a game configuration.
  */
 
 public class GameConfigAdapter extends ArrayAdapter<GameConfig> {

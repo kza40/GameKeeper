@@ -1,7 +1,8 @@
 package ca.cmpt276.myapplication.model;
 
-/*
-This will be the class holding the scores, and I suspect our categorization of the points (ugly unicorn)
+/**
+ * The GameConfig class stores the details of a single game configuration.
+ * It contains the: title, poor and great scores, as well as a list of games.
  */
 
 import androidx.annotation.NonNull;
