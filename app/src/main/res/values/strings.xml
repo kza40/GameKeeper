@@ -23,6 +23,6 @@
     <string name="achievementEight">Real Deal</string>
     <string name="achievementZero">The First-Timers</string>
     <string name="add_game">Add Game</string>
-    <string name="you_got">You got </string>
+    <string name="you_got">"You got "</string>
     <string name="exclamation">!</string>
 </resources>
