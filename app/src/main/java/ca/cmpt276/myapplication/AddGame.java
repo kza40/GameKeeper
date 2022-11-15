@@ -1,6 +1,7 @@
 package ca.cmpt276.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 import android.content.Context;
 import android.content.Intent;
@@ -93,6 +94,11 @@ public class AddGame extends AppCompatActivity {
             if (!numPlayers.isEmpty() && !groupScore.isEmpty()) {
                 saveGame(Integer.parseInt(numPlayers), Integer.parseInt(groupScore));
                 finish();
+                //if statements to be implemented, have to move this to its own function
+                FragmentManager manager = getSupportFragmentManager();
+                CelebrationFragment dialog = new CelebrationFragment();
+                dialog.show(manager, "CelebrationFragment");
+
             }
             else {
                 Toast.makeText(AddGame.this, R.string.addEmptyMsg, Toast.LENGTH_LONG)
