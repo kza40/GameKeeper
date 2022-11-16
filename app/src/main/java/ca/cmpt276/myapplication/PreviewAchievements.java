@@ -9,6 +9,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +31,8 @@ public class PreviewAchievements extends AppCompatActivity {
 
     private String[] titles;
     private List<AchievementLevel> achievementLevels;
+    private DifficultyToggle toggle;
+    private TextView tvDifficulty;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,24 +42,31 @@ public class PreviewAchievements extends AppCompatActivity {
         setTitle(R.string.achievementsTitle);
         setUpMemberVariables();
         setupAchievementLevels();
-
-        DifficultyToggle toggle = new DifficultyToggle(findViewById(android.R.id.content).getRootView());
-        toggle.setup();
     }
 
     private void setUpMemberVariables() {
+        // Poor/great scores
         Intent intent = getIntent();
         poorScore = intent.getIntExtra(EXTRA_POOR_SCORE, 0);
         greatScore = intent.getIntExtra(EXTRA_GREAT_SCORE, 0);
+
+        // EditText field
         edtNumPlayers = findViewById(R.id.edtNumPlayers);
         edtNumPlayers.addTextChangedListener(scoreTextWatcher);
-        list = findViewById(R.id.achievementLevels);
 
+        // Achievement-related
+        list = findViewById(R.id.achievementLevels);
         titles = new String[] { getString(R.string.achievementOne), getString(R.string.achievementTwo),
                                 getString(R.string.achievementThree), getString(R.string.achievementFour),
                                 getString(R.string.achievementFive), getString(R.string.achievementSix),
                                 getString(R.string.achievementSeven), getString(R.string.achievementEight) };
         achievementLevels = new ArrayList<>();
+
+        // Difficulty toggle
+        toggle = new DifficultyToggle(findViewById(android.R.id.content).getRootView());
+        toggle.setup();
+        tvDifficulty = findViewById(R.id.tvDifficulty);
+        tvDifficulty.addTextChangedListener(scoreTextWatcher);
     }
 
     private void setupAchievementLevels() {
@@ -86,6 +96,8 @@ public class PreviewAchievements extends AppCompatActivity {
 
     private void updateListView(int numPlayers) {
         List<Integer> boundaries = AchievementCalculator.getBoundaries(numPlayers, poorScore, greatScore);
+        AchievementCalculator.applyDifficulty(boundaries, toggle.getScaleFactor());
+
         for(int i = 0; i < NUM_ACHIEVEMENTS; i++) {
             String value = Integer.toString(boundaries.get(i));
             achievementLevels.get(i).setBoundary(value);

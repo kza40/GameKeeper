@@ -17,9 +17,9 @@ public class DifficultyToggle {
     private TextView tvDifficulty;
     private final View inputView;
 
-    public static final int EASY = 1;
-    public static final int NORMAL = 2;
-    public static final int HARD = 3;
+    private static final float EASY_PERCENT = 75;
+    private static final float NORMAL_PERCENT = 100;
+    private static final float HARD_PERCENT = 125;
 
     public DifficultyToggle(View view) {
         inputView = view;
@@ -73,15 +73,15 @@ public class DifficultyToggle {
         }
     }
 
-    public int getNumToggled() {
+    public float getScaleFactor() {
         if (!isGoldSecond) {
-            return EASY;
+            return EASY_PERCENT;
         }
         else if (!isGoldThird) {
-            return NORMAL;
+            return NORMAL_PERCENT;
         }
         else {
-            return HARD;
+            return HARD_PERCENT;
         }
     }
 }
