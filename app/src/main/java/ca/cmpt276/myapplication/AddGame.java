@@ -4,11 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,7 +28,6 @@ public class AddGame extends AppCompatActivity {
     private EditText edtNumPlayers;
     private ConfigManager configManager;
     private GameConfig gameConfig;
-
     private String[] titles;
 
     @Override
@@ -46,6 +48,9 @@ public class AddGame extends AppCompatActivity {
                                 getString(R.string.achievementEight) };
         setupEditTextFields();
         setupSaveButton();
+
+        DifficultyToggle toggle = new DifficultyToggle(findViewById(android.R.id.content).getRootView());
+        toggle.setup();
     }
 
     private void setupEditTextFields() {

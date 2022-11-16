@@ -39,6 +39,9 @@ public class PreviewAchievements extends AppCompatActivity {
         setTitle(R.string.achievementsTitle);
         setUpMemberVariables();
         setupAchievementLevels();
+
+        DifficultyToggle toggle = new DifficultyToggle(findViewById(android.R.id.content).getRootView());
+        toggle.setup();
     }
 
     private void setUpMemberVariables() {
