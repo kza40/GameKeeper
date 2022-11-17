@@ -6,16 +6,37 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
 public class CelebrationFragment extends AppCompatDialogFragment {
+
+
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
+
+
         View tv = LayoutInflater.from(getActivity()).inflate(R.layout.celebration_fragment, null);
+
+
+        ImageView rSaber;
+        ImageView gSaber;
+
+        rSaber = getActivity().findViewById(R.id.rSaber);
+        gSaber = getActivity().findViewById(R.id.gSaber);
+
+        Animation rotateSlideR = AnimationUtils.loadAnimation(getActivity(), R.anim.slide_rotate_left);
+        Animation rotateSlideL = AnimationUtils.loadAnimation(getActivity(), R.anim.slide_rotate_right);
+
+        rSaber.startAnimation(rotateSlideR);
+        gSaber.startAnimation(rotateSlideL);
+
 
         DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
             @Override

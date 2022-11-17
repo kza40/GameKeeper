@@ -94,10 +94,8 @@ public class AddGame extends AppCompatActivity {
             if (!numPlayers.isEmpty() && !groupScore.isEmpty()) {
                 saveGame(Integer.parseInt(numPlayers), Integer.parseInt(groupScore));
                 finish();
-                //if statements to be implemented, have to move this to its own function
-                FragmentManager manager = getSupportFragmentManager();
-                CelebrationFragment dialog = new CelebrationFragment();
-                dialog.show(manager, "CelebrationFragment");
+            //could possibly have if statements here to distinguish between the fragments
+                celebrate();
 
             }
             else {
@@ -105,6 +103,12 @@ public class AddGame extends AppCompatActivity {
                         .show();
             }
         });
+    }
+
+    private void celebrate() {
+        FragmentManager manager = getSupportFragmentManager();
+        CelebrationFragment dialog = new CelebrationFragment();
+        dialog.show(manager, "CelebrationFragment");
     }
 
     private void saveGame(int numPlayers, int groupScore) {
