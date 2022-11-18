@@ -64,4 +64,8 @@
     <string name="star_wars_theme">Star Wars Theme</string>
     <string name="fitness_theme">Fitness Theme</string>
     <string name="sponge_bob_theme">Sponge Bob Theme</string>
+    <string name="theme_instructions">Click on the Icon of the theme that you like!</string>
+    <string name="spong_bob_title">Sponge \nBob</string>
+    <string name="fitness_title">Fitness</string>
+    <string name="star_wars_title">Star Wars</string>
 </resources>
