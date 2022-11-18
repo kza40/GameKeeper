@@ -28,7 +28,9 @@ public class PreviewAchievements extends AppCompatActivity {
     private ListView list;
     private AchievementAdapter adapter;
 
-    private String[] titles;
+    private String[] starWarsTitles;
+    private String[] fitnessTitles;
+    private String[] spongeBobTitles;
     private List<AchievementLevel> achievementLevels;
 
     @Override
@@ -49,16 +51,21 @@ public class PreviewAchievements extends AppCompatActivity {
         edtNumPlayers.addTextChangedListener(scoreTextWatcher);
         list = findViewById(R.id.achievementLevels);
 
-        titles = new String[] { getString(R.string.achievementOne), getString(R.string.achievementTwo),
-                                getString(R.string.achievementThree), getString(R.string.achievementFour),
-                                getString(R.string.achievementFive), getString(R.string.achievementSix),
-                                getString(R.string.achievementSeven), getString(R.string.achievementEight) };
+        starWarsTitles = new String[] { getString(R.string.starWarsLvl1), getString(R.string.starWarsLvl2), getString(R.string.starWarsLvl3),
+                                getString(R.string.starWarsLvl4), getString(R.string.starWarsLvl5), getString(R.string.starWarsLvl6),
+                                getString(R.string.starWarsLvl7), getString(R.string.starWarsLvl8)};
+        fitnessTitles = new String [] { getString(R.string.fitnessLvl1), getString(R.string.fitnessLvl2),
+                                getString(R.string.fitnessLvl3), getString(R.string.fitnessLvl4), getString(R.string.fitnessLvl5),
+                                getString(R.string.fitnessLvl6), getString(R.string.fitnessLvl7), getString(R.string.fitnessLvl8)};
+        spongeBobTitles = new String[] { getString(R.string.spongeBobLvl1), getString(R.string.spongeBobLvl2), getString(R.string.spongeBobLvl3),
+                                getString(R.string.spongeBobLvl4), getString(R.string.spongeBobLvl5), getString(R.string.spongeBobLvl6),
+                                getString(R.string.spongeBobLvl7) , getString(R.string.spongeBobLvl8) };
         achievementLevels = new ArrayList<>();
     }
 
     private void setupAchievementLevels() {
         for(int i = 0; i < NUM_ACHIEVEMENTS; i++) {
-            AchievementLevel newLevel = new AchievementLevel(titles[i]);
+            AchievementLevel newLevel = new AchievementLevel(starWarsTitles[i]);
             achievementLevels.add(newLevel);
         }
         adapter = new AchievementAdapter(this, R.layout.adapter_view3, achievementLevels);
