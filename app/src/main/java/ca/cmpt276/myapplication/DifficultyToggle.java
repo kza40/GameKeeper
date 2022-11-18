@@ -10,53 +10,48 @@ import android.widget.TextView;
  */
 
 public class DifficultyToggle {
-    private ImageButton ibStar2;
-    private ImageButton ibStar3;
+    private final ImageButton ibStar1;
+    private final ImageButton ibStar2;
+    private final ImageButton ibStar3;
     private boolean isGoldSecond;
     private boolean isGoldThird;
-    private TextView tvDifficulty;
-    private final View inputView;
+    private final TextView tvDifficulty;
 
     private static final float EASY_PERCENT = 75;
     private static final float NORMAL_PERCENT = 100;
     private static final float HARD_PERCENT = 125;
 
     public DifficultyToggle(View view) {
-        inputView = view;
-        tvDifficulty = inputView.findViewById(R.id.tvDifficulty);
-        ibStar2 = inputView.findViewById(R.id.star2);
-        ibStar3 = inputView.findViewById(R.id.star3);
+        tvDifficulty = view.findViewById(R.id.tvDifficulty);
+        ibStar1 = view.findViewById(R.id.star1);
+        ibStar2 = view.findViewById(R.id.star2);
+        ibStar3 = view.findViewById(R.id.star3);
         isGoldSecond = true;
         isGoldThird = false;
     }
 
     public void setup() {
-        tvDifficulty = inputView.findViewById(R.id.tvDifficulty);
-        ibStar2 = inputView.findViewById(R.id.star2);
-        ibStar3 = inputView.findViewById(R.id.star3);
-
-        isGoldSecond = true;
-        isGoldThird = false;
+        ibStar1.setOnClickListener(view -> {
+            isGoldSecond = false;
+            isGoldThird = false;
+            ibStar2.setImageResource(R.drawable.star_grey);
+            ibStar3.setImageResource(R.drawable.star_grey);
+            updateDifficultyText();
+        });
 
         ibStar2.setOnClickListener(view -> {
-            if (isGoldSecond && !isGoldThird) {
-                ibStar2.setImageResource(R.drawable.star_grey);
-                isGoldSecond = false;
-            } else if (!isGoldSecond && !isGoldThird){
-                ibStar2.setImageResource(R.drawable.star_gold);
-                isGoldSecond = true;
-            }
+            isGoldSecond = true;
+            isGoldThird = false;
+            ibStar2.setImageResource(R.drawable.star_gold);
+            ibStar3.setImageResource(R.drawable.star_grey);
             updateDifficultyText();
         });
 
         ibStar3.setOnClickListener(view -> {
-            if (!isGoldThird && isGoldSecond) {
-                ibStar3.setImageResource(R.drawable.star_gold);
-                isGoldThird = true;
-            } else if (isGoldThird && isGoldSecond){
-                ibStar3.setImageResource(R.drawable.star_grey);
-                isGoldThird = false;
-            }
+            isGoldSecond = true;
+            isGoldThird = true;
+            ibStar2.setImageResource(R.drawable.star_gold);
+            ibStar3.setImageResource(R.drawable.star_gold);
             updateDifficultyText();
         });
     }
