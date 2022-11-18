@@ -26,7 +26,7 @@ public class CelebrationFragment extends AppCompatDialogFragment {
 
         final MediaPlayer mp = MediaPlayer.create(getActivity(), R.raw.sample);
         mp.start();
-        setupAnimations();
+        setupAnimations(tv);
 
 
 
@@ -44,12 +44,12 @@ public class CelebrationFragment extends AppCompatDialogFragment {
                 .create();
     }
 
-    private void setupAnimations() {
+    private void setupAnimations(View tv) {
         ImageView rSaber;
         ImageView gSaber;
 
-        rSaber = getActivity().findViewById(R.id.rSaber);
-        gSaber = getActivity().findViewById(R.id.gSaber);
+        rSaber = tv.findViewById(R.id.rSaber);
+        gSaber = tv.findViewById(R.id.gSaber);
 
         Animation rotateSlideR = AnimationUtils.loadAnimation(getActivity(), R.anim.slide_rotate_left);
         Animation rotateSlideL = AnimationUtils.loadAnimation(getActivity(), R.anim.slide_rotate_right);
