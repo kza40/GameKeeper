@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
@@ -41,6 +43,19 @@ public class PreviewAchievements extends AppCompatActivity {
         setTitle(R.string.achievementsTitle);
         setUpMemberVariables();
         setupAchievementLevels();
+        setupSettingBtn();
+    }
+
+    private void setupSettingBtn() {
+        Button settingBtn = findViewById(R.id.btnSetting);
+
+        settingBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(PreviewAchievements.this, ThemeSetting.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void setUpMemberVariables() {
