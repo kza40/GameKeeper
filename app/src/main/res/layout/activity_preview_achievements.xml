@@ -6,60 +6,33 @@
     android:layout_height="match_parent"
     tools:context=".PreviewAchievements">
 
-    <TextView
-        android:id="@+id/tvTitles"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:autoSizeTextType="uniform"
-        android:autoSizeMaxTextSize="22sp"
-        android:text="@string/name"
-        android:textColor="#673AB7"
-        app:layout_constraintBottom_toTopOf="@+id/guidelineUnderTitles"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineCenter"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/guidelineLeftMargin"
-        app:layout_constraintTop_toTopOf="@+id/guidelineTop"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/tvScores"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:autoSizeTextType="uniform"
-        android:autoSizeMaxTextSize="22sp"
-        android:text="@string/points"
-        android:textColor="#673AB7"
-        app:layout_constraintBottom_toTopOf="@+id/guidelineUnderTitles"
-        app:layout_constraintEnd_toEndOf="@+id/guidelineRightMargin"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/guidelineCenter"
-        app:layout_constraintTop_toTopOf="@+id/guidelineTop"
-        app:layout_constraintVertical_bias="0.0" />
-
     <EditText
         android:id="@+id/edtNumPlayers"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="@string/number_of_players"
         android:gravity="center"
+        android:hint="@string/number_of_players"
         android:inputType="number"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="#673AB7"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guidelineLow" />
+        app:layout_constraintTop_toTopOf="@+id/guidelineLow"
+        app:layout_constraintVertical_bias="0.315" />
 
     <ListView
         android:id="@+id/achievementLevels"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="10dp"
         app:layout_constraintBottom_toBottomOf="@+id/guidelineLow"
         app:layout_constraintEnd_toEndOf="@+id/guidelineRightMargin"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guidelineLeftMargin"
-        app:layout_constraintTop_toTopOf="@id/guidelineUnderTitles" />
+        app:layout_constraintTop_toTopOf="@id/guidelineUnderTitles"
+        app:layout_constraintVertical_bias="0.0" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineCenter"
@@ -73,34 +46,27 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.95" />
+        app:layout_constraintGuide_percent="0.99" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineLeftMargin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.05" />
+        app:layout_constraintGuide_percent="0.01" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineLow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.70" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineTop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.05" />
+        app:layout_constraintGuide_percent="0.8" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineUnderTitles"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.10" />
+        app:layout_constraintGuide_percent="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
