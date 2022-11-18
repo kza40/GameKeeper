@@ -49,4 +49,8 @@ public class Game {
     public int getGroupScore() {
         return groupScore;
     }
+
+    public float getScaleFactor() {
+        return scaleFactor;
+    }
 }

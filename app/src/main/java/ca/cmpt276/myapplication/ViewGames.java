@@ -6,19 +6,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import ca.cmpt276.myapplication.adapter.GameAdapter;
-import ca.cmpt276.myapplication.adapter.GameConfigAdapter;
-import ca.cmpt276.myapplication.model.Game;
 import ca.cmpt276.myapplication.model.GameConfig;
 import ca.cmpt276.myapplication.model.ConfigManager;
 
@@ -58,7 +52,7 @@ public class ViewGames extends AppCompatActivity {
     }
 
     private void populateListView() {
-        gameAdapter = new GameAdapter(this, R.layout.adapter_view2, gameConfig.getGames());
+        gameAdapter = new GameAdapter(this, R.layout.game_row, gameConfig.getGames());
         gamesList.setAdapter(gameAdapter);
     }
 
