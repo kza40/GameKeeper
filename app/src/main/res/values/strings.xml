@@ -37,4 +37,7 @@
     <string name="poor_score_colon">"Poor Score: "</string>
     <string name="good_score_colon">"Good Score: "</string>
     <string name="score_colon">"Score: "</string>
+    <string name="difficulty_easy">Easy</string>
+    <string name="difficulty_normal">Normal</string>
+    <string name="difficulty_hard">Hard</string>
 </resources>

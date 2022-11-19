@@ -25,8 +25,10 @@ public class AddGame extends AppCompatActivity {
     private EditText edtNumPlayers;
     private ConfigManager configManager;
     private GameConfig gameConfig;
-
     private String[] titles;
+    private TextView tvDifficulty;
+    private DifficultyToggle toggle;
+    private TextView achievementDisplay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,28 +41,35 @@ public class AddGame extends AppCompatActivity {
         gameConfig = configManager.getGameConfigAtIndex(configPos);
         setTitle(getString(R.string.add_game));
 
-        titles = new String[] { getString(R.string.achievementZero), getString(R.string.achievementOne),
-                                getString(R.string.achievementTwo), getString(R.string.achievementThree),
-                                getString(R.string.achievementFour), getString(R.string.achievementFive),
-                                getString(R.string.achievementSix), getString(R.string.achievementSeven),
-                                getString(R.string.achievementEight) };
-        setupEditTextFields();
+        setupMemberVariables();
         setupSaveButton();
     }
 
-    private void setupEditTextFields() {
+    private void setupMemberVariables() {
+        // EditText fields
         edtScore = findViewById(R.id.edtScoreDisplay);
         edtNumPlayers = findViewById(R.id.edtNumPlayersDisplay);
-
         edtScore.addTextChangedListener(scoreTextWatcher);
         edtNumPlayers.addTextChangedListener(scoreTextWatcher);
+
+        // Achievement-related
+        titles = new String[] { getString(R.string.achievementZero), getString(R.string.achievementOne),
+                getString(R.string.achievementTwo), getString(R.string.achievementThree),
+                getString(R.string.achievementFour), getString(R.string.achievementFive),
+                getString(R.string.achievementSix), getString(R.string.achievementSeven),
+                getString(R.string.achievementEight) };
+        achievementDisplay = findViewById(R.id.tvAchievement);
+
+        // Difficulty toggle
+        toggle = new DifficultyToggle(findViewById(android.R.id.content).getRootView());
+        toggle.setup();
+        tvDifficulty = findViewById(R.id.tvDifficulty);
+        tvDifficulty.addTextChangedListener(scoreTextWatcher);
     }
 
-    private TextWatcher scoreTextWatcher = new TextWatcher() {
+    private final TextWatcher scoreTextWatcher = new TextWatcher() {
         @Override
-        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-        }
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
         @Override
         public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -68,21 +77,22 @@ public class AddGame extends AppCompatActivity {
             String numPlayersInput = edtNumPlayers.getText().toString();
 
             if (!scoreInput.isEmpty() && !numPlayersInput.isEmpty()) {
-                String temp = AchievementCalculator
-                        .getAchievementEarned(titles, Integer.parseInt(numPlayersInput),
-                                gameConfig.getPoorScore(), gameConfig.getGoodScore(),
-                                Integer.parseInt(scoreInput));
-                TextView showAchievement = findViewById(R.id.tvAchievement);
-                String message = getString(R.string.you_got) + temp + getString(R.string.exclamation);
-                showAchievement.setText(message);
+                showAchievement(Integer.parseInt(scoreInput), Integer.parseInt(numPlayersInput));
             }
         }
 
         @Override
-        public void afterTextChanged(Editable editable) {
-
-        }
+        public void afterTextChanged(Editable editable) {}
     };
+
+    private void showAchievement(int score, int numPlayers) {
+        String name = AchievementCalculator.getAchievementEarned(
+                titles, numPlayers, gameConfig.getPoorScore(),
+                gameConfig.getGoodScore(), score, toggle.getScaleFactor());
+
+        String message = getString(R.string.you_got) + name + getString(R.string.exclamation);
+        achievementDisplay.setText(message);
+    }
 
     private void setupSaveButton() {
         Button btnSave = findViewById(R.id.btnSave);
@@ -93,16 +103,15 @@ public class AddGame extends AppCompatActivity {
             if (!numPlayers.isEmpty() && !groupScore.isEmpty()) {
                 saveGame(Integer.parseInt(numPlayers), Integer.parseInt(groupScore));
                 finish();
-            }
-            else {
-                Toast.makeText(AddGame.this, R.string.addEmptyMsg, Toast.LENGTH_LONG)
-                        .show();
+            } else {
+                Toast.makeText(AddGame.this, R.string.addEmptyMsg, Toast.LENGTH_LONG).show();
             }
         });
     }
 
     private void saveGame(int numPlayers, int groupScore) {
-        Game game = new Game(titles, numPlayers, groupScore, gameConfig.getPoorScore(), gameConfig.getGoodScore());
+        Game game = new Game(titles, numPlayers, groupScore, gameConfig.getPoorScore(),
+                             gameConfig.getGoodScore(), toggle.getScaleFactor());
         gameConfig.addGame(game);
         new SharedPreferenceManager(getApplicationContext()).updateConfigManager(configManager);
     }
