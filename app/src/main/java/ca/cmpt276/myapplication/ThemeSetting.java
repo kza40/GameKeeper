@@ -28,15 +28,16 @@ public class ThemeSetting extends AppCompatActivity {
 
     //TO DO: Update Shared Preferences anytime a theme is switched
     public void starWarsSelected(View view){
-        displayToast(getString(R.string.star_wars_theme));
+        displayToast("You've selected "+getString(R.string.star_wars_theme));
         ConfigManager.getInstance().setTheme(THEME_STAR_WARS);
+
     }
     public void fitnessSelected(View view){
-        displayToast(getString(R.string.fitness_theme));
+        displayToast("You've selected "+getString(R.string.fitness_theme));
         ConfigManager.getInstance().setTheme(THEME_FITNESS);
     }
     public void spongeBobSelected(View view){
-        displayToast(getString(R.string.sponge_bob_theme));
+        displayToast("You've selected "+getString(R.string.sponge_bob_theme));
         ConfigManager.getInstance().setTheme(THEME_SPONGEBOB);
     }
 
