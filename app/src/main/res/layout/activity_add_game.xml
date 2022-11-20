@@ -83,14 +83,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.75" />
+        app:layout_constraintGuide_percent="0.55" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/hGuideline55p"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.55" />
+        app:layout_constraintGuide_percent="0.45" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/hGuideline25p"
@@ -108,42 +108,42 @@
 
     <ImageButton
         android:id="@+id/star1"
-        android:scaleType="centerCrop"
-        app:layout_constraintDimensionRatio="1:1"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/hGuideline25p"
-        app:layout_constraintStart_toStartOf="@+id/vGuideline20p"
-        app:layout_constraintTop_toTopOf="@+id/hGuideline20p"
-        app:layout_constraintEnd_toStartOf="@+id/star2"
+        android:background="@drawable/star_gold"
+        android:scaleType="centerCrop"
         android:src="@drawable/star_gold"
-        android:background="@drawable/star_gold"/>
+        app:layout_constraintBottom_toTopOf="@+id/hGuideline25p"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toStartOf="@+id/star2"
+        app:layout_constraintStart_toStartOf="@+id/vGuideline20p"
+        app:layout_constraintTop_toTopOf="@+id/hGuideline20p" />
 
     <ImageButton
         android:id="@+id/star2"
-        android:scaleType="centerCrop"
-        app:layout_constraintDimensionRatio="1:1"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="@drawable/star_gold"
+        android:scaleType="centerCrop"
+        android:src="@drawable/star_gold"
         app:layout_constraintBottom_toBottomOf="@+id/hGuideline25p"
+        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toStartOf="@+id/star3"
         app:layout_constraintStart_toEndOf="@+id/star1"
-        app:layout_constraintTop_toTopOf="@+id/hGuideline20p"
-        android:src="@drawable/star_gold"
-        android:background="@drawable/star_gold" />
+        app:layout_constraintTop_toTopOf="@+id/hGuideline20p" />
 
     <ImageButton
         android:id="@+id/star3"
-        android:scaleType="centerCrop"
-        app:layout_constraintDimensionRatio="1:1"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="@drawable/star_grey"
+        android:scaleType="centerCrop"
+        android:src="@drawable/star_grey"
         app:layout_constraintBottom_toTopOf="@+id/hGuideline25p"
+        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toStartOf="@+id/vGuideline55p"
         app:layout_constraintStart_toEndOf="@+id/star2"
-        app:layout_constraintTop_toTopOf="@+id/hGuideline20p"
-        android:src="@drawable/star_grey"
-        android:background="@drawable/star_grey" />
+        app:layout_constraintTop_toTopOf="@+id/hGuideline20p" />
 
     <TextView
         android:id="@+id/tvDifficulty"
@@ -160,20 +160,19 @@
         app:layout_constraintTop_toTopOf="@+id/hGuideline20p" />
 
     <ScrollView
-        android:layout_width="409dp"
-        android:layout_height="350dp"
+        android:layout_width="403dp"
+        android:layout_height="298dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/hGuideline75p">
+        app:layout_constraintTop_toTopOf="@+id/hGuideline75p"
+        app:layout_constraintVertical_bias="0.032">
 
         <LinearLayout
             android:id="@+id/LayoutForEdittexts"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
-        </LinearLayout>
+            android:orientation="vertical"></LinearLayout>
 
     </ScrollView>
 
