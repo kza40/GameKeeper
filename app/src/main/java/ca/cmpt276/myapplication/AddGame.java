@@ -26,7 +26,7 @@ public class AddGame extends AppCompatActivity {
     private ConfigManager configManager;
     private GameConfig gameConfig;
 
-    private String[] titles;
+    private String[] starWarsTitles;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,11 +39,9 @@ public class AddGame extends AppCompatActivity {
         gameConfig = configManager.getGameConfigAtIndex(configPos);
         setTitle(getString(R.string.add_game));
 
-        titles = new String[] { getString(R.string.achievementZero), getString(R.string.achievementOne),
-                                getString(R.string.achievementTwo), getString(R.string.achievementThree),
-                                getString(R.string.achievementFour), getString(R.string.achievementFive),
-                                getString(R.string.achievementSix), getString(R.string.achievementSeven),
-                                getString(R.string.achievementEight) };
+        starWarsTitles = new String[] { getString(R.string.starWarsLvl1), getString(R.string.starWarsLvl2), getString(R.string.starWarsLvl3),
+                getString(R.string.starWarsLvl4), getString(R.string.starWarsLvl5), getString(R.string.starWarsLvl6),
+                getString(R.string.starWarsLvl7), getString(R.string.starWarsLvl8)};
         setupEditTextFields();
         setupSaveButton();
     }
@@ -69,7 +67,7 @@ public class AddGame extends AppCompatActivity {
 
             if (!scoreInput.isEmpty() && !numPlayersInput.isEmpty()) {
                 String temp = AchievementCalculator
-                        .getAchievementEarned(titles, Integer.parseInt(numPlayersInput),
+                        .getAchievementEarned(starWarsTitles, Integer.parseInt(numPlayersInput),
                                 gameConfig.getPoorScore(), gameConfig.getGoodScore(),
                                 Integer.parseInt(scoreInput));
                 TextView showAchievement = findViewById(R.id.tvAchievement);
@@ -102,7 +100,7 @@ public class AddGame extends AppCompatActivity {
     }
 
     private void saveGame(int numPlayers, int groupScore) {
-        Game game = new Game(titles, numPlayers, groupScore, gameConfig.getPoorScore(), gameConfig.getGoodScore());
+        Game game = new Game(starWarsTitles, numPlayers, groupScore, gameConfig.getPoorScore(), gameConfig.getGoodScore());
         gameConfig.addGame(game);
         new SharedPreferenceManager(getApplicationContext()).updateConfigManager(configManager);
     }

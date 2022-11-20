@@ -17,6 +17,7 @@ public class ThemeSetting extends AppCompatActivity {
     public static final String THEME_FITNESS="THEME_FITNESS";
     public static final String THEME_SPONGEBOB="THEME_SPONGEBOB";
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -27,9 +27,11 @@ public class PreviewAchievements extends AppCompatActivity {
 
     private int poorScore;
     private int greatScore;
+    private int choosenTheme;
     private EditText edtNumPlayers;
     private ListView list;
     private AchievementAdapter adapter;
+
 
     private String[] starWarsTitles;
     private String[] fitnessTitles;
@@ -40,6 +42,7 @@ public class PreviewAchievements extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preview_achievements);
+
 
         setTitle(R.string.achievementsTitle);
         setUpMemberVariables();
@@ -76,23 +79,28 @@ public class PreviewAchievements extends AppCompatActivity {
         edtNumPlayers.addTextChangedListener(scoreTextWatcher);
         list = findViewById(R.id.achievementLevels);
 
-        starWarsTitles = new String[] { getString(R.string.starWarsLvl1), getString(R.string.starWarsLvl2), getString(R.string.starWarsLvl3),
-                                getString(R.string.starWarsLvl4), getString(R.string.starWarsLvl5), getString(R.string.starWarsLvl6),
-                                getString(R.string.starWarsLvl7), getString(R.string.starWarsLvl8)};
-        fitnessTitles = new String [] { getString(R.string.fitnessLvl1), getString(R.string.fitnessLvl2),
-                                getString(R.string.fitnessLvl3), getString(R.string.fitnessLvl4), getString(R.string.fitnessLvl5),
-                                getString(R.string.fitnessLvl6), getString(R.string.fitnessLvl7), getString(R.string.fitnessLvl8)};
-        spongeBobTitles = new String[] { getString(R.string.spongeBobLvl1), getString(R.string.spongeBobLvl2), getString(R.string.spongeBobLvl3),
-                                getString(R.string.spongeBobLvl4), getString(R.string.spongeBobLvl5), getString(R.string.spongeBobLvl6),
-                                getString(R.string.spongeBobLvl7) , getString(R.string.spongeBobLvl8) };
+        switch(choosenTheme) {
+            case 0:
+                fitnessTitles = new String[]{getString(R.string.fitnessLvl1), getString(R.string.fitnessLvl2),
+                        getString(R.string.fitnessLvl3), getString(R.string.fitnessLvl4), getString(R.string.fitnessLvl5),
+                        getString(R.string.fitnessLvl6), getString(R.string.fitnessLvl7), getString(R.string.fitnessLvl8)};
+                break;
+            case 1:
+                spongeBobTitles = new String[]{getString(R.string.spongeBobLvl1), getString(R.string.spongeBobLvl2), getString(R.string.spongeBobLvl3),
+                        getString(R.string.spongeBobLvl4), getString(R.string.spongeBobLvl5), getString(R.string.spongeBobLvl6),
+                        getString(R.string.spongeBobLvl7), getString(R.string.spongeBobLvl8)};
+                break;
+            default:
+            starWarsTitles = new String[]{getString(R.string.starWarsLvl1), getString(R.string.starWarsLvl2), getString(R.string.starWarsLvl3),
+                    getString(R.string.starWarsLvl4), getString(R.string.starWarsLvl5), getString(R.string.starWarsLvl6),
+                    getString(R.string.starWarsLvl7), getString(R.string.starWarsLvl8)};
+        }
         achievementLevels = new ArrayList<>();
     }
 
     private void setupAchievementLevels(String theme) {
         String[] themeTitles;
-        if(theme.equals(ThemeSetting.THEME_STAR_WARS))
-            themeTitles=starWarsTitles;
-        else if(theme.equals(ThemeSetting.THEME_FITNESS))
+        if(theme.equals(ThemeSetting.THEME_FITNESS))
             themeTitles=fitnessTitles;
         else if(theme.equals(ThemeSetting.THEME_SPONGEBOB))
             themeTitles=spongeBobTitles;
