@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.Button;
@@ -28,6 +29,9 @@ public class AddGame extends AppCompatActivity {
     private GameConfig gameConfig;
 
     private String[] titles;
+
+    private static final int Tick = 1000;
+    private static final int Complete = 10000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,9 +97,18 @@ public class AddGame extends AppCompatActivity {
             String groupScore = edtScore.getText().toString();
             if (!numPlayers.isEmpty() && !groupScore.isEmpty()) {
                 saveGame(Integer.parseInt(numPlayers), Integer.parseInt(groupScore));
-                finish();
-            //could possibly have if statements here to distinguish between the fragments
                 celebrate();
+                new CountDownTimer(Complete, Tick) {
+
+                    public void onTick(long millisUntilFinished) {
+                    }
+
+                    public void onFinish() {
+                        finish();
+                    }
+                }.start();
+
+
 
             }
             else {
