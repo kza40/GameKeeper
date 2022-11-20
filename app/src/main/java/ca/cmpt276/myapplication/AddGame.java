@@ -6,9 +6,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +30,8 @@ public class AddGame extends AppCompatActivity {
     private ConfigManager configManager;
     private GameConfig gameConfig;
     private String[] titles;
+    private int NUM_ROWS = 0;
+    EditText[] editTexts;
     private TextView tvDifficulty;
     private DifficultyToggle toggle;
     private TextView achievementDisplay;
@@ -79,11 +85,49 @@ public class AddGame extends AppCompatActivity {
             if (!scoreInput.isEmpty() && !numPlayersInput.isEmpty()) {
                 showAchievement(Integer.parseInt(scoreInput), Integer.parseInt(numPlayersInput));
             }
+
+            if (!numPlayersInput.isEmpty()) {
+                NUM_ROWS=Integer.parseInt(numPlayersInput);
+                if(NUM_ROWS>200)
+                {
+                    Toast.makeText(getApplicationContext(),"Please input a number less than 200",Toast.LENGTH_SHORT).show();
+                    edtNumPlayers.setText("");
+                }
+                else
+                {
+                    editTexts= new EditText[NUM_ROWS];
+                    populateEdittextScores();
+                }
+            }
+            else
+            {
+                LinearLayout table = (LinearLayout) findViewById(R.id.LayoutForEdittexts);
+                table.removeAllViews();
+            }
         }
 
         @Override
         public void afterTextChanged(Editable editable) {}
     };
+
+    private void populateEdittextScores() {
+        LinearLayout table = (LinearLayout) findViewById(R.id.LayoutForEdittexts);
+        table.removeAllViews();
+
+        for (int row = 0; row < NUM_ROWS; row++) {
+            EditText editText = new EditText(this);
+            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT); // Verbose!
+            lp.weight = 1.0f; // This is critical. Doesn't work without it.
+            lp.setMargins(240,10,240,10);
+
+            editText.setHint("Player " + (row+1) +" scores");
+            editText.setInputType(InputType.TYPE_CLASS_NUMBER);
+
+            table.addView(editText, lp);
+
+            editTexts[row] = editText;
+        }
+    }
 
     private void showAchievement(int score, int numPlayers) {
         String name = AchievementCalculator.getAchievementEarned(
@@ -111,7 +155,7 @@ public class AddGame extends AppCompatActivity {
 
     private void saveGame(int numPlayers, int groupScore) {
         Game game = new Game(titles, numPlayers, groupScore, gameConfig.getPoorScore(),
-                             gameConfig.getGoodScore(), toggle.getScaleFactor());
+                gameConfig.getGoodScore(), toggle.getScaleFactor());
         gameConfig.addGame(game);
         new SharedPreferenceManager(getApplicationContext()).updateConfigManager(configManager);
     }

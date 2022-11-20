@@ -39,7 +39,8 @@
         android:text="@string/save"
         app:layout_constraintBottom_toTopOf="@+id/hGuideline75p"
         app:layout_constraintEnd_toStartOf="@+id/vGuideline80p"
-        app:layout_constraintTop_toTopOf="@+id/hGuideline55p" />
+        app:layout_constraintTop_toTopOf="@+id/hGuideline55p"
+        app:layout_constraintVertical_bias="0.353" />
 
     <TextView
         android:id="@+id/tvAchievement"
@@ -157,6 +158,24 @@
         app:layout_constraintEnd_toStartOf="@+id/vGuideline80p"
         app:layout_constraintStart_toStartOf="@+id/vGuideline55p"
         app:layout_constraintTop_toTopOf="@+id/hGuideline20p" />
+
+    <ScrollView
+        android:layout_width="409dp"
+        android:layout_height="350dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/hGuideline75p">
+
+        <LinearLayout
+            android:id="@+id/LayoutForEdittexts"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+        </LinearLayout>
+
+    </ScrollView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
