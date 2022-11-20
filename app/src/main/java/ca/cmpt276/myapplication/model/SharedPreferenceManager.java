@@ -10,6 +10,8 @@ import androidx.annotation.NonNull;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import ca.cmpt276.myapplication.ThemeSetting;
+
 /**
  * The SharedPreferenceManager class provides a model for saving game configurations and games.
  */
@@ -51,6 +53,8 @@ public class SharedPreferenceManager {
         if(!json.equals(""))
         {
             configManager=gson.fromJson(json, ConfigManager.class);
+            if(configManager.getTheme()==null)
+                configManager.setTheme(ThemeSetting.THEME_STAR_WARS);
             ConfigManager.setInstance(configManager);
         }
         else

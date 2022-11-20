@@ -18,6 +18,7 @@ import java.util.List;
 import ca.cmpt276.myapplication.adapter.AchievementAdapter;
 import ca.cmpt276.myapplication.model.AchievementLevel;
 import ca.cmpt276.myapplication.model.AchievementCalculator;
+import ca.cmpt276.myapplication.model.ConfigManager;
 
 public class PreviewAchievements extends AppCompatActivity {
     private static final String EXTRA_POOR_SCORE = "ca.cmpt276.myapplication: poor score";
@@ -42,8 +43,16 @@ public class PreviewAchievements extends AppCompatActivity {
 
         setTitle(R.string.achievementsTitle);
         setUpMemberVariables();
-        setupAchievementLevels();
+        setupAchievementLevels(ConfigManager.getInstance().getTheme());
         setupSettingBtn();
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        achievementLevels.clear();
+        setupAchievementLevels(ConfigManager.getInstance().getTheme());
+        adapter.notifyDataSetChanged();
     }
 
     private void setupSettingBtn() {
@@ -52,7 +61,8 @@ public class PreviewAchievements extends AppCompatActivity {
         settingBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(PreviewAchievements.this, ThemeSetting.class);
+
+                Intent intent = ThemeSetting.makeIntent(PreviewAchievements.this);
                 startActivity(intent);
             }
         });
@@ -78,9 +88,19 @@ public class PreviewAchievements extends AppCompatActivity {
         achievementLevels = new ArrayList<>();
     }
 
-    private void setupAchievementLevels() {
+    private void setupAchievementLevels(String theme) {
+        String[] themeTitles;
+        if(theme.equals(ThemeSetting.THEME_STAR_WARS))
+            themeTitles=starWarsTitles;
+        else if(theme.equals(ThemeSetting.THEME_FITNESS))
+            themeTitles=fitnessTitles;
+        else if(theme.equals(ThemeSetting.THEME_SPONGEBOB))
+            themeTitles=spongeBobTitles;
+        else
+            themeTitles=starWarsTitles;
+
         for(int i = 0; i < NUM_ACHIEVEMENTS; i++) {
-            AchievementLevel newLevel = new AchievementLevel(starWarsTitles[i]);
+            AchievementLevel newLevel = new AchievementLevel(themeTitles[i]);
             achievementLevels.add(newLevel);
         }
         adapter = new AchievementAdapter(this, R.layout.adapter_view3, achievementLevels);
