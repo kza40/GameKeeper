@@ -6,6 +6,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -40,7 +41,6 @@ public class ViewConfigs extends AppCompatActivity {
 
         configManager=new SharedPreferenceManager(getApplicationContext()).getConfigManager();
         configsList = findViewById(R.id.listOfConfigs);
-
         setEmptyState();
         populateListView();
         setupAddConfig();
@@ -49,8 +49,8 @@ public class ViewConfigs extends AppCompatActivity {
 
 
     @Override
-    protected void onResume() {
-        super.onResume();
+    protected void onStart() {
+        super.onStart();
         adapter.notifyDataSetChanged();
         setEmptyState();
     }

@@ -37,30 +37,39 @@
     <string name="poor_score_colon">"Poor Score: "</string>
     <string name="good_score_colon">"Good Score: "</string>
     <string name="score_colon">"Score: "</string>
-    <string name="fitnessLvl1">Casual Walker</string>
-    <string name="fitnessLvl2">Treadmill Treader</string>
-    <string name="fitnessLvl3">Mountain Explorer</string>
-    <string name="fitnessLvl4">Pushup Spammer</string>
-    <string name="fitnessLvl5">Gym-bro Cadet</string>
-    <string name="fitnessLvl6">Bench Spammer</string>
-    <string name="fitnessLvl7">Steroid Sniffer</string>
-    <string name="fitnessLvl8">The Grand Gymmer</string>
-    <string name="spongeBobLvl1">Crusty Crab</string>
-    <string name="spongeBobLvl2">Naughty Plankton</string>
-    <string name="spongeBobLvl3">Grumpy Squidward</string>
-    <string name="spongeBobLvl4">Strong Larry</string>
-    <string name="spongeBobLvl5">Jolly Patrick</string>
-    <string name="spongeBobLvl6">Gleeful Garry</string>
-    <string name="spongeBobLvl7">Spongy Bob</string>
-    <string name="spongeBobLvl8">Delicious Krappy Patty</string>
-    <string name="starWarsLvl1">Clone Cadet</string>
-    <string name="starWarsLvl2">The Younglings</string>
-    <string name="starWarsLvl3">Midshipmans</string>
-    <string name="starWarsLvl4">Padawans</string>
-    <string name="starWarsLvl5">Jedi Knight</string>
-    <string name="starWarsLvl6">Supreme Commander</string>
-    <string name="starWarsLvl7">Freedom Fighters</string>
-    <string name="starWarsLvl8">Grand Admiral</string>
+    <string-array name="theme_fitness_names">
+        <item>Casual Walker</item>
+        <item>Treadmill Treader</item>
+        <item>Mountain Explorer</item>
+        <item>Pushup Spammer</item>
+        <item>Gym-bro Cadet</item>
+        <item>Bench Spammer</item>
+        <item>Steroid Sniffer</item>
+        <item>The Grand Gymmer</item>
+    </string-array>
+    <string-array name="theme_starwars_names">
+        <item>Clone Cadet</item>
+        <item>The Younglings</item>
+        <item>Midshipmans</item>
+        <item>Padawans</item>
+        <item>Jedi Knight</item>
+        <item>Supreme Commander</item>
+        <item>Freedom Fighters</item>
+        <item>Grand Admiral</item>
+    </string-array>
+    <string-array name="theme_spongebob_names">
+        <item>Crusty Crab</item>
+        <item>Naughty Plankton</item>
+        <item>Grumpy Squidward</item>
+        <item>Strong Larry</item>
+        <item>Jolly Patrick</item>
+        <item>Gleeful Garry</item>
+        <item>Spongy Bob</item>
+        <item>Delicious Krabby Patty</item>
+    </string-array>
+    <string name="starWarsLvl0">Jabba the Hut</string>
+    <string name="fitnessLvl0">Natural Selected</string>
+    <string name="spongeBobLvl0">Tattletale Strangler</string>
     <string name="star_wars_theme">Star Wars Theme</string>
     <string name="fitness_theme">Fitness Theme</string>
     <string name="sponge_bob_theme">Sponge Bob Theme</string>
@@ -72,7 +81,4 @@
     <string name="difficulty_easy">Easy</string>
     <string name="difficulty_normal">Normal</string>
     <string name="difficulty_hard">Hard</string>
-    <string name="starWarsLvl0">Jabba the Hut</string>
-    <string name="fitnessLvl0">Natural Selected</string>
-    <string name="spongeBobLvl0">Tattletale Strangler</string>
 </resources>

@@ -6,10 +6,12 @@ import androidx.appcompat.widget.Toolbar;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import ca.cmpt276.myapplication.model.ConfigManager;
+import ca.cmpt276.myapplication.model.SharedPreferenceManager;
 
 public class ThemeSetting extends AppCompatActivity {
     public static final String THEME_STAR_WARS="THEME_STAR_WARS";
@@ -31,7 +33,6 @@ public class ThemeSetting extends AppCompatActivity {
     public void starWarsSelected(View view){
         displayToast("You've selected "+getString(R.string.star_wars_theme));
         ConfigManager.getInstance().setTheme(THEME_STAR_WARS);
-
     }
     public void fitnessSelected(View view){
         displayToast("You've selected "+getString(R.string.fitness_theme));
@@ -44,6 +45,12 @@ public class ThemeSetting extends AppCompatActivity {
 
     public void displayToast(String message){
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        new SharedPreferenceManager(getApplicationContext()).updateConfigManager(ConfigManager.getInstance());
+        finish();
     }
 
     public static Intent makeIntent(Context context) {

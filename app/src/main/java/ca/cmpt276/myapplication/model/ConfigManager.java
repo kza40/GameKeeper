@@ -1,6 +1,8 @@
 package ca.cmpt276.myapplication.model;
 
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import java.util.ArrayList;

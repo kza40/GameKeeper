@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -22,53 +23,40 @@ import ca.cmpt276.myapplication.model.SharedPreferenceManager;
 public class AddGame extends AppCompatActivity {
     public static final String CONFIG_POSITION = "AddGame: Config position";
 
-    private EditText edtScore;
-    private EditText edtNumPlayers;
     private ConfigManager configManager;
     private GameConfig gameConfig;
-    private String[] titles;
-    private TextView tvDifficulty;
-    private DifficultyToggle toggle;
-    private TextView achievementDisplay;
 
-    private String[] starWarsTitles;
-    private String[] fitnessTitles;
-    private String[] spongeBobTitles;
+    private EditText edtScore;
+    private EditText edtNumPlayers;
+
+    private TextView tvDifficulty;
+    private TextView achievementDisplay;
+    private String[] themeTitles;
+    private String titleSubLevelOne;
+    private String achievementEarned;
+
+    private DifficultyToggle toggle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_game);
 
-        Intent intent = getIntent();
-        int configPos = intent.getIntExtra(CONFIG_POSITION,-1);
-        configManager = ConfigManager.getInstance();
-        gameConfig = configManager.getGameConfigAtIndex(configPos);
-        setTitle(getString(R.string.add_game));
-
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(getString(R.string.add_game));
 
-        starWarsTitles = new String[] { getString(R.string.starWarsLvl0), getString(R.string.starWarsLvl1), getString(R.string.starWarsLvl2), getString(R.string.starWarsLvl3),
-                getString(R.string.starWarsLvl4), getString(R.string.starWarsLvl5), getString(R.string.starWarsLvl6),
-                getString(R.string.starWarsLvl7), getString(R.string.starWarsLvl8)};
-
-        fitnessTitles = new String[]{getString(R.string.fitnessLvl0),getString(R.string.fitnessLvl1), getString(R.string.fitnessLvl2),
-                getString(R.string.fitnessLvl3), getString(R.string.fitnessLvl4), getString(R.string.fitnessLvl5),
-                getString(R.string.fitnessLvl6), getString(R.string.fitnessLvl7), getString(R.string.fitnessLvl8)};
-
-
-        spongeBobTitles = new String[]{getString(R.string.spongeBobLvl0), getString(R.string.spongeBobLvl1), getString(R.string.spongeBobLvl2), getString(R.string.spongeBobLvl3),
-                getString(R.string.spongeBobLvl4), getString(R.string.spongeBobLvl5), getString(R.string.spongeBobLvl6),
-                getString(R.string.spongeBobLvl7), getString(R.string.spongeBobLvl8)};
-
         setupMemberVariables();
-        setupEditTextFields();
         setupSaveButton();
     }
 
     private void setupMemberVariables() {
+        // Config
+        Intent intent = getIntent();
+        int configPos = intent.getIntExtra(CONFIG_POSITION,-1);
+        configManager = ConfigManager.getInstance();
+        gameConfig = configManager.getGameConfigAtIndex(configPos);
+
         // EditText fields
         edtScore = findViewById(R.id.edtScoreDisplay);
         edtNumPlayers = findViewById(R.id.edtNumPlayersDisplay);
@@ -76,18 +64,16 @@ public class AddGame extends AppCompatActivity {
         edtNumPlayers.addTextChangedListener(scoreTextWatcher);
 
         // Achievement-related
-        if (configManager.getTheme() == ThemeSetting.THEME_FITNESS) {
-            titles = new String[]{getString(R.string.fitnessLvl1), getString(R.string.fitnessLvl2),
-                    getString(R.string.fitnessLvl3), getString(R.string.fitnessLvl4), getString(R.string.fitnessLvl5),
-                    getString(R.string.fitnessLvl6), getString(R.string.fitnessLvl7), getString(R.string.fitnessLvl8)};
-        } else if (configManager.getTheme() == ThemeSetting.THEME_SPONGEBOB) {
-            titles = new String[]{getString(R.string.spongeBobLvl1), getString(R.string.spongeBobLvl2), getString(R.string.spongeBobLvl3),
-                    getString(R.string.spongeBobLvl4), getString(R.string.spongeBobLvl5), getString(R.string.spongeBobLvl6),
-                    getString(R.string.spongeBobLvl7), getString(R.string.spongeBobLvl8)};
+        String theme = configManager.getTheme();
+        if (theme.equals(ThemeSetting.THEME_FITNESS)) {
+            themeTitles = getResources().getStringArray(R.array.theme_fitness_names);
+            titleSubLevelOne = getString(R.string.fitnessLvl0);
+        } else if (theme.equals(ThemeSetting.THEME_SPONGEBOB)) {
+            themeTitles = getResources().getStringArray(R.array.theme_spongebob_names);
+            titleSubLevelOne = getString(R.string.spongeBobLvl0);
         } else {
-            titles = new String[]{getString(R.string.starWarsLvl1), getString(R.string.starWarsLvl2), getString(R.string.starWarsLvl3),
-                    getString(R.string.starWarsLvl4), getString(R.string.starWarsLvl5), getString(R.string.starWarsLvl6),
-                    getString(R.string.starWarsLvl7), getString(R.string.starWarsLvl8)};
+            themeTitles = getResources().getStringArray(R.array.theme_starwars_names);
+            titleSubLevelOne = getString(R.string.starWarsLvl0);
         }
         achievementDisplay = findViewById(R.id.tvAchievement);
 
@@ -98,19 +84,9 @@ public class AddGame extends AppCompatActivity {
         tvDifficulty.addTextChangedListener(scoreTextWatcher);
     }
 
-    private void setupEditTextFields() {
-        edtScore = findViewById(R.id.edtScoreDisplay);
-        edtNumPlayers = findViewById(R.id.edtNumPlayersDisplay);
-
-        edtScore.addTextChangedListener(scoreTextWatcher);
-        edtNumPlayers.addTextChangedListener(scoreTextWatcher);
-    }
-
     private TextWatcher scoreTextWatcher = new TextWatcher() {
         @Override
-        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-        }
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
         @Override
         public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -118,40 +94,29 @@ public class AddGame extends AppCompatActivity {
             String numPlayersInput = edtNumPlayers.getText().toString();
 
             if (!scoreInput.isEmpty() && !numPlayersInput.isEmpty()) {
-                    String temp;
-                if(ConfigManager.getInstance().getTheme()=="THEME_FITNESS") {
-                    temp = getTemp(fitnessTitles, scoreInput, numPlayersInput);
-                } else if (ConfigManager.getInstance().getTheme()=="THEME_SPONGEBOB"){
-                    temp = getTemp(spongeBobTitles, scoreInput, numPlayersInput);
-                } else {
-                    temp = getTemp(starWarsTitles, scoreInput, numPlayersInput);
-                }
-                TextView showAchievement = findViewById(R.id.tvAchievement);
-                String message = getString(R.string.you_got) + temp + getString(R.string.exclamation);
-                showAchievement.setText(message);
+                showAchievement(Integer.parseInt(scoreInput), Integer.parseInt(numPlayersInput));
             }
         }
 
         @Override
-        public void afterTextChanged(Editable editable) {
-
-        }
+        public void afterTextChanged(Editable editable) {}
     };
 
 
     private void showAchievement(int score, int numPlayers) {
-        String name = AchievementCalculator.getAchievementEarned(
-                titles, numPlayers, gameConfig.getPoorScore(),
-                gameConfig.getGoodScore(), score, toggle.getScaleFactor());
-
+        int index = AchievementCalculator.getScorePlacement(
+                themeTitles.length, numPlayers, gameConfig.getPoorScore(), gameConfig.getGoodScore(),
+                score, toggle.getScaleFactor());
+        String name;
+        if (index == AchievementCalculator.INDEX_SUB_LEVEL_ONE) {
+            name = titleSubLevelOne;
+        }
+        else {
+            name = themeTitles[index];
+        }
+        achievementEarned = name;
         String message = getString(R.string.you_got) + name + getString(R.string.exclamation);
         achievementDisplay.setText(message);
-    }
-
-    private String getTemp(String[] titles, String scoreInput, String numPlayersInput) {
-        return AchievementCalculator.getAchievementEarned(titles, Integer.parseInt(numPlayersInput),
-                        gameConfig.getPoorScore(), gameConfig.getGoodScore(),
-                        Integer.parseInt(scoreInput), toggle.getScaleFactor());
     }
 
     private void setupSaveButton() {
@@ -172,8 +137,7 @@ public class AddGame extends AppCompatActivity {
     }
 
     private void saveGame(int numPlayers, int groupScore) {
-        Game game = new Game(titles, numPlayers, groupScore, gameConfig.getPoorScore(),
-                             gameConfig.getGoodScore(), toggle.getScaleFactor());
+        Game game = new Game(achievementEarned, numPlayers, groupScore, toggle.getScaleFactor());
         gameConfig.addGame(game);
         new SharedPreferenceManager(getApplicationContext()).updateConfigManager(configManager);
     }
@@ -183,5 +147,4 @@ public class AddGame extends AppCompatActivity {
         intent.putExtra(CONFIG_POSITION, position);
         return intent;
     }
-
 }
