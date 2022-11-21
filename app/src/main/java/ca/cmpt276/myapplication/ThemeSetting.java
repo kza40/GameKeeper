@@ -11,11 +11,14 @@ import android.view.View;
 import android.widget.Toast;
 
 import ca.cmpt276.myapplication.model.ConfigManager;
+import ca.cmpt276.myapplication.model.SharedPreferenceManager;
 
 public class ThemeSetting extends AppCompatActivity {
     public static final String THEME_STAR_WARS="THEME_STAR_WARS";
     public static final String THEME_FITNESS="THEME_FITNESS";
     public static final String THEME_SPONGEBOB="THEME_SPONGEBOB";
+
+    ConfigManager configManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,20 +29,24 @@ public class ThemeSetting extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(getString(R.string.title_settings));
+
+        configManager = ConfigManager.getInstance();
     }
 
-    //TO DO: Update Shared Preferences anytime a theme is switched
     public void starWarsSelected(View view){
-        displayToast("You've selected "+getString(R.string.star_wars_theme));
-        ConfigManager.getInstance().setTheme(THEME_STAR_WARS);
+        onImageSelected(getString(R.string.star_wars_theme), THEME_STAR_WARS);
     }
     public void fitnessSelected(View view){
-        displayToast("You've selected "+getString(R.string.fitness_theme));
-        ConfigManager.getInstance().setTheme(THEME_FITNESS);
+        onImageSelected(getString(R.string.fitness_theme), THEME_FITNESS);
     }
     public void spongeBobSelected(View view){
-        displayToast("You've selected "+getString(R.string.sponge_bob_theme));
-        ConfigManager.getInstance().setTheme(THEME_SPONGEBOB);
+        onImageSelected(getString(R.string.sponge_bob_theme), THEME_SPONGEBOB);
+    }
+
+    public void onImageSelected(String themeDisplay, String theme) {
+        displayToast("You've selected " + themeDisplay);
+        configManager.setTheme(theme);
+        new SharedPreferenceManager(getApplicationContext()).updateConfigManager(configManager);
     }
 
     public void displayToast(String message){
