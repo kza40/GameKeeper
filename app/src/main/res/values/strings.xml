@@ -69,4 +69,7 @@
     <string name="fitness_title">Fitness</string>
     <string name="star_wars_title">Star Wars</string>
     <string name="title_settings">Settings</string>
+    <string name="difficulty_easy">Easy</string>
+    <string name="difficulty_normal">Normal</string>
+    <string name="difficulty_hard">Hard</string>
 </resources>

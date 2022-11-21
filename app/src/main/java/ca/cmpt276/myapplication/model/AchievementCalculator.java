@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  * This class contains methods that calculate: the boundaries for a set of achievements,
- * and the achievement earned given a score.
+ * the achievement earned given a score.
  */
 
 public class AchievementCalculator {
@@ -46,9 +46,11 @@ public class AchievementCalculator {
         return boundaries;
     }
 
-    public static String getAchievementEarned(String[] names, int numPlayers, int poorScore, int greatScore, int groupScore) {
+    public static String getAchievementEarned(String[] names, int numPlayers, int poorScore, int greatScore, int groupScore, float scaleFactor) {
         boolean isReversed = false;
         List<Integer> boundaries = getBoundaries(numPlayers, poorScore, greatScore);
+        applyDifficulty(boundaries, scaleFactor);
+
         int index = 0;
 
         if (poorScore > greatScore) {
@@ -65,5 +67,13 @@ public class AchievementCalculator {
             index++;
         }
         return names[index];
+    }
+
+    public static void applyDifficulty(List<Integer> boundaries, float scaleFactor) {
+        for (int i = 0; i < boundaries.size(); i++) {
+            int x = boundaries.get(i);
+            x = (int)(x * (scaleFactor/100.0f));
+            boundaries.set(i, x);
+        }
     }
 }

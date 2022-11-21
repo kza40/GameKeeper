@@ -10,6 +10,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,11 +27,14 @@ public class PreviewAchievements extends AppCompatActivity {
 
     private int poorScore;
     private int greatScore;
-
     private EditText edtNumPlayers;
     private ListView achievementsList;
     private AchievementAdapter adapter;
+
+    private String[] titles;
     private List<AchievementLevel> achievementLevels;
+    private DifficultyToggle toggle;
+    private TextView tvDifficulty;
     private String[] themeTitles;
 
     @Override
@@ -52,6 +56,7 @@ public class PreviewAchievements extends AppCompatActivity {
         poorScore = intent.getIntExtra(EXTRA_POOR_SCORE, 0);
         greatScore = intent.getIntExtra(EXTRA_GREAT_SCORE, 0);
 
+        // EditText field
         edtNumPlayers = findViewById(R.id.edtNumPlayers);
         edtNumPlayers.addTextChangedListener(scoreTextWatcher);
         achievementsList = findViewById(R.id.achievementLevels);
@@ -72,6 +77,12 @@ public class PreviewAchievements extends AppCompatActivity {
         }
 
         achievementLevels = new ArrayList<>();
+
+        // Difficulty toggle
+        toggle = new DifficultyToggle(findViewById(android.R.id.content).getRootView());
+        toggle.setup();
+        tvDifficulty = findViewById(R.id.tvDifficulty);
+        tvDifficulty.addTextChangedListener(scoreTextWatcher);
     }
 
     private void setupAchievementLevels() {
@@ -101,6 +112,8 @@ public class PreviewAchievements extends AppCompatActivity {
 
     private void updateListView(int numPlayers) {
         List<Integer> boundaries = AchievementCalculator.getBoundaries(numPlayers, poorScore, greatScore);
+        AchievementCalculator.applyDifficulty(boundaries, toggle.getScaleFactor());
+
         for(int i = 0; i < NUM_ACHIEVEMENTS; i++) {
             String value = Integer.toString(boundaries.get(i));
             achievementLevels.get(i).setBoundary(value);

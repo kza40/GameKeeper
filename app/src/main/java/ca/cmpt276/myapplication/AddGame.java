@@ -26,6 +26,10 @@ public class AddGame extends AppCompatActivity {
     private EditText edtNumPlayers;
     private ConfigManager configManager;
     private GameConfig gameConfig;
+    private String[] titles;
+    private TextView tvDifficulty;
+    private DifficultyToggle toggle;
+    private TextView achievementDisplay;
 
     private String[] starWarsTitles;
     private String[] fitnessTitles;
@@ -40,6 +44,7 @@ public class AddGame extends AppCompatActivity {
         int configPos = intent.getIntExtra(CONFIG_POSITION,-1);
         configManager = ConfigManager.getInstance();
         gameConfig = configManager.getGameConfigAtIndex(configPos);
+        setTitle(getString(R.string.add_game));
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -53,12 +58,36 @@ public class AddGame extends AppCompatActivity {
                 getString(R.string.fitnessLvl3), getString(R.string.fitnessLvl4), getString(R.string.fitnessLvl5),
                 getString(R.string.fitnessLvl6), getString(R.string.fitnessLvl7), getString(R.string.fitnessLvl8)};
 
+
         spongeBobTitles = new String[]{getString(R.string.spongeBobLvl1), getString(R.string.spongeBobLvl2), getString(R.string.spongeBobLvl3),
                 getString(R.string.spongeBobLvl4), getString(R.string.spongeBobLvl5), getString(R.string.spongeBobLvl6),
                 getString(R.string.spongeBobLvl7), getString(R.string.spongeBobLvl8)};
 
+        setupMemberVariables();
         setupEditTextFields();
         setupSaveButton();
+    }
+
+    private void setupMemberVariables() {
+        // EditText fields
+        edtScore = findViewById(R.id.edtScoreDisplay);
+        edtNumPlayers = findViewById(R.id.edtNumPlayersDisplay);
+        edtScore.addTextChangedListener(scoreTextWatcher);
+        edtNumPlayers.addTextChangedListener(scoreTextWatcher);
+
+        // Achievement-related
+        titles = new String[] { getString(R.string.achievementZero), getString(R.string.achievementOne),
+                getString(R.string.achievementTwo), getString(R.string.achievementThree),
+                getString(R.string.achievementFour), getString(R.string.achievementFive),
+                getString(R.string.achievementSix), getString(R.string.achievementSeven),
+                getString(R.string.achievementEight) };
+        achievementDisplay = findViewById(R.id.tvAchievement);
+
+        // Difficulty toggle
+        toggle = new DifficultyToggle(findViewById(android.R.id.content).getRootView());
+        toggle.setup();
+        tvDifficulty = findViewById(R.id.tvDifficulty);
+        tvDifficulty.addTextChangedListener(scoreTextWatcher);
     }
 
     private void setupEditTextFields() {
@@ -101,6 +130,16 @@ public class AddGame extends AppCompatActivity {
         }
     };
 
+
+    private void showAchievement(int score, int numPlayers) {
+        String name = AchievementCalculator.getAchievementEarned(
+                titles, numPlayers, gameConfig.getPoorScore(),
+                gameConfig.getGoodScore(), score, toggle.getScaleFactor());
+
+        String message = getString(R.string.you_got) + name + getString(R.string.exclamation);
+        achievementDisplay.setText(message);
+    }
+
     private String getTemp(String[] titles, String scoreInput, String numPlayersInput) {
         return AchievementCalculator.getAchievementEarned(titles, Integer.parseInt(numPlayersInput),
                         gameConfig.getPoorScore(), gameConfig.getGoodScore(),
@@ -125,7 +164,8 @@ public class AddGame extends AppCompatActivity {
     }
 
     private void saveGame(int numPlayers, int groupScore) {
-        Game game = new Game(starWarsTitles, numPlayers, groupScore, gameConfig.getPoorScore(), gameConfig.getGoodScore());
+        Game game = new Game(titles, numPlayers, groupScore, gameConfig.getPoorScore(),
+                             gameConfig.getGoodScore(), toggle.getScaleFactor());
         gameConfig.addGame(game);
         new SharedPreferenceManager(getApplicationContext()).updateConfigManager(configManager);
     }
