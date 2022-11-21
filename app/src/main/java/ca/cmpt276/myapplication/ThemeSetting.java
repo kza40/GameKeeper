@@ -1,6 +1,7 @@
 package ca.cmpt276.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,19 +12,19 @@ import android.widget.Toast;
 import ca.cmpt276.myapplication.model.ConfigManager;
 
 public class ThemeSetting extends AppCompatActivity {
-
-
     public static final String THEME_STAR_WARS="THEME_STAR_WARS";
     public static final String THEME_FITNESS="THEME_FITNESS";
     public static final String THEME_SPONGEBOB="THEME_SPONGEBOB";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_theme_setting);
 
-
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle(getString(R.string.title_settings));
     }
 
     //TO DO: Update Shared Preferences anytime a theme is switched

@@ -1,6 +1,7 @@
 package ca.cmpt276.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Context;
 import android.content.Intent;
@@ -44,7 +45,11 @@ public class ViewGames extends AppCompatActivity {
 
         configManager = ConfigManager.getInstance();
         gameConfig = configManager.getGameConfigAtIndex(configPos);
-        setTitle(gameConfig.getGameTitle());
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(gameConfig.getGameTitle() + " Games");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         setupAddGame();
         populateListView();

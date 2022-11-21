@@ -1,6 +1,7 @@
 package ca.cmpt276.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Context;
 import android.content.Intent;
@@ -30,7 +31,12 @@ public class AddConfig extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_config);
-        setTitle(getString(R.string.addConfigTitle));
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(getString(R.string.addConfigTitle));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         configManager = ConfigManager.getInstance();
         int position=-1;
 
@@ -40,7 +46,7 @@ public class AddConfig extends AppCompatActivity {
         if(getIntent().getExtras()!=null)
         {
             isEdit=true;
-            setTitle(getString(R.string.editConfigTitle));
+            getSupportActionBar().setTitle(getString(R.string.editConfigTitle));
             position=getIntent().getIntExtra(AddGame.CONFIG_POSITION,-1);
             loadInputFields(position);
         }

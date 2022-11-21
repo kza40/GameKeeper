@@ -1,14 +1,13 @@
 package ca.cmpt276.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
@@ -42,11 +41,13 @@ public class PreviewAchievements extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preview_achievements);
 
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle(getString(R.string.achievementsTitle));
 
-        setTitle(R.string.achievementsTitle);
         setUpMemberVariables();
         setupAchievementLevels(ConfigManager.getInstance().getTheme());
-        setupSettingBtn();
     }
 
     @Override
@@ -56,19 +57,6 @@ public class PreviewAchievements extends AppCompatActivity {
         setUpMemberVariables();
         setupAchievementLevels(ConfigManager.getInstance().getTheme());
         adapter.notifyDataSetChanged();
-    }
-
-    private void setupSettingBtn() {
-        Button settingBtn = findViewById(R.id.btnSetting);
-
-        settingBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Intent intent = ThemeSetting.makeIntent(PreviewAchievements.this);
-                startActivity(intent);
-            }
-        });
     }
 
     private void setUpMemberVariables() {
