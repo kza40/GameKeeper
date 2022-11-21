@@ -6,12 +6,11 @@ import androidx.appcompat.widget.Toolbar;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
 import ca.cmpt276.myapplication.model.ConfigManager;
-import ca.cmpt276.myapplication.model.SharedPreferenceManager;
 
 public class ThemeSetting extends AppCompatActivity {
     public static final String THEME_STAR_WARS="THEME_STAR_WARS";
@@ -48,9 +47,13 @@ public class ThemeSetting extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed() {
-        new SharedPreferenceManager(getApplicationContext()).updateConfigManager(ConfigManager.getInstance());
-        finish();
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == android.R.id.home){
+            onBackPressed();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public static Intent makeIntent(Context context) {
