@@ -30,9 +30,6 @@ public class AddGame extends AppCompatActivity {
     private ConfigManager configManager;
     private GameConfig gameConfig;
 
-    private EditText edtScore;
-    private EditText edtNumPlayers;
-
     private TextView tvDifficulty;
     private TextView achievementDisplay;
     private String[] themeTitles;
