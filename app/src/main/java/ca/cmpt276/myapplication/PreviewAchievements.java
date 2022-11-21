@@ -26,6 +26,7 @@ public class PreviewAchievements extends AppCompatActivity {
 
     private int poorScore;
     private int greatScore;
+
     private EditText edtNumPlayers;
     private ListView achievementsList;
     private AchievementAdapter adapter;
