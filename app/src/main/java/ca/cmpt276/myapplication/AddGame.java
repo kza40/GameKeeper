@@ -25,6 +25,7 @@ import ca.cmpt276.myapplication.model.SharedPreferenceManager;
 public class AddGame extends AppCompatActivity {
     public static final String CONFIG_POSITION = "AddGame: Config position";
 
+    private TextView txtScore;
     private EditText edtNumPlayers;
     private ConfigManager configManager;
     private GameConfig gameConfig;
@@ -52,6 +53,9 @@ public class AddGame extends AppCompatActivity {
     }
 
     private void setupMemberVariables() {
+
+        txtScore = findViewById(R.id.txtTotalScore);
+        txtScore.setText("Score: 0");
         // EditText fields
         edtNumPlayers = findViewById(R.id.edtNumPlayersDisplay);
         edtNumPlayers.addTextChangedListener(playerNumTextWatcher);
@@ -113,19 +117,23 @@ public class AddGame extends AppCompatActivity {
             String[] individualScores = new String[NUM_ROWS];
             boolean individualScoresChecker = true;
             int groupScore = 0;
+            totalScore = 0;
             for (int row = 0; row < NUM_ROWS; row++) {
                 individualScores[row] = edtIndividualScore[row].getText().toString();
                 if(individualScores[row].isEmpty()) {
                     individualScoresChecker = false;
+                    groupScore = 0;
                 }
                 if(individualScoresChecker) {
                     groupScore += Integer.parseInt(individualScores[row]);
                 }
             }
-            if (individualScoresChecker && !numPlayersInput.isEmpty()) {
-                totalScore = groupScore;
-                Toast.makeText(getApplicationContext(), "This is the total score: " + totalScore, Toast.LENGTH_SHORT).show();
-                showAchievement(totalScore, Integer.parseInt(numPlayersInput));
+            totalScore = groupScore;
+            if (!numPlayersInput.isEmpty()) {
+                txtScore.setText("Score: " + totalScore);
+                if(individualScoresChecker) {
+                    showAchievement(totalScore, Integer.parseInt(numPlayersInput));
+                }
             }
         }
 

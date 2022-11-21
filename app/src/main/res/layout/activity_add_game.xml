@@ -7,22 +7,10 @@
     tools:context=".AddGame">
 
     <EditText
-        android:id="@+id/edtScoreDisplay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/score"
-        android:inputType="number"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        app:layout_constraintBottom_toTopOf="@+id/edtNumPlayersDisplay"
-        app:layout_constraintEnd_toStartOf="@+id/vGuideline80p"
-        app:layout_constraintStart_toStartOf="@+id/vGuideline20p"
-        app:layout_constraintTop_toBottomOf="@+id/hGuideline25p" />
-
-    <EditText
         android:id="@+id/edtNumPlayersDisplay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
         android:ems="10"
         android:hint="@string/total_players"
         android:inputType="number"
@@ -30,7 +18,7 @@
         app:layout_constraintBottom_toTopOf="@+id/tvAchievement"
         app:layout_constraintEnd_toStartOf="@+id/vGuideline80p"
         app:layout_constraintStart_toStartOf="@+id/vGuideline20p"
-        app:layout_constraintTop_toBottomOf="@+id/edtScoreDisplay" />
+        app:layout_constraintTop_toBottomOf="@+id/txtTotalScore" />
 
     <Button
         android:id="@+id/btnSave"
@@ -175,6 +163,16 @@
             android:orientation="vertical"></LinearLayout>
 
     </ScrollView>
+
+    <TextView
+        android:id="@+id/txtTotalScore"
+        android:layout_width="211dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="12dp"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/vGuideline80p"
+        app:layout_constraintStart_toStartOf="@+id/vGuideline20p"
+        app:layout_constraintTop_toTopOf="@+id/hGuideline25p" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
