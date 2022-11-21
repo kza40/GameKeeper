@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -22,6 +23,8 @@ import ca.cmpt276.myapplication.model.Game;
 public class GameAdapter extends ArrayAdapter<Game> {
     private Context context;
     private int resource;
+    private static final float EASY_PERCENT = 75;
+    private static final float HARD_PERCENT = 125;
 
     public GameAdapter(@NonNull Context context, int resource, @NonNull List<Game> objects) {
         super(context, resource, objects);
@@ -35,16 +38,29 @@ public class GameAdapter extends ArrayAdapter<Game> {
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         convertView = layoutInflater.inflate(resource, parent, false);
 
-        TextView achievementView = convertView.findViewById(R.id.tvAchievementView);
-        TextView dateView = convertView.findViewById(R.id.tvDateView);
-        TextView numPlayersView = convertView.findViewById(R.id.tvNumPlayersView);
-        TextView groupScore = convertView.findViewById(R.id.tvScoreView);
-
+        TextView achievementView = convertView.findViewById(R.id.tvAchievement);
         achievementView.setText(getItem(position).getAchievementEarned());
+
+        TextView dateView = convertView.findViewById(R.id.tvDate);
         dateView.setText(getItem(position).getDatePlayed());
+
+        TextView numPlayersView = convertView.findViewById(R.id.tvNumPlayers);
         String numPlayers = getItem(position).getNumOfPlayers() + context.getString(R.string.players);
         numPlayersView.setText(numPlayers);
-        groupScore.setText(context.getString(R.string.score_colon) + getItem(position).getGroupScore());
+
+        TextView scoreView = convertView.findViewById(R.id.tvScore);
+        String score = Integer.toString(getItem(position).getGroupScore());
+        scoreView.setText(score);
+
+        ImageView ivStar2 = convertView.findViewById(R.id.star2);
+        ImageView ivStar3 = convertView.findViewById(R.id.star3);
+
+        float scaleFactor = getItem(position).getScaleFactor();
+        if (scaleFactor == EASY_PERCENT) {
+            ivStar2.setImageResource(R.drawable.star_grey);
+        } else if (scaleFactor == HARD_PERCENT) {
+            ivStar3.setImageResource(R.drawable.star_gold);
+        }
 
         return convertView;
     }

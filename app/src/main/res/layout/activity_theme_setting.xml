@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ThemeSetting">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
+
+    <ImageView
+        android:id="@+id/liftingImage"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@string/fitness_theme"
+        android:gravity="center"
+        android:onClick="fitnessSelected"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineBelowFitness"
+        app:layout_constraintEnd_toStartOf="@+id/imagesRightMargin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guidelineAboveFitness"
+        app:srcCompat="@drawable/lifting" />
+
+    <ImageView
+        android:id="@+id/spongeBobImage"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@string/sponge_bob_theme"
+        android:onClick="spongeBobSelected"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineBelowSponge"
+        app:layout_constraintEnd_toStartOf="@+id/imagesRightMargin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guidelineBelowFitness"
+        app:srcCompat="@drawable/spongebob" />
+
+    <TextView
+        android:id="@+id/txtViewStarWars"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:shadowColor="#BDAC0F"
+        android:shadowDx="5"
+        android:shadowDy="5"
+        android:shadowRadius="5"
+        android:text="@string/star_wars_title"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="#000000"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineAboveFitness"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/imagesRightMargin"
+        app:layout_constraintTop_toTopOf="@+id/guidelineAbStar" />
+
+    <TextView
+        android:id="@+id/txtViewFitness"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:shadowColor="#BDAC0F"
+        android:shadowDx="5"
+        android:shadowDy="5"
+        android:shadowRadius="5"
+        android:text="@string/fitness_title"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="#000000"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineBelowFitness"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/liftingImage"
+        app:layout_constraintTop_toTopOf="@+id/guidelineAboveFitness" />
+
+    <TextView
+        android:id="@+id/txtViewSpongeBob"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:shadowColor="#BDAC0F"
+        android:shadowDx="5"
+        android:shadowDy="5"
+        android:shadowRadius="5"
+        android:text="@string/spong_bob_title"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="#000000"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineBelowSponge"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/imagesRightMargin"
+        app:layout_constraintTop_toTopOf="@+id/guidelineBelowFitness" />
+
+    <TextView
+        android:id="@+id/txtViewManual"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:shadowColor="#BDAC0F"
+        android:shadowDx="5"
+        android:shadowDy="5"
+        android:shadowRadius="5"
+        android:text="@string/theme_instructions"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="#000000"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineAbStar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <ImageView
+        android:id="@+id/starWars"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@string/star_wars_theme"
+        android:onClick="starWarsSelected"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineAboveFitness"
+        app:layout_constraintEnd_toStartOf="@+id/imagesRightMargin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guidelineAbStar"
+        app:srcCompat="@drawable/starwars" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/imagesRightMargin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.6" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineAboveFitness"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.45" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineBelowFitness"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.70" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineBelowSponge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.95" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineAbStar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.25" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

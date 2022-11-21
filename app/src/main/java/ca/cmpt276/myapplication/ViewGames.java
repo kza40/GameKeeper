@@ -1,24 +1,20 @@
 package ca.cmpt276.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import ca.cmpt276.myapplication.adapter.GameAdapter;
-import ca.cmpt276.myapplication.adapter.GameConfigAdapter;
-import ca.cmpt276.myapplication.model.Game;
 import ca.cmpt276.myapplication.model.GameConfig;
 import ca.cmpt276.myapplication.model.ConfigManager;
 
@@ -44,7 +40,11 @@ public class ViewGames extends AppCompatActivity {
 
         configManager = ConfigManager.getInstance();
         gameConfig = configManager.getGameConfigAtIndex(configPos);
-        setTitle(gameConfig.getGameTitle());
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(gameConfig.getGameTitle() + " Games");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         setupAddGame();
         populateListView();
@@ -58,7 +58,7 @@ public class ViewGames extends AppCompatActivity {
     }
 
     private void populateListView() {
-        gameAdapter = new GameAdapter(this, R.layout.adapter_view2, gameConfig.getGames());
+        gameAdapter = new GameAdapter(this, R.layout.game_row, gameConfig.getGames());
         gamesList.setAdapter(gameAdapter);
     }
 
@@ -83,6 +83,15 @@ public class ViewGames extends AppCompatActivity {
         }
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == android.R.id.home){
+            onBackPressed();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     public static Intent makeIntent(Context context, int position) {
         Intent intent = new Intent(context, ViewGames.class);

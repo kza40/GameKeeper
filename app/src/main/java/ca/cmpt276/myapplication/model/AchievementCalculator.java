@@ -6,13 +6,13 @@ import java.util.List;
 
 /**
  * This class contains methods that calculate: the boundaries for a set of achievements,
- * and the achievement earned given a score.
+ * the achievement earned given a score.
  */
 
 public class AchievementCalculator {
-    public static final int NUM_ACHIEVEMENTS = 8;
+    public static final int INDEX_SUB_LEVEL_ONE = -1;
 
-    public static List<Integer> getBoundaries(int numPlayers, int poorScore, int greatScore) {
+    public static List<Integer> getBoundaries(int numAchievements, int numPlayers, int poorScore, int greatScore) {
         List<Integer> boundaries = new ArrayList<>();
 
         int lowerBound = Math.min(numPlayers * poorScore, numPlayers * greatScore);
@@ -20,7 +20,7 @@ public class AchievementCalculator {
 
         int upperBound = Math.max(numPlayers * poorScore, numPlayers * greatScore);
 
-        int numIntervals = NUM_ACHIEVEMENTS - 1;
+        int numIntervals = numAchievements - 1;
         int range = upperBound - lowerBound;
         int jumpAmt = range / numIntervals;
 
@@ -29,11 +29,11 @@ public class AchievementCalculator {
         int timesAdjusted = 0;
 
         int currScore = lowerBound;
-        for (int i = 0; i < NUM_ACHIEVEMENTS - 2; i++) {
+        for (int i = 0; i < numAchievements - 2; i++) {
             currScore += jumpAmt;
             if (i == indexToBeAdjusted && timesAdjusted < extraAmt) {
                 currScore++;
-                indexToBeAdjusted += ((NUM_ACHIEVEMENTS - 2) /  extraAmt);
+                indexToBeAdjusted += ((numAchievements - 2) /  extraAmt);
                 timesAdjusted++;
             }
             boundaries.add(currScore);
@@ -46,24 +46,37 @@ public class AchievementCalculator {
         return boundaries;
     }
 
-    public static String getAchievementEarned(String[] names, int numPlayers, int poorScore, int greatScore, int groupScore) {
+    public static int getScorePlacement(int numAchievements, int numPlayers, int poorScore, int greatScore, int groupScore, float scaleFactor) {
         boolean isReversed = false;
-        List<Integer> boundaries = getBoundaries(numPlayers, poorScore, greatScore);
+        List<Integer> boundaries = getBoundaries(numAchievements, numPlayers, poorScore, greatScore);
+        applyDifficulty(boundaries, scaleFactor);
+
         int index = 0;
+        int placement = -1;
 
         if (poorScore > greatScore) {
             isReversed = true;
         }
 
-        while(index < NUM_ACHIEVEMENTS) {
+        while(index < numAchievements) {
             if (isReversed && groupScore > boundaries.get(index)) {
                 break;
             }
             else if (!isReversed && groupScore < boundaries.get(index)) {
                 break;
             }
+            placement++;
             index++;
         }
-        return names[index];
+
+        return placement;
+    }
+
+    public static void applyDifficulty(List<Integer> boundaries, float scaleFactor) {
+        for (int i = 0; i < boundaries.size(); i++) {
+            int x = boundaries.get(i);
+            x = (int)(x * (scaleFactor/100.0f));
+            boundaries.set(i, x);
+        }
     }
 }

@@ -5,31 +5,28 @@ import java.time.format.DateTimeFormatter;
 
 /**
  * Game class contains the details of a single game: the date it was played, group score,
- * number of players, and the achievement earned.
+ * number of players, the achievement earned, and the scale factor (based on chosen difficulty).
  */
 
 public class Game {
+    private String achievementEarned;
     private int numOfPlayers;
     private int groupScore;
+    private float scaleFactor;
     private String datePlayed;
-    private String achievementEarned;
 
-    public Game(String[] names, int numOfPlayers, int groupScore, int poorScore, int greatScore) {
+    public Game(String achievementEarned, int numOfPlayers, int groupScore, float scaleFactor) {
+        this.achievementEarned = achievementEarned;
         this.numOfPlayers = numOfPlayers;
         this.groupScore = groupScore;
+        this.scaleFactor = scaleFactor;
         setDate();
-        setAchievementEarned(names, poorScore, greatScore);
     }
 
     private void setDate() {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("MMM dd");
         LocalDateTime now = LocalDateTime.now();
         datePlayed = now.format(format);
-    }
-
-    private void setAchievementEarned(String[] names, int poorScore, int greatScore) {
-        achievementEarned = AchievementCalculator
-                            .getAchievementEarned(names, numOfPlayers, poorScore, greatScore, groupScore);
     }
 
     public int getNumOfPlayers() {
@@ -46,5 +43,9 @@ public class Game {
 
     public int getGroupScore() {
         return groupScore;
+    }
+
+    public float getScaleFactor() {
+        return scaleFactor;
     }
 }

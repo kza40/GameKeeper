@@ -37,4 +37,48 @@
     <string name="poor_score_colon">"Poor Score: "</string>
     <string name="good_score_colon">"Good Score: "</string>
     <string name="score_colon">"Score: "</string>
+    <string-array name="theme_fitness_names">
+        <item>Casual Walker</item>
+        <item>Treadmill Treader</item>
+        <item>Mountain Explorer</item>
+        <item>Pushup Spammer</item>
+        <item>Gym-bro Cadet</item>
+        <item>Bench Spammer</item>
+        <item>Steroid Sniffer</item>
+        <item>The Grand Gymmer</item>
+    </string-array>
+    <string-array name="theme_starwars_names">
+        <item>Clone Cadet</item>
+        <item>The Younglings</item>
+        <item>Midshipmans</item>
+        <item>Padawans</item>
+        <item>Jedi Knight</item>
+        <item>Supreme Commander</item>
+        <item>Freedom Fighters</item>
+        <item>Grand Admiral</item>
+    </string-array>
+    <string-array name="theme_spongebob_names">
+        <item>Crusty Crab</item>
+        <item>Naughty Plankton</item>
+        <item>Grumpy Squidward</item>
+        <item>Strong Larry</item>
+        <item>Jolly Patrick</item>
+        <item>Gleeful Garry</item>
+        <item>Spongy Bob</item>
+        <item>Delicious Krabby Patty</item>
+    </string-array>
+    <string name="starWarsLvl0">Jabba the Hut</string>
+    <string name="fitnessLvl0">Natural Selected</string>
+    <string name="spongeBobLvl0">Tattletale Strangler</string>
+    <string name="star_wars_theme">Star Wars Theme</string>
+    <string name="fitness_theme">Fitness Theme</string>
+    <string name="sponge_bob_theme">Sponge Bob Theme</string>
+    <string name="theme_instructions">Click on the Icon of the theme that you like!</string>
+    <string name="spong_bob_title">SpongeBob</string>
+    <string name="fitness_title">Fitness</string>
+    <string name="star_wars_title">Star Wars</string>
+    <string name="title_settings">Settings</string>
+    <string name="difficulty_easy">Easy</string>
+    <string name="difficulty_normal">Normal</string>
+    <string name="difficulty_hard">Hard</string>
 </resources>
