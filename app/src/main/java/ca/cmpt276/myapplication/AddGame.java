@@ -50,16 +50,16 @@ public class AddGame extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(getString(R.string.add_game));
 
-        starWarsTitles = new String[] { getString(R.string.starWarsLvl1), getString(R.string.starWarsLvl2), getString(R.string.starWarsLvl3),
+        starWarsTitles = new String[] { getString(R.string.starWarsLvl0), getString(R.string.starWarsLvl1), getString(R.string.starWarsLvl2), getString(R.string.starWarsLvl3),
                 getString(R.string.starWarsLvl4), getString(R.string.starWarsLvl5), getString(R.string.starWarsLvl6),
                 getString(R.string.starWarsLvl7), getString(R.string.starWarsLvl8)};
 
-        fitnessTitles = new String[]{getString(R.string.fitnessLvl1), getString(R.string.fitnessLvl2),
+        fitnessTitles = new String[]{getString(R.string.fitnessLvl0),getString(R.string.fitnessLvl1), getString(R.string.fitnessLvl2),
                 getString(R.string.fitnessLvl3), getString(R.string.fitnessLvl4), getString(R.string.fitnessLvl5),
                 getString(R.string.fitnessLvl6), getString(R.string.fitnessLvl7), getString(R.string.fitnessLvl8)};
 
 
-        spongeBobTitles = new String[]{getString(R.string.spongeBobLvl1), getString(R.string.spongeBobLvl2), getString(R.string.spongeBobLvl3),
+        spongeBobTitles = new String[]{getString(R.string.spongeBobLvl0), getString(R.string.spongeBobLvl1), getString(R.string.spongeBobLvl2), getString(R.string.spongeBobLvl3),
                 getString(R.string.spongeBobLvl4), getString(R.string.spongeBobLvl5), getString(R.string.spongeBobLvl6),
                 getString(R.string.spongeBobLvl7), getString(R.string.spongeBobLvl8)};
 
@@ -76,11 +76,19 @@ public class AddGame extends AppCompatActivity {
         edtNumPlayers.addTextChangedListener(scoreTextWatcher);
 
         // Achievement-related
-        titles = new String[] { getString(R.string.achievementZero), getString(R.string.achievementOne),
-                getString(R.string.achievementTwo), getString(R.string.achievementThree),
-                getString(R.string.achievementFour), getString(R.string.achievementFive),
-                getString(R.string.achievementSix), getString(R.string.achievementSeven),
-                getString(R.string.achievementEight) };
+        if (configManager.getTheme() == ThemeSetting.THEME_FITNESS) {
+            titles = new String[]{getString(R.string.fitnessLvl1), getString(R.string.fitnessLvl2),
+                    getString(R.string.fitnessLvl3), getString(R.string.fitnessLvl4), getString(R.string.fitnessLvl5),
+                    getString(R.string.fitnessLvl6), getString(R.string.fitnessLvl7), getString(R.string.fitnessLvl8)};
+        } else if (configManager.getTheme() == ThemeSetting.THEME_SPONGEBOB) {
+            titles = new String[]{getString(R.string.spongeBobLvl1), getString(R.string.spongeBobLvl2), getString(R.string.spongeBobLvl3),
+                    getString(R.string.spongeBobLvl4), getString(R.string.spongeBobLvl5), getString(R.string.spongeBobLvl6),
+                    getString(R.string.spongeBobLvl7), getString(R.string.spongeBobLvl8)};
+        } else {
+            titles = new String[]{getString(R.string.starWarsLvl1), getString(R.string.starWarsLvl2), getString(R.string.starWarsLvl3),
+                    getString(R.string.starWarsLvl4), getString(R.string.starWarsLvl5), getString(R.string.starWarsLvl6),
+                    getString(R.string.starWarsLvl7), getString(R.string.starWarsLvl8)};
+        }
         achievementDisplay = findViewById(R.id.tvAchievement);
 
         // Difficulty toggle

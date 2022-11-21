@@ -23,7 +23,7 @@ import ca.cmpt276.myapplication.model.ConfigManager;
 public class PreviewAchievements extends AppCompatActivity {
     private static final String EXTRA_POOR_SCORE = "ca.cmpt276.myapplication: poor score";
     private static final String EXTRA_GREAT_SCORE = "ca.cmpt276.myapplication: great score";
-    private static final int NUM_ACHIEVEMENTS = 8;
+    private static final int NUM_ACHIEVEMENTS = 9;
 
     private int poorScore;
     private int greatScore;
