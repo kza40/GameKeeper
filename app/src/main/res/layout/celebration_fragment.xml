@@ -9,28 +9,28 @@
 
     <ImageView
         android:id="@+id/gSaber"
-        android:layout_width="157dp"
-        android:layout_height="228dp"
+        android:layout_width="151dp"
+        android:layout_height="233dp"
         app:layout_constraintBottom_toTopOf="@+id/guidelineBelowGSab"
         app:layout_constraintEnd_toEndOf="@+id/guidelineRightGSab"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guidelineLeftGSab"
         app:layout_constraintTop_toTopOf="@+id/guidelineBelowAch"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/green_saber" />
 
     <ImageView
         android:id="@+id/rSaber"
-        android:layout_width="107dp"
-        android:layout_height="210dp"
+        android:layout_width="124dp"
+        android:layout_height="258dp"
         android:rotation="-90"
-        android:rotationX="0"
-        android:rotationY="0"
-        app:layout_constraintBottom_toTopOf="@+id/guidelineBelowRSab"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineBelowGSab"
         app:layout_constraintEnd_toEndOf="@+id/guidelineRightRSab"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/guidelineLeftRSab"
         app:layout_constraintTop_toTopOf="@+id/guidelineAboveRSab"
-        app:layout_constraintVertical_bias="0.108" />
+        app:layout_constraintVertical_bias="0.108"
+        app:srcCompat="@drawable/red_saber" />
 
     <TextView
         android:id="@+id/tvAchievement"
@@ -81,7 +81,7 @@
         android:textSize="28sp"
         app:layout_constraintBottom_toTopOf="@+id/guidelineBeMes"
         app:layout_constraintEnd_toEndOf="@+id/guidelineRiMess"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/guidelineLeMes"
         app:layout_constraintTop_toTopOf="@+id/guidelineAbMes"
         app:layout_constraintVertical_bias="0.0" />
@@ -175,7 +175,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.5790754" />
+        app:layout_constraintGuide_percent="0.59" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineRightGSab"
@@ -189,7 +189,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.85" />
+        app:layout_constraintGuide_percent="0.96" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineAboveRSab"
@@ -204,5 +204,9 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.7893297" />
+
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

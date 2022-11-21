@@ -124,6 +124,7 @@ public class AddGame extends AppCompatActivity {
         achievementDisplay.setText(message);
     }
 
+
     private void setupSaveButton() {
         Button btnSave = findViewById(R.id.btnSave);
         btnSave.setOnClickListener(view -> {

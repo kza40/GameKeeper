@@ -26,7 +26,6 @@ import ca.cmpt276.myapplication.model.GameConfig;
 
 public class CelebrationFragment extends AppCompatDialogFragment {
 
-    private ConfigManager configManager;
 
     @NonNull
     @Override
@@ -34,8 +33,6 @@ public class CelebrationFragment extends AppCompatDialogFragment {
         View tv = LayoutInflater.from(getActivity()).inflate(R.layout.celebration_fragment, null);
 
 
-
-        configManager = ConfigManager.getInstance();
 
         final MediaPlayer mp = MediaPlayer.create(getActivity(), R.raw.sample);
         mp.start();
@@ -61,10 +58,7 @@ public class CelebrationFragment extends AppCompatDialogFragment {
     }
 
     private void showAchievementLvl() {
-//        String temp = AchievementCalculator
-//                .getAchievementEarned(ConfigManager., Integer.parseInt(numPlayersInput),
-//                        gameConfig.getPoorScore(), gameConfig.getGoodScore(),
-//                        Integer.parseInt(scoreInput));
+        //need code here
 //        TextView showAchievement = getActivity().findViewById(R.id.tvAchievement);
 //        String message = temp + getString(R.string.exclamation);
 //        showAchievement.setText(message);
