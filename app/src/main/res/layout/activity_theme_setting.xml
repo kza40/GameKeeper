@@ -16,12 +16,10 @@
         android:layout_height="183dp"
         android:contentDescription="@string/fitness_theme"
         android:onClick="fitnessSelected"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.604"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineBelowFitness"
+        app:layout_constraintEnd_toStartOf="@+id/guidlineRightFitness"
+        app:layout_constraintStart_toStartOf="@+id/guidlineLeftFitness"
+        app:layout_constraintTop_toTopOf="@+id/guidelineAboveFitness"
         app:srcCompat="@drawable/lifting" />
 
     <ImageView
@@ -30,12 +28,10 @@
         android:layout_height="169dp"
         android:contentDescription="@string/sponge_bob_theme"
         android:onClick="spongeBobSelected"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.914"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineBelowSponge"
+        app:layout_constraintEnd_toStartOf="@+id/guidlineRightFitness"
+        app:layout_constraintStart_toStartOf="@+id/guidlineLeftFitness"
+        app:layout_constraintTop_toTopOf="@+id/guidelineBelowFitness"
         app:srcCompat="@drawable/spongebob" />
 
     <TextView
@@ -50,12 +46,10 @@
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textColor="#000000"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.978"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.293" />
+        app:layout_constraintBottom_toTopOf="@+id/guidelineBeStarTitle"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineRiFitTitle"
+        app:layout_constraintStart_toStartOf="@+id/guidelineLeStarTitle"
+        app:layout_constraintTop_toTopOf="@+id/guidelineAbStarTitle" />
 
     <TextView
         android:id="@+id/txtViewFitness"
@@ -69,17 +63,15 @@
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textColor="#000000"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.941"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.566" />
+        app:layout_constraintBottom_toTopOf="@+id/guidelineBeFitTitle"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineRiFitTitle"
+        app:layout_constraintStart_toStartOf="@+id/guidelineLeFitTitle"
+        app:layout_constraintTop_toTopOf="@+id/guidelineAbFitTitle" />
 
     <TextView
         android:id="@+id/txtViewSpongeBob"
-        android:layout_width="169dp"
-        android:layout_height="102dp"
+        android:layout_width="165dp"
+        android:layout_height="103dp"
         android:shadowColor="#BDAC0F"
         android:shadowDx="5"
         android:shadowDy="5"
@@ -88,12 +80,10 @@
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textColor="#000000"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.858" />
+        app:layout_constraintBottom_toTopOf="@+id/guidelineBeSpTitle"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineRiTitle"
+        app:layout_constraintStart_toStartOf="@+id/guidlineRightFitness"
+        app:layout_constraintTop_toTopOf="@+id/guidelineAbSpTitle" />
 
     <TextView
         android:id="@+id/txtViewManual"
@@ -107,25 +97,21 @@
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textColor="#000000"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.086" />
+        app:layout_constraintBottom_toTopOf="@+id/guidelineAbStar"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineRiTitle"
+        app:layout_constraintStart_toStartOf="@+id/guidlineLeftFitness"
+        app:layout_constraintTop_toTopOf="@+id/guidelineAbTitle" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/starWars"
         android:layout_width="138dp"
         android:layout_height="161dp"
         android:contentDescription="@string/star_wars_theme"
         android:onClick="starWarsSelected"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.201"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.257"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineBeStar"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineRiStar"
+        app:layout_constraintStart_toStartOf="@+id/guidelineLeStar"
+        app:layout_constraintTop_toTopOf="@+id/guidelineAbStar"
         app:srcCompat="@drawable/starwars" />
 
     <androidx.constraintlayout.widget.Barrier
@@ -155,17 +141,129 @@
         app:layout_constraintGuide_percent="0.0" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline8"
+        android:id="@+id/guidelineAboveFitness"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.4528044" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline9"
+        android:id="@+id/guidelineBelowFitness"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.7" />
+        app:layout_constraintGuide_percent="0.7045144" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineBelowSponge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.93433654" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineRiStar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.47201946" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineAbStar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.20109439" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineBeStar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.42270863" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineLeStar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.13625304" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineRiTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="1.0" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineAbTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.07797538" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineAbSpTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.75239396" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineBeSpTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.89192885" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineBeFitTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5991792" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineAbFitTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5253078" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineLeFitTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.63017035" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineRiFitTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.99760765" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineAbStarTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.2735978" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineLeStarTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5523114" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineBeStarTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.35365853" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
