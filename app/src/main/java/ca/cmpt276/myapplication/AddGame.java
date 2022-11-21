@@ -143,7 +143,7 @@ public class AddGame extends AppCompatActivity {
     private String getTemp(String[] titles, String scoreInput, String numPlayersInput) {
         return AchievementCalculator.getAchievementEarned(titles, Integer.parseInt(numPlayersInput),
                         gameConfig.getPoorScore(), gameConfig.getGoodScore(),
-                        Integer.parseInt(scoreInput));
+                        Integer.parseInt(scoreInput), toggle.getScaleFactor());
     }
 
     private void setupSaveButton() {
