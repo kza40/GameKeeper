@@ -25,16 +25,16 @@ import ca.cmpt276.myapplication.model.SharedPreferenceManager;
 public class AddGame extends AppCompatActivity {
     public static final String CONFIG_POSITION = "AddGame: Config position";
 
-    private EditText edtScore;
     private EditText edtNumPlayers;
     private ConfigManager configManager;
     private GameConfig gameConfig;
     private String[] titles;
     private int NUM_ROWS = 0;
-    EditText[] editTexts;
+    EditText[] edtIndividualScore;
     private TextView tvDifficulty;
     private DifficultyToggle toggle;
     private TextView achievementDisplay;
+    private int totalScore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,10 +53,8 @@ public class AddGame extends AppCompatActivity {
 
     private void setupMemberVariables() {
         // EditText fields
-        edtScore = findViewById(R.id.edtScoreDisplay);
         edtNumPlayers = findViewById(R.id.edtNumPlayersDisplay);
-        edtScore.addTextChangedListener(scoreTextWatcher);
-        edtNumPlayers.addTextChangedListener(scoreTextWatcher);
+        edtNumPlayers.addTextChangedListener(playerNumTextWatcher);
 
         // Achievement-related
         titles = new String[] { getString(R.string.achievementZero), getString(R.string.achievementOne),
@@ -73,18 +71,13 @@ public class AddGame extends AppCompatActivity {
         tvDifficulty.addTextChangedListener(scoreTextWatcher);
     }
 
-    private final TextWatcher scoreTextWatcher = new TextWatcher() {
+    private final TextWatcher playerNumTextWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
         @Override
         public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            String scoreInput = edtScore.getText().toString();
             String numPlayersInput = edtNumPlayers.getText().toString();
-
-            if (!scoreInput.isEmpty() && !numPlayersInput.isEmpty()) {
-                showAchievement(Integer.parseInt(scoreInput), Integer.parseInt(numPlayersInput));
-            }
 
             if (!numPlayersInput.isEmpty()) {
                 NUM_ROWS=Integer.parseInt(numPlayersInput);
@@ -95,7 +88,7 @@ public class AddGame extends AppCompatActivity {
                 }
                 else
                 {
-                    editTexts= new EditText[NUM_ROWS];
+                    edtIndividualScore= new EditText[NUM_ROWS];
                     populateEdittextScores();
                 }
             }
@@ -103,6 +96,36 @@ public class AddGame extends AppCompatActivity {
             {
                 LinearLayout table = (LinearLayout) findViewById(R.id.LayoutForEdittexts);
                 table.removeAllViews();
+            }
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {}
+    };
+
+    private final TextWatcher scoreTextWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            String numPlayersInput = edtNumPlayers.getText().toString();
+            String[] individualScores = new String[NUM_ROWS];
+            boolean individualScoresChecker = true;
+            int groupScore = 0;
+            for (int row = 0; row < NUM_ROWS; row++) {
+                individualScores[row] = edtIndividualScore[row].getText().toString();
+                if(individualScores[row].isEmpty()) {
+                    individualScoresChecker = false;
+                }
+                if(individualScoresChecker) {
+                    groupScore += Integer.parseInt(individualScores[row]);
+                }
+            }
+            if (individualScoresChecker && !numPlayersInput.isEmpty()) {
+                totalScore = groupScore;
+                Toast.makeText(getApplicationContext(), "This is the total score: " + totalScore, Toast.LENGTH_SHORT).show();
+                showAchievement(totalScore, Integer.parseInt(numPlayersInput));
             }
         }
 
@@ -125,7 +148,9 @@ public class AddGame extends AppCompatActivity {
 
             table.addView(editText, lp);
 
-            editTexts[row] = editText;
+            //EditText fields
+            edtIndividualScore[row] = editText;
+            edtIndividualScore[row].addTextChangedListener(scoreTextWatcher);
         }
     }
 
@@ -143,9 +168,8 @@ public class AddGame extends AppCompatActivity {
         btnSave.setOnClickListener(view -> {
 
             String numPlayers = edtNumPlayers.getText().toString();
-            String groupScore = edtScore.getText().toString();
-            if (!numPlayers.isEmpty() && !groupScore.isEmpty()) {
-                saveGame(Integer.parseInt(numPlayers), Integer.parseInt(groupScore));
+            if (!numPlayers.isEmpty() && totalScore != 0) {
+                saveGame(Integer.parseInt(numPlayers), totalScore);
                 finish();
             } else {
                 Toast.makeText(AddGame.this, R.string.addEmptyMsg, Toast.LENGTH_LONG).show();
@@ -165,5 +189,4 @@ public class AddGame extends AppCompatActivity {
         intent.putExtra(CONFIG_POSITION, position);
         return intent;
     }
-
 }
