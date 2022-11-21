@@ -156,7 +156,7 @@ public class AddGame extends AppCompatActivity {
 
     private void celebrate() {
         FragmentManager manager = getSupportFragmentManager();
-        CelebrationFragment dialog = new CelebrationFragment();
+        CelebrationFragment dialog = new CelebrationFragment(achievementEarned);
         dialog.show(manager, "CelebrationFragment");
     }
 

@@ -69,22 +69,22 @@
 
     <TextView
         android:id="@+id/txtViewLevel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:shadowColor="#000000"
         android:shadowDx="5"
         android:shadowRadius="5"
         android:text="You've reached \nthe level of"
+        android:autoSizeTextType="uniform"
+        android:autoSizeMaxTextSize="22sp"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:textColor="#FFFFFF"
         android:textSize="28sp"
         app:layout_constraintBottom_toTopOf="@+id/guidelineBeMes"
         app:layout_constraintEnd_toEndOf="@+id/guidelineRiMess"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/guidelineLeMes"
-        app:layout_constraintTop_toTopOf="@+id/guidelineAbMes"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="@+id/guidelineAbMes" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineLeCon"

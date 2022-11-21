@@ -3,14 +3,11 @@ package ca.cmpt276.myapplication;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.os.CountDownTimer;
-import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -20,50 +17,33 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
-import ca.cmpt276.myapplication.model.AchievementCalculator;
-import ca.cmpt276.myapplication.model.ConfigManager;
-import ca.cmpt276.myapplication.model.GameConfig;
-
 public class CelebrationFragment extends AppCompatDialogFragment {
 
+    private String name;
+
+    public CelebrationFragment(String name) {
+        this.name = name;
+    }
 
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-        View tv = LayoutInflater.from(getActivity()).inflate(R.layout.celebration_fragment, null);
-
-
+        View view = LayoutInflater.from(getActivity()).inflate(R.layout.celebration_fragment, null);
 
         final MediaPlayer mp = MediaPlayer.create(getActivity(), R.raw.sample);
         mp.start();
-        setupAnimations(tv);
+        setupAnimations(view);
+        TextView txtView = view.findViewById(R.id.txtViewLevel);
+        txtView.setText("Your team got " + name + "!");
 
-        showAchievementLvl();
-
-
-
-
-        DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                getActivity().finish();
-            }
-        };
+        DialogInterface.OnClickListener listener = (dialogInterface, i) -> getActivity().finish();
 
         return new AlertDialog.Builder(getActivity())
                 .setTitle("Congratulations")
-                .setView(tv)
+                .setView(view)
                 .setPositiveButton(android.R.string.ok, listener)
                 .create();
     }
-
-    private void showAchievementLvl() {
-        //need code here
-//        TextView showAchievement = getActivity().findViewById(R.id.tvAchievement);
-//        String message = temp + getString(R.string.exclamation);
-//        showAchievement.setText(message);
-    }
-
 
     private void setupAnimations(View tv) {
         ImageView rSaber;
