@@ -28,6 +28,8 @@ public class AddGame extends AppCompatActivity {
     private GameConfig gameConfig;
 
     private String[] starWarsTitles;
+    private String[] fitnessTitles;
+    private String[] spongeBobTitles;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +48,15 @@ public class AddGame extends AppCompatActivity {
         starWarsTitles = new String[] { getString(R.string.starWarsLvl1), getString(R.string.starWarsLvl2), getString(R.string.starWarsLvl3),
                 getString(R.string.starWarsLvl4), getString(R.string.starWarsLvl5), getString(R.string.starWarsLvl6),
                 getString(R.string.starWarsLvl7), getString(R.string.starWarsLvl8)};
+
+        fitnessTitles = new String[]{getString(R.string.fitnessLvl1), getString(R.string.fitnessLvl2),
+                getString(R.string.fitnessLvl3), getString(R.string.fitnessLvl4), getString(R.string.fitnessLvl5),
+                getString(R.string.fitnessLvl6), getString(R.string.fitnessLvl7), getString(R.string.fitnessLvl8)};
+
+        spongeBobTitles = new String[]{getString(R.string.spongeBobLvl1), getString(R.string.spongeBobLvl2), getString(R.string.spongeBobLvl3),
+                getString(R.string.spongeBobLvl4), getString(R.string.spongeBobLvl5), getString(R.string.spongeBobLvl6),
+                getString(R.string.spongeBobLvl7), getString(R.string.spongeBobLvl8)};
+
         setupEditTextFields();
         setupSaveButton();
     }
@@ -70,10 +81,14 @@ public class AddGame extends AppCompatActivity {
             String numPlayersInput = edtNumPlayers.getText().toString();
 
             if (!scoreInput.isEmpty() && !numPlayersInput.isEmpty()) {
-                String temp = AchievementCalculator
-                        .getAchievementEarned(starWarsTitles, Integer.parseInt(numPlayersInput),
-                                gameConfig.getPoorScore(), gameConfig.getGoodScore(),
-                                Integer.parseInt(scoreInput));
+                    String temp;
+                if(ConfigManager.getInstance().getTheme()=="THEME_FITNESS") {
+                    temp = getTemp(fitnessTitles, scoreInput, numPlayersInput);
+                } else if (ConfigManager.getInstance().getTheme()=="THEME_SPONGEBOB"){
+                    temp = getTemp(spongeBobTitles, scoreInput, numPlayersInput);
+                } else {
+                    temp = getTemp(starWarsTitles, scoreInput, numPlayersInput);
+                }
                 TextView showAchievement = findViewById(R.id.tvAchievement);
                 String message = getString(R.string.you_got) + temp + getString(R.string.exclamation);
                 showAchievement.setText(message);
@@ -85,6 +100,12 @@ public class AddGame extends AppCompatActivity {
 
         }
     };
+
+    private String getTemp(String[] titles, String scoreInput, String numPlayersInput) {
+        return AchievementCalculator.getAchievementEarned(titles, Integer.parseInt(numPlayersInput),
+                        gameConfig.getPoorScore(), gameConfig.getGoodScore(),
+                        Integer.parseInt(scoreInput));
+    }
 
     private void setupSaveButton() {
         Button btnSave = findViewById(R.id.btnSave);
