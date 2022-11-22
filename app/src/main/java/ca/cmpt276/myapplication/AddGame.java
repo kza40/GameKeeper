@@ -115,7 +115,8 @@ public class AddGame extends AppCompatActivity {
             toggle.setDifficulty(currentGame.getScaleFactor());
             edtNumPlayers.setText(Integer.toString(currentGame.getNumOfPlayers()));
             loadPlayerScoresForEditGame();
-            achievementEarned = currentGame.getAchievementEarned();
+
+            updateAchievement(currentGame.getGroupScore(), currentGame.getNumOfPlayers());
         }
         else
         {
@@ -255,17 +256,15 @@ public class AddGame extends AppCompatActivity {
         public boolean onOptionsItemSelected(@NonNull MenuItem item) {
             String numPlayers = edtNumPlayers.getText().toString();
 
-            if (!numPlayers.isEmpty()) {
-                if (individualScores.length == Integer.parseInt(edtNumPlayers.getText().toString())) {
-                    saveGame(Integer.parseInt(numPlayers), totalScore);
-                }
+            if (!numPlayers.isEmpty() && totalScore != 0) {
+                saveGame(Integer.parseInt(numPlayers), totalScore);
                 celebrate();
                 new CountDownTimer(Complete, Tick) {
                     public void onTick(long millisUntilFinished) {
                     }
 
                     public void onFinish() {
-                        onBackPressed();
+                        finish();
                     }
                 }.start();
             } else {
