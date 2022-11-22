@@ -227,7 +227,7 @@ public class AddGame extends AppCompatActivity {
                 lp.weight = 1.0f; // This is critical. Doesn't work without it.
                 lp.setMargins(240, 10, 240, 10);
 
-                editText.setHint("Player " + (row + 1) + " scores");
+                editText.setHint("Score #" + (row + 1));
                 editText.setInputType(InputType.TYPE_CLASS_NUMBER);
 
                 table.addView(editText, lp);
