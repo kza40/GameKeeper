@@ -26,12 +26,14 @@
                 app:layout_constraintBottom_toTopOf="@+id/tvEmpty"
                 app:layout_constraintTop_toTopOf="@+id/hGuidelineTwoThirds"
                 android:textSize="16sp"
+                android:fontFamily="@font/font_main"
                 android:text="Players" />
 
             <TextView
                 android:id="@+id/tvDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/font_main"
                 android:text="Date"
                 app:layout_constraintBottom_toTopOf="@+id/hGuidelineOneThird"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -53,6 +55,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
                 android:textStyle="bold"
+                android:fontFamily="@font/font_main"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toTopOf="@+id/hGuidelineTwoThirds"
                 app:layout_constraintTop_toTopOf="@+id/hGuidelineOneThird"
@@ -63,6 +66,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
+                android:fontFamily="@font/font_main"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toTopOf="@+id/hGuidelineTwoThirds"
