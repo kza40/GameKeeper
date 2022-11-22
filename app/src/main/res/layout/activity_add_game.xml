@@ -13,17 +13,19 @@
     <EditText
         android:id="@+id/edtNumPlayersDisplay"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
+        android:layout_height="50dp"
+        android:background="@drawable/custom_input"
         android:ems="10"
-        android:hint="@string/total_players"
         android:fontFamily="@font/font_main"
+        android:gravity="center"
+        android:hint="@string/total_players"
         android:inputType="number"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        app:layout_constraintBottom_toTopOf="@+id/hGuideline55p"
+        android:textColor="#673AB7"
+        app:layout_constraintBottom_toTopOf="@+id/txtTotalScore"
         app:layout_constraintEnd_toStartOf="@+id/vGuideline80p"
         app:layout_constraintStart_toStartOf="@+id/vGuideline20p"
-        app:layout_constraintTop_toBottomOf="@+id/txtTotalScore" />
+        app:layout_constraintTop_toTopOf="@+id/hGuideline25p" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/vGuideline20p"
@@ -31,6 +33,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.20" />
+
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/vGuideline55p"
@@ -119,8 +122,8 @@
         android:layout_height="0dp"
         android:autoSizeMaxTextSize="22sp"
         android:autoSizeTextType="uniform"
-        android:text="@string/difficulty_normal"
         android:fontFamily="@font/font_main"
+        android:text="@string/difficulty_normal"
         android:textAlignment="center"
         android:textColor="#000000"
         app:layout_constraintBottom_toTopOf="@+id/hGuideline25p"
@@ -149,12 +152,11 @@
         android:id="@+id/txtTotalScore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
         android:fontFamily="@font/font_main"
         android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/hGuideline55p"
         app:layout_constraintEnd_toStartOf="@+id/vGuideline80p"
-        app:layout_constraintStart_toStartOf="@+id/vGuideline20p"
-        app:layout_constraintTop_toTopOf="@+id/hGuideline25p" />
+        app:layout_constraintTop_toBottomOf="@+id/edtNumPlayersDisplay" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

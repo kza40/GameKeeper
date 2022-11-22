@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentManager;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.Editable;
@@ -106,6 +107,7 @@ public class AddGame extends AppCompatActivity {
         if( intent.getIntExtra(Game_POSITION, -1)!=-1)
         {
             isEdit=true;
+            isScoreFieldsFilled = true;
             gamePos=intent.getIntExtra(Game_POSITION, -1);
             currentGame=gameConfig.getGameAtIndex(gamePos);
 
@@ -135,7 +137,7 @@ public class AddGame extends AppCompatActivity {
             lp.weight = 1.0f; // This is critical. Doesn't work without it.
             lp.setMargins(240, 10, 240, 10);
 
-            editText.setHint("Player " + (row + 1) + " scores");
+            editText.setHint("Score #" + (row + 1));
             editText.setInputType(InputType.TYPE_CLASS_NUMBER);
 
             editText.setText(currentGame.getPlayerScoresAtIndex(row));

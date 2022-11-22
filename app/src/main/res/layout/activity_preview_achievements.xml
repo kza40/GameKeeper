@@ -13,9 +13,10 @@
     <EditText
         android:id="@+id/edtNumPlayers"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
+        android:layout_height="50dp"
+        android:background="@drawable/custom_input"
         android:gravity="center"
+        android:ems="10"
         android:hint="@string/number_of_players"
         android:fontFamily="@font/font_main"
         android:inputType="number"
