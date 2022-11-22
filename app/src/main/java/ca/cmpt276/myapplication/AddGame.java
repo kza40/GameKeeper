@@ -36,6 +36,7 @@ public class AddGame extends AppCompatActivity {
     private DifficultyToggle toggle;
     private TextView achievementDisplay;
     private int totalScore;
+    String[] individualScores;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,7 +115,7 @@ public class AddGame extends AppCompatActivity {
         @Override
         public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
             String numPlayersInput = edtNumPlayers.getText().toString();
-            String[] individualScores = new String[NUM_ROWS];
+            individualScores = new String[NUM_ROWS];
             boolean individualScoresChecker = true;
             int groupScore = 0;
             totalScore = 0;
@@ -187,7 +188,7 @@ public class AddGame extends AppCompatActivity {
 
     private void saveGame(int numPlayers, int groupScore) {
         Game game = new Game(titles, numPlayers, groupScore, gameConfig.getPoorScore(),
-                gameConfig.getGoodScore(), toggle.getScaleFactor());
+                gameConfig.getGoodScore(), toggle.getScaleFactor(),individualScores);
         gameConfig.addGame(game);
         new SharedPreferenceManager(getApplicationContext()).updateConfigManager(configManager);
     }

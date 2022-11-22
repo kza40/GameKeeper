@@ -1,5 +1,7 @@
 package ca.cmpt276.myapplication.model;
 
+import android.widget.EditText;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -14,11 +16,13 @@ public class Game {
     private String datePlayed;
     private String achievementEarned;
     private float scaleFactor;
+    private String[] playerScores;
 
-    public Game(String[] names, int numOfPlayers, int groupScore, int poorScore, int greatScore, float scaleFactor) {
+    public Game(String[] names, int numOfPlayers, int groupScore, int poorScore, int greatScore, float scaleFactor,String[] playerScores) {
         this.numOfPlayers = numOfPlayers;
         this.groupScore = groupScore;
         this.scaleFactor = scaleFactor;
+        this.playerScores=playerScores;
         setDate();
         setAchievementEarned(names, poorScore, greatScore);
     }
