@@ -110,11 +110,11 @@ public class AddGame extends AppCompatActivity {
 //            isScoreFieldsFilled = true;
             gamePos=intent.getIntExtra(Game_POSITION, -1);
             currentGame=gameConfig.getGameAtIndex(gamePos);
-
+            loadPlayerScoresForEditGame();
             txtScore.setText("Score: "+currentGame.getGroupScore());
             toggle.setDifficulty(currentGame.getScaleFactor());
             edtNumPlayers.setText(Integer.toString(currentGame.getNumOfPlayers()));
-            loadPlayerScoresForEditGame();
+
 
             updateAchievement(currentGame.getGroupScore(), currentGame.getNumOfPlayers());
         }
