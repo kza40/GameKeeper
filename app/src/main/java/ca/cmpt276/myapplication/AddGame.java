@@ -33,12 +33,10 @@ public class AddGame extends AppCompatActivity {
     private EditText edtNumPlayers;
     private ConfigManager configManager;
     private GameConfig gameConfig;
-    private String[] titles;
     private int NUM_ROWS = 0;
     EditText[] edtIndividualScore;
 
     private TextView tvDifficulty;
-    private TextView achievementDisplay;
     private int totalScore;
     String[] individualScores;
     private String[] themeTitles;
@@ -67,10 +65,11 @@ public class AddGame extends AppCompatActivity {
         int configPos = intent.getIntExtra(CONFIG_POSITION, -1);
         configManager = ConfigManager.getInstance();
         gameConfig = configManager.getGameConfigAtIndex(configPos);
-        setTitle(getString(R.string.add_game));
 
+        // TextViews
         txtScore = findViewById(R.id.txtTotalScore);
         txtScore.setText("Score: 0");
+
         // EditText fields
         edtNumPlayers = findViewById(R.id.edtNumPlayersDisplay);
         edtNumPlayers.addTextChangedListener(playerNumTextWatcher);
@@ -87,7 +86,6 @@ public class AddGame extends AppCompatActivity {
             themeTitles = getResources().getStringArray(R.array.theme_starwars_names);
             titleSubLevelOne = getString(R.string.starWarsLvl0);
         }
-        achievementDisplay = findViewById(R.id.tvAchievement);
 
         // Difficulty toggle
         toggle = new DifficultyToggle(findViewById(android.R.id.content).getRootView());
@@ -152,7 +150,7 @@ public class AddGame extends AppCompatActivity {
                 if (!numPlayersInput.isEmpty()) {
                     txtScore.setText("Score: " + totalScore);
                     if (individualScoresChecker) {
-                        showAchievement(totalScore, Integer.parseInt(numPlayersInput));
+                        updateAchievement(totalScore, Integer.parseInt(numPlayersInput));
                     }
                 }
             }
@@ -184,7 +182,7 @@ public class AddGame extends AppCompatActivity {
         }
 
 
-        private void showAchievement(int score, int numPlayers) {
+        private void updateAchievement(int score, int numPlayers) {
             int index = AchievementCalculator.getScorePlacement(
                     themeTitles.length, numPlayers, gameConfig.getPoorScore(), gameConfig.getGoodScore(),
                     score, toggle.getScaleFactor());
@@ -195,8 +193,6 @@ public class AddGame extends AppCompatActivity {
                 name = themeTitles[index];
             }
             achievementEarned = name;
-            String message = getString(R.string.you_got) + name + getString(R.string.exclamation);
-            achievementDisplay.setText(message);
         }
 
 
