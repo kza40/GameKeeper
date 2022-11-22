@@ -12,6 +12,7 @@ import java.util.List;
 public class AchievementCalculator {
     public static final int INDEX_SUB_LEVEL_ONE = -1;
 
+    // constraint on numAchievements, must be >= 2
     public static List<Integer> getBoundaries(int numAchievements, int numPlayers, int poorScore, int greatScore) {
         List<Integer> boundaries = new ArrayList<>();
 

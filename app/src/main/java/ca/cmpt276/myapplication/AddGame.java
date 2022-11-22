@@ -134,19 +134,17 @@ public class AddGame extends AppCompatActivity {
                 String numPlayersInput = edtNumPlayers.getText().toString();
                 individualScores = new String[NUM_ROWS];
                 boolean individualScoresChecker = true;
-                int groupScore = 0;
                 totalScore = 0;
                 for (int row = 0; row < NUM_ROWS; row++) {
                     individualScores[row] = edtIndividualScore[row].getText().toString();
                     if (individualScores[row].isEmpty()) {
                         individualScoresChecker = false;
-                        groupScore = 0;
+                        totalScore = 0;
                     }
                     if (individualScoresChecker) {
-                        groupScore += Integer.parseInt(individualScores[row]);
+                        totalScore += Integer.parseInt(individualScores[row]);
                     }
                 }
-                totalScore = groupScore;
                 if (!numPlayersInput.isEmpty()) {
                     txtScore.setText("Score: " + totalScore);
                     if (individualScoresChecker) {
