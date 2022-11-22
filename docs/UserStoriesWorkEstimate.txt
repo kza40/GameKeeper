@@ -1,0 +1,31 @@
+The group decided to use "Practical Fibonacci" to estimate the work required for the following user stories:
+
+
+Game Played Difficulty
+- Set difficult level of easy, normal and hard: 3
+https://csil-git1.cs.surrey.sfu.ca/276-2022-7-Aluminium/CoopAchievement/-/issues/22
+- When viewing an achievement screen, I want to see the difficulty level listed on the screen: 2
+https://csil-git1.cs.surrey.sfu.ca/276-2022-7-Aluminium/CoopAchievement/-/issues/23
+- When viewing the list of games played, I want to see the difficulty level listed for each game play: 2
+https://csil-git1.cs.surrey.sfu.ca/276-2022-7-Aluminium/CoopAchievement/-/issues/24
+
+Achievement Improvements
+- When achievement level is earned, display image, animation effect, and sound as celebration: 5
+https://csil-git1.cs.surrey.sfu.ca/276-2022-7-Aluminium/CoopAchievement/-/issues/26
+
+Edit Game Played
+- When viewing a previous game play, I'd like to be able to edit it to correct any errors, 
+such as changing scores or difficulty so that I can correct any errors from previous game plays. : 3
+https://csil-git1.cs.surrey.sfu.ca/276-2022-7-Aluminium/CoopAchievement/-/issues/25
+
+Score Calculator
+- Create UI for Individual Scores: 5
+https://csil-git1.cs.surrey.sfu.ca/276-2022-7-Aluminium/CoopAchievement/-/issues/36
+- The app should know the individual scores in the future, so that I can later go back and see or edit the individual scores: 5
+https://csil-git1.cs.surrey.sfu.ca/276-2022-7-Aluminium/CoopAchievement/-/issues/37
+
+The ideas for estimating work using Fibonacci numbers were taken from this website: https://www.scrum.org/resources/blog/practical-fibonacci-beginners-guide-relative-sizing
+Author: Julee Everett
+Date Published: October 19, 2021
+Image taken from: https://www.scrum.org/resources/blog/practical-fibonacci-beginners-guide-relative-sizing
+Image by author
