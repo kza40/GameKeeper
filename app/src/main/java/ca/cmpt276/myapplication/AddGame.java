@@ -2,10 +2,12 @@ package ca.cmpt276.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentManager;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -23,11 +25,10 @@ import ca.cmpt276.myapplication.model.SharedPreferenceManager;
 public class AddGame extends AppCompatActivity {
     public static final String CONFIG_POSITION = "AddGame: Config position";
 
-    private ConfigManager configManager;
-    private GameConfig gameConfig;
-
     private EditText edtScore;
     private EditText edtNumPlayers;
+    private ConfigManager configManager;
+    private GameConfig gameConfig;
 
     private TextView tvDifficulty;
     private TextView achievementDisplay;
@@ -36,6 +37,9 @@ public class AddGame extends AppCompatActivity {
     private String achievementEarned;
 
     private DifficultyToggle toggle;
+
+    private static final int Tick = 1000;
+    private static final int Complete = 10000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +60,7 @@ public class AddGame extends AppCompatActivity {
         int configPos = intent.getIntExtra(CONFIG_POSITION,-1);
         configManager = ConfigManager.getInstance();
         gameConfig = configManager.getGameConfigAtIndex(configPos);
+        setTitle(getString(R.string.add_game));
 
         // EditText fields
         edtScore = findViewById(R.id.edtScoreDisplay);
@@ -119,6 +124,7 @@ public class AddGame extends AppCompatActivity {
         achievementDisplay.setText(message);
     }
 
+
     private void setupSaveButton() {
         Button btnSave = findViewById(R.id.btnSave);
         btnSave.setOnClickListener(view -> {
@@ -127,13 +133,31 @@ public class AddGame extends AppCompatActivity {
             String groupScore = edtScore.getText().toString();
             if (!numPlayers.isEmpty() && !groupScore.isEmpty()) {
                 saveGame(Integer.parseInt(numPlayers), Integer.parseInt(groupScore));
-                finish();
+                celebrate();
+                new CountDownTimer(Complete, Tick) {
+
+                    public void onTick(long millisUntilFinished) {
+                    }
+
+                    public void onFinish() {
+                        finish();
+                    }
+                }.start();
+
+
+
             }
             else {
                 Toast.makeText(AddGame.this, R.string.addEmptyMsg, Toast.LENGTH_LONG)
                         .show();
             }
         });
+    }
+
+    private void celebrate() {
+        FragmentManager manager = getSupportFragmentManager();
+        CelebrationFragment dialog = new CelebrationFragment(achievementEarned);
+        dialog.show(manager, "CelebrationFragment");
     }
 
     private void saveGame(int numPlayers, int groupScore) {
@@ -147,4 +171,5 @@ public class AddGame extends AppCompatActivity {
         intent.putExtra(CONFIG_POSITION, position);
         return intent;
     }
+
 }

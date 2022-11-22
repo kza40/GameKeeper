@@ -47,8 +47,8 @@
 
     <TextView
         android:id="@+id/tvAchievement"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="197dp"
+        android:layout_height="23dp"
         android:autoSizeMaxTextSize="22sp"
         android:autoSizeTextType="uniform"
         android:gravity="center"
