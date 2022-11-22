@@ -11,30 +11,18 @@
         layout="@layout/toolbar" />
 
     <EditText
-        android:id="@+id/edtScoreDisplay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/score"
-        android:inputType="number"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        app:layout_constraintBottom_toTopOf="@+id/edtNumPlayersDisplay"
-        app:layout_constraintEnd_toStartOf="@+id/vGuideline80p"
-        app:layout_constraintStart_toStartOf="@+id/vGuideline20p"
-        app:layout_constraintTop_toBottomOf="@+id/hGuideline25p" />
-
-    <EditText
         android:id="@+id/edtNumPlayersDisplay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
         android:ems="10"
         android:hint="@string/total_players"
         android:inputType="number"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        app:layout_constraintBottom_toTopOf="@+id/tvAchievement"
+        app:layout_constraintBottom_toTopOf="@+id/hGuideline55p"
         app:layout_constraintEnd_toStartOf="@+id/vGuideline80p"
         app:layout_constraintStart_toStartOf="@+id/vGuideline20p"
-        app:layout_constraintTop_toBottomOf="@+id/edtScoreDisplay" />
+        app:layout_constraintTop_toBottomOf="@+id/txtTotalScore" />
 
     <Button
         android:id="@+id/btnSave"
@@ -43,22 +31,8 @@
         android:text="@string/save"
         app:layout_constraintBottom_toTopOf="@+id/hGuideline75p"
         app:layout_constraintEnd_toStartOf="@+id/vGuideline80p"
-        app:layout_constraintTop_toTopOf="@+id/hGuideline55p" />
-
-    <TextView
-        android:id="@+id/tvAchievement"
-        android:layout_width="197dp"
-        android:layout_height="23dp"
-        android:autoSizeMaxTextSize="22sp"
-        android:autoSizeTextType="uniform"
-        android:gravity="center"
-        android:text=""
-        android:textColor="#000000"
-        app:layout_constraintBottom_toTopOf="@+id/hGuideline55p"
-        app:layout_constraintEnd_toStartOf="@+id/vGuideline80p"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/vGuideline20p"
-        app:layout_constraintTop_toBottomOf="@+id/edtNumPlayersDisplay" />
+        app:layout_constraintTop_toTopOf="@+id/hGuideline55p"
+        app:layout_constraintVertical_bias="0.353" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/vGuideline20p"
@@ -86,14 +60,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.75" />
+        app:layout_constraintGuide_percent="0.55" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/hGuideline55p"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.55" />
+        app:layout_constraintGuide_percent="0.45" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/hGuideline25p"
@@ -111,42 +85,42 @@
 
     <ImageButton
         android:id="@+id/star1"
-        android:scaleType="centerCrop"
-        app:layout_constraintDimensionRatio="1:1"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/hGuideline25p"
-        app:layout_constraintStart_toStartOf="@+id/vGuideline20p"
-        app:layout_constraintTop_toTopOf="@+id/hGuideline20p"
-        app:layout_constraintEnd_toStartOf="@+id/star2"
+        android:background="@drawable/star_gold"
+        android:scaleType="centerCrop"
         android:src="@drawable/star_gold"
-        android:background="@drawable/star_gold"/>
+        app:layout_constraintBottom_toTopOf="@+id/hGuideline25p"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toStartOf="@+id/star2"
+        app:layout_constraintStart_toStartOf="@+id/vGuideline20p"
+        app:layout_constraintTop_toTopOf="@+id/hGuideline20p" />
 
     <ImageButton
         android:id="@+id/star2"
-        android:scaleType="centerCrop"
-        app:layout_constraintDimensionRatio="1:1"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="@drawable/star_gold"
+        android:scaleType="centerCrop"
+        android:src="@drawable/star_gold"
         app:layout_constraintBottom_toBottomOf="@+id/hGuideline25p"
+        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toStartOf="@+id/star3"
         app:layout_constraintStart_toEndOf="@+id/star1"
-        app:layout_constraintTop_toTopOf="@+id/hGuideline20p"
-        android:src="@drawable/star_gold"
-        android:background="@drawable/star_gold" />
+        app:layout_constraintTop_toTopOf="@+id/hGuideline20p" />
 
     <ImageButton
         android:id="@+id/star3"
-        android:scaleType="centerCrop"
-        app:layout_constraintDimensionRatio="1:1"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="@drawable/star_grey"
+        android:scaleType="centerCrop"
+        android:src="@drawable/star_grey"
         app:layout_constraintBottom_toTopOf="@+id/hGuideline25p"
+        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toStartOf="@+id/vGuideline55p"
         app:layout_constraintStart_toEndOf="@+id/star2"
-        app:layout_constraintTop_toTopOf="@+id/hGuideline20p"
-        android:src="@drawable/star_grey"
-        android:background="@drawable/star_grey" />
+        app:layout_constraintTop_toTopOf="@+id/hGuideline20p" />
 
     <TextView
         android:id="@+id/tvDifficulty"
@@ -161,6 +135,33 @@
         app:layout_constraintEnd_toStartOf="@+id/vGuideline80p"
         app:layout_constraintStart_toStartOf="@+id/vGuideline55p"
         app:layout_constraintTop_toTopOf="@+id/hGuideline20p" />
+
+    <ScrollView
+        android:layout_width="403dp"
+        android:layout_height="298dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/hGuideline75p"
+        app:layout_constraintVertical_bias="0.032">
+
+        <LinearLayout
+            android:id="@+id/LayoutForEdittexts"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"></LinearLayout>
+
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/txtTotalScore"
+        android:layout_width="211dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="12dp"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/vGuideline80p"
+        app:layout_constraintStart_toStartOf="@+id/vGuideline20p"
+        app:layout_constraintTop_toTopOf="@+id/hGuideline25p" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

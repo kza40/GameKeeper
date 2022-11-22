@@ -37,6 +37,10 @@ public class GameConfig implements Iterable<Game>{
         this.gameTitle = gameTitle;
     }
 
+    public Game getGameAtIndex(int configPos)
+    {
+        return games.get(configPos);
+    }
 
     public int getPoorScore() {
         return poorScore;
