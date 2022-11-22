@@ -30,16 +30,17 @@ public class CelebrationFragment extends AppCompatDialogFragment {
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.celebration_fragment, null);
 
-        final MediaPlayer mp = MediaPlayer.create(getActivity(), R.raw.sample);
+        MediaPlayer mp = MediaPlayer.create(getActivity(), R.raw.sample);
+        mp.setVolume(1.0f,1.0f);
         mp.start();
         setupAnimations(view);
         TextView txtView = view.findViewById(R.id.txtViewLevel);
-        txtView.setText("Your team got " + name + "!");
+        txtView.setText(name);
 
         DialogInterface.OnClickListener listener = (dialogInterface, i) -> getActivity().finish();
 
         return new AlertDialog.Builder(getActivity())
-                .setTitle("Congratulations")
+                .setTitle("Congratulations!")
                 .setView(view)
                 .setPositiveButton(android.R.string.ok, listener)
                 .create();
