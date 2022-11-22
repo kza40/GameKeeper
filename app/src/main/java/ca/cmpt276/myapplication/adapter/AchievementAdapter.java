@@ -15,8 +15,11 @@ import androidx.annotation.Nullable;
 
 import java.util.List;
 
+import ca.cmpt276.myapplication.PreviewAchievements;
 import ca.cmpt276.myapplication.R;
+import ca.cmpt276.myapplication.ThemeSetting;
 import ca.cmpt276.myapplication.model.AchievementLevel;
+import ca.cmpt276.myapplication.model.ConfigManager;
 import ca.cmpt276.myapplication.model.Game;
 
 /**
@@ -48,30 +51,71 @@ public class AchievementAdapter extends ArrayAdapter<AchievementLevel> {
         achievementName.setText(achievementLevel.getName());
 
         ImageView winnerImage=convertView.findViewById(R.id.imageViewLevel);
+        String theme= ConfigManager.getInstance().getTheme();
         switch(position) {
             case 0:
-                winnerImage.setImageResource(R.drawable.level1);
+                if(theme.equals(ThemeSetting.THEME_STAR_WARS))
+                    winnerImage.setImageResource(R.drawable.starwars1);
+                else if(theme.equals(ThemeSetting.THEME_FITNESS))
+                    winnerImage.setImageResource(R.drawable.workout1);
+                else if(theme.equals(ThemeSetting.THEME_SPONGEBOB))
+                    winnerImage.setImageResource(R.drawable.sponge1);
                 break;
             case 1:
-                winnerImage.setImageResource(R.drawable.level2);
+                if(theme.equals(ThemeSetting.THEME_STAR_WARS))
+                    winnerImage.setImageResource(R.drawable.starwars2);
+                else if(theme.equals(ThemeSetting.THEME_FITNESS))
+                    winnerImage.setImageResource(R.drawable.workout2);
+                else if(theme.equals(ThemeSetting.THEME_SPONGEBOB))
+                    winnerImage.setImageResource(R.drawable.sponge2);
                 break;
             case 2:
-                winnerImage.setImageResource(R.drawable.level3);
+                if(theme.equals(ThemeSetting.THEME_STAR_WARS))
+                    winnerImage.setImageResource(R.drawable.starwars3);
+                else if(theme.equals(ThemeSetting.THEME_FITNESS))
+                    winnerImage.setImageResource(R.drawable.workout3);
+                else if(theme.equals(ThemeSetting.THEME_SPONGEBOB))
+                    winnerImage.setImageResource(R.drawable.sponge3);
                 break;
             case 3:
-                winnerImage.setImageResource(R.drawable.level4);
+                if(theme.equals(ThemeSetting.THEME_STAR_WARS))
+                    winnerImage.setImageResource(R.drawable.starwars4);
+                else if(theme.equals(ThemeSetting.THEME_FITNESS))
+                    winnerImage.setImageResource(R.drawable.workout4);
+                else if(theme.equals(ThemeSetting.THEME_SPONGEBOB))
+                    winnerImage.setImageResource(R.drawable.sponge4);
                 break;
             case 4:
-                winnerImage.setImageResource(R.drawable.level5);
+                if(theme.equals(ThemeSetting.THEME_STAR_WARS))
+                    winnerImage.setImageResource(R.drawable.starwars5);
+                else if(theme.equals(ThemeSetting.THEME_FITNESS))
+                    winnerImage.setImageResource(R.drawable.workout5);
+                else if(theme.equals(ThemeSetting.THEME_SPONGEBOB))
+                    winnerImage.setImageResource(R.drawable.sponge5);
                 break;
             case 5:
-                winnerImage.setImageResource(R.drawable.level6);
+                if(theme.equals(ThemeSetting.THEME_STAR_WARS))
+                    winnerImage.setImageResource(R.drawable.starwars6);
+                else if(theme.equals(ThemeSetting.THEME_FITNESS))
+                    winnerImage.setImageResource(R.drawable.workout6);
+                else if(theme.equals(ThemeSetting.THEME_SPONGEBOB))
+                    winnerImage.setImageResource(R.drawable.sponge6);
                 break;
             case 6:
-                winnerImage.setImageResource(R.drawable.level7);
+                if(theme.equals(ThemeSetting.THEME_STAR_WARS))
+                    winnerImage.setImageResource(R.drawable.starwars7);
+                else if(theme.equals(ThemeSetting.THEME_FITNESS))
+                    winnerImage.setImageResource(R.drawable.workout7);
+                else if(theme.equals(ThemeSetting.THEME_SPONGEBOB))
+                    winnerImage.setImageResource(R.drawable.sponge7);
                 break;
             case 7:
-                winnerImage.setImageResource(R.drawable.level8);
+                if(theme.equals(ThemeSetting.THEME_STAR_WARS))
+                    winnerImage.setImageResource(R.drawable.starwars8);
+                else if(theme.equals(ThemeSetting.THEME_FITNESS))
+                    winnerImage.setImageResource(R.drawable.workout8);
+                else if(theme.equals(ThemeSetting.THEME_SPONGEBOB))
+                    winnerImage.setImageResource(R.drawable.sponge8);
                 break;
         }
 
