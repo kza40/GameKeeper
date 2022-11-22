@@ -158,7 +158,7 @@ public class AddGame extends AppCompatActivity {
         @Override
         public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
             String numPlayersInput = edtNumPlayers.getText().toString();
-
+            totalScore=0;
             if (!numPlayersInput.isEmpty()) {
                 NUM_ROWS = Integer.parseInt(numPlayersInput);
                 if (NUM_ROWS > 200) {
