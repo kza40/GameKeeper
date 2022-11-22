@@ -6,6 +6,10 @@
     android:layout_height="match_parent"
     tools:context=".AddConfig">
 
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
+
     <EditText
         android:id="@+id/configName"
         android:layout_width="wrap_content"

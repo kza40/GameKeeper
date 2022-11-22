@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -17,19 +19,38 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:weightSum="100">
-            <TextView
-                android:id="@+id/tvAchievementName"
+
+            <ImageView
+                android:id="@+id/imageViewLevel"
+                android:layout_width="wrap_content"
+                android:layout_height="70dp"
+                android:layout_weight="60"
+                android:scaleType="fitCenter"
+                tools:srcCompat="@tools:sample/avatars" />
+
+            <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_weight="50"
-                android:textStyle="bold"
-                android:text="Name" />
-            <TextView
-                android:id="@+id/tvMinScore"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_weight="50"
-                android:text="Min Score" />
+                android:layout_height="match_parent"
+                android:layout_weight="40"
+                android:weightSum="100">
+
+                <TextView
+                    android:id="@+id/tvAchievementName"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_weight="50"
+                    android:textStyle="bold"
+                    android:text="Name" />
+                <TextView
+                    android:id="@+id/tvMinScore"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_weight="50"
+                    android:text="Min Score" />
+
+            </LinearLayout>
+
 
         </LinearLayout>
 

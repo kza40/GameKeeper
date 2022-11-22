@@ -1,12 +1,14 @@
 package ca.cmpt276.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -17,35 +19,39 @@ import java.util.List;
 import ca.cmpt276.myapplication.adapter.AchievementAdapter;
 import ca.cmpt276.myapplication.model.AchievementLevel;
 import ca.cmpt276.myapplication.model.AchievementCalculator;
+import ca.cmpt276.myapplication.model.ConfigManager;
 
 public class PreviewAchievements extends AppCompatActivity {
     private static final String EXTRA_POOR_SCORE = "ca.cmpt276.myapplication: poor score";
     private static final String EXTRA_GREAT_SCORE = "ca.cmpt276.myapplication: great score";
-    private static final int NUM_ACHIEVEMENTS = 8;
 
     private int poorScore;
     private int greatScore;
+
     private EditText edtNumPlayers;
-    private ListView list;
+    private ListView achievementsList;
     private AchievementAdapter adapter;
 
-    private String[] titles;
     private List<AchievementLevel> achievementLevels;
     private DifficultyToggle toggle;
     private TextView tvDifficulty;
+    private String[] themeTitles;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preview_achievements);
 
-        setTitle(R.string.achievementsTitle);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle(getString(R.string.achievementsTitle));
+
         setUpMemberVariables();
         setupAchievementLevels();
     }
 
     private void setUpMemberVariables() {
-        // Poor/great scores
         Intent intent = getIntent();
         poorScore = intent.getIntExtra(EXTRA_POOR_SCORE, 0);
         greatScore = intent.getIntExtra(EXTRA_GREAT_SCORE, 0);
@@ -53,13 +59,19 @@ public class PreviewAchievements extends AppCompatActivity {
         // EditText field
         edtNumPlayers = findViewById(R.id.edtNumPlayers);
         edtNumPlayers.addTextChangedListener(scoreTextWatcher);
+        achievementsList = findViewById(R.id.achievementLevels);
 
-        // Achievement-related
-        list = findViewById(R.id.achievementLevels);
-        titles = new String[] { getString(R.string.achievementOne), getString(R.string.achievementTwo),
-                                getString(R.string.achievementThree), getString(R.string.achievementFour),
-                                getString(R.string.achievementFive), getString(R.string.achievementSix),
-                                getString(R.string.achievementSeven), getString(R.string.achievementEight) };
+        // Achievement related
+        ConfigManager configManager = ConfigManager.getInstance();
+        String theme = configManager.getTheme();
+
+        if (theme.equals(ThemeSetting.THEME_FITNESS)) {
+            themeTitles = getResources().getStringArray(R.array.theme_fitness_names);
+        } else if (theme.equals(ThemeSetting.THEME_SPONGEBOB)) {
+            themeTitles = getResources().getStringArray(R.array.theme_spongebob_names);
+        } else {
+            themeTitles = getResources().getStringArray(R.array.theme_starwars_names);
+        }
         achievementLevels = new ArrayList<>();
 
         // Difficulty toggle
@@ -70,12 +82,12 @@ public class PreviewAchievements extends AppCompatActivity {
     }
 
     private void setupAchievementLevels() {
-        for(int i = 0; i < NUM_ACHIEVEMENTS; i++) {
-            AchievementLevel newLevel = new AchievementLevel(titles[i]);
+        for (String themeTitle : themeTitles) {
+            AchievementLevel newLevel = new AchievementLevel(themeTitle);
             achievementLevels.add(newLevel);
         }
         adapter = new AchievementAdapter(this, R.layout.adapter_view3, achievementLevels);
-        list.setAdapter(adapter);
+        achievementsList.setAdapter(adapter);
     }
 
     private final TextWatcher scoreTextWatcher = new TextWatcher() {
@@ -95,14 +107,26 @@ public class PreviewAchievements extends AppCompatActivity {
     };
 
     private void updateListView(int numPlayers) {
-        List<Integer> boundaries = AchievementCalculator.getBoundaries(numPlayers, poorScore, greatScore);
+        List<Integer> boundaries = AchievementCalculator
+                            .getBoundaries(themeTitles.length, numPlayers, poorScore, greatScore);
         AchievementCalculator.applyDifficulty(boundaries, toggle.getScaleFactor());
 
-        for(int i = 0; i < NUM_ACHIEVEMENTS; i++) {
+        for(int i = 0; i < themeTitles.length; i++) {
             String value = Integer.toString(boundaries.get(i));
             achievementLevels.get(i).setBoundary(value);
         }
+
         adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == android.R.id.home){
+            onBackPressed();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public static Intent makeIntent(Context context, int poorScore, int greatScore) {

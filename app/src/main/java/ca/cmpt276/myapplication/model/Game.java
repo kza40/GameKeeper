@@ -11,31 +11,27 @@ import java.time.format.DateTimeFormatter;
  */
 
 public class Game {
+    private String achievementEarned;
     private int numOfPlayers;
     private int groupScore;
-    private String datePlayed;
-    private String achievementEarned;
     private float scaleFactor;
     private String[] playerScores;
+    private String datePlayed;
 
-    public Game(String[] names, int numOfPlayers, int groupScore, int poorScore, int greatScore, float scaleFactor,String[] playerScores) {
+    public Game(String achievementEarned, int numOfPlayers, int groupScore, int poorScore, int greatScore, float scaleFactor,String[] playerScores)
+    {
+        this.achievementEarned = achievementEarned;
         this.numOfPlayers = numOfPlayers;
         this.groupScore = groupScore;
         this.scaleFactor = scaleFactor;
         this.playerScores=playerScores;
         setDate();
-        setAchievementEarned(names, poorScore, greatScore);
     }
 
     private void setDate() {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("MMM dd");
         LocalDateTime now = LocalDateTime.now();
         datePlayed = now.format(format);
-    }
-
-    private void setAchievementEarned(String[] names, int poorScore, int greatScore) {
-        achievementEarned = AchievementCalculator
-                            .getAchievementEarned(names, numOfPlayers, poorScore, greatScore, groupScore, scaleFactor);
     }
 
     public int getNumOfPlayers() {

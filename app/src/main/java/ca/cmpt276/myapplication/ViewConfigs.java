@@ -1,9 +1,13 @@
 package ca.cmpt276.myapplication;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -29,16 +33,18 @@ public class ViewConfigs extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_configs);
-        setTitle(getString(R.string.viewConfigsTitle));
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(getString(R.string.viewConfigsTitle));
 
         configManager=new SharedPreferenceManager(getApplicationContext()).getConfigManager();
         configsList = findViewById(R.id.listOfConfigs);
-
         setEmptyState();
         populateListView();
         setupAddConfig();
         setupViewGames();
     }
+
 
     @Override
     protected void onResume() {
@@ -47,6 +53,18 @@ public class ViewConfigs extends AppCompatActivity {
         setEmptyState();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.view_configs_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        Intent intent = ThemeSetting.makeIntent(this);
+        startActivity(intent);
+        return true;
+    }
 
     private void populateListView() {
             List<String> theConfigs = new ArrayList<>();

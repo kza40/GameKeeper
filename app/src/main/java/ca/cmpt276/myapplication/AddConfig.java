@@ -1,12 +1,12 @@
 package ca.cmpt276.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -30,7 +30,12 @@ public class AddConfig extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_config);
-        setTitle(getString(R.string.addConfigTitle));
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(getString(R.string.addConfigTitle));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         configManager = ConfigManager.getInstance();
         int position=-1;
 
@@ -40,7 +45,7 @@ public class AddConfig extends AppCompatActivity {
         if(getIntent().getExtras()!=null)
         {
             isEdit=true;
-            setTitle(getString(R.string.editConfigTitle));
+            getSupportActionBar().setTitle(getString(R.string.editConfigTitle));
             position=getIntent().getIntExtra(AddGame.CONFIG_POSITION,-1);
             loadInputFields(position);
         }
@@ -98,6 +103,16 @@ public class AddConfig extends AppCompatActivity {
             configManager.addGame(gameConfig);
         }
         new SharedPreferenceManager(getApplicationContext()).updateConfigManager(configManager);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == android.R.id.home){
+            onBackPressed();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public static Intent makeIntent(Context context,boolean isEdit,int position) {
