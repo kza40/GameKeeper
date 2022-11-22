@@ -79,4 +79,40 @@ public class DifficultyToggle {
             return HARD_PERCENT;
         }
     }
+
+    public void setDifficulty(float scaleFactor) {
+        if(scaleFactor==EASY_PERCENT)
+        {
+            tvDifficulty.setText(R.string.difficulty_easy);
+            isGoldSecond = false;
+            isGoldThird = false;
+            ibStar2.setImageResource(R.drawable.star_grey);
+            ibStar3.setImageResource(R.drawable.star_grey);
+        }
+        else if(scaleFactor==NORMAL_PERCENT)
+        {
+            tvDifficulty.setText(R.string.difficulty_normal);
+            isGoldSecond = true;
+            isGoldThird = false;
+            ibStar2.setImageResource(R.drawable.star_gold);
+            ibStar3.setImageResource(R.drawable.star_grey);
+        }
+        else if(scaleFactor==HARD_PERCENT)
+        {
+            tvDifficulty.setText(R.string.difficulty_hard);
+            isGoldSecond = true;
+            isGoldThird = true;
+            ibStar2.setImageResource(R.drawable.star_gold);
+            ibStar3.setImageResource(R.drawable.star_gold);
+        }
+        else
+        {
+            tvDifficulty.setText(R.string.difficulty_normal);
+            isGoldSecond = true;
+            isGoldThird = false;
+            ibStar2.setImageResource(R.drawable.star_gold);
+            ibStar3.setImageResource(R.drawable.star_grey);
+        }
+        updateDifficultyText();
+    }
 }

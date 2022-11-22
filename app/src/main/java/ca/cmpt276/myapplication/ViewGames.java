@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -60,12 +61,19 @@ public class ViewGames extends AppCompatActivity {
     private void populateListView() {
         gameAdapter = new GameAdapter(this, R.layout.game_row, gameConfig.getGames());
         gamesList.setAdapter(gameAdapter);
+        gamesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = AddGame.makeIntent(ViewGames.this,true, configPos,i);
+                startActivity(intent);
+            }
+        });
     }
 
     private void setupAddGame() {
         FloatingActionButton addGame = findViewById(R.id.btnAddGame);
         addGame.setOnClickListener(view -> {
-            Intent intent = AddGame.makeIntent(ViewGames.this, configPos);
+            Intent intent = AddGame.makeIntent(ViewGames.this,false, configPos,-1);
             startActivity(intent);
         });
     }

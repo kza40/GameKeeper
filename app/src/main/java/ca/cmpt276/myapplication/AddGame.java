@@ -11,12 +11,9 @@ import android.os.CountDownTimer;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TableLayout;
-import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,13 +25,16 @@ import ca.cmpt276.myapplication.model.SharedPreferenceManager;
 
 public class AddGame extends AppCompatActivity {
     public static final String CONFIG_POSITION = "AddGame: Config position";
+    public static final String Game_POSITION = "AddGame: Game position";
 
     private TextView txtScore;
     private EditText edtNumPlayers;
     private ConfigManager configManager;
     private GameConfig gameConfig;
+    private Game currentGame;
     private int NUM_ROWS = 0;
     EditText[] edtIndividualScore;
+    private Boolean isEdit;
 
     private TextView tvDifficulty;
     private int totalScore;
@@ -63,17 +63,15 @@ public class AddGame extends AppCompatActivity {
     private void setupMemberVariables() {
         Intent intent = getIntent();
         int configPos = intent.getIntExtra(CONFIG_POSITION, -1);
+
         configManager = ConfigManager.getInstance();
         gameConfig = configManager.getGameConfigAtIndex(configPos);
-
+        isEdit=false;
+        int gamePos;
         // TextViews
         txtScore = findViewById(R.id.txtTotalScore);
-        txtScore.setText("Score: 0");
-
         // EditText fields
         edtNumPlayers = findViewById(R.id.edtNumPlayersDisplay);
-        edtNumPlayers.addTextChangedListener(playerNumTextWatcher);
-
         // Achievement-related
         String theme = configManager.getTheme();
         if (theme.equals(ThemeSetting.THEME_FITNESS)) {
@@ -87,11 +85,55 @@ public class AddGame extends AppCompatActivity {
             titleSubLevelOne = getString(R.string.starWarsLvl0);
         }
 
+
         // Difficulty toggle
         toggle = new DifficultyToggle(findViewById(android.R.id.content).getRootView());
         toggle.setup();
         tvDifficulty = findViewById(R.id.tvDifficulty);
         tvDifficulty.addTextChangedListener(scoreTextWatcher);
+
+        if( intent.getIntExtra(Game_POSITION, -1)!=-1)
+        {
+            isEdit=true;
+            gamePos=intent.getIntExtra(Game_POSITION, -1);
+            currentGame=gameConfig.getGameAtIndex(gamePos);
+
+            txtScore.setText("Score: "+currentGame.getGroupScore());
+            toggle.setDifficulty(currentGame.getScaleFactor());
+            edtNumPlayers.setText(Integer.toString(currentGame.getNumOfPlayers()));
+            loadPlayerScoresForEditGame();
+
+            updateAchievement(currentGame.getGroupScore(), currentGame.getNumOfPlayers());
+        }
+        else
+        {
+            txtScore.setText("Score: 0");
+        }
+        edtNumPlayers.addTextChangedListener(playerNumTextWatcher);
+    }
+
+    private void loadPlayerScoresForEditGame() {
+        NUM_ROWS = currentGame.getNumOfPlayers();
+        edtIndividualScore = new EditText[NUM_ROWS];
+        LinearLayout table = (LinearLayout) findViewById(R.id.LayoutForEdittexts);
+        table.removeAllViews();
+
+        for (int row = 0; row < NUM_ROWS; row++) {
+            EditText editText = new EditText(getApplicationContext());
+            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT); // Verbose!
+            lp.weight = 1.0f; // This is critical. Doesn't work without it.
+            lp.setMargins(240, 10, 240, 10);
+
+            editText.setHint("Player " + (row + 1) + " scores");
+            editText.setInputType(InputType.TYPE_CLASS_NUMBER);
+
+            editText.setText(currentGame.getPlayerScoresAtIndex(row));
+            table.addView(editText, lp);
+
+            //EditText fields
+            edtIndividualScore[row] = editText;
+            edtIndividualScore[row].addTextChangedListener(scoreTextWatcher);
+        }
     }
 
 
@@ -228,15 +270,28 @@ public class AddGame extends AppCompatActivity {
         }
 
         private void saveGame(int numPlayers, int groupScore) {
-            Game game = new Game(achievementEarned, numPlayers, groupScore, gameConfig.getPoorScore(),
-                    gameConfig.getGoodScore(), toggle.getScaleFactor(), individualScores);
-            gameConfig.addGame(game);
+            if(isEdit)
+            {
+                currentGame.setAchievementEarned(achievementEarned);
+                currentGame.setNumOfPlayers(numPlayers);
+                currentGame.setGroupScore(groupScore);
+                currentGame.setScaleFactor(toggle.getScaleFactor());
+                currentGame.setPlayerScores(individualScores);
+            }
+            else
+            {
+                Game game = new Game(achievementEarned, numPlayers, groupScore, gameConfig.getPoorScore(),
+                        gameConfig.getGoodScore(), toggle.getScaleFactor(), individualScores);
+                gameConfig.addGame(game);
+            }
             new SharedPreferenceManager(getApplicationContext()).updateConfigManager(configManager);
         }
 
-        public static Intent makeIntent(Context context, int position) {
+        public static Intent makeIntent(Context context,boolean isEdit, int position,int gamePosition) {
             Intent intent = new Intent(context, AddGame.class);
             intent.putExtra(CONFIG_POSITION, position);
+            if(isEdit)
+                intent.putExtra(Game_POSITION, gamePosition);
             return intent;
         }
     }
