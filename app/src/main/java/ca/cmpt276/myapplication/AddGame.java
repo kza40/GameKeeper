@@ -1,16 +1,20 @@
 package ca.cmpt276.myapplication;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -33,12 +37,13 @@ public class AddGame extends AppCompatActivity {
     private GameConfig gameConfig;
     private Game currentGame;
     private int NUM_ROWS = 0;
-    EditText[] edtIndividualScore;
+    private EditText[] edtIndividualScore;
     private Boolean isEdit;
+//    private boolean isScoreFieldsFilled;
 
     private TextView tvDifficulty;
     private int totalScore;
-    String[] individualScores;
+    private String[] individualScores;
     private String[] themeTitles;
     private String titleSubLevelOne;
     private String achievementEarned;
@@ -57,10 +62,17 @@ public class AddGame extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(getString(R.string.add_game));
         setupMemberVariables();
-        setupSaveButton();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.add_game_menu, menu);
+        return true;
     }
 
     private void setupMemberVariables() {
+//        isScoreFieldsFilled = false;
+
         Intent intent = getIntent();
         int configPos = intent.getIntExtra(CONFIG_POSITION, -1);
 
@@ -95,13 +107,14 @@ public class AddGame extends AppCompatActivity {
         if( intent.getIntExtra(Game_POSITION, -1)!=-1)
         {
             isEdit=true;
+//            isScoreFieldsFilled = true;
             gamePos=intent.getIntExtra(Game_POSITION, -1);
             currentGame=gameConfig.getGameAtIndex(gamePos);
-
+            loadPlayerScoresForEditGame();
             txtScore.setText("Score: "+currentGame.getGroupScore());
             toggle.setDifficulty(currentGame.getScaleFactor());
             edtNumPlayers.setText(Integer.toString(currentGame.getNumOfPlayers()));
-            loadPlayerScoresForEditGame();
+
 
             updateAchievement(currentGame.getGroupScore(), currentGame.getNumOfPlayers());
         }
@@ -124,7 +137,7 @@ public class AddGame extends AppCompatActivity {
             lp.weight = 1.0f; // This is critical. Doesn't work without it.
             lp.setMargins(240, 10, 240, 10);
 
-            editText.setHint("Player " + (row + 1) + " scores");
+            editText.setHint("Score #" + (row + 1));
             editText.setInputType(InputType.TYPE_CLASS_NUMBER);
 
             editText.setText(currentGame.getPlayerScoresAtIndex(row));
@@ -145,7 +158,7 @@ public class AddGame extends AppCompatActivity {
         @Override
         public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
             String numPlayersInput = edtNumPlayers.getText().toString();
-
+            totalScore=0;
             if (!numPlayersInput.isEmpty()) {
                 NUM_ROWS = Integer.parseInt(numPlayersInput);
                 if (NUM_ROWS > 200) {
@@ -190,7 +203,11 @@ public class AddGame extends AppCompatActivity {
                 if (!numPlayersInput.isEmpty()) {
                     txtScore.setText("Score: " + totalScore);
                     if (individualScoresChecker) {
+//                        isScoreFieldsFilled = true;
                         updateAchievement(totalScore, Integer.parseInt(numPlayersInput));
+                    }
+                    else {
+//                        isScoreFieldsFilled = false;
                     }
                 }
             }
@@ -210,7 +227,7 @@ public class AddGame extends AppCompatActivity {
                 lp.weight = 1.0f; // This is critical. Doesn't work without it.
                 lp.setMargins(240, 10, 240, 10);
 
-                editText.setHint("Player " + (row + 1) + " scores");
+                editText.setHint("Score #" + (row + 1));
                 editText.setInputType(InputType.TYPE_CLASS_NUMBER);
 
                 table.addView(editText, lp);
@@ -235,30 +252,26 @@ public class AddGame extends AppCompatActivity {
             achievementEarned = name;
         }
 
+        @Override
+        public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+            String numPlayers = edtNumPlayers.getText().toString();
 
-        private void setupSaveButton() {
-            Button btnSave = findViewById(R.id.btnSave);
-            btnSave.setOnClickListener(view -> {
+            if (!numPlayers.isEmpty() && totalScore != 0) {
+                saveGame(Integer.parseInt(numPlayers), totalScore);
+                celebrate();
+                new CountDownTimer(Complete, Tick) {
+                    public void onTick(long millisUntilFinished) {
+                    }
 
-                String numPlayers = edtNumPlayers.getText().toString();
-
-                if (!numPlayers.isEmpty() && totalScore != 0) {
-                    saveGame(Integer.parseInt(numPlayers), totalScore);
-                    celebrate();
-                    new CountDownTimer(Complete, Tick) {
-
-                        public void onTick(long millisUntilFinished) {
-                        }
-
-                        public void onFinish() {
-                            finish();
-                        }
-                    }.start();
-                } else {
-                    Toast.makeText(AddGame.this, R.string.addEmptyMsg, Toast.LENGTH_LONG)
-                            .show();
-                }
-            });
+                    public void onFinish() {
+                        finish();
+                    }
+                }.start();
+            } else {
+                Toast.makeText(AddGame.this, R.string.addEmptyMsg, Toast.LENGTH_LONG)
+                        .show();
+            }
+            return true;
         }
 
         private void celebrate() {

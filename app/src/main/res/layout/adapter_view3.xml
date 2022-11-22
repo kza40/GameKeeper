@@ -40,6 +40,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:layout_weight="50"
+                    android:fontFamily="@font/font_main"
                     android:textStyle="bold"
                     android:text="Name" />
                 <TextView
@@ -47,6 +48,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:layout_weight="50"
+                    android:fontFamily="@font/font_main"
                     android:text="Min Score" />
 
             </LinearLayout>
