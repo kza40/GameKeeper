@@ -17,8 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ca.cmpt276.myapplication.adapter.AchievementAdapter;
-import ca.cmpt276.myapplication.model.AchievementLevel;
 import ca.cmpt276.myapplication.model.AchievementCalculator;
+import ca.cmpt276.myapplication.model.AchievementLevel;
 import ca.cmpt276.myapplication.model.ConfigManager;
 
 public class PreviewAchievements extends AppCompatActivity {
