@@ -38,6 +38,11 @@ public class Game {
         return numOfPlayers;
     }
 
+    public String getPlayerScoresAtIndex(int position)
+    {
+        return playerScores[position];
+    }
+
     public String getDatePlayed() {
         return datePlayed;
     }
@@ -52,5 +57,29 @@ public class Game {
 
     public float getScaleFactor() {
         return scaleFactor;
+    }
+
+    public void setAchievementEarned(String achievementEarned) {
+        this.achievementEarned = achievementEarned;
+    }
+
+    public void setNumOfPlayers(int numOfPlayers) {
+        this.numOfPlayers = numOfPlayers;
+    }
+
+    public void setGroupScore(int groupScore) {
+        this.groupScore = groupScore;
+    }
+
+    public void setScaleFactor(float scaleFactor) {
+        this.scaleFactor = scaleFactor;
+    }
+
+    public void setPlayerScores(String[] playerScores) {
+        this.playerScores = playerScores;
+    }
+
+    public void setDatePlayed(String datePlayed) {
+        this.datePlayed = datePlayed;
     }
 }
