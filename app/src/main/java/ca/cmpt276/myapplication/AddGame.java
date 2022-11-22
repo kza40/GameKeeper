@@ -9,10 +9,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,13 +29,16 @@ import ca.cmpt276.myapplication.model.SharedPreferenceManager;
 public class AddGame extends AppCompatActivity {
     public static final String CONFIG_POSITION = "AddGame: Config position";
 
-    private EditText edtScore;
+    private TextView txtScore;
     private EditText edtNumPlayers;
     private ConfigManager configManager;
     private GameConfig gameConfig;
+    private int NUM_ROWS = 0;
+    EditText[] edtIndividualScore;
 
     private TextView tvDifficulty;
-    private TextView achievementDisplay;
+    private int totalScore;
+    String[] individualScores;
     private String[] themeTitles;
     private String titleSubLevelOne;
     private String achievementEarned;
@@ -49,24 +56,23 @@ public class AddGame extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(getString(R.string.add_game));
-
         setupMemberVariables();
         setupSaveButton();
     }
 
     private void setupMemberVariables() {
-        // Config
         Intent intent = getIntent();
-        int configPos = intent.getIntExtra(CONFIG_POSITION,-1);
+        int configPos = intent.getIntExtra(CONFIG_POSITION, -1);
         configManager = ConfigManager.getInstance();
         gameConfig = configManager.getGameConfigAtIndex(configPos);
-        setTitle(getString(R.string.add_game));
+
+        // TextViews
+        txtScore = findViewById(R.id.txtTotalScore);
+        txtScore.setText("Score: 0");
 
         // EditText fields
-        edtScore = findViewById(R.id.edtScoreDisplay);
         edtNumPlayers = findViewById(R.id.edtNumPlayersDisplay);
-        edtScore.addTextChangedListener(scoreTextWatcher);
-        edtNumPlayers.addTextChangedListener(scoreTextWatcher);
+        edtNumPlayers.addTextChangedListener(playerNumTextWatcher);
 
         // Achievement-related
         String theme = configManager.getTheme();
@@ -80,7 +86,6 @@ public class AddGame extends AppCompatActivity {
             themeTitles = getResources().getStringArray(R.array.theme_starwars_names);
             titleSubLevelOne = getString(R.string.starWarsLvl0);
         }
-        achievementDisplay = findViewById(R.id.tvAchievement);
 
         // Difficulty toggle
         toggle = new DifficultyToggle(findViewById(android.R.id.content).getRootView());
@@ -89,87 +94,150 @@ public class AddGame extends AppCompatActivity {
         tvDifficulty.addTextChangedListener(scoreTextWatcher);
     }
 
-    private TextWatcher scoreTextWatcher = new TextWatcher() {
+
+    private final TextWatcher playerNumTextWatcher = new TextWatcher() {
         @Override
-        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        }
 
         @Override
         public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            String scoreInput = edtScore.getText().toString();
             String numPlayersInput = edtNumPlayers.getText().toString();
 
-            if (!scoreInput.isEmpty() && !numPlayersInput.isEmpty()) {
-                showAchievement(Integer.parseInt(scoreInput), Integer.parseInt(numPlayersInput));
+            if (!numPlayersInput.isEmpty()) {
+                NUM_ROWS = Integer.parseInt(numPlayersInput);
+                if (NUM_ROWS > 200) {
+                    Toast.makeText(getApplicationContext(), "Please input a number less than 200", Toast.LENGTH_SHORT).show();
+                    edtNumPlayers.setText("");
+                } else {
+                    edtIndividualScore = new EditText[NUM_ROWS];
+                    populateEdittextScores();
+                }
+            } else {
+                LinearLayout table = (LinearLayout) findViewById(R.id.LayoutForEdittexts);
+                table.removeAllViews();
             }
         }
 
         @Override
-        public void afterTextChanged(Editable editable) {}
+        public void afterTextChanged(Editable editable) {
+        }
     };
 
-
-    private void showAchievement(int score, int numPlayers) {
-        int index = AchievementCalculator.getScorePlacement(
-                themeTitles.length, numPlayers, gameConfig.getPoorScore(), gameConfig.getGoodScore(),
-                score, toggle.getScaleFactor());
-        String name;
-        if (index == AchievementCalculator.INDEX_SUB_LEVEL_ONE) {
-            name = titleSubLevelOne;
-        }
-        else {
-            name = themeTitles[index];
-        }
-        achievementEarned = name;
-        String message = getString(R.string.you_got) + name + getString(R.string.exclamation);
-        achievementDisplay.setText(message);
-    }
-
-
-    private void setupSaveButton() {
-        Button btnSave = findViewById(R.id.btnSave);
-        btnSave.setOnClickListener(view -> {
-
-            String numPlayers = edtNumPlayers.getText().toString();
-            String groupScore = edtScore.getText().toString();
-            if (!numPlayers.isEmpty() && !groupScore.isEmpty()) {
-                saveGame(Integer.parseInt(numPlayers), Integer.parseInt(groupScore));
-                celebrate();
-                new CountDownTimer(Complete, Tick) {
-
-                    public void onTick(long millisUntilFinished) {
-                    }
-
-                    public void onFinish() {
-                        finish();
-                    }
-                }.start();
-
-
-
+        private TextWatcher scoreTextWatcher = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
             }
-            else {
-                Toast.makeText(AddGame.this, R.string.addEmptyMsg, Toast.LENGTH_LONG)
-                        .show();
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                String numPlayersInput = edtNumPlayers.getText().toString();
+                individualScores = new String[NUM_ROWS];
+                boolean individualScoresChecker = true;
+                int groupScore = 0;
+                totalScore = 0;
+                for (int row = 0; row < NUM_ROWS; row++) {
+                    individualScores[row] = edtIndividualScore[row].getText().toString();
+                    if (individualScores[row].isEmpty()) {
+                        individualScoresChecker = false;
+                        groupScore = 0;
+                    }
+                    if (individualScoresChecker) {
+                        groupScore += Integer.parseInt(individualScores[row]);
+                    }
+                }
+                totalScore = groupScore;
+                if (!numPlayersInput.isEmpty()) {
+                    txtScore.setText("Score: " + totalScore);
+                    if (individualScoresChecker) {
+                        updateAchievement(totalScore, Integer.parseInt(numPlayersInput));
+                    }
+                }
             }
-        });
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        };
+
+        private void populateEdittextScores() {
+            LinearLayout table = (LinearLayout) findViewById(R.id.LayoutForEdittexts);
+            table.removeAllViews();
+
+            for (int row = 0; row < NUM_ROWS; row++) {
+                EditText editText = new EditText(getApplicationContext());
+                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT); // Verbose!
+                lp.weight = 1.0f; // This is critical. Doesn't work without it.
+                lp.setMargins(240, 10, 240, 10);
+
+                editText.setHint("Player " + (row + 1) + " scores");
+                editText.setInputType(InputType.TYPE_CLASS_NUMBER);
+
+                table.addView(editText, lp);
+
+                //EditText fields
+                edtIndividualScore[row] = editText;
+                edtIndividualScore[row].addTextChangedListener(scoreTextWatcher);
+            }
+        }
+
+
+        private void updateAchievement(int score, int numPlayers) {
+            int index = AchievementCalculator.getScorePlacement(
+                    themeTitles.length, numPlayers, gameConfig.getPoorScore(), gameConfig.getGoodScore(),
+                    score, toggle.getScaleFactor());
+            String name;
+            if (index == AchievementCalculator.INDEX_SUB_LEVEL_ONE) {
+                name = titleSubLevelOne;
+            } else {
+                name = themeTitles[index];
+            }
+            achievementEarned = name;
+        }
+
+
+        private void setupSaveButton() {
+            Button btnSave = findViewById(R.id.btnSave);
+            btnSave.setOnClickListener(view -> {
+
+                String numPlayers = edtNumPlayers.getText().toString();
+
+                if (!numPlayers.isEmpty() && totalScore != 0) {
+                    saveGame(Integer.parseInt(numPlayers), totalScore);
+                    celebrate();
+                    new CountDownTimer(Complete, Tick) {
+
+                        public void onTick(long millisUntilFinished) {
+                        }
+
+                        public void onFinish() {
+                            finish();
+                        }
+                    }.start();
+                } else {
+                    Toast.makeText(AddGame.this, R.string.addEmptyMsg, Toast.LENGTH_LONG)
+                            .show();
+                }
+            });
+        }
+
+        private void celebrate() {
+            FragmentManager manager = getSupportFragmentManager();
+            CelebrationFragment dialog = new CelebrationFragment(achievementEarned);
+            dialog.show(manager, "CelebrationFragment");
+        }
+
+        private void saveGame(int numPlayers, int groupScore) {
+            Game game = new Game(achievementEarned, numPlayers, groupScore, gameConfig.getPoorScore(),
+                    gameConfig.getGoodScore(), toggle.getScaleFactor(), individualScores);
+            gameConfig.addGame(game);
+            new SharedPreferenceManager(getApplicationContext()).updateConfigManager(configManager);
+        }
+
+        public static Intent makeIntent(Context context, int position) {
+            Intent intent = new Intent(context, AddGame.class);
+            intent.putExtra(CONFIG_POSITION, position);
+            return intent;
+        }
     }
 
-    private void celebrate() {
-        FragmentManager manager = getSupportFragmentManager();
-        CelebrationFragment dialog = new CelebrationFragment(achievementEarned);
-        dialog.show(manager, "CelebrationFragment");
-    }
-
-    private void saveGame(int numPlayers, int groupScore) {
-        Game game = new Game(achievementEarned, numPlayers, groupScore, toggle.getScaleFactor());
-        gameConfig.addGame(game);
-        new SharedPreferenceManager(getApplicationContext()).updateConfigManager(configManager);
-    }
-
-    public static Intent makeIntent(Context context, int position) {
-        Intent intent = new Intent(context, AddGame.class);
-        intent.putExtra(CONFIG_POSITION, position);
-        return intent;
-    }
-
-}
