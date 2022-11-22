@@ -39,7 +39,6 @@ public class AddGame extends AppCompatActivity {
     private int NUM_ROWS = 0;
     private EditText[] edtIndividualScore;
     private Boolean isEdit;
-//    private boolean isScoreFieldsFilled;
 
     private TextView tvDifficulty;
     private int totalScore;
@@ -71,7 +70,6 @@ public class AddGame extends AppCompatActivity {
     }
 
     private void setupMemberVariables() {
-//        isScoreFieldsFilled = false;
 
         Intent intent = getIntent();
         int configPos = intent.getIntExtra(CONFIG_POSITION, -1);
@@ -107,7 +105,6 @@ public class AddGame extends AppCompatActivity {
         if( intent.getIntExtra(Game_POSITION, -1)!=-1)
         {
             isEdit=true;
-//            isScoreFieldsFilled = true;
             gamePos=intent.getIntExtra(Game_POSITION, -1);
             currentGame=gameConfig.getGameAtIndex(gamePos);
             loadPlayerScoresForEditGame();
@@ -120,7 +117,7 @@ public class AddGame extends AppCompatActivity {
         }
         else
         {
-            txtScore.setText("Score: 0");
+            txtScore.setText(R.string.score_equals_zero);
         }
         edtNumPlayers.addTextChangedListener(playerNumTextWatcher);
     }
@@ -137,7 +134,7 @@ public class AddGame extends AppCompatActivity {
             lp.weight = 1.0f; // This is critical. Doesn't work without it.
             lp.setMargins(240, 10, 240, 10);
 
-            editText.setHint("Score #" + (row + 1));
+            editText.setHint(getString(R.string.score_num) + (row + 1));
             editText.setInputType(InputType.TYPE_CLASS_NUMBER);
 
             editText.setText(currentGame.getPlayerScoresAtIndex(row));
@@ -162,7 +159,7 @@ public class AddGame extends AppCompatActivity {
             if (!numPlayersInput.isEmpty()) {
                 NUM_ROWS = Integer.parseInt(numPlayersInput);
                 if (NUM_ROWS > 200) {
-                    Toast.makeText(getApplicationContext(), "Please input a number less than 200", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), R.string.input_less_message, Toast.LENGTH_SHORT).show();
                     edtNumPlayers.setText("");
                 } else {
                     edtIndividualScore = new EditText[NUM_ROWS];
@@ -201,13 +198,9 @@ public class AddGame extends AppCompatActivity {
                     }
                 }
                 if (!numPlayersInput.isEmpty()) {
-                    txtScore.setText("Score: " + totalScore);
+                    txtScore.setText(getString(R.string.score_colon_2) + totalScore);
                     if (individualScoresChecker) {
-//                        isScoreFieldsFilled = true;
                         updateAchievement(totalScore, Integer.parseInt(numPlayersInput));
-                    }
-                    else {
-//                        isScoreFieldsFilled = false;
                     }
                 }
             }
@@ -227,7 +220,7 @@ public class AddGame extends AppCompatActivity {
                 lp.weight = 1.0f; // This is critical. Doesn't work without it.
                 lp.setMargins(240, 10, 240, 10);
 
-                editText.setHint("Score #" + (row + 1));
+                editText.setHint(getString(R.string.score_num) + (row + 1));
                 editText.setInputType(InputType.TYPE_CLASS_NUMBER);
 
                 table.addView(editText, lp);

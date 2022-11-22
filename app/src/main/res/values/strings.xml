@@ -81,4 +81,8 @@
     <string name="difficulty_easy">Easy</string>
     <string name="difficulty_normal">Normal</string>
     <string name="difficulty_hard">Hard</string>
+    <string name="score_equals_zero">Score: 0</string>
+    <string name="score_num">Score #</string>
+    <string name="input_less_message">Please input a number less than 200</string>
+    <string name="score_colon_2">"Score: "</string>
 </resources>
