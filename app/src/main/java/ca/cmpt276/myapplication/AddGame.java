@@ -39,7 +39,7 @@ public class AddGame extends AppCompatActivity {
     private int NUM_ROWS = 0;
     private EditText[] edtIndividualScore;
     private Boolean isEdit;
-    private boolean isScoreFieldsFilled;
+//    private boolean isScoreFieldsFilled;
 
     private TextView tvDifficulty;
     private int totalScore;
@@ -71,7 +71,7 @@ public class AddGame extends AppCompatActivity {
     }
 
     private void setupMemberVariables() {
-        isScoreFieldsFilled = false;
+//        isScoreFieldsFilled = false;
 
         Intent intent = getIntent();
         int configPos = intent.getIntExtra(CONFIG_POSITION, -1);
@@ -107,7 +107,7 @@ public class AddGame extends AppCompatActivity {
         if( intent.getIntExtra(Game_POSITION, -1)!=-1)
         {
             isEdit=true;
-            isScoreFieldsFilled = true;
+//            isScoreFieldsFilled = true;
             gamePos=intent.getIntExtra(Game_POSITION, -1);
             currentGame=gameConfig.getGameAtIndex(gamePos);
 
@@ -203,11 +203,11 @@ public class AddGame extends AppCompatActivity {
                 if (!numPlayersInput.isEmpty()) {
                     txtScore.setText("Score: " + totalScore);
                     if (individualScoresChecker) {
-                        isScoreFieldsFilled = true;
+//                        isScoreFieldsFilled = true;
                         updateAchievement(totalScore, Integer.parseInt(numPlayersInput));
                     }
                     else {
-                        isScoreFieldsFilled = false;
+//                        isScoreFieldsFilled = false;
                     }
                 }
             }
@@ -256,7 +256,7 @@ public class AddGame extends AppCompatActivity {
         public boolean onOptionsItemSelected(@NonNull MenuItem item) {
             String numPlayers = edtNumPlayers.getText().toString();
 
-            if (!numPlayers.isEmpty() && isScoreFieldsFilled) {
+            if (!numPlayers.isEmpty() && totalScore != 0) {
                 saveGame(Integer.parseInt(numPlayers), totalScore);
                 celebrate();
                 new CountDownTimer(Complete, Tick) {
