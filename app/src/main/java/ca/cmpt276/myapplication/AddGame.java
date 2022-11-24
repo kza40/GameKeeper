@@ -1,14 +1,28 @@
 package ca.cmpt276.myapplication;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 import androidx.fragment.app.FragmentManager;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
@@ -16,9 +30,12 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.io.File;
 
 import ca.cmpt276.myapplication.model.AchievementCalculator;
 import ca.cmpt276.myapplication.model.Game;
@@ -27,6 +44,10 @@ import ca.cmpt276.myapplication.model.ConfigManager;
 import ca.cmpt276.myapplication.model.SharedPreferenceManager;
 
 public class AddGame extends AppCompatActivity {
+    public static final int CAMERA_PERMISSION_CODE = 101;
+    public final String APP_TAG = "MyCustomApp";
+    public String photoFileName = "photo.jpg";
+    File photoFile;
     //Constants
     public static final String CONFIG_POSITION = "AddGame: Config position";
     public static final String Game_POSITION = "AddGame: Game position";
@@ -56,11 +77,28 @@ public class AddGame extends AppCompatActivity {
     private String titleSubLevelOne;
     private String achievementEarned;
 
+
+    ActivityResultLauncher<Intent> activityLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+        @Override
+        public void onActivityResult(ActivityResult result) {
+            Log.d("Testing","ONResult");
+            if (result.getResultCode() == RESULT_OK) {
+                // by this point we have the camera photo on disk
+                Bitmap takenImage = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
+                // RESIZE BITMAP, see section below
+                // Load the taken image into a preview
+                ImageView selfie=findViewById(R.id.imageViewSelfie);
+                selfie.setImageBitmap(takenImage);
+            }
+        }
+    });
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_game);
-
+        ImageView selfie=findViewById(R.id.imageViewSelfie);
+        selfie.setImageResource(R.drawable.starwars1);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(getString(R.string.add_game));
@@ -220,21 +258,82 @@ public class AddGame extends AppCompatActivity {
         String numPlayers = edtNumPlayers.getText().toString();
 
         if (!numPlayers.isEmpty() && totalScore != 0) {
-            saveGame(Integer.parseInt(numPlayers), totalScore);
-            celebrate();
-            new CountDownTimer(COMPLETE, TICK) {
-                public void onTick(long millisUntilFinished) {
-                }
-
-                public void onFinish() {
-                    finish();
-                }
-            }.start();
+            askCameraPermission();
+//            saveGame(Integer.parseInt(numPlayers), totalScore);
+//            celebrate();
+//            new CountDownTimer(COMPLETE, TICK) {
+//                public void onTick(long millisUntilFinished) {
+//                }
+//
+//                public void onFinish() {
+//                    finish();
+//                }
+//            }.start();
         } else {
             Toast.makeText(AddGame.this, R.string.addEmptyMsg, Toast.LENGTH_LONG)
                     .show();
         }
         return true;
+    }
+
+    private void askCameraPermission() {
+            if(ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)!= PackageManager.PERMISSION_GRANTED)
+            {
+                ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION_CODE);
+            }
+            else
+            {
+                openCamera();
+            }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == CAMERA_PERMISSION_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                openCamera();
+            } else {
+                Toast.makeText(this, "Camera permission required to use Camera.", Toast.LENGTH_LONG).show();
+//                celebrate();
+//                new CountDownTimer(Complete, Tick) {
+//                    public void onTick(long millisUntilFinished) {
+//                    }
+//
+//                    public void onFinish() {
+//                        finish();
+//                    }
+//                }.start();
+            }
+        }
+    }
+
+    private void openCamera() {
+        Intent camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        // Create a File reference for future access
+        photoFile = getPhotoFileUri(photoFileName);
+        Uri fileProvider = FileProvider.getUriForFile(AddGame.this, "com.codepath.fileprovider", photoFile);
+        camera.putExtra(MediaStore.EXTRA_OUTPUT, fileProvider);
+        if (camera.resolveActivity(getPackageManager()) != null) {
+            activityLauncher.launch(camera);
+        }
+    }
+
+    // Returns the File for a photo stored on disk given the fileName
+    public File getPhotoFileUri(String fileName) {
+        // Get safe storage directory for photos
+        // Use `getExternalFilesDir` on Context to access package-specific directories.
+        // This way, we don't need to request external read/write runtime permissions.
+        File mediaStorageDir = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), APP_TAG);
+
+        // Create the storage directory if it does not exist
+        if (!mediaStorageDir.exists() && !mediaStorageDir.mkdirs()){
+            Log.d(APP_TAG, "failed to create directory");
+        }
+
+        // Return the file target for the photo based on filename
+        File file = new File(mediaStorageDir.getPath() + File.separator + fileName);
+        return file;
     }
 
     private void celebrate() {

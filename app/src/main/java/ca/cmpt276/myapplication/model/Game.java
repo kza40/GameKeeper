@@ -17,6 +17,7 @@ public class Game {
     private float scaleFactor;
     private String[] playerScores;
     private String datePlayed;
+    private String photoFileName;
 
     public Game(String achievementEarned, int numOfPlayers, int groupScore, int poorScore, int greatScore, float scaleFactor,String[] playerScores)
     {
