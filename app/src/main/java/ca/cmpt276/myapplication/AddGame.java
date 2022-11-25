@@ -268,9 +268,8 @@ public class AddGame extends AppCompatActivity {
         }
 
         private void celebrate() {
-            FragmentManager manager = getSupportFragmentManager();
-            CelebrationFragment dialog = new CelebrationFragment(achievementEarned);
-            dialog.show(manager, "CelebrationFragment");
+            Intent intent = CelebrationPage.makeIntent(AddGame.this);
+            startActivity(intent);
         }
 
         private void saveGame(int numPlayers, int groupScore) {

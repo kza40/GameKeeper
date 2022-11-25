@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    tools:context=".CelebrationPage">
+
 
     <ImageView
         android:id="@+id/imageView2"
@@ -38,7 +39,10 @@
         app:layout_constraintBottom_toBottomOf="@+id/guidelineBottomImages"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toStartOf="@+id/guidelineRiCon"
+        app:layout_constraintHorizontal_bias="0.866"
+        app:layout_constraintStart_toStartOf="@+id/gSaber"
         app:layout_constraintTop_toTopOf="@+id/guidelineTopImages"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/partypopper" />
 
     <TextView
@@ -117,5 +121,16 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.70" />
+
+    <ImageView
+        android:id="@+id/reload"
+        android:layout_width="73dp"
+        android:layout_height="64dp"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineAbCon"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineLeCon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/reload" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
