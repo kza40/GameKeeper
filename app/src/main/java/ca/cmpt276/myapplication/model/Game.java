@@ -18,13 +18,13 @@ public class Game {
     private String[] playerScores;
     private String datePlayed;
 
-    public Game(String achievementEarned, int numOfPlayers, int groupScore, int poorScore, int greatScore, float scaleFactor,String[] playerScores)
+    public Game(String achievementEarned, int numOfPlayers, int groupScore, float scaleFactor,String[] playerScores)
     {
         this.achievementEarned = achievementEarned;
         this.numOfPlayers = numOfPlayers;
         this.groupScore = groupScore;
         this.scaleFactor = scaleFactor;
-        this.playerScores=playerScores;
+        this.playerScores = playerScores;
         setDate();
     }
 

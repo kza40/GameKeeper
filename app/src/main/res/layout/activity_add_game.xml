@@ -22,7 +22,7 @@
         android:inputType="number"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="#673AB7"
-        app:layout_constraintBottom_toTopOf="@+id/txtTotalScore"
+        app:layout_constraintBottom_toTopOf="@+id/tvTotalScore"
         app:layout_constraintEnd_toStartOf="@+id/vGuideline80p"
         app:layout_constraintStart_toStartOf="@+id/vGuideline20p"
         app:layout_constraintTop_toTopOf="@+id/hGuideline25p" />
@@ -149,7 +149,7 @@
     </ScrollView>
 
     <TextView
-        android:id="@+id/txtTotalScore"
+        android:id="@+id/tvTotalScore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/font_main"
