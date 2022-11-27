@@ -29,10 +29,7 @@ public class AddGame extends AppCompatActivity {
     //Constants
     public static final String CONFIG_POSITION = "AddGame: Config position";
     public static final String GAME_POSITION = "AddGame: Game position";
-    private static final int TICK = 1000;
-    private static final int COMPLETE = 10000;
     public static final int MAX_PLAYERS = 25;
-    public static final String CELEBRATION_FRAGMENT = "CelebrationFragment";
 
     //UI Variables
     private TextView tvTotalScore;
@@ -215,15 +212,6 @@ public class AddGame extends AppCompatActivity {
 
             saveGame(achievementEarned, numPlayers);
             celebrate(achievementEarned);
-
-            new CountDownTimer(COMPLETE, TICK) {
-                public void onTick(long millisUntilFinished) {
-                }
-
-                public void onFinish() {
-                    finish();
-                }
-            }.start();
         } else {
             Toast.makeText(AddGame.this, R.string.addEmptyMsg, Toast.LENGTH_LONG)
                     .show();
@@ -266,9 +254,8 @@ public class AddGame extends AppCompatActivity {
     }
 
     private void celebrate(String achievementEarned) {
-        FragmentManager manager = getSupportFragmentManager();
-        CelebrationFragment dialog = new CelebrationFragment(achievementEarned);
-        dialog.show(manager, CELEBRATION_FRAGMENT);
+        Intent intent = CelebrationPage.makeIntent(AddGame.this);
+        startActivity(intent);
     }
 
     private LinearLayout.LayoutParams setupLinearLayoutParameters() {

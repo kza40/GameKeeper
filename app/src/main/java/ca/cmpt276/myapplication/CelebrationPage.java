@@ -17,9 +17,6 @@ public class CelebrationPage extends AppCompatActivity {
     private String name;
     private String ACHIEVEMENT;
 
-    public CelebrationPage(String name) {
-        this.name = name;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
