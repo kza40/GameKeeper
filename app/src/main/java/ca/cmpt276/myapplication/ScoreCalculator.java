@@ -16,6 +16,13 @@ import java.util.List;
 
 import ca.cmpt276.myapplication.model.Game;
 
+/**
+ * This class handles the UI for processing player scores.
+ *
+ * It can return some information: the number of players entered, the total score,
+ * an array of individual player scores, and whether the game is ready to save.
+ */
+
 public class ScoreCalculator {
     public static final int MAX_PLAYERS = 25;
 
@@ -29,7 +36,7 @@ public class ScoreCalculator {
     private LinearLayout.LayoutParams lp;
 
     private List<EditText> playerScores;
-    private boolean isFilled;
+    private boolean isReadyForSave;
     private int numActiveFields;
     private int totalScore;
 
@@ -62,7 +69,7 @@ public class ScoreCalculator {
         updateScoreFields();
 
         edtPlayerCount.addTextChangedListener(playerNumTextWatcher);
-        isFilled = true;
+        isReadyForSave = true;
     }
 
     private void loadPlayerScores() {
@@ -107,7 +114,7 @@ public class ScoreCalculator {
                 numScoresFilled++;
             }
         }
-        isFilled = (numActiveFields > 0 && numScoresFilled == numActiveFields);
+        isReadyForSave = (numActiveFields > 0 && numScoresFilled == numActiveFields);
 
         String text = mContext.getString(R.string.score_colon) + totalScore;
         tvTotalScore.setText(text);
@@ -133,7 +140,6 @@ public class ScoreCalculator {
                 numActiveFields = 0;
                 table.removeAllViews();
             }
-
             updateTotalScore();
         }
 
@@ -185,7 +191,7 @@ public class ScoreCalculator {
     }
 
     public boolean isReadyForSave() {
-        return isFilled;
+        return isReadyForSave;
     }
 
     public String[] getScoresAsArray() {
