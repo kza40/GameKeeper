@@ -111,7 +111,6 @@ public class AddGame extends AppCompatActivity {
     private void setupUIElements() {
         tvTotalScore = findViewById(R.id.tvTotalScore);
         edtPlayerCount = findViewById(R.id.edtNumPlayersDisplay);
-
         setupDifficultyToggle();
 
         if(isEdit) {
@@ -293,7 +292,11 @@ public class AddGame extends AppCompatActivity {
     private LinearLayout.LayoutParams setupLinearLayoutParameters() {
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT); // Verbose!
         lp.weight = 1.0f; // This is critical. Doesn't work without it.
-        lp.setMargins(240, 10, 240, 10);
+        edtPlayerCount.measure(0, 0);
+        int widthPlayerCountBox = edtPlayerCount.getMeasuredWidth();
+        int widthParent = getApplicationContext().getResources().getDisplayMetrics().widthPixels;
+        int hMargin = (widthParent - widthPlayerCountBox) / 2;
+        lp.setMargins(hMargin, 10, hMargin, 10);
         return lp;
     }
 
