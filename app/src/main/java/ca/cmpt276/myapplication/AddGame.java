@@ -12,12 +12,16 @@ import android.os.CountDownTimer;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import ca.cmpt276.myapplication.model.AchievementCalculator;
 import ca.cmpt276.myapplication.model.Game;
@@ -36,18 +40,21 @@ public class AddGame extends AppCompatActivity {
 
     //UI Variables
     private TextView tvTotalScore;
-    private EditText edtNumPlayers;
-    private EditText[] edtIndividualScore;
+    private EditText edtPlayerCount;
     private DifficultyToggle difficultyToggle;
+    private LinearLayout table;
+    private LinearLayout.LayoutParams lp;
 
     //Game Variables
     private ConfigManager configManager;
     private GameConfig gameConfig;
     private Game currentGame;
-    private int NUM_ROWS = 0;
-    private Boolean isEdit;
+    private boolean isEdit;
     private int totalScore;
+
+    private List<EditText> playerScores;
     private boolean isFilled;
+    private int numActiveFields;
 
     private String[] themeTitles;
     private String titleSubLevelOne;
@@ -77,16 +84,13 @@ public class AddGame extends AppCompatActivity {
         int configPos = intent.getIntExtra(CONFIG_POSITION, -1);
         configManager = ConfigManager.getInstance();
         gameConfig = configManager.getGameConfigAtIndex(configPos);
-        isEdit=false;
-        isFilled = false;
+        isEdit = false;
 
-        if (intent.getIntExtra(GAME_POSITION, -1) != -1)
-        {
+        if (intent.getIntExtra(GAME_POSITION, -1) != -1) {
             setTitle(getString(R.string.edit_game_title));
-            isFilled = true;
-            isEdit=true;
-            int gamePos=intent.getIntExtra(GAME_POSITION, -1);
-            currentGame=gameConfig.getGameAtIndex(gamePos);
+            isEdit = true;
+            int gamePos = intent.getIntExtra(GAME_POSITION, -1);
+            currentGame = gameConfig.getGameAtIndex(gamePos);
         }
     }
 
@@ -106,21 +110,57 @@ public class AddGame extends AppCompatActivity {
 
     private void setupUIElements() {
         tvTotalScore = findViewById(R.id.tvTotalScore);
-        edtNumPlayers = findViewById(R.id.edtNumPlayersDisplay);
+        edtPlayerCount = findViewById(R.id.edtNumPlayersDisplay);
+
         setupDifficultyToggle();
-        populateEdittextScores(isEdit);
-        if(isEdit)
-        {
+
+        if(isEdit) {
             totalScore = currentGame.getGroupScore();
-            tvTotalScore.setText(getString(R.string.score_colon) + totalScore);
+            String total = getString(R.string.score_colon) + totalScore;
+            tvTotalScore.setText(total);
+
+            String count = Integer.toString(currentGame.getNumOfPlayers());
+            edtPlayerCount.setText(count);
+
             difficultyToggle.setDifficulty(currentGame.getScaleFactor());
-            edtNumPlayers.setText(Integer.toString(currentGame.getNumOfPlayers()));
-        }
-        else
-        {
+        } else {
+            totalScore = 0;
             tvTotalScore.setText(R.string.score_equals_zero);
+            edtPlayerCount.setText(R.string.default_player_count);
         }
-        edtNumPlayers.addTextChangedListener(playerNumTextWatcher);
+
+        numActiveFields = Integer.parseInt(edtPlayerCount.getText().toString());
+
+        loadPlayerScores();
+        updateScoreFields();
+
+        edtPlayerCount.addTextChangedListener(playerNumTextWatcher);
+        isFilled = true;
+    }
+
+    private void loadPlayerScores() {
+        playerScores = new ArrayList<>();
+
+        for (int i = 0; i < numActiveFields; i++) {
+            EditText scoreField;
+            if (isEdit) {
+                scoreField = setupEditText("" + currentGame.getPlayerScoresAtIndex(i), i);
+            }
+            else {
+                scoreField = setupEditText(getString(R.string.default_score_zero), i);
+            }
+            scoreField.addTextChangedListener(scoreTextWatcher);
+            playerScores.add(scoreField);
+        }
+
+        for (int i = numActiveFields; i < MAX_PLAYERS; i++) {
+            EditText scoreField = setupEditText(getString(R.string.default_score_zero), i);
+            scoreField.addTextChangedListener(scoreTextWatcher);
+            playerScores.add(scoreField);
+        }
+
+        table = findViewById(R.id.LayoutForEdittexts);
+        lp = setupLinearLayoutParameters();
     }
 
     private void setupDifficultyToggle() {
@@ -128,79 +168,62 @@ public class AddGame extends AppCompatActivity {
         difficultyToggle.setup();
     }
 
-    private void populateEdittextScores(Boolean isEdit) {
-        if(isEdit) {
-            NUM_ROWS = currentGame.getNumOfPlayers();
-            edtIndividualScore = new EditText[NUM_ROWS];
-        }
-        LinearLayout table = findViewById(R.id.LayoutForEdittexts);
-        table.removeAllViews();
-
-        for (int row = 0; row < NUM_ROWS; row++) {
-            EditText editText = setupEditText(row);
-            LinearLayout.LayoutParams lp = setupLinearLayoutParameters();
-
-            if(isEdit) {
-                editText.setText(currentGame.getPlayerScoresAtIndex(row));
-            }
-            table.addView(editText, lp);
-            edtIndividualScore[row] = editText;
-            edtIndividualScore[row].addTextChangedListener(scoreTextWatcher);
-        }
-    }
-
-
     private final TextWatcher playerNumTextWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
         @Override
         public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            String numPlayersInput = edtNumPlayers.getText().toString();
-            totalScore = 0;
-            if (!numPlayersInput.isEmpty()) {
-                NUM_ROWS = Integer.parseInt(numPlayersInput);
-                if (NUM_ROWS > MAX_PLAYERS) {
+            String strPlayerCount = edtPlayerCount.getText().toString();
+            if (!strPlayerCount.isEmpty()) {
+                numActiveFields = Integer.parseInt(strPlayerCount);
+                if (numActiveFields > MAX_PLAYERS) {
                     Toast.makeText(getApplicationContext(), R.string.input_less_message, Toast.LENGTH_SHORT).show();
-                    edtNumPlayers.setText("");
+                    edtPlayerCount.setText("");
                 } else {
-                    edtIndividualScore = new EditText[NUM_ROWS];
-                    populateEdittextScores(false);
+                    updateScoreFields();
                 }
             } else {
-                LinearLayout table = findViewById(R.id.LayoutForEdittexts);
+                numActiveFields = 0;
                 table.removeAllViews();
-                isFilled = false;
             }
+            updateTotalScore();
         }
 
         @Override
         public void afterTextChanged(Editable editable) {}
     };
 
-    private TextWatcher scoreTextWatcher = new TextWatcher() {
+    private void updateScoreFields() {
+        table.removeAllViews();
+        for (int i = 0; i < numActiveFields; i++) {
+            table.addView(playerScores.get(i), lp);
+        }
+    }
+
+    private void updateTotalScore() {
+        totalScore = 0;
+        int numFilledFields = 0;
+        for (int i = 0; i < numActiveFields; i++) {
+            String score = playerScores.get(i).getText().toString();
+            if (!score.isEmpty()) {
+                totalScore += Integer.parseInt(score);
+                numFilledFields++;
+            }
+        }
+        isFilled = (numActiveFields > 0 && numFilledFields == numActiveFields);
+
+        String text = getString(R.string.score_colon) + totalScore;
+        tvTotalScore.setText(text);
+    }
+
+    private final TextWatcher scoreTextWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
         @Override
         public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            int numFilled = 0;
-            totalScore = 0;
-
-            for (int row = 0; row < NUM_ROWS; row++) {
-                String currField = edtIndividualScore[row].getText().toString();
-                if (!currField.isEmpty()) {
-                    totalScore += Integer.parseInt(currField);
-                    numFilled++;
-                }
-            }
-
-            if (numFilled == NUM_ROWS) {
-                isFilled = true;      // ready for save!
-            } else {
-                isFilled = false;
-            }
-            tvTotalScore.setText(Integer.toString(totalScore));
+            updateTotalScore();
         }
 
         @Override
@@ -210,10 +233,9 @@ public class AddGame extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (isFilled) {
-            int numPlayers = Integer.parseInt(edtNumPlayers.getText().toString());
-            String achievementEarned = getAchievementName(totalScore, numPlayers);
+            String achievementEarned = getAchievementName(totalScore);
 
-            saveGame(achievementEarned, numPlayers);
+            saveGame(achievementEarned);
             celebrate(achievementEarned);
 
             new CountDownTimer(COMPLETE, TICK) {
@@ -231,10 +253,10 @@ public class AddGame extends AppCompatActivity {
         return true;
     }
 
-    private String getAchievementName(int score, int numPlayers) {
+    private String getAchievementName(int score) {
         int index = AchievementCalculator.getScorePlacement(
-                themeTitles.length, numPlayers, gameConfig.getPoorScore(), gameConfig.getGoodScore(),
-                score, difficultyToggle.getScaleFactor());
+                themeTitles.length, numActiveFields, gameConfig.getPoorScore(),
+                gameConfig.getGoodScore(), score, difficultyToggle.getScaleFactor());
         if (index == AchievementCalculator.INDEX_SUB_LEVEL_ONE) {
             return titleSubLevelOne;
         } else {
@@ -242,23 +264,20 @@ public class AddGame extends AppCompatActivity {
         }
     }
 
-    private void saveGame(String achievementEarned, int numPlayers) {
-        String[] scores = new String[NUM_ROWS];
-        for (int i = 0; i < NUM_ROWS; i++) {
-            scores[i] = edtIndividualScore[i].getText().toString();
+    private void saveGame(String achievementEarned) {
+        String[] scores = new String[numActiveFields];
+        for (int i = 0; i < numActiveFields; i++) {
+            scores[i] = playerScores.get(i).getText().toString();
         }
 
-        if(isEdit)
-        {
+        if(isEdit) {
             currentGame.setAchievementEarned(achievementEarned);
-            currentGame.setNumOfPlayers(numPlayers);
+            currentGame.setNumOfPlayers(numActiveFields);
             currentGame.setGroupScore(totalScore);
             currentGame.setScaleFactor(difficultyToggle.getScaleFactor());
             currentGame.setPlayerScores(scores);
-        }
-        else
-        {
-            Game game = new Game(achievementEarned, numPlayers, totalScore,
+        } else {
+            Game game = new Game(achievementEarned, numActiveFields, totalScore,
                                  difficultyToggle.getScaleFactor(), scores);
             gameConfig.addGame(game);
         }
@@ -272,15 +291,17 @@ public class AddGame extends AppCompatActivity {
     }
 
     private LinearLayout.LayoutParams setupLinearLayoutParameters() {
-        LinearLayout.LayoutParams lp=new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT); // Verbose!
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT); // Verbose!
         lp.weight = 1.0f; // This is critical. Doesn't work without it.
         lp.setMargins(240, 10, 240, 10);
         return lp;
     }
 
-    private EditText setupEditText(int row) {
-        EditText editText=new EditText(getApplicationContext());
+    private EditText setupEditText(String text, int row) {
+        EditText editText = new EditText(getApplicationContext());
+        editText.setText(text);
         editText.setHint(getString(R.string.score_num) + (row + 1));
+        editText.setGravity(Gravity.CENTER_HORIZONTAL);
         editText.setInputType(InputType.TYPE_CLASS_NUMBER);
         return editText;
     }
