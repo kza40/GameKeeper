@@ -254,7 +254,7 @@ public class AddGame extends AppCompatActivity {
     }
 
     private void celebrate(String achievementEarned) {
-        Intent intent = CelebrationPage.makeIntent(AddGame.this);
+        Intent intent = CelebrationPage.makeIntent(this, achievementEarned);
         startActivity(intent);
     }
 

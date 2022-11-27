@@ -14,7 +14,6 @@
     <string name="number_of_players">Number of players</string>
     <string name="achievementsTitle">Achievements</string>
     <string name="add_game_title">Add Game</string>
-    <string name="you_got">"You got "</string>
     <string name="exclamation">!</string>
     <string name="addEmptyMsg">Could not save. One or more fields are empty.</string>
     <string name="configsEmptyStateMsg">Oh... seems like there arent any game configurations yet. Tap the + icon to add one!</string>
@@ -76,4 +75,5 @@
     <string name="score_num">Score #</string>
     <string name="input_less_message">Please input a number of 25 or lower</string>
     <string name="edit_game_title">Edit Game</string>
+    <string name="you_got_text">You got</string>
 </resources>

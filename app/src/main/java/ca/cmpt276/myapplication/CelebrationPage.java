@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -14,44 +13,25 @@ import android.widget.TextView;
 
 public class CelebrationPage extends AppCompatActivity {
 
-    private String name;
-    private String ACHIEVEMENT;
-
+    private static final String ACHIEVEMENT_NAME = "CelebrationPage: Achievement name";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_celebration_page);
 
-        MediaPlayer mp = MediaPlayer.create(this, R.raw.sample);
-        mp.setVolume(1.0f,1.0f);
-        mp.start();
+        TextView tvName = findViewById(R.id.tvAchievementName);
+        String name = getIntent().getStringExtra(ACHIEVEMENT_NAME);
+        tvName.setText(name);
 
-        TextView txtView = findViewById(R.id.txtViewLevel);
-        txtView.setText(name);
-
-
-
-        setupAnimations();
+        startEffects();
         setupReload();
     }
 
-    private void setupReload() {
-        ImageView reload = findViewById(R.id.reload);
+    private void startEffects() {
+        MediaPlayer mp = MediaPlayer.create(CelebrationPage.this, R.raw.win_sound);
+        mp.start();
 
-        reload.setOnClickListener(view -> {
-            finish();
-            startActivity(getIntent());
-        });
-    }
-
-    public static Intent makeIntent(Context context) {
-        Intent intent = new Intent(context, CelebrationPage.class);
-        return intent;
-    }
-
-
-    private void setupAnimations() {
         ImageView rSaber;
         ImageView gSaber;
 
@@ -65,5 +45,15 @@ public class CelebrationPage extends AppCompatActivity {
         gSaber.startAnimation(rotateSlideL);
     }
 
+    private void setupReload() {
+        ImageView ivReload = findViewById(R.id.ivReload);
+        ivReload.setOnClickListener(view -> startEffects());
+    }
+
+    public static Intent makeIntent(Context context, String achievementName) {
+        Intent intent = new Intent(context, CelebrationPage.class);
+        intent.putExtra(ACHIEVEMENT_NAME, achievementName);
+        return intent;
+    }
 
 }
