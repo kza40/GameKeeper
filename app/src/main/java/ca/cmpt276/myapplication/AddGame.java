@@ -144,9 +144,16 @@ public class AddGame extends AppCompatActivity {
         populateEdittextScores(isEdit);
         if(isEdit)
         {
-            photoFile = getPhotoFileUri(currentGame.getPhotoFileName());
-            Bitmap takenImage = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
-            imageViewPicture.setImageBitmap(takenImage);
+            if(currentGame.getPhotoFileName()!=null)
+            {
+                photoFile = getPhotoFileUri(currentGame.getPhotoFileName());
+                Bitmap takenImage = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
+                if(takenImage!=null)
+                {
+                    imageViewPicture.setImageBitmap(takenImage);
+                }
+            }
+
             tvTotalScore.setText("Score: "+currentGame.getGroupScore());
             difficultyToggle.setDifficulty(currentGame.getScaleFactor());
             edtNumPlayers.setText(Integer.toString(currentGame.getNumOfPlayers()));
