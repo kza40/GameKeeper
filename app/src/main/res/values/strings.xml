@@ -76,4 +76,6 @@
     <string name="score_num">Score #</string>
     <string name="input_less_message">Please input a number of 25 or lower</string>
     <string name="edit_game_title">Edit Game</string>
+    <string name="default_player_count">3</string>
+    <string name="default_score_zero">0</string>
 </resources>
