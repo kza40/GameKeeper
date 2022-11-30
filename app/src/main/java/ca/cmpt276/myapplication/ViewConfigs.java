@@ -61,9 +61,21 @@ public class ViewConfigs extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        Intent intent = ThemeSetting.makeIntent(this);
-        startActivity(intent);
-        return true;
+        Intent intent;
+        switch (item.getItemId()) {
+            case R.id.settings:
+                intent = ThemeSetting.makeIntent(this);
+                startActivity(intent);
+                return true;
+
+            case R.id.about:
+                intent = AboutScreen.makeIntent(this);
+                startActivity(intent);
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     private void populateListView() {
