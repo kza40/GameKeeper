@@ -19,13 +19,14 @@ public class Game {
     private String datePlayed;
     private String photoFileName;
 
-    public Game(String achievementEarned, int numOfPlayers, int groupScore, int poorScore, int greatScore, float scaleFactor,String[] playerScores)
+    public Game(String achievementEarned, int numOfPlayers, int groupScore, int poorScore, int greatScore, float scaleFactor,String[] playerScores,String photoFileName)
     {
         this.achievementEarned = achievementEarned;
         this.numOfPlayers = numOfPlayers;
         this.groupScore = groupScore;
         this.scaleFactor = scaleFactor;
         this.playerScores=playerScores;
+        this.photoFileName=photoFileName;
         setDate();
     }
 
@@ -82,5 +83,9 @@ public class Game {
 
     public void setDatePlayed(String datePlayed) {
         this.datePlayed = datePlayed;
+    }
+
+    public String getPhotoFileName() {
+        return photoFileName;
     }
 }

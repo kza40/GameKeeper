@@ -57,6 +57,7 @@ public class AddGame extends AppCompatActivity {
     public static final String CELEBRATION_FRAGMENT = "CelebrationFragment";
 
     //UI Variables
+    private ImageView imageViewPicture;
     private TextView tvTotalScore;
     private TextView tvDifficulty;
     private EditText edtNumPlayers;
@@ -81,14 +82,22 @@ public class AddGame extends AppCompatActivity {
     ActivityResultLauncher<Intent> activityLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
         @Override
         public void onActivityResult(ActivityResult result) {
-            Log.d("Testing","ONResult");
-            if (result.getResultCode() == RESULT_OK) {
-                // by this point we have the camera photo on disk
+            if (result.getResultCode() == RESULT_OK)
+            {
                 Bitmap takenImage = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
-                // RESIZE BITMAP, see section below
-                // Load the taken image into a preview
-                ImageView selfie=findViewById(R.id.imageViewSelfie);
-                selfie.setImageBitmap(takenImage);
+                imageViewPicture.setImageBitmap(takenImage);
+
+                String numPlayers = edtNumPlayers.getText().toString();
+                saveGame(Integer.parseInt(numPlayers), totalScore);
+                celebrate();
+                new CountDownTimer(COMPLETE, TICK) {
+                    public void onTick(long millisUntilFinished) {
+                    }
+
+                    public void onFinish() {
+                        finish();
+                    }
+                }.start();
             }
         }
     });
@@ -97,8 +106,6 @@ public class AddGame extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_game);
-        ImageView selfie=findViewById(R.id.imageViewSelfie);
-        selfie.setImageResource(R.drawable.starwars1);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(getString(R.string.add_game));
@@ -132,10 +139,14 @@ public class AddGame extends AppCompatActivity {
     private void setupUIElements() {
         tvTotalScore = findViewById(R.id.tvTotalScore);
         edtNumPlayers = findViewById(R.id.edtNumPlayersDisplay);
+        imageViewPicture=findViewById(R.id.imageViewSelfie);
         setupDifficultyToggle(isEdit);
         populateEdittextScores(isEdit);
         if(isEdit)
         {
+            photoFile = getPhotoFileUri(currentGame.getPhotoFileName());
+            Bitmap takenImage = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
+            imageViewPicture.setImageBitmap(takenImage);
             tvTotalScore.setText("Score: "+currentGame.getGroupScore());
             difficultyToggle.setDifficulty(currentGame.getScaleFactor());
             edtNumPlayers.setText(Integer.toString(currentGame.getNumOfPlayers()));
@@ -144,6 +155,7 @@ public class AddGame extends AppCompatActivity {
         else
         {
             tvTotalScore.setText(R.string.score_equals_zero);
+            imageViewPicture.setImageResource(R.drawable.starwars1);
         }
         edtNumPlayers.addTextChangedListener(playerNumTextWatcher);
     }
@@ -311,6 +323,7 @@ public class AddGame extends AppCompatActivity {
     private void openCamera() {
         Intent camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         // Create a File reference for future access
+        photoFileName=System.currentTimeMillis()+"_"+photoFileName;
         photoFile = getPhotoFileUri(photoFileName);
         Uri fileProvider = FileProvider.getUriForFile(AddGame.this, "com.codepath.fileprovider", photoFile);
         camera.putExtra(MediaStore.EXTRA_OUTPUT, fileProvider);
@@ -321,12 +334,8 @@ public class AddGame extends AppCompatActivity {
 
     // Returns the File for a photo stored on disk given the fileName
     public File getPhotoFileUri(String fileName) {
-        // Get safe storage directory for photos
-        // Use `getExternalFilesDir` on Context to access package-specific directories.
-        // This way, we don't need to request external read/write runtime permissions.
         File mediaStorageDir = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), APP_TAG);
 
-        // Create the storage directory if it does not exist
         if (!mediaStorageDir.exists() && !mediaStorageDir.mkdirs()){
             Log.d(APP_TAG, "failed to create directory");
         }
@@ -354,7 +363,7 @@ public class AddGame extends AppCompatActivity {
         else
         {
             Game game = new Game(achievementEarned, numPlayers, groupScore, gameConfig.getPoorScore(),
-                    gameConfig.getGoodScore(), difficultyToggle.getScaleFactor(), individualScores);
+                    gameConfig.getGoodScore(), difficultyToggle.getScaleFactor(), individualScores,photoFileName);
             gameConfig.addGame(game);
         }
         new SharedPreferenceManager(getApplicationContext()).updateConfigManager(configManager);
@@ -395,5 +404,6 @@ public class AddGame extends AppCompatActivity {
             intent.putExtra(Game_POSITION, gamePosition);
         return intent;
     }
+
 }
 
