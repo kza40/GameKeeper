@@ -19,7 +19,7 @@ public class Game {
     private String datePlayed;
     private String photoFileName;
 
-    public Game(String achievementEarned, int numOfPlayers, int groupScore, int poorScore, int greatScore, float scaleFactor,String[] playerScores,String photoFileName)
+    public Game(String achievementEarned, int numOfPlayers, int groupScore, float scaleFactor,String[] playerScores,String photoFileName)
     {
         this.achievementEarned = achievementEarned;
         this.numOfPlayers = numOfPlayers;

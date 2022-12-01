@@ -23,16 +23,10 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.text.Editable;
-import android.text.InputType;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.view.View;
 import android.widget.Toast;
 
@@ -49,6 +43,7 @@ public class AddGame extends AppCompatActivity {
     public final String APP_TAG = "MyCustomApp";
     public String photoFileName = "photo.jpg";
     File photoFile;
+
     //Constants
     public static final String CONFIG_POSITION = "AddGame: Config position";
     public static final String GAME_POSITION = "AddGame: Game position";
@@ -57,12 +52,7 @@ public class AddGame extends AppCompatActivity {
     public static final String CELEBRATION_FRAGMENT = "CelebrationFragment";
 
     //Features
-    //UI Variables
     private ImageView imageViewPicture;
-    private TextView tvTotalScore;
-    private TextView tvDifficulty;
-    private EditText edtNumPlayers;
-    private EditText[] edtIndividualScore;
     private DifficultyToggle difficultyToggle;
     private ScoreCalculator scoreCalculator;
 
@@ -85,17 +75,17 @@ public class AddGame extends AppCompatActivity {
                 Bitmap takenImage = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
                 imageViewPicture.setImageBitmap(takenImage);
 
-                String numPlayers = edtNumPlayers.getText().toString();
-                saveGame(Integer.parseInt(numPlayers), totalScore);
-                celebrate();
-                new CountDownTimer(COMPLETE, TICK) {
-                    public void onTick(long millisUntilFinished) {
-                    }
-
-                    public void onFinish() {
-                        finish();
-                    }
-                }.start();
+                String achievementEarned = getAchievementName(scoreCalculator.getTotalScore());
+                saveGame(achievementEarned);
+                celebrate(achievementEarned);
+//                new CountDownTimer(COMPLETE, TICK) {
+//                    public void onTick(long millisUntilFinished) {
+//                    }
+//
+//                    public void onFinish() {
+//                        finish();
+//                    }
+//                }.start();
             }
         }
     });
@@ -134,25 +124,6 @@ public class AddGame extends AppCompatActivity {
         }
     }
 
-    private void setupUIElements() {
-        tvTotalScore = findViewById(R.id.tvTotalScore);
-        edtNumPlayers = findViewById(R.id.edtNumPlayersDisplay);
-        imageViewPicture=findViewById(R.id.imageViewSelfie);
-        setupDifficultyToggle(isEdit);
-        populateEdittextScores(isEdit);
-        if(isEdit)
-        {
-            if(currentGame.getPhotoFileName()!=null)
-            {
-                photoFile = getPhotoFileUri(currentGame.getPhotoFileName());
-                Bitmap takenImage = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
-                if(takenImage!=null)
-                {
-                    imageViewPicture.setImageBitmap(takenImage);
-                }
-            }
-
-            tvTotalScore.setText("Score: "+currentGame.getGroupScore());
     private void loadCurrentTheme() {
         String theme = configManager.getTheme();
         if (theme.equals(ThemeSetting.THEME_FITNESS)) {
@@ -168,89 +139,30 @@ public class AddGame extends AppCompatActivity {
     }
 
     private void setupFeatures() {
+        imageViewPicture = findViewById(R.id.imageViewSelfie);
+
         View view = findViewById(android.R.id.content).getRootView();
         difficultyToggle = new DifficultyToggle(view);
         difficultyToggle.setup();
+
         if (isEdit) {
             difficultyToggle.setDifficulty(currentGame.getScaleFactor());
-            edtNumPlayers.setText(Integer.toString(currentGame.getNumOfPlayers()));
-            updateAchievement(currentGame.getGroupScore(), currentGame.getNumOfPlayers());
-        }
-        else
-        {
-            tvTotalScore.setText(R.string.score_equals_zero);
-            imageViewPicture.setImageResource(R.drawable.starwars1);
-        }
-        edtNumPlayers.addTextChangedListener(playerNumTextWatcher);
-    }
 
-    private void setupDifficultyToggle(boolean isEdit) {
-        difficultyToggle = new DifficultyToggle(findViewById(android.R.id.content).getRootView());
-        difficultyToggle.setup();
-        tvDifficulty = findViewById(R.id.tvDifficulty);
-        tvDifficulty.addTextChangedListener(scoreTextWatcher);
-    }
-
-    private void populateEdittextScores(Boolean isEdit) {
-        if(isEdit)
-        {
-            NUM_ROWS = currentGame.getNumOfPlayers();
-            edtIndividualScore = new EditText[NUM_ROWS];
-        }
-        LinearLayout table = (LinearLayout) findViewById(R.id.LayoutForEdittexts);
-        table.removeAllViews();
-
-        for (int row = 0; row < NUM_ROWS; row++) {
-            EditText editText = setupEditText(row);
-            LinearLayout.LayoutParams lp = setupLinearLayoutParameters();
-
-            if(isEdit)
-            {
-                editText.setText(currentGame.getPlayerScoresAtIndex(row));
+            if (currentGame.getPhotoFileName() != null) {
+                photoFile = getPhotoFileUri(currentGame.getPhotoFileName());
+                Bitmap takenImage = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
+                if (takenImage != null) {
+                    imageViewPicture.setImageBitmap(takenImage);
+                }
             }
-            table.addView(editText, lp);
-            edtIndividualScore[row] = editText;
-            edtIndividualScore[row].addTextChangedListener(scoreTextWatcher);
         }
-    }
-
-
-    private final TextWatcher playerNumTextWatcher = new TextWatcher() {
-        @Override
-        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-        }
-
         scoreCalculator = new ScoreCalculator(view, getApplicationContext(), currentGame);
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (scoreCalculator.isReadyForSave()) {
-            String achievementEarned = getAchievementName(scoreCalculator.getTotalScore());
-
-            saveGame(achievementEarned);
-            celebrate(achievementEarned);
-
-            new CountDownTimer(COMPLETE, TICK) {
-                public void onTick(long millisUntilFinished) {
-                }
-
-                public void onFinish() {
-                    finish();
-                }
-            }.start();
-        if (!numPlayers.isEmpty() && totalScore != 0) {
             askCameraPermission();
-//            saveGame(Integer.parseInt(numPlayers), totalScore);
-//            celebrate();
-//            new CountDownTimer(COMPLETE, TICK) {
-//                public void onTick(long millisUntilFinished) {
-//                }
-//
-//                public void onFinish() {
-//                    finish();
-//                }
-//            }.start();
         } else {
             Toast.makeText(AddGame.this, R.string.addEmptyMsg, Toast.LENGTH_LONG)
                     .show();
@@ -259,14 +171,14 @@ public class AddGame extends AppCompatActivity {
     }
 
     private void askCameraPermission() {
-            if(ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)!= PackageManager.PERMISSION_GRANTED)
-            {
-                ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION_CODE);
-            }
-            else
-            {
-                openCamera();
-            }
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)!= PackageManager.PERMISSION_GRANTED)
+        {
+            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION_CODE);
+        }
+        else
+        {
+            openCamera();
+        }
     }
 
     @Override
@@ -277,15 +189,6 @@ public class AddGame extends AppCompatActivity {
                 openCamera();
             } else {
                 Toast.makeText(this, "Camera permission required to use Camera.", Toast.LENGTH_LONG).show();
-//                celebrate();
-//                new CountDownTimer(Complete, Tick) {
-//                    public void onTick(long millisUntilFinished) {
-//                    }
-//
-//                    public void onFinish() {
-//                        finish();
-//                    }
-//                }.start();
             }
         }
     }
@@ -315,10 +218,6 @@ public class AddGame extends AppCompatActivity {
         return file;
     }
 
-    private void celebrate() {
-        FragmentManager manager = getSupportFragmentManager();
-        CelebrationFragment dialog = new CelebrationFragment(achievementEarned);
-        dialog.show(manager, CELEBRATION_FRAGMENT);
     private String getAchievementName(int score) {
         int index = AchievementCalculator.getScorePlacement(
                 themeTitles.length, scoreCalculator.getNumPlayers(), gameConfig.getPoorScore(),
@@ -341,7 +240,7 @@ public class AddGame extends AppCompatActivity {
         } else {
             Game game = new Game(achievementEarned, scoreCalculator.getNumPlayers(),
                                  scoreCalculator.getTotalScore(), difficultyToggle.getScaleFactor(),
-                                 scoreCalculator.getScoresAsArray());
+                                 scoreCalculator.getScoresAsArray(), photoFileName);
             gameConfig.addGame(game);
         }
         new SharedPreferenceManager(getApplicationContext()).updateConfigManager(configManager);
@@ -361,5 +260,4 @@ public class AddGame extends AppCompatActivity {
         }
         return intent;
     }
-
 }
