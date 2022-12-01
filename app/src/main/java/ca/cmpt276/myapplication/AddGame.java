@@ -33,6 +33,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.view.View;
 import android.widget.Toast;
 
 import java.io.File;
@@ -50,12 +51,12 @@ public class AddGame extends AppCompatActivity {
     File photoFile;
     //Constants
     public static final String CONFIG_POSITION = "AddGame: Config position";
-    public static final String Game_POSITION = "AddGame: Game position";
+    public static final String GAME_POSITION = "AddGame: Game position";
     private static final int TICK = 1000;
     private static final int COMPLETE = 10000;
-    public static final int MAX_PLAYERS = 25;
     public static final String CELEBRATION_FRAGMENT = "CelebrationFragment";
 
+    //Features
     //UI Variables
     private ImageView imageViewPicture;
     private TextView tvTotalScore;
@@ -63,20 +64,17 @@ public class AddGame extends AppCompatActivity {
     private EditText edtNumPlayers;
     private EditText[] edtIndividualScore;
     private DifficultyToggle difficultyToggle;
+    private ScoreCalculator scoreCalculator;
 
     //Game Variables
     private ConfigManager configManager;
     private GameConfig gameConfig;
     private Game currentGame;
+    private boolean isEdit;
 
-
-    private int NUM_ROWS = 0;
-    private Boolean isEdit;
-    private int totalScore;
-    private String[] individualScores;
+    //Achievements
     private String[] themeTitles;
     private String titleSubLevelOne;
-    private String achievementEarned;
 
 
     ActivityResultLauncher<Intent> activityLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
@@ -108,12 +106,12 @@ public class AddGame extends AppCompatActivity {
         setContentView(R.layout.activity_add_game);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(getString(R.string.add_game));
+        setTitle(getString(R.string.add_game_title));
+
         setupGameObjects();
         loadCurrentTheme();
-        setupUIElements();
+        setupFeatures();
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -126,13 +124,13 @@ public class AddGame extends AppCompatActivity {
         int configPos = intent.getIntExtra(CONFIG_POSITION, -1);
         configManager = ConfigManager.getInstance();
         gameConfig = configManager.getGameConfigAtIndex(configPos);
-        isEdit=false;
+        isEdit = false;
 
-        if( intent.getIntExtra(Game_POSITION, -1)!=-1)
-        {
-            isEdit=true;
-            int gamePos=intent.getIntExtra(Game_POSITION, -1);
-            currentGame=gameConfig.getGameAtIndex(gamePos);
+        if (intent.getIntExtra(GAME_POSITION, -1) != -1) {
+            setTitle(getString(R.string.edit_game_title));
+            isEdit = true;
+            int gamePos = intent.getIntExtra(GAME_POSITION, -1);
+            currentGame = gameConfig.getGameAtIndex(gamePos);
         }
     }
 
@@ -155,6 +153,25 @@ public class AddGame extends AppCompatActivity {
             }
 
             tvTotalScore.setText("Score: "+currentGame.getGroupScore());
+    private void loadCurrentTheme() {
+        String theme = configManager.getTheme();
+        if (theme.equals(ThemeSetting.THEME_FITNESS)) {
+            themeTitles = getResources().getStringArray(R.array.theme_fitness_names);
+            titleSubLevelOne = getString(R.string.fitnessLvl0);
+        } else if (theme.equals(ThemeSetting.THEME_SPONGEBOB)) {
+            themeTitles = getResources().getStringArray(R.array.theme_spongebob_names);
+            titleSubLevelOne = getString(R.string.spongeBobLvl0);
+        } else {
+            themeTitles = getResources().getStringArray(R.array.theme_starwars_names);
+            titleSubLevelOne = getString(R.string.starWarsLvl0);
+        }
+    }
+
+    private void setupFeatures() {
+        View view = findViewById(android.R.id.content).getRootView();
+        difficultyToggle = new DifficultyToggle(view);
+        difficultyToggle.setup();
+        if (isEdit) {
             difficultyToggle.setDifficulty(currentGame.getScaleFactor());
             edtNumPlayers.setText(Integer.toString(currentGame.getNumOfPlayers()));
             updateAchievement(currentGame.getGroupScore(), currentGame.getNumOfPlayers());
@@ -203,79 +220,25 @@ public class AddGame extends AppCompatActivity {
         public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
         }
 
-        @Override
-        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            String numPlayersInput = edtNumPlayers.getText().toString();
-            totalScore=0;
-            if (!numPlayersInput.isEmpty()) {
-                NUM_ROWS = Integer.parseInt(numPlayersInput);
-                if (NUM_ROWS > MAX_PLAYERS) {
-                    Toast.makeText(getApplicationContext(), R.string.input_less_message, Toast.LENGTH_SHORT).show();
-                    edtNumPlayers.setText("");
-                } else {
-                    edtIndividualScore = new EditText[NUM_ROWS];
-                    populateEdittextScores(false);
-                }
-            } else {
-                LinearLayout table = (LinearLayout) findViewById(R.id.LayoutForEdittexts);
-                table.removeAllViews();
-            }
-        }
-
-        @Override
-        public void afterTextChanged(Editable editable) {
-        }
-    };
-
-    private TextWatcher scoreTextWatcher = new TextWatcher() {
-        @Override
-        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-        }
-
-        @Override
-        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            String numPlayersInput = edtNumPlayers.getText().toString();
-            individualScores = new String[NUM_ROWS];
-            boolean individualScoresChecker = true;
-            totalScore = 0;
-            for (int row = 0; row < NUM_ROWS; row++) {
-                individualScores[row] = edtIndividualScore[row].getText().toString();
-                if (individualScores[row].isEmpty()) {
-                    individualScoresChecker = false;
-                    totalScore = 0;
-                }
-                if (individualScoresChecker) {
-                    totalScore += Integer.parseInt(individualScores[row]);
-                }
-            }
-            if (!numPlayersInput.isEmpty()) {
-                tvTotalScore.setText(getString(R.string.score_colon_2) + totalScore);
-                if (individualScoresChecker) {
-                    updateAchievement(totalScore, Integer.parseInt(numPlayersInput));
-                }
-            }
-        }
-
-        @Override
-        public void afterTextChanged(Editable editable) {
-        }
-    };
-
-    private void updateAchievement(int score, int numPlayers) {
-        int index = AchievementCalculator.getScorePlacement(
-                themeTitles.length, numPlayers, gameConfig.getPoorScore(), gameConfig.getGoodScore(),
-                score, difficultyToggle.getScaleFactor());
-        if (index == AchievementCalculator.INDEX_SUB_LEVEL_ONE) {
-            achievementEarned = titleSubLevelOne;
-        } else {
-            achievementEarned = themeTitles[index];
-        }
+        scoreCalculator = new ScoreCalculator(view, getApplicationContext(), currentGame);
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        String numPlayers = edtNumPlayers.getText().toString();
+        if (scoreCalculator.isReadyForSave()) {
+            String achievementEarned = getAchievementName(scoreCalculator.getTotalScore());
 
+            saveGame(achievementEarned);
+            celebrate(achievementEarned);
+
+            new CountDownTimer(COMPLETE, TICK) {
+                public void onTick(long millisUntilFinished) {
+                }
+
+                public void onFinish() {
+                    finish();
+                }
+            }.start();
         if (!numPlayers.isEmpty() && totalScore != 0) {
             askCameraPermission();
 //            saveGame(Integer.parseInt(numPlayers), totalScore);
@@ -356,61 +319,47 @@ public class AddGame extends AppCompatActivity {
         FragmentManager manager = getSupportFragmentManager();
         CelebrationFragment dialog = new CelebrationFragment(achievementEarned);
         dialog.show(manager, CELEBRATION_FRAGMENT);
+    private String getAchievementName(int score) {
+        int index = AchievementCalculator.getScorePlacement(
+                themeTitles.length, scoreCalculator.getNumPlayers(), gameConfig.getPoorScore(),
+                gameConfig.getGoodScore(), score, difficultyToggle.getScaleFactor()
+        );
+        if (index == AchievementCalculator.INDEX_SUB_LEVEL_ONE) {
+            return titleSubLevelOne;
+        } else {
+            return themeTitles[index];
+        }
     }
 
-    private void saveGame(int numPlayers, int groupScore) {
-        if(isEdit)
-        {
+    private void saveGame(String achievementEarned) {
+        if(isEdit) {
             currentGame.setAchievementEarned(achievementEarned);
-            currentGame.setNumOfPlayers(numPlayers);
-            currentGame.setGroupScore(groupScore);
             currentGame.setScaleFactor(difficultyToggle.getScaleFactor());
-            currentGame.setPlayerScores(individualScores);
-        }
-        else
-        {
-            Game game = new Game(achievementEarned, numPlayers, groupScore, gameConfig.getPoorScore(),
-                    gameConfig.getGoodScore(), difficultyToggle.getScaleFactor(), individualScores,photoFileName);
+            currentGame.setNumOfPlayers(scoreCalculator.getNumPlayers());
+            currentGame.setGroupScore(scoreCalculator.getTotalScore());
+            currentGame.setPlayerScores(scoreCalculator.getScoresAsArray());
+        } else {
+            Game game = new Game(achievementEarned, scoreCalculator.getNumPlayers(),
+                                 scoreCalculator.getTotalScore(), difficultyToggle.getScaleFactor(),
+                                 scoreCalculator.getScoresAsArray());
             gameConfig.addGame(game);
         }
         new SharedPreferenceManager(getApplicationContext()).updateConfigManager(configManager);
     }
 
-    private void loadCurrentTheme() {
-        String theme = configManager.getTheme();
-        if (theme.equals(ThemeSetting.THEME_FITNESS)) {
-            themeTitles = getResources().getStringArray(R.array.theme_fitness_names);
-            titleSubLevelOne = getString(R.string.fitnessLvl0);
-        } else if (theme.equals(ThemeSetting.THEME_SPONGEBOB)) {
-            themeTitles = getResources().getStringArray(R.array.theme_spongebob_names);
-            titleSubLevelOne = getString(R.string.spongeBobLvl0);
-        } else {
-            themeTitles = getResources().getStringArray(R.array.theme_starwars_names);
-            titleSubLevelOne = getString(R.string.starWarsLvl0);
-        }
-    }
-
-    private LinearLayout.LayoutParams setupLinearLayoutParameters() {
-        LinearLayout.LayoutParams lp=new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT); // Verbose!
-        lp.weight = 1.0f; // This is critical. Doesn't work without it.
-        lp.setMargins(240, 10, 240, 10);
-        return lp;
-    }
-
-    private EditText setupEditText(int row) {
-        EditText editText=new EditText(getApplicationContext());
-        editText.setHint(getString(R.string.score_num) + (row + 1));
-        editText.setInputType(InputType.TYPE_CLASS_NUMBER);
-        return editText;
+    private void celebrate(String achievementEarned) {
+        FragmentManager manager = getSupportFragmentManager();
+        CelebrationFragment dialog = new CelebrationFragment(achievementEarned);
+        dialog.show(manager, CELEBRATION_FRAGMENT);
     }
 
     public static Intent makeIntent(Context context,boolean isEdit, int position,int gamePosition) {
         Intent intent = new Intent(context, AddGame.class);
         intent.putExtra(CONFIG_POSITION, position);
-        if(isEdit)
-            intent.putExtra(Game_POSITION, gamePosition);
+        if(isEdit) {
+            intent.putExtra(GAME_POSITION, gamePosition);
+        }
         return intent;
     }
 
 }
-
