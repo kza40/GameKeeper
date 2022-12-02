@@ -214,6 +214,7 @@ public class AddGame extends AppCompatActivity {
             nextBoundary = AchievementCalculator.getNextBoundary(totalScore) - totalScore;
             saveGame(achievementEarned, numPlayers);
             celebrate(achievementEarned, nextBoundary);
+            finish();
         } else {
             Toast.makeText(AddGame.this, R.string.addEmptyMsg, Toast.LENGTH_LONG)
                     .show();

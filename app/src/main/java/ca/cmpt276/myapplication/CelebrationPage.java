@@ -62,6 +62,15 @@ public class CelebrationPage extends AppCompatActivity {
         setupReload();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        theme = configManager.getTheme();
+        setContentTheme();
+        startEffects();
+        setupReload();
+    }
+
     private void setNextBoundary() {
         if (theme.equals(ThemeSetting.THEME_FITNESS)) {
             tvNextDifference = findViewById(R.id.tvScoreDifference2);
@@ -111,13 +120,13 @@ public class CelebrationPage extends AppCompatActivity {
 //gotta check this
 
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        setContentTheme();
-        startEffects();
-        setupReload();
-    }
+//    @Override
+//    public void onBackPressed() {
+//        super.onBackPressed();
+//        setContentTheme();
+//        startEffects();
+//        setupReload();
+//    }
 
     public void onSettingSelected(View view){
         Intent intent = ThemeSetting.makeIntent(this);
