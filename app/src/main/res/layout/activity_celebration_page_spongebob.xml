@@ -13,31 +13,31 @@
         android:layout_height="67dp"
         android:contentDescription="@string/theme_setting"
         android:onClick="onSettingSelected"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.076"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineAbCon"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineLeCon"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.06"
         app:srcCompat="@drawable/setting_icon" />
 
     <ImageView
         android:id="@+id/left_party"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:rotation="-0"
+        android:rotationY="180"
         android:scaleType="centerCrop"
-        android:rotation="-45"
         app:layout_constraintBottom_toBottomOf="@+id/guidelineBottomImages"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintStart_toStartOf="@+id/guidelineLeCon"
         app:layout_constraintTop_toTopOf="@+id/guidelineTopImages"
-        app:srcCompat="@drawable/partypopper" />
+        app:srcCompat="@drawable/left_garry" />
 
     <ImageView
         android:id="@+id/right_party"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:rotation="-45"
+        android:rotation="0"
+        android:rotationY="0"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="@+id/guidelineBottomImages"
         app:layout_constraintDimensionRatio="1:1"
@@ -46,7 +46,7 @@
         app:layout_constraintStart_toStartOf="@+id/left_party"
         app:layout_constraintTop_toTopOf="@+id/guidelineTopImages"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/partypopper" />
+        app:srcCompat="@drawable/right_garry" />
 
     <TextView
         android:id="@+id/tvCongrats"

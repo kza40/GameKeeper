@@ -28,6 +28,11 @@ public class CelebrationPage extends AppCompatActivity {
     ImageView ivReload;
     TextView tvName;
 
+    //todo: findNextAchievement, Ui and the score til the next achievement
+    //todo: Put helper margins for UI
+    //todo: the onResume bug
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
