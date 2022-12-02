@@ -20,8 +20,10 @@ import ca.cmpt276.myapplication.model.ConfigManager;
 public class CelebrationPage extends AppCompatActivity {
 
     private static final String ACHIEVEMENT_NAME = "CelebrationPage: Achievement name";
+    private String achievement;
     private String nextAchievement;
     private String theme;
+    private String[] themeTitles;
     private ConfigManager configManager;
     ImageView ivReload;
     TextView tvName;
@@ -36,8 +38,8 @@ public class CelebrationPage extends AppCompatActivity {
 
         setContentTheme();
 
-        String name = getIntent().getStringExtra(ACHIEVEMENT_NAME);
-        tvName.setText(name);
+        achievement = getIntent().getStringExtra(ACHIEVEMENT_NAME);
+        tvName.setText(achievement);
 
 //        findNextAchievement();
 
@@ -63,15 +65,21 @@ public class CelebrationPage extends AppCompatActivity {
         }
     }
 
-    private void findNextAchievement() {
-        if (theme.equals(ThemeSetting.THEME_FITNESS)) {
-            themeTitles = getResources().getStringArray(R.array.theme_fitness_names);
-        } else if (theme.equals(ThemeSetting.THEME_SPONGEBOB)) {
-            themeTitles = getResources().getStringArray(R.array.theme_spongebob_names);
-        } else {
-            themeTitles = getResources().getStringArray(R.array.theme_starwars_names);
-        }
-    }
+//    private void findNextAchievement() {
+//        if (theme.equals(ThemeSetting.THEME_FITNESS)) {
+//            themeTitles = getResources().getStringArray(R.array.theme_fitness_names);
+//        } else if (theme.equals(ThemeSetting.THEME_SPONGEBOB)) {
+//            themeTitles = getResources().getStringArray(R.array.theme_spongebob_names);
+//        } else {
+//            themeTitles = getResources().getStringArray(R.array.theme_starwars_names);
+//        }
+//        for(int i=0; i< themeTitles.length; i++){
+//            if(themeTitles[i]==achievement){
+//                nextAchievement= themeTitles[i++];
+//            }
+//        }
+//        tvNextAchieve.setText(nextAchievement);
+//    }
 
 //gotta check this
     @Override
