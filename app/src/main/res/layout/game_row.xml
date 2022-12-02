@@ -16,79 +16,70 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:layout_editor_absoluteX="20dp"
-            tools:layout_editor_absoluteY="-3dp">
-
+            android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/tvNumPlayers"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="20dp"
                 android:fontFamily="@font/font_main"
                 android:text="Players"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toTopOf="@+id/tvEmpty"
+                app:layout_constraintBottom_toTopOf="@+id/hGuidelineOneThird"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/hGuidelineTwoThirds"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@+id/vGuideline25p" />
 
             <TextView
                 android:id="@+id/tvDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="4dp"
                 android:fontFamily="@font/font_main"
                 android:text="Date"
                 app:layout_constraintBottom_toTopOf="@+id/hGuidelineOneThird"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.157"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="@+id/tvAchievement" />
 
             <TextView
                 android:id="@+id/tvEmpty"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/vGuideline25p"
                 app:layout_constraintTop_toBottomOf="@+id/star1" />
 
             <TextView
                 android:id="@+id/tvAchievement"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="60dp"
                 android:fontFamily="@font/font_main"
-                android:text="Achievement"
+                android:text="Delicious Krabby Patty"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/hGuidelineTwoThirds"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.10"
+                app:layout_constraintStart_toStartOf="@+id/vGuideline25p"
                 app:layout_constraintTop_toTopOf="@+id/hGuidelineOneThird" />
 
             <TextView
                 android:id="@+id/tvScore"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="28dp"
                 android:fontFamily="@font/font_main"
                 android:text="Score"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/hGuidelineTwoThirds"
+                app:layout_constraintBottom_toTopOf="@+id/tvEmpty"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/hGuidelineOneThird" />
+                app:layout_constraintTop_toTopOf="@+id/hGuidelineTwoThirds" />
 
             <ImageView
                 android:id="@+id/star1"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginStart="60dp"
                 android:scaleType="centerCrop"
                 app:layout_constraintBottom_toTopOf="@+id/tvEmpty"
                 app:layout_constraintDimensionRatio="1:1"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/tvAchievement"
                 app:layout_constraintTop_toBottomOf="@+id/hGuidelineTwoThirds"
                 app:srcCompat="@drawable/star_gold" />
 
@@ -97,9 +88,9 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:scaleType="centerCrop"
-                app:layout_constraintBottom_toTopOf="@+id/tvEmpty"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintStart_toEndOf="@+id/star1"
+                app:layout_constraintBottom_toTopOf="@+id/tvEmpty"
                 app:layout_constraintTop_toBottomOf="@+id/hGuidelineTwoThirds"
                 app:srcCompat="@drawable/star_gold" />
 
@@ -107,12 +98,24 @@
                 android:id="@+id/star3"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
+                app:srcCompat="@drawable/star_grey"
                 android:scaleType="centerCrop"
-                app:layout_constraintBottom_toTopOf="@+id/tvEmpty"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintStart_toEndOf="@+id/star2"
-                app:layout_constraintTop_toBottomOf="@+id/hGuidelineTwoThirds"
-                app:srcCompat="@drawable/star_grey" />
+                app:layout_constraintBottom_toTopOf="@+id/tvEmpty"
+                app:layout_constraintTop_toBottomOf="@+id/hGuidelineTwoThirds"/>
+
+            <ImageView
+                android:id="@+id/imageViewGamePicture"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toStartOf="@+id/vGuideline25p"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@android:drawable/ic_menu_camera" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/hGuidelineTwoThirds"
@@ -126,19 +129,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_begin="38dp" />
+                app:layout_constraintGuide_percent="0.33" />
 
-            <ImageView
-                android:id="@+id/imageViewGamePicture"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:scaleType="fitCenter"
-                app:layout_constraintBottom_toTopOf="@+id/hGuidelineTwoThirds"
-                app:layout_constraintTop_toTopOf="@+id/hGuidelineOneThird"
-                app:srcCompat="@android:drawable/ic_menu_camera"
-                tools:layout_editor_absoluteX="8dp" />
-
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/vGuideline25p"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.25" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
+
