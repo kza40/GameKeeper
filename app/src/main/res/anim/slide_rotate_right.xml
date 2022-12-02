@@ -11,7 +11,7 @@
 
     <translate
         android:fromXDelta="0%p"
-        android:toXDelta="-20%p"
+        android:toXDelta="-22%p"
         android:duration="1500" />
 
 </set>
