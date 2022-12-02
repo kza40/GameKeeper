@@ -42,7 +42,7 @@ public class CelebrationPage extends AppCompatActivity {
 
         configManager = ConfigManager.getInstance();
         theme = configManager.getTheme();
-
+        achievement = getIntent().getStringExtra(ACHIEVEMENT_NAME);
 
         setContentTheme();
         findNextAchievement();
@@ -53,10 +53,9 @@ public class CelebrationPage extends AppCompatActivity {
 //        nextScoreDifference = getIntent().getIntExtra(BOUNDARY_DIFFERENCE, -1);
 //        tvNextDifference.setText(nextScoreDifference);
 
-        achievement = getIntent().getStringExtra(ACHIEVEMENT_NAME);
+
         tvName.setText(achievement);
-//
-//        setNextBoundary();
+
 
         startEffects();
         setupReload();
@@ -117,16 +116,6 @@ public class CelebrationPage extends AppCompatActivity {
         }
     }
 
-//gotta check this
-
-
-//    @Override
-//    public void onBackPressed() {
-//        super.onBackPressed();
-//        setContentTheme();
-//        startEffects();
-//        setupReload();
-//    }
 
     public void onSettingSelected(View view){
         Intent intent = ThemeSetting.makeIntent(this);
