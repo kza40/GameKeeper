@@ -45,6 +45,7 @@ public class AddGame extends AppCompatActivity {
     private Boolean isEdit;
     private int totalScore;
     private boolean isFilled;
+    private int nextBoundary;
 
     private String[] themeTitles;
     private String titleSubLevelOne;
@@ -209,9 +210,10 @@ public class AddGame extends AppCompatActivity {
         if (isFilled) {
             int numPlayers = Integer.parseInt(edtNumPlayers.getText().toString());
             String achievementEarned = getAchievementName(totalScore, numPlayers);
-
+//added for iteration3
+            nextBoundary = AchievementCalculator.getNextBoundary(totalScore) - totalScore;
             saveGame(achievementEarned, numPlayers);
-            celebrate(achievementEarned);
+            celebrate(achievementEarned, nextBoundary);
         } else {
             Toast.makeText(AddGame.this, R.string.addEmptyMsg, Toast.LENGTH_LONG)
                     .show();
@@ -253,8 +255,8 @@ public class AddGame extends AppCompatActivity {
         new SharedPreferenceManager(getApplicationContext()).updateConfigManager(configManager);
     }
 
-    private void celebrate(String achievementEarned) {
-        Intent intent = CelebrationPage.makeIntent(this, achievementEarned);
+    private void celebrate(String achievementEarned, int nextBoundary) {
+        Intent intent = CelebrationPage.makeIntent(this, achievementEarned, nextBoundary);
         startActivity(intent);
     }
 

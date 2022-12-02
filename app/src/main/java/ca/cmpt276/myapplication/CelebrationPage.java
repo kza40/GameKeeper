@@ -20,16 +20,19 @@ import ca.cmpt276.myapplication.model.ConfigManager;
 public class CelebrationPage extends AppCompatActivity {
 
     private static final String ACHIEVEMENT_NAME = "CelebrationPage: Achievement name";
+    private static final String BOUNDARY_DIFFERENCE = "CelebrationPage: nextBoundary difference";
     private String achievement;
     private String nextAchievement;
+    private int nextScoreDifference;
     private String theme;
     private String[] themeTitles;
     private ConfigManager configManager;
     ImageView ivReload;
     TextView tvName;
+    TextView tvNextAchievement;
+    TextView tvNextDifference;
 
     //todo: findNextAchievement, Ui and the score til the next achievement
-    //todo: Put helper margins for UI
     //todo: the onResume bug
 
 
@@ -42,14 +45,28 @@ public class CelebrationPage extends AppCompatActivity {
 
 
         setContentTheme();
+        setNextBoundary();
+
+//        nextScoreDifference = getIntent().getIntExtra(BOUNDARY_DIFFERENCE, -1);
+//        tvNextDifference.setText(nextScoreDifference);
 
         achievement = getIntent().getStringExtra(ACHIEVEMENT_NAME);
         tvName.setText(achievement);
-
-//        findNextAchievement();
-
+//
+//        setNextBoundary();
+        findNextAchievement();
         startEffects();
         setupReload();
+    }
+
+    private void setNextBoundary() {
+        if (theme.equals(ThemeSetting.THEME_FITNESS)) {
+            tvNextDifference = findViewById(R.id.tvScoreDifference2);
+        } else if (theme.equals(ThemeSetting.THEME_SPONGEBOB)) {
+            tvNextDifference = findViewById(R.id.tvScoreDifference1);
+        } else {
+            tvNextDifference = findViewById(R.id.tvScoreDifference);
+        }
     }
 
     private void setContentTheme() {
@@ -70,26 +87,30 @@ public class CelebrationPage extends AppCompatActivity {
         }
     }
 
-//    private void findNextAchievement() {
-//        if (theme.equals(ThemeSetting.THEME_FITNESS)) {
-//            themeTitles = getResources().getStringArray(R.array.theme_fitness_names);
-//        } else if (theme.equals(ThemeSetting.THEME_SPONGEBOB)) {
-//            themeTitles = getResources().getStringArray(R.array.theme_spongebob_names);
-//        } else {
-//            themeTitles = getResources().getStringArray(R.array.theme_starwars_names);
-//        }
-//        for(int i=0; i< themeTitles.length; i++){
-//            if(themeTitles[i]==achievement){
-//                nextAchievement= themeTitles[i++];
-//            }
-//        }
-//        tvNextAchieve.setText(nextAchievement);
-//    }
+    private void findNextAchievement() {
+        if (theme.equals(ThemeSetting.THEME_FITNESS)) {
+            themeTitles = getResources().getStringArray(R.array.theme_fitness_names);
+            tvNextAchievement = findViewById(R.id.tvNextAchievement2);
+        } else if (theme.equals(ThemeSetting.THEME_SPONGEBOB)) {
+            themeTitles = getResources().getStringArray(R.array.theme_spongebob_names);
+            tvNextAchievement = findViewById(R.id.tvNextAchievement1);
+        } else {
+            themeTitles = getResources().getStringArray(R.array.theme_starwars_names);
+            tvNextAchievement = findViewById(R.id.tvNextAchievement);
+        }
+        for(int i=0; i< themeTitles.length; i++){
+            if(themeTitles[i]==achievement){
+                nextAchievement= themeTitles[i++];
+
+            }
+        }
+        tvNextAchievement.setText(nextAchievement);
+    }
 
 //gotta check this
     @Override
-    protected void onResume() {
-        super.onResume();
+    protected void onRestart() {
+        super.onRestart();
         setContentTheme();
         startEffects();
         setupReload();
@@ -130,13 +151,13 @@ public class CelebrationPage extends AppCompatActivity {
     }
 
     private void setupReload() {
-//        theme = configManager.getTheme();
         ivReload.setOnClickListener(view -> startEffects());
     }
 
-    public static Intent makeIntent(Context context, String achievementName) {
+    public static Intent makeIntent(Context context, String achievementName, int nextBoundary) {
         Intent intent = new Intent(context, CelebrationPage.class);
         intent.putExtra(ACHIEVEMENT_NAME, achievementName);
+        intent.putExtra(BOUNDARY_DIFFERENCE, nextBoundary);
         return intent;
     }
 

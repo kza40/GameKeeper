@@ -42,7 +42,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/guidelineBottomImages"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toStartOf="@+id/guidelineRiCon"
-        app:layout_constraintHorizontal_bias="0.866"
+        app:layout_constraintHorizontal_bias="0.885"
         app:layout_constraintStart_toStartOf="@+id/left_party"
         app:layout_constraintTop_toTopOf="@+id/guidelineTopImages"
         app:layout_constraintVertical_bias="0.0"
@@ -52,8 +52,8 @@
         android:id="@+id/tvCongrats"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/you_got_text"
         android:fontFamily="@font/font_main"
+        android:text="@string/you_got_text"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:textSize="28sp"
@@ -64,10 +64,10 @@
 
     <TextView
         android:id="@+id/tvAchievementName1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="name"
+        android:layout_width="167dp"
+        android:layout_height="68dp"
         android:fontFamily="@font/font_main_bold"
+        android:text="name"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:textSize="28sp"
@@ -130,12 +130,69 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:scaleType="centerCrop"
-        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintBottom_toTopOf="@+id/guidelineAbCon"
+        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guidelineRiCon"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/reload" />
+
+    <TextView
+        android:id="@+id/tvDifference1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="You were \n           from "
+        android:textAlignment="viewStart"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textSize="28sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineRiCon"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guidelineLeCon"
+        app:layout_constraintTop_toTopOf="@+id/guideline11"
+        app:layout_constraintVertical_bias="0.34" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.7742818" />
+
+    <TextView
+        android:id="@+id/tvScoreDifference1"
+        android:layout_width="82dp"
+        android:layout_height="43dp"
+        android:text="score"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textSize="28sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineRiCon"
+        app:layout_constraintHorizontal_bias="0.991"
+        app:layout_constraintStart_toStartOf="@+id/guidelineLeCon"
+        app:layout_constraintTop_toTopOf="@+id/guideline11"
+        app:layout_constraintVertical_bias="0.262" />
+
+    <TextView
+        android:id="@+id/tvNextAchievement1"
+        android:layout_width="184dp"
+        android:layout_height="58dp"
+        android:text="nextAchieve"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textSize="28sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineRiCon"
+        app:layout_constraintStart_toStartOf="@+id/guidelineLeCon"
+        app:layout_constraintTop_toTopOf="@+id/guideline11"
+        app:layout_constraintVertical_bias="0.962" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
