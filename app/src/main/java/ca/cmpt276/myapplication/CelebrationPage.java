@@ -1,11 +1,15 @@
 package ca.cmpt276.myapplication;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -29,6 +33,19 @@ public class CelebrationPage extends AppCompatActivity {
         configManager = ConfigManager.getInstance();
         theme = configManager.getTheme();
 
+
+        setContentTheme();
+
+        String name = getIntent().getStringExtra(ACHIEVEMENT_NAME);
+        tvName.setText(name);
+
+//        findNextAchievement();
+
+        startEffects();
+        setupReload();
+    }
+
+    private void setContentTheme() {
         if (theme.equals(ThemeSetting.THEME_FITNESS)) {
             setContentView(R.layout.activity_celebration_page_fitness);
             tvName = findViewById(R.id.tvAchievementName2);
@@ -44,19 +61,31 @@ public class CelebrationPage extends AppCompatActivity {
             tvName = findViewById(R.id.tvAchievementName);
             ivReload = findViewById(R.id.ivReload);
         }
+    }
 
+    private void findNextAchievement() {
+        if (theme.equals(ThemeSetting.THEME_FITNESS)) {
+            themeTitles = getResources().getStringArray(R.array.theme_fitness_names);
+        } else if (theme.equals(ThemeSetting.THEME_SPONGEBOB)) {
+            themeTitles = getResources().getStringArray(R.array.theme_spongebob_names);
+        } else {
+            themeTitles = getResources().getStringArray(R.array.theme_starwars_names);
+        }
+    }
 
-        String name = getIntent().getStringExtra(ACHIEVEMENT_NAME);
-        tvName.setText(name);
-
-//        findNextAchievement();
+//gotta check this
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setContentTheme();
         startEffects();
         setupReload();
     }
 
-//    private void findNextAchievement() {
-//
-//    }
+    public void onSettingSelected(View view){
+        Intent intent = ThemeSetting.makeIntent(this);
+        startActivity(intent);
+    }
 
     private void startEffects() {
         MediaPlayer mp = MediaPlayer.create(CelebrationPage.this, R.raw.win_sound);
@@ -65,10 +94,10 @@ public class CelebrationPage extends AppCompatActivity {
         ImageView leftAnim;
         ImageView rightAnim;
         ImageView falconer;
-        if(theme=="THEME_FITNESS"){
+        if(theme.equals(ThemeSetting.THEME_FITNESS)){
             leftAnim = findViewById(R.id.right_dumbbell);
             rightAnim = findViewById(R.id.left_dumbbell);
-        } else if ( theme=="THEME_SPONGEBOB"){
+        } else if (theme.equals(ThemeSetting.THEME_SPONGEBOB)){
             leftAnim = findViewById(R.id.right_party);
             rightAnim = findViewById(R.id.left_party);
         } else {
@@ -88,7 +117,7 @@ public class CelebrationPage extends AppCompatActivity {
     }
 
     private void setupReload() {
-        theme = configManager.getTheme();
+//        theme = configManager.getTheme();
         ivReload.setOnClickListener(view -> startEffects());
     }
 

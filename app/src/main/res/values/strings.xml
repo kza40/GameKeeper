@@ -76,4 +76,5 @@
     <string name="input_less_message">Please input a number of 25 or lower</string>
     <string name="edit_game_title">Edit Game</string>
     <string name="you_got_text">You got</string>
+    <string name="theme_setting">Theme Setting</string>
 </resources>
