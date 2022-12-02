@@ -97,4 +97,6 @@
     <string name="help_instruction_editGamePlay">1. Click on the game itself\n2. Edit any of the fields\n3. Repeat steps 6-8 in \"Adding a game play\"</string>
     <string name="help_title_deleteGameConfig">- Deleting a game configuration</string>
     <string name="resources">Images\n\n 1. https://www.freepik.com/premium-vector/neumorphic-ui-ux-design-elements-3d-vector-yellow-stars-rating-system-white-background-abstract-neumorphism-material-design-star-icons-set-achievement-rank-scale-customer-product-rating-review_27250396.htm\n\nSound\n\n 1.</string>
+    <string name="default_player_count">3</string>
+    <string name="default_score_zero">0</string>
 </resources>
