@@ -5,10 +5,31 @@
     android:layout_height="match_parent"
     tools:context=".DevelopersFragment">
 
-    <!-- Add content to fragment -->
+    <!-- Add text to fragment -->
     <TextView
+        android:id="@+id/groupName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Chiggiddy check" />
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:fontFamily="@font/font_main"
+        android:text="@string/groupName"
+        android:textAlignment="center"
+        android:textSize="60sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/memberNames"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="180dp"
+        android:fontFamily="@font/font_main"
+        android:lineSpacingExtra="20sp"
+        android:text="@string/memberNames"
+        android:textSize="24sp" />
 
 </RelativeLayout>

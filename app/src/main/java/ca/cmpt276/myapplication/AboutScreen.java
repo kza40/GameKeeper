@@ -1,8 +1,7 @@
 package ca.cmpt276.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.viewpager.widget.ViewPager;
+import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Context;
@@ -23,6 +22,11 @@ public class AboutScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_screen);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle(R.string.title_about);
 
         tabLayout = findViewById(R.id.tabLayout);
         viewPager = findViewById(R.id.viewPager);
@@ -57,7 +61,6 @@ public class AboutScreen extends AppCompatActivity {
     }
 
     public static Intent makeIntent(Context context) {
-        Intent intent = new Intent(context, AboutScreen.class);
-        return intent;
+        return new Intent(context, AboutScreen.class);
     }
 }
