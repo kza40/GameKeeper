@@ -8,7 +8,7 @@
     tools:context=".CelebrationPage">
 
     <ImageView
-        android:id="@+id/gSaber"
+        android:id="@+id/left_party"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:scaleType="centerCrop"
@@ -20,7 +20,7 @@
         app:srcCompat="@drawable/partypopper" />
 
     <ImageView
-        android:id="@+id/rSaber"
+        android:id="@+id/right_party"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:rotation="-45"
@@ -29,7 +29,7 @@
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toStartOf="@+id/guidelineRiCon"
         app:layout_constraintHorizontal_bias="0.866"
-        app:layout_constraintStart_toStartOf="@+id/gSaber"
+        app:layout_constraintStart_toStartOf="@+id/left_party"
         app:layout_constraintTop_toTopOf="@+id/guidelineTopImages"
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/partypopper" />
@@ -49,7 +49,7 @@
         app:layout_constraintTop_toTopOf="@+id/guidelineAbCon" />
 
     <TextView
-        android:id="@+id/tvAchievementName"
+        android:id="@+id/tvAchievementName1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="name"
@@ -102,17 +102,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.50" />
+        app:layout_constraintGuide_percent="0.29" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineBottomImages"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.60" />
+        app:layout_constraintGuide_percent="0.44" />
 
     <ImageView
-        android:id="@+id/ivReload"
+        android:id="@+id/ivReload1"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:scaleType="centerCrop"

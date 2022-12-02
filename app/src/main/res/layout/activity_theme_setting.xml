@@ -117,7 +117,7 @@
         app:layout_constraintEnd_toStartOf="@+id/imagesRightMargin"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guidelineAbStar"
-        app:srcCompat="@drawable/starwars_background" />
+        app:srcCompat="@drawable/starwars" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/imagesRightMargin"
