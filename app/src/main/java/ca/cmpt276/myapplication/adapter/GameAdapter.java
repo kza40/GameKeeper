@@ -3,6 +3,8 @@ package ca.cmpt276.myapplication.adapter;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.media.ExifInterface;
 import android.os.Environment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -68,6 +70,7 @@ public class GameAdapter extends ArrayAdapter<Game> {
         }
         File photoFile = new File(mediaStorageDir.getPath() + File.separator + getItem(position).getPhotoFileName());
         Bitmap takenImage = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
+
         if(takenImage!=null)
         {
             imageViewGamePicture.setImageBitmap(takenImage);

@@ -1,4 +1,5 @@
 package ca.cmpt276.myapplication;
+import static ca.cmpt276.myapplication.Camera.CAMERA_PERMISSION_CODE;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
@@ -7,9 +8,6 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.core.content.FileProvider;
 import androidx.fragment.app.FragmentManager;
 
 import android.Manifest;
@@ -39,10 +37,7 @@ import ca.cmpt276.myapplication.model.ConfigManager;
 import ca.cmpt276.myapplication.model.SharedPreferenceManager;
 
 public class AddGame extends AppCompatActivity {
-    public static final int CAMERA_PERMISSION_CODE = 101;
-    public final String APP_TAG = "MyCustomApp";
-    public String photoFileName = "photo.jpg";
-    File photoFile;
+
 
     //Constants
     public static final String CONFIG_POSITION = "AddGame: Config position";
@@ -66,13 +61,15 @@ public class AddGame extends AppCompatActivity {
     private String[] themeTitles;
     private String titleSubLevelOne;
 
+    Camera camera;
+
 
     ActivityResultLauncher<Intent> activityLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
         @Override
         public void onActivityResult(ActivityResult result) {
             if (result.getResultCode() == RESULT_OK)
             {
-                Bitmap takenImage = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
+                Bitmap takenImage = BitmapFactory.decodeFile(Camera.photoFile.getAbsolutePath());
                 imageViewPicture.setImageBitmap(takenImage);
 
                 String achievementEarned = getAchievementName(scoreCalculator.getTotalScore());
@@ -149,7 +146,7 @@ public class AddGame extends AppCompatActivity {
             difficultyToggle.setDifficulty(currentGame.getScaleFactor());
 
             if (currentGame.getPhotoFileName() != null) {
-                photoFile = getPhotoFileUri(currentGame.getPhotoFileName());
+                Camera.photoFile = getPhotoFileUri(currentGame.getPhotoFileName());
                 Bitmap takenImage = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
                 if (takenImage != null) {
                     imageViewPicture.setImageBitmap(takenImage);
@@ -162,7 +159,8 @@ public class AddGame extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (scoreCalculator.isReadyForSave()) {
-            askCameraPermission();
+            camera=new Camera(AddGame.this,this,activityLauncher);
+            camera.askCameraPermission();
         } else {
             Toast.makeText(AddGame.this, R.string.addEmptyMsg, Toast.LENGTH_LONG)
                     .show();
@@ -170,52 +168,18 @@ public class AddGame extends AppCompatActivity {
         return true;
     }
 
-    private void askCameraPermission() {
-        if(ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)!= PackageManager.PERMISSION_GRANTED)
-        {
-            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION_CODE);
-        }
-        else
-        {
-            openCamera();
-        }
-    }
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == CAMERA_PERMISSION_CODE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                openCamera();
+                camera.openCamera();
             } else {
                 Toast.makeText(this, "Camera permission required to use Camera.", Toast.LENGTH_LONG).show();
             }
         }
-    }
-
-    private void openCamera() {
-        Intent camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        // Create a File reference for future access
-        photoFileName=System.currentTimeMillis()+"_"+photoFileName;
-        photoFile = getPhotoFileUri(photoFileName);
-        Uri fileProvider = FileProvider.getUriForFile(AddGame.this, "com.codepath.fileprovider", photoFile);
-        camera.putExtra(MediaStore.EXTRA_OUTPUT, fileProvider);
-        if (camera.resolveActivity(getPackageManager()) != null) {
-            activityLauncher.launch(camera);
-        }
-    }
-
-    // Returns the File for a photo stored on disk given the fileName
-    public File getPhotoFileUri(String fileName) {
-        File mediaStorageDir = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), APP_TAG);
-
-        if (!mediaStorageDir.exists() && !mediaStorageDir.mkdirs()){
-            Log.d(APP_TAG, "failed to create directory");
-        }
-
-        // Return the file target for the photo based on filename
-        File file = new File(mediaStorageDir.getPath() + File.separator + fileName);
-        return file;
     }
 
     private String getAchievementName(int score) {
@@ -240,7 +204,7 @@ public class AddGame extends AppCompatActivity {
         } else {
             Game game = new Game(achievementEarned, scoreCalculator.getNumPlayers(),
                                  scoreCalculator.getTotalScore(), difficultyToggle.getScaleFactor(),
-                                 scoreCalculator.getScoresAsArray(), photoFileName);
+                                 scoreCalculator.getScoresAsArray(), Camera.photoFileName);
             gameConfig.addGame(game);
         }
         new SharedPreferenceManager(getApplicationContext()).updateConfigManager(configManager);

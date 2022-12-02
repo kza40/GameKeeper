@@ -7,6 +7,7 @@ import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,6 +40,7 @@ public class ScoreCalculator {
     private boolean isReadyForSave;
     private int numActiveFields;
     private int totalScore;
+    private ImageView capturedImage;
 
     public ScoreCalculator(View view, Context context, Game currentGame) {
         mView = view;
@@ -48,6 +50,14 @@ public class ScoreCalculator {
     }
 
     private void setupUI() {
+        capturedImage=mView.findViewById(R.id.imageViewSelfie);
+        capturedImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        capturedImage.setVisibility(View.GONE);
         tvTotalScore = mView.findViewById(R.id.tvTotalScore);
         edtPlayerCount = mView.findViewById(R.id.edtNumPlayersDisplay);
 
@@ -116,6 +126,11 @@ public class ScoreCalculator {
         }
         isReadyForSave = (numActiveFields > 0 && numScoresFilled == numActiveFields);
 
+        if(isReadyForSave)
+        {
+            capturedImage.setVisibility(View.VISIBLE);
+            capturedImage.setImageResource(R.drawable.starwars1);
+        }
         String text = mContext.getString(R.string.score_colon) + totalScore;
         tvTotalScore.setText(text);
     }
