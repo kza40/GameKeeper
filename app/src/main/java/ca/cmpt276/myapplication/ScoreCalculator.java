@@ -7,6 +7,7 @@ import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -104,7 +105,7 @@ public class ScoreCalculator {
         }
     }
 
-    private void updateTotalScore() {
+    private void updateTotalAndSaveStatus() {
         totalScore = 0;
         int numScoresFilled = 0;
         for (int i = 0; i < numActiveFields; i++) {
@@ -114,10 +115,18 @@ public class ScoreCalculator {
                 numScoresFilled++;
             }
         }
-        isReadyForSave = (numActiveFields > 0 && numScoresFilled == numActiveFields);
-
         String text = mContext.getString(R.string.score_colon) + totalScore;
         tvTotalScore.setText(text);
+
+        ImageView photoStatusIcon = mView.findViewById(R.id.icon_add);
+        if (numActiveFields > 0 && numScoresFilled == numActiveFields) {
+            isReadyForSave = true;
+            photoStatusIcon.setImageResource(R.drawable.ic_add_green);
+        }
+        else {
+            isReadyForSave = false;
+            photoStatusIcon.setImageResource(R.drawable.ic_add_grey);
+        }
     }
 
     private final TextWatcher playerNumTextWatcher = new TextWatcher() {
@@ -140,7 +149,7 @@ public class ScoreCalculator {
                 numActiveFields = 0;
                 table.removeAllViews();
             }
-            updateTotalScore();
+            updateTotalAndSaveStatus();
         }
 
         @Override
@@ -153,7 +162,7 @@ public class ScoreCalculator {
 
         @Override
         public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            updateTotalScore();
+            updateTotalAndSaveStatus();
         }
 
         @Override
