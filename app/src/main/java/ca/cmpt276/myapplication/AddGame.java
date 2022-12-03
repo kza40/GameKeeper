@@ -108,7 +108,7 @@ public class AddGame extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (scoreCalculator.isReadyForSave()) {
             String achievementEarned = getAchievementName(scoreCalculator.getTotalScore());
-            nextBoundary = AchievementCalculator.getNextBoundary(totalScore) - totalScore;
+            nextBoundary = AchievementCalculator.getNextBoundary(scoreCalculator.getTotalScore()) - scoreCalculator.getTotalScore();
             saveGame(achievementEarned);
             celebrate(achievementEarned, nextBoundary);
 
