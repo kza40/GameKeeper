@@ -11,12 +11,16 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import ca.cmpt276.myapplication.PreviewAchievements;
+
 public class GameConfig implements Iterable<Game>{
     private final List<Game> games = new ArrayList<>();
+    private static final int NUMBER_OF_ACHIEVEMENT_LEVELS = 9;
 
     private String gameTitle;
     private int poorScore;
     private int goodScore;
+    private int[] achievementLevelCounter = new int[NUMBER_OF_ACHIEVEMENT_LEVELS];
 
 
     public GameConfig(String gameTitle, int poorScore, int goodScore) {
@@ -58,8 +62,10 @@ public class GameConfig implements Iterable<Game>{
         this.goodScore = goodScore;
     }
 
-    public void addGame(Game game) { games.add(game); }
-
+    public void addGame(Game game) {
+        games.add(game);
+        achievementLevelCounter[game.getAchievementLevel()]++;
+    }
     public boolean isEmpty(){ return games.isEmpty(); }
 
 

@@ -13,6 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import java.util.List;
+
+import ca.cmpt276.myapplication.AchievementStatistics;
 import ca.cmpt276.myapplication.AddConfig;
 import ca.cmpt276.myapplication.PreviewAchievements;
 import ca.cmpt276.myapplication.R;
@@ -46,6 +48,7 @@ public class GameConfigAdapter extends ArrayAdapter<GameConfig> {
         TextView title=convertView.findViewById(R.id.tvTitle);
         TextView poorScore=convertView.findViewById(R.id.tvPoorScore);
         TextView goodScore=convertView.findViewById(R.id.tvGoodScore);
+        ImageButton btnAchievementStats=convertView.findViewById(R.id.btnAchievementStats);
         ImageButton btnAchievement=convertView.findViewById(R.id.btnAchievement);
         ImageButton btnEdit=convertView.findViewById(R.id.btnEdit);
         ImageButton btnDelete=convertView.findViewById(R.id.btnDelete);
@@ -54,11 +57,17 @@ public class GameConfigAdapter extends ArrayAdapter<GameConfig> {
         title.setText(gameConfig.getGameTitle());
         poorScore.setText(context.getString(R.string.poor_score_colon)+Integer.toString(gameConfig.getPoorScore()));
         goodScore.setText(context.getString(R.string.good_score_colon)+Integer.toString(gameConfig.getGoodScore()));
-        setupClickListenersOnButton(gameConfig,parent,position,btnEdit,btnDelete,btnAchievement);
+        setupClickListenersOnButton(gameConfig,parent,position,btnEdit,btnDelete,btnAchievement, btnAchievementStats);
         return convertView;
     }
 
-    private void setupClickListenersOnButton(GameConfig gameConfig, ViewGroup parent, int position, ImageButton btnEdit, ImageButton btnDelete, ImageButton btnAchievement) {
+    private void setupClickListenersOnButton(GameConfig gameConfig, ViewGroup parent, int position, ImageButton btnEdit, ImageButton btnDelete, ImageButton btnAchievement, ImageButton btnAchievementStats) {
+        btnAchievementStats.setOnClickListener((View view)->{
+            Intent intent = AchievementStatistics.makeIntent(context);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
+        });
+
         btnAchievement.setOnClickListener((View view)->{
             Intent intent= PreviewAchievements.makeIntent(context,gameConfig.getPoorScore(),gameConfig.getGoodScore());
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

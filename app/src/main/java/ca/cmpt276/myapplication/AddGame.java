@@ -43,6 +43,7 @@ public class AddGame extends AppCompatActivity {
     //Achievements
     private String[] themeTitles;
     private String titleSubLevelOne;
+    private int achievementLevel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -128,26 +129,29 @@ public class AddGame extends AppCompatActivity {
     }
 
     private String getAchievementName(int score) {
-        int index = AchievementCalculator.getScorePlacement(
+        achievementLevel = AchievementCalculator.getScorePlacement(
                 themeTitles.length, scoreCalculator.getNumPlayers(), gameConfig.getPoorScore(),
                 gameConfig.getGoodScore(), score, difficultyToggle.getScaleFactor()
         );
-        if (index == AchievementCalculator.INDEX_SUB_LEVEL_ONE) {
+        if (achievementLevel == AchievementCalculator.INDEX_SUB_LEVEL_ONE) {
+            achievementLevel++;
             return titleSubLevelOne;
         } else {
-            return themeTitles[index];
+            achievementLevel++;
+            return themeTitles[achievementLevel - 1];
         }
     }
 
     private void saveGame(String achievementEarned) {
         if(isEdit) {
             currentGame.setAchievementEarned(achievementEarned);
+            currentGame.setAchievementLevel(achievementLevel);
             currentGame.setScaleFactor(difficultyToggle.getScaleFactor());
             currentGame.setNumOfPlayers(scoreCalculator.getNumPlayers());
             currentGame.setGroupScore(scoreCalculator.getTotalScore());
             currentGame.setPlayerScores(scoreCalculator.getScoresAsArray());
         } else {
-            Game game = new Game(achievementEarned, scoreCalculator.getNumPlayers(),
+            Game game = new Game(achievementEarned, achievementLevel, scoreCalculator.getNumPlayers(),
                                  scoreCalculator.getTotalScore(), difficultyToggle.getScaleFactor(),
                                  scoreCalculator.getScoresAsArray());
             gameConfig.addGame(game);

@@ -12,15 +12,17 @@ import java.time.format.DateTimeFormatter;
 
 public class Game {
     private String achievementEarned;
+    private int achievementLevel;
     private int numOfPlayers;
     private int groupScore;
     private float scaleFactor;
     private String[] playerScores;
     private String datePlayed;
 
-    public Game(String achievementEarned, int numOfPlayers, int groupScore, float scaleFactor,String[] playerScores)
+    public Game(String achievementEarned, int achievementLevel, int numOfPlayers, int groupScore, float scaleFactor,String[] playerScores)
     {
         this.achievementEarned = achievementEarned;
+        this.achievementLevel = achievementLevel;
         this.numOfPlayers = numOfPlayers;
         this.groupScore = groupScore;
         this.scaleFactor = scaleFactor;
@@ -51,6 +53,8 @@ public class Game {
         return achievementEarned;
     }
 
+    public int getAchievementLevel() { return achievementLevel; }
+
     public int getGroupScore() {
         return groupScore;
     }
@@ -61,6 +65,10 @@ public class Game {
 
     public void setAchievementEarned(String achievementEarned) {
         this.achievementEarned = achievementEarned;
+    }
+
+    public void setAchievementLevel(int achievementLevel) {
+        this.achievementLevel = achievementLevel;
     }
 
     public void setNumOfPlayers(int numOfPlayers) {
