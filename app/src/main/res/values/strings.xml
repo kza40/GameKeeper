@@ -76,6 +76,27 @@
     <string name="score_num">Score #</string>
     <string name="input_less_message">Please input a number of 25 or lower</string>
     <string name="edit_game_title">Edit Game</string>
+    <string name="title_about">About</string>
+    <string name="tab_title_developers">Developers</string>
+    <string name="tab_title_resources">Resources</string>
+    <string name="tab_title_help">Help</string>
+    <string name="groupName">Aluminium</string>
+    <string name="memberNames"><![CDATA[<Developers>\n\t\t\t<Member = \"Divesh\" />\n\t\t\t<Member = \"Kiarash\" />\n\t\t\t<Member = \"Maria\" />\n\t\t\t<Member = \"Peeyush\" />\n</Developers>]]></string>
+    <string name="help_title_gameConfig">Game configuration</string>
+    <string name="help_title_addGameConfig">- Adding a game configuration</string>
+    <string name="help_instruction_addGameConfig">1. Click on the settings button on the upper right of the screen to change theme\n2. Click on the add button in the bottom left of the screen\n3. Enter the configuration name, poor score and good score (scores are per player)\n4. Click save</string>
+    <string name="help_instruction_editGameConfig">1. Click on the edit button located to the right of the game configuration name\n2. Edit any of the three fields\n3. Click save</string>
+    <string name="help_title_editGameConfig">- Editing a game configuration</string>
+    <string name="help_instruction_deleteGameConfig">1. Click on the delete button located to the right of the game configuration name\n2. Click ok</string>
+    <string name="help_title_viewAchievement">- Viewing an achievement</string>
+    <string name="help_instruction_viewAchievement">1. Click on the trophy button located to the right of the game configuration name\n2. Enter the amount of players playing</string>
+    <string name="help_title_gamePlay">Game play</string>
+    <string name="help_title_addGamePlay">- Adding a game play</string>
+    <string name="help_instruction_addGamePlay">1. Click on the game configuration to add a game to\n2. Click on the add button in the bottom left of the screen\n3. Choose the difficulty\n4. Enter the amount of players playing\n5. Enter the score per player\n6. Click the save button on the upper right of the screen\n7. Take a picture\n8. Click ok</string>
+    <string name="help_title_editGamePlay">- Editing a game play</string>
+    <string name="help_instruction_editGamePlay">1. Click on the game itself\n2. Edit any of the fields\n3. Repeat steps 6-8 in \"Adding a game play\"</string>
+    <string name="help_title_deleteGameConfig">- Deleting a game configuration</string>
+    <string name="resources">Images\n\n 1. https://www.freepik.com/premium-vector/neumorphic-ui-ux-design-elements-3d-vector-yellow-stars-rating-system-white-background-abstract-neumorphism-material-design-star-icons-set-achievement-rank-scale-customer-product-rating-review_27250396.htm\n\nSound\n\n 1.</string>
     <string name="default_player_count">3</string>
     <string name="default_score_zero">0</string>
 </resources>
