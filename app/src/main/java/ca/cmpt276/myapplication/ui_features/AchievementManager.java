@@ -15,6 +15,7 @@ public class AchievementManager {
     private String titleSubLevelOne;
     private final View view;
     private String theme;
+    public static final int NUMBER_OF_ACHIEVEMENT_POS = 8;
 
     public AchievementManager(View view, String theme) {
         this.view = view;

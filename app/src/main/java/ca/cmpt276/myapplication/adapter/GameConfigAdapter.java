@@ -63,7 +63,7 @@ public class GameConfigAdapter extends ArrayAdapter<GameConfig> {
 
     private void setupClickListenersOnButton(GameConfig gameConfig, ViewGroup parent, int position, ImageButton btnEdit, ImageButton btnDelete, ImageButton btnAchievement, ImageButton btnAchievementStats) {
         btnAchievementStats.setOnClickListener((View view)->{
-            Intent intent = AchievementStatistics.makeIntent(context);
+            Intent intent = AchievementStatistics.makeIntent(context, gameConfig.getAchievementPosCounter());
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);
         });

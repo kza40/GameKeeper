@@ -12,15 +12,15 @@ import java.util.Iterator;
 import java.util.List;
 
 import ca.cmpt276.myapplication.PreviewAchievements;
+import ca.cmpt276.myapplication.ui_features.AchievementManager;
 
 public class GameConfig implements Iterable<Game>{
     private final List<Game> games = new ArrayList<>();
-    private static final int NUMBER_OF_ACHIEVEMENT_LEVELS = 9;
 
     private String gameTitle;
     private int poorScore;
     private int goodScore;
-    private int[] achievementLevelCounter = new int[NUMBER_OF_ACHIEVEMENT_LEVELS];
+    private int[] achievementPosCounter = new int[AchievementManager.NUMBER_OF_ACHIEVEMENT_POS];
 
 
     public GameConfig(String gameTitle, int poorScore, int goodScore) {
@@ -64,8 +64,11 @@ public class GameConfig implements Iterable<Game>{
 
     public void addGame(Game game) {
         games.add(game);
-        achievementLevelCounter[game.getAchievementLevel()]++;
+        if (game.getAchievementPos() > AchievementCalculator.INDEX_SUB_LEVEL_ONE) {
+            achievementPosCounter[game.getAchievementPos()]++;
+        }
     }
+    public int[] getAchievementPosCounter() { return achievementPosCounter; }
     public boolean isEmpty(){ return games.isEmpty(); }
 
 
