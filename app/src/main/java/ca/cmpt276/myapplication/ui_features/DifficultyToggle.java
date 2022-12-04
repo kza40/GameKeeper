@@ -1,8 +1,10 @@
-package ca.cmpt276.myapplication;
+package ca.cmpt276.myapplication.ui_features;
 
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
+import ca.cmpt276.myapplication.R;
 
 /**
  * This class sets up the option for user to toggle difficulty level for game plays.

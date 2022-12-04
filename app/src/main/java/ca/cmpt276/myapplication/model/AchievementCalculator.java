@@ -11,7 +11,6 @@ import java.util.List;
 
 public class AchievementCalculator {
     public static final int INDEX_SUB_LEVEL_ONE = -1;
-    public static List<Integer> boundariesSaved;
 
     // constraint on numAchievements, must be >= 2
     public static List<Integer> getBoundaries(int numAchievements, int numPlayers, int poorScore, int greatScore) {
@@ -45,14 +44,16 @@ public class AchievementCalculator {
         if (poorScore > greatScore) {
             Collections.reverse(boundaries);
         }
-        boundariesSaved = boundaries;
+
         return boundaries;
     }
 //added for iteration3
-    public static int getNextBoundary(int totalScore){
-        for(int i =0; i <boundariesSaved.size(); i ++){
-            if(totalScore> boundariesSaved.get(i)){
-                return boundariesSaved.get(i++);
+    public static int getPointsToNextLevel(int totalScore, int numAchievements, int numPlayers, int poorScore, int greatScore){
+        List<Integer> boundaries = getBoundaries(numAchievements, numPlayers, poorScore, greatScore);
+        for(int i = 0; i < boundaries.size(); i++){
+            // TO DO: check for case when poor score > good score
+            if(totalScore < boundaries.get(i)){
+                return boundaries.get(i) - totalScore;
             }
         }
         return 0;

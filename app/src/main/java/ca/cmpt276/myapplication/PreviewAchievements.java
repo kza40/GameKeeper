@@ -20,6 +20,7 @@ import ca.cmpt276.myapplication.adapter.AchievementAdapter;
 import ca.cmpt276.myapplication.model.AchievementCalculator;
 import ca.cmpt276.myapplication.model.AchievementLevel;
 import ca.cmpt276.myapplication.model.ConfigManager;
+import ca.cmpt276.myapplication.ui_features.DifficultyToggle;
 
 public class PreviewAchievements extends AppCompatActivity {
     private static final String EXTRA_POOR_SCORE = "ca.cmpt276.myapplication: poor score";
