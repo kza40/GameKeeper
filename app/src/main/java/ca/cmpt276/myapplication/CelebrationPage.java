@@ -1,11 +1,15 @@
 package ca.cmpt276.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
+import android.annotation.SuppressLint;
+import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -23,6 +27,7 @@ public class CelebrationPage extends AppCompatActivity {
     private AchievementManager achievementManager;
     private String theme;
 
+    private String achievement;
     private String nextAchievement;
     private int nextScoreDifference;
     private TextView tvNextAchievement;
@@ -43,6 +48,7 @@ public class CelebrationPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_celebration_page_general);
 
+
         configManager = ConfigManager.getInstance();
         tvName = findViewById(R.id.tvAchievementName);
         tvNextAchievement = findViewById(R.id.tvNextAchievementMessage);
@@ -56,13 +62,20 @@ public class CelebrationPage extends AppCompatActivity {
         startEffects();
         setupReload();
 
-//        findNextAchievement();
-//        setNextBoundary();
-//        tvNextAchievement.setText(nextAchievement);
 
-//        nextScoreDifference = getIntent().getIntExtra(BOUNDARY_DIFFERENCE, -1);
-//        tvNextDifference.setText(nextScoreDifference);
+        findNextAchievement();
+        nextScoreDifference = getIntent().getIntExtra(BOUNDARY_DIFFERENCE, -1);
+        displayNextAchievement();
 
+    }
+
+    @SuppressLint("SetTextI18n")
+    private void displayNextAchievement() {
+        if(nextScoreDifference>0) {
+            tvNextAchievement.setText(getString(R.string.you_were) + nextScoreDifference + getString(R.string.away_from) + nextAchievement);
+        } else {
+            tvNextAchievement.setText(R.string.highest_achievement);
+        }
     }
 
 
@@ -76,19 +89,10 @@ public class CelebrationPage extends AppCompatActivity {
 
     private void showAchievementEarned() {
         int pos = getIntent().getIntExtra(ACHIEVEMENT_POS, -1);
-        String message = achievementManager.getAchievementAtIndex(pos) + "!";
-        tvName.setText(message);
+        achievement = achievementManager.getAchievementAtIndex(pos) + "!";
+        tvName.setText(achievement);
     }
 
-//    private void setNextBoundary() {
-//        if (theme.equals(ThemeSetting.THEME_FITNESS)) {
-//            tvNextDifference = findViewById(R.id.tvScoreDifference2);
-//        } else if (theme.equals(ThemeSetting.THEME_SPONGEBOB)) {
-//            tvNextDifference = findViewById(R.id.tvScoreDifference1);
-//        } else {
-//            tvNextDifference = findViewById(R.id.tvScoreDifference);
-//        }
-//    }
 
     private void setContentTheme() {
         theme = configManager.getTheme();
@@ -114,23 +118,22 @@ public class CelebrationPage extends AppCompatActivity {
         }
     }
 
-//    private void findNextAchievement() {
-//        if (theme.equals(ThemeSetting.THEME_FITNESS)) {
-//            themeTitles = getResources().getStringArray(R.array.theme_fitness_names);
-//            tvNextAchievement = findViewById(R.id.tvNextAchievement2);
-//        } else if (theme.equals(ThemeSetting.THEME_SPONGEBOB)) {
-//            themeTitles = getResources().getStringArray(R.array.theme_spongebob_names);
-//            tvNextAchievement = findViewById(R.id.tvNextAchievement1);
-//        } else {
-//            themeTitles = getResources().getStringArray(R.array.theme_starwars_names);
-//            tvNextAchievement = findViewById(R.id.tvNextAchievement);
-//        }
-//        for(int i=0; i< themeTitles.length; i++){
-//            if(themeTitles[i]==achievement){
-//                nextAchievement= themeTitles[i++];
-//            }
-//        }
-//    }
+    private void findNextAchievement() {
+        String[] themeTitles;
+        if (theme.equals(ThemeSetting.THEME_FITNESS)) {
+            themeTitles = getResources().getStringArray(R.array.theme_fitness_names);
+        } else if (theme.equals(ThemeSetting.THEME_SPONGEBOB)) {
+            themeTitles = getResources().getStringArray(R.array.theme_spongebob_names);
+        } else {
+            themeTitles = getResources().getStringArray(R.array.theme_starwars_names);
+        }
+        for(int i = 0; i< themeTitles.length -1 ; i++){
+            if(themeTitles[i].equals(achievement)){
+                nextAchievement= themeTitles[i++];
+            }
+        }
+
+    }
 
 
     public void onSettingSelected(View view){
@@ -138,21 +141,12 @@ public class CelebrationPage extends AppCompatActivity {
         startActivity(intent);
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-    }
+
 
     private void startEffects() {
         MediaPlayer mp = MediaPlayer.create(CelebrationPage.this, R.raw.win_sound);
         mp.start();
 
-//        ImageView falconer;
-//        if(theme.equals(ThemeSetting.STAR_WARS)){
-//            falconer = findViewById(R.id.falconer);
-//            Animation slideUp = AnimationUtils.loadAnimation(this, R.anim.up);
-//            falconer.startAnimation(slideUp);
-//        }
 
         Animation rotateSlideR = AnimationUtils.loadAnimation(this, R.anim.slide_rotate_left);
         Animation rotateSlideL = AnimationUtils.loadAnimation(this, R.anim.slide_rotate_right);
