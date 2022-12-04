@@ -83,6 +83,6 @@
     <string name="default_player_count">3</string>
     <string name="default_score_zero">0</string>
     <string name="highest_achievement">You got the highest achievement possible!!!</string>
-    <string name="you_were">\You were \</string>
-    <string name="away_from">\ away from \</string>
+    <string name="you_were">"You were "</string>
+    <string name="points_away_from">" points away from "</string>
 </resources>

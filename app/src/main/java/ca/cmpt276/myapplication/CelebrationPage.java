@@ -27,7 +27,6 @@ public class CelebrationPage extends AppCompatActivity {
     private AchievementManager achievementManager;
     private String theme;
 
-    private String achievement;
     private String nextAchievement;
     private int nextScoreDifference;
     private TextView tvNextAchievement;
@@ -39,7 +38,7 @@ public class CelebrationPage extends AppCompatActivity {
     private ImageView leftItem;
     private ImageView rightItem;
 
-    //todo: display points till the next achievement
+
     //todo: change color of texts based on theme to see better
 
 
@@ -62,17 +61,16 @@ public class CelebrationPage extends AppCompatActivity {
         startEffects();
         setupReload();
 
-
-        findNextAchievement();
         nextScoreDifference = getIntent().getIntExtra(BOUNDARY_DIFFERENCE, -1);
         displayNextAchievement();
 
     }
 
+
     @SuppressLint("SetTextI18n")
     private void displayNextAchievement() {
         if(nextScoreDifference>0) {
-            tvNextAchievement.setText(getString(R.string.you_were) + nextScoreDifference + getString(R.string.away_from) + nextAchievement);
+            tvNextAchievement.setText(getString(R.string.you_were)+ nextScoreDifference +getString(R.string.points_away_from)+ nextAchievement);
         } else {
             tvNextAchievement.setText(R.string.highest_achievement);
         }
@@ -85,11 +83,13 @@ public class CelebrationPage extends AppCompatActivity {
         setContentTheme();
         achievementManager.updateTheme(theme);
         showAchievementEarned();
+        displayNextAchievement();
     }
 
     private void showAchievementEarned() {
-        int pos = getIntent().getIntExtra(ACHIEVEMENT_POS, -1);
-        achievement = achievementManager.getAchievementAtIndex(pos) + "!";
+        int achievementPos = getIntent().getIntExtra(ACHIEVEMENT_POS, -1);
+        String achievement = achievementManager.getAchievementAtIndex(achievementPos) + "!";
+        nextAchievement = achievementManager.getAchievementAtIndex(achievementPos +1);
         tvName.setText(achievement);
     }
 
@@ -116,23 +116,6 @@ public class CelebrationPage extends AppCompatActivity {
             leftItem.setImageResource(R.drawable.green_saber);
             rightItem.setImageResource(R.drawable.green_saber);
         }
-    }
-
-    private void findNextAchievement() {
-        String[] themeTitles;
-        if (theme.equals(ThemeSetting.THEME_FITNESS)) {
-            themeTitles = getResources().getStringArray(R.array.theme_fitness_names);
-        } else if (theme.equals(ThemeSetting.THEME_SPONGEBOB)) {
-            themeTitles = getResources().getStringArray(R.array.theme_spongebob_names);
-        } else {
-            themeTitles = getResources().getStringArray(R.array.theme_starwars_names);
-        }
-        for(int i = 0; i< themeTitles.length -1 ; i++){
-            if(themeTitles[i].equals(achievement)){
-                nextAchievement= themeTitles[i++];
-            }
-        }
-
     }
 
 
