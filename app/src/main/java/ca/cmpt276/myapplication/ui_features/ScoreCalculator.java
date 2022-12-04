@@ -1,4 +1,4 @@
-package ca.cmpt276.myapplication;
+package ca.cmpt276.myapplication.ui_features;
 
 import android.content.Context;
 import android.text.Editable;
@@ -14,6 +14,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import ca.cmpt276.myapplication.R;
 import ca.cmpt276.myapplication.model.Game;
 
 /**
