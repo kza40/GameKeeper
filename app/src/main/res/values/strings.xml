@@ -85,4 +85,5 @@
     <string name="highest_achievement">You got the highest achievement possible!!!</string>
     <string name="you_were">"You were "</string>
     <string name="points_away_from">" points away from "</string>
+    <string name="congratulations_message">Congratulations!</string>
 </resources>
