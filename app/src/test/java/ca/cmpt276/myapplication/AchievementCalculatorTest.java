@@ -14,7 +14,7 @@ public class AchievementCalculatorTest {
     @Test
     public void testAllZero(){
         int[] correctOutput = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
-        List<Integer> resultOutput = AchievementCalculator.getBoundaries(8, 0, 0, 0);
+        List<Integer> resultOutput = AchievementCalculator.getBoundaries(8, 0, 0, 0, 100.0f);
 
         assertEquals(correctOutput.length, resultOutput.size());
 
@@ -27,7 +27,7 @@ public class AchievementCalculatorTest {
     @Test
     public void testAverageInput(){
         int[] correctOutput = new int[]{100, 118, 136, 154, 172, 190, 208, 225};
-        List<Integer> resultOutput = AchievementCalculator.getBoundaries(8, 1, 100, 225);
+        List<Integer> resultOutput = AchievementCalculator.getBoundaries(8, 1, 100, 225, 100.0f);
 
         assertEquals(correctOutput.length, resultOutput.size());
 
@@ -40,7 +40,7 @@ public class AchievementCalculatorTest {
     @Test
     public void testAverageInputReversed(){
         int[] correctOutput = new int[]{225, 208, 190, 172, 154, 136, 118, 100};
-        List<Integer> resultOutput = AchievementCalculator.getBoundaries(8, 1, 225, 100);
+        List<Integer> resultOutput = AchievementCalculator.getBoundaries(8, 1, 225, 100, 100.0f);
 
         assertEquals(correctOutput.length, resultOutput.size());
 
@@ -53,7 +53,7 @@ public class AchievementCalculatorTest {
     @Test
     public void testSmallRange(){
         int[] correctOutput = new int[]{20, 22, 23, 25, 26, 28, 29, 30};
-        List<Integer> resultOutput = AchievementCalculator.getBoundaries(8, 1, 20, 30);
+        List<Integer> resultOutput = AchievementCalculator.getBoundaries(8, 1, 20, 30, 100.0f);
 
         assertEquals(correctOutput.length, resultOutput.size());
 
@@ -117,9 +117,7 @@ public class AchievementCalculatorTest {
     @Test
     public void testApplyEasy(){
         int[] correctOutput = new int[]{168, 156, 142, 129, 115, 102, 88, 75};
-        List<Integer> resultOutput = AchievementCalculator.getBoundaries(8, 1, 225, 100);
-
-        AchievementCalculator.applyDifficulty(resultOutput, 75.0f);
+        List<Integer> resultOutput = AchievementCalculator.getBoundaries(8, 1, 225, 100, 75.0f);
 
         assertEquals(correctOutput.length, resultOutput.size());
 
@@ -132,9 +130,7 @@ public class AchievementCalculatorTest {
     @Test
     public void testApplyHard(){
         int[] correctOutput = new int[]{281, 260, 237, 215, 192, 170, 147, 125};
-        List<Integer> resultOutput = AchievementCalculator.getBoundaries(8, 1, 225, 100);
-
-        AchievementCalculator.applyDifficulty(resultOutput, 125.0f);
+        List<Integer> resultOutput = AchievementCalculator.getBoundaries(8, 1, 225, 100, 125.0f);
 
         assertEquals(correctOutput.length, resultOutput.size());
 

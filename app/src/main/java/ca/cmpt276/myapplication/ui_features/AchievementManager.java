@@ -27,8 +27,8 @@ public class AchievementManager {
         return AchievementCalculator.getScorePlacement(titles.length, playerCount, poorScore, goodScore, totalScore, scaleFactor);
     }
 
-    public int getPointsToNextLevel(int totalScore, int numPlayers, int poorScore, int goodScore){
-        return AchievementCalculator.getPointsToNextLevel(totalScore, titles.length, numPlayers, poorScore, goodScore);
+    public int getPointsToNextLevel(int totalScore, int playerCount, int poorScore, int goodScore, float scaleFactor, int scorePlacement){
+        return AchievementCalculator.getPointsToNextLevel(titles.length, playerCount, poorScore, goodScore, totalScore, scaleFactor, scorePlacement);
     }
 
     public void setTitles() {
@@ -59,11 +59,8 @@ public class AchievementManager {
         }
     }
 
-    public String getNextHighestAchievement(int index) {
-        if (index == titles.length - 1) {
-            return titles[index];
-        }
-        return titles[index+1];
+    public int getNumAchievements() {
+        return titles.length;
     }
 
 }

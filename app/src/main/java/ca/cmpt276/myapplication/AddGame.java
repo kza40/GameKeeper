@@ -37,7 +37,7 @@ public class AddGame extends AppCompatActivity {
     private Game currentGame;
     private boolean isEdit;
 
-//    private int nextBoundary;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,8 +88,10 @@ public class AddGame extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (scoreCalculator.isReadyForSave()) {
             int achievementPos = achievementManager.getAchievementPos(
-                    scoreCalculator.getTotalScore(), scoreCalculator.getNumPlayers(),
-                    gameConfig.getPoorScore(), gameConfig.getGoodScore(),
+                    scoreCalculator.getTotalScore(),
+                    scoreCalculator.getNumPlayers(),
+                    gameConfig.getPoorScore(),
+                    gameConfig.getGoodScore(),
                     difficultyToggle.getScaleFactor());
 
             saveGame(achievementPos);
@@ -112,9 +114,12 @@ public class AddGame extends AppCompatActivity {
             currentGame.setPlayerScores(scoreCalculator.getScoresAsArray());
         }
         else {
-            Game game = new Game(achievementPos, scoreCalculator.getNumPlayers(),
-                                 scoreCalculator.getTotalScore(), difficultyToggle.getScaleFactor(),
-                                 scoreCalculator.getScoresAsArray());
+            Game game = new Game(
+                    achievementPos,
+                    scoreCalculator.getNumPlayers(),
+                    scoreCalculator.getTotalScore(),
+                    difficultyToggle.getScaleFactor(),
+                    scoreCalculator.getScoresAsArray());
             gameConfig.addGame(game);
         }
         new SharedPreferenceManager(getApplicationContext()).updateConfigManager(configManager);
@@ -122,8 +127,12 @@ public class AddGame extends AppCompatActivity {
 
     private void celebrate(int achievementPos) {
         int pointDifference = achievementManager.getPointsToNextLevel(
-                scoreCalculator.getTotalScore(), scoreCalculator.getNumPlayers(),
-                gameConfig.getPoorScore(), gameConfig.getGoodScore());
+                        scoreCalculator.getTotalScore(),
+                        scoreCalculator.getNumPlayers(),
+                        gameConfig.getPoorScore(),
+                        gameConfig.getGoodScore(),
+                        difficultyToggle.getScaleFactor(),
+                        achievementPos);
 
         Intent intent = CelebrationPage.makeIntent(this, achievementPos, pointDifference);
         startActivity(intent);
