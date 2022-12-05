@@ -21,9 +21,9 @@
     <string name="gamesEmptyStateMsg">No games to show. Tap the + icon to add one!</string>
     <string name="score">Score</string>
     <string name="total_players">Total Players</string>
-    <string name="addConfigTitle">Add Config</string>
-    <string name="editConfigTitle">Edit Config</string>
-    <string name="viewConfigsTitle">Game Configs</string>
+    <string name="addConfigTitle">Add Configuration</string>
+    <string name="editConfigTitle">"Edit "</string>
+    <string name="viewConfigsTitle">Game Configurations</string>
     <string name="players">" players"</string>
     <string name="poor_score_colon">"Poor Score: "</string>
     <string name="good_score_colon">"Good Score: "</string>

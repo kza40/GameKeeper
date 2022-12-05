@@ -44,7 +44,7 @@ public class ViewGames extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(gameConfig.getGameTitle() + " Games");
+        getSupportActionBar().setTitle(gameConfig.getConfigTitle() + " Games");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         setupAddGame();

@@ -65,17 +65,17 @@ public class GameAdapter extends ArrayAdapter<Game> {
         ImageView ivStar2 = convertView.findViewById(R.id.star2);
         ImageView ivStar3 = convertView.findViewById(R.id.star3);
 
-        ImageView imageViewGamePicture=convertView.findViewById(R.id.imageViewGamePicture);
-        File mediaStorageDir = new File(context.getExternalFilesDir(Environment.DIRECTORY_PICTURES), APP_TAG);
-        if (!mediaStorageDir.exists() && !mediaStorageDir.mkdirs()){
-            Log.d(APP_TAG, "failed to create directory");
-        }
-        File photoFile = new File(mediaStorageDir.getPath() + File.separator + getItem(position).getPhotoFileName());
-        Bitmap takenImage = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
-        if(takenImage!=null)
-        {
-            imageViewGamePicture.setImageBitmap(takenImage);
-        }
+//        ImageView imageViewGamePicture=convertView.findViewById(R.id.imageViewGamePicture);
+//        File mediaStorageDir = new File(context.getExternalFilesDir(Environment.DIRECTORY_PICTURES), APP_TAG);
+//        if (!mediaStorageDir.exists() && !mediaStorageDir.mkdirs()){
+//            Log.d(APP_TAG, "failed to create directory");
+//        }
+//        File photoFile = new File(mediaStorageDir.getPath() + File.separator + getItem(position).getPhotoFileName());
+//        Bitmap takenImage = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
+//        if(takenImage!=null)
+//        {
+//            imageViewGamePicture.setImageBitmap(takenImage);
+//        }
 
         float scaleFactor = getItem(position).getScaleFactor();
         if (scaleFactor == EASY_PERCENT) {

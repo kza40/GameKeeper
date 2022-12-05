@@ -19,6 +19,7 @@
         android:fontFamily="@font/font_main"
         android:gravity="center"
         android:hint="@string/total_players"
+        app:layout_constrainedWidth="true"
         android:inputType="number"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="#673AB7"

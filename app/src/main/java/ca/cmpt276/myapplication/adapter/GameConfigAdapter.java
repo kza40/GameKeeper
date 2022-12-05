@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -49,11 +50,13 @@ public class GameConfigAdapter extends ArrayAdapter<GameConfig> {
         ImageButton btnAchievement=convertView.findViewById(R.id.btnAchievement);
         ImageButton btnEdit=convertView.findViewById(R.id.btnEdit);
         ImageButton btnDelete=convertView.findViewById(R.id.btnDelete);
+//        ImageView ivConfigPhoto=convertView.findViewById(R.id.ivConfigPhoto);
 
 
-        title.setText(gameConfig.getGameTitle());
+        title.setText(gameConfig.getConfigTitle());
         poorScore.setText(context.getString(R.string.poor_score_colon)+Integer.toString(gameConfig.getPoorScore()));
         goodScore.setText(context.getString(R.string.good_score_colon)+Integer.toString(gameConfig.getGoodScore()));
+//        ivConfigPhoto.setImageResource();
         setupClickListenersOnButton(gameConfig,parent,position,btnEdit,btnDelete,btnAchievement);
         return convertView;
     }
