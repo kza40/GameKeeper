@@ -101,16 +101,16 @@ public class CelebrationPage extends AppCompatActivity {
     }
 
     private void setupMessages() {
-        String message1 = getString(R.string.you_got) + achievementManager.getAchievementAtIndex(achievementPos) + "!";
-        tvAchievementEarned.setText(message1);
+        String currentAchievement = getString(R.string.you_got) + achievementManager.getAchievementAtIndex(achievementPos) + "!";
+        tvAchievementEarned.setText(currentAchievement);
 
         if (achievementPos == achievementManager.getNumAchievements() - 1) {
             tvNextAchievement.setText(R.string.highest_achievement);
         }
         else {
-            String message2 = getString(R.string.you_were) + nextScoreDifference + getString(R.string.points_away_from)
+            String nextAchievementDifference = getString(R.string.you_were) + nextScoreDifference + getString(R.string.points_away_from)
                               + achievementManager.getAchievementAtIndex(achievementPos + 1);
-            tvNextAchievement.setText(message2);
+            tvNextAchievement.setText(nextAchievementDifference);
         }
     }
 
