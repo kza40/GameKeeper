@@ -104,7 +104,7 @@ public class CelebrationPage extends AppCompatActivity {
         String currentAchievement = getString(R.string.you_got) + achievementManager.getAchievementAtIndex(achievementPos) + "!";
         tvAchievementEarned.setText(currentAchievement);
 
-        if (achievementPos == achievementManager.getNumAchievements() - 1) {
+        if (nextScoreDifference == 0) {
             tvNextAchievement.setText(R.string.highest_achievement);
         }
         else {

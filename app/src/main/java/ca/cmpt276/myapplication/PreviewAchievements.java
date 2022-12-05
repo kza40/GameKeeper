@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -20,11 +21,13 @@ import ca.cmpt276.myapplication.adapter.AchievementAdapter;
 import ca.cmpt276.myapplication.model.AchievementCalculator;
 import ca.cmpt276.myapplication.model.AchievementLevel;
 import ca.cmpt276.myapplication.model.ConfigManager;
+import ca.cmpt276.myapplication.ui_features.AchievementManager;
 import ca.cmpt276.myapplication.ui_features.DifficultyToggle;
 
 public class PreviewAchievements extends AppCompatActivity {
     private static final String EXTRA_POOR_SCORE = "ca.cmpt276.myapplication: poor score";
     private static final String EXTRA_GREAT_SCORE = "ca.cmpt276.myapplication: great score";
+    private static final int NUM_ACHIEVEMENTS = AchievementManager.NUMBER_OF_ACHIEVEMENT_POS - 1;
 
     private int poorScore;
     private int greatScore;
@@ -33,10 +36,9 @@ public class PreviewAchievements extends AppCompatActivity {
     private ListView achievementsList;
     private AchievementAdapter adapter;
 
+    private AchievementManager achievementManager;
     private List<AchievementLevel> achievementLevels;
     private DifficultyToggle toggle;
-    private TextView tvDifficulty;
-    private String[] themeTitles;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,29 +64,22 @@ public class PreviewAchievements extends AppCompatActivity {
         edtNumPlayers.addTextChangedListener(scoreTextWatcher);
         achievementsList = findViewById(R.id.achievementLevels);
 
-        // Achievement related
-        ConfigManager configManager = ConfigManager.getInstance();
-        String theme = configManager.getTheme();
-
-        if (theme.equals(ThemeSetting.THEME_FITNESS)) {
-            themeTitles = getResources().getStringArray(R.array.theme_fitness_names);
-        } else if (theme.equals(ThemeSetting.THEME_SPONGEBOB)) {
-            themeTitles = getResources().getStringArray(R.array.theme_spongebob_names);
-        } else {
-            themeTitles = getResources().getStringArray(R.array.theme_starwars_names);
-        }
+        View view = findViewById(android.R.id.content).getRootView();
+        // Achievement levels
+        achievementManager = new AchievementManager(view, ConfigManager.getInstance().getTheme());
         achievementLevels = new ArrayList<>();
 
         // Difficulty toggle
-        toggle = new DifficultyToggle(findViewById(android.R.id.content).getRootView());
+        toggle = new DifficultyToggle(view);
         toggle.setup();
-        tvDifficulty = findViewById(R.id.tvDifficulty);
+        TextView tvDifficulty = findViewById(R.id.tvDifficulty);
         tvDifficulty.addTextChangedListener(scoreTextWatcher);
     }
 
     private void setupAchievementLevels() {
-        for (String themeTitle : themeTitles) {
-            AchievementLevel newLevel = new AchievementLevel(themeTitle);
+        for (int i = 0; i < NUM_ACHIEVEMENTS; i++) {
+            String title = achievementManager.getAchievementAtIndex(i + 1);
+            AchievementLevel newLevel = new AchievementLevel(title);
             achievementLevels.add(newLevel);
         }
         adapter = new AchievementAdapter(this, R.layout.adapter_view3, achievementLevels);
@@ -109,13 +104,12 @@ public class PreviewAchievements extends AppCompatActivity {
 
     private void updateListView(int numPlayers) {
         List<Integer> boundaries = AchievementCalculator
-                            .getBoundaries(themeTitles.length, numPlayers, poorScore, greatScore, toggle.getScaleFactor());
-
-        for(int i = 0; i < themeTitles.length; i++) {
+                                    .getBoundaries(NUM_ACHIEVEMENTS, numPlayers, poorScore,
+                                    greatScore, toggle.getScaleFactor());
+        for(int i = 0; i < NUM_ACHIEVEMENTS; i++) {
             String value = Integer.toString(boundaries.get(i));
             achievementLevels.get(i).setBoundary(value);
         }
-
         adapter.notifyDataSetChanged();
     }
 
