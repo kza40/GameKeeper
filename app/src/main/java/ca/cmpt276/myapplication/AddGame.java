@@ -37,7 +37,7 @@ public class AddGame extends AppCompatActivity {
     private Game currentGame;
     private boolean isEdit;
 
-//    private int nextBoundary;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
