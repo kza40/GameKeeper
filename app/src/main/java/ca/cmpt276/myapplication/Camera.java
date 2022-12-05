@@ -43,9 +43,6 @@ public class Camera {
             openCamera();
         }
     }
-
-
-
     public void openCamera() {
         Intent camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         // Create a File reference for future access

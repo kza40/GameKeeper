@@ -41,11 +41,13 @@ public class ScoreCalculator {
     private int numActiveFields;
     private int totalScore;
     private ImageView capturedImage;
+    private boolean isEdit;
 
-    public ScoreCalculator(View view, Context context, Game currentGame) {
+    public ScoreCalculator(View view, Context context, Game currentGame,Boolean isEdit) {
         mView = view;
         mContext = context;
         mCurrentGame = currentGame;
+        this.isEdit=isEdit;
         setupUI();
     }
 
@@ -57,7 +59,11 @@ public class ScoreCalculator {
 
             }
         });
-        capturedImage.setVisibility(View.GONE);
+
+        if(!isReadyForSave && !isEdit)
+        {
+            capturedImage.setVisibility(View.GONE);
+        }
         tvTotalScore = mView.findViewById(R.id.tvTotalScore);
         edtPlayerCount = mView.findViewById(R.id.edtNumPlayersDisplay);
 
@@ -126,7 +132,7 @@ public class ScoreCalculator {
         }
         isReadyForSave = (numActiveFields > 0 && numScoresFilled == numActiveFields);
 
-        if(isReadyForSave)
+        if(isReadyForSave && !isEdit)
         {
             capturedImage.setVisibility(View.VISIBLE);
             capturedImage.setImageResource(R.drawable.starwars1);

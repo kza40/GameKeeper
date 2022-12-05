@@ -69,7 +69,7 @@ public class AddGame extends AppCompatActivity {
         public void onActivityResult(ActivityResult result) {
             if (result.getResultCode() == RESULT_OK)
             {
-                Bitmap takenImage = BitmapFactory.decodeFile(Camera.photoFile.getAbsolutePath());
+                Bitmap takenImage = BitmapFactory.decodeFile(camera.photoFile.getAbsolutePath());
                 imageViewPicture.setImageBitmap(takenImage);
 
                 String achievementEarned = getAchievementName(scoreCalculator.getTotalScore());
@@ -94,7 +94,7 @@ public class AddGame extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         setTitle(getString(R.string.add_game_title));
-
+        camera=new Camera(AddGame.this,this,activityLauncher);
         setupGameObjects();
         loadCurrentTheme();
         setupFeatures();
@@ -144,22 +144,23 @@ public class AddGame extends AppCompatActivity {
 
         if (isEdit) {
             difficultyToggle.setDifficulty(currentGame.getScaleFactor());
-
             if (currentGame.getPhotoFileName() != null) {
-                Camera.photoFile = getPhotoFileUri(currentGame.getPhotoFileName());
-                Bitmap takenImage = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
+                Bitmap takenImage = BitmapFactory.decodeFile(camera.getPhotoFileUri(currentGame.getPhotoFileName()).getAbsolutePath());
                 if (takenImage != null) {
                     imageViewPicture.setImageBitmap(takenImage);
                 }
             }
+            imageViewPicture.setOnClickListener(view2 -> {
+                    Toast.makeText(AddGame.this,"ghehh",Toast.LENGTH_LONG).show();
+                    //camera.askCameraPermission();
+            });
         }
-        scoreCalculator = new ScoreCalculator(view, getApplicationContext(), currentGame);
+        scoreCalculator = new ScoreCalculator(view, getApplicationContext(), currentGame,isEdit);
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (scoreCalculator.isReadyForSave()) {
-            camera=new Camera(AddGame.this,this,activityLauncher);
             camera.askCameraPermission();
         } else {
             Toast.makeText(AddGame.this, R.string.addEmptyMsg, Toast.LENGTH_LONG)
@@ -204,7 +205,7 @@ public class AddGame extends AppCompatActivity {
         } else {
             Game game = new Game(achievementEarned, scoreCalculator.getNumPlayers(),
                                  scoreCalculator.getTotalScore(), difficultyToggle.getScaleFactor(),
-                                 scoreCalculator.getScoresAsArray(), Camera.photoFileName);
+                                 scoreCalculator.getScoresAsArray(), camera.photoFileName);
             gameConfig.addGame(game);
         }
         new SharedPreferenceManager(getApplicationContext()).updateConfigManager(configManager);

@@ -107,6 +107,7 @@
         android:id="@+id/imageViewSelfie"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:scaleType="centerCrop"
         app:layout_constraintBottom_toTopOf="@+id/hGuideline55p"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.479"
