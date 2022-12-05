@@ -3,12 +3,10 @@ package ca.cmpt276.myapplication;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.FragmentManager;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,18 +17,19 @@ import ca.cmpt276.myapplication.model.Game;
 import ca.cmpt276.myapplication.model.GameConfig;
 import ca.cmpt276.myapplication.model.ConfigManager;
 import ca.cmpt276.myapplication.model.SharedPreferenceManager;
+import ca.cmpt276.myapplication.ui_features.AchievementManager;
+import ca.cmpt276.myapplication.ui_features.DifficultyToggle;
+import ca.cmpt276.myapplication.ui_features.ScoreCalculator;
 
 public class AddGame extends AppCompatActivity {
     //Constants
     public static final String CONFIG_POSITION = "AddGame: Config position";
     public static final String GAME_POSITION = "AddGame: Game position";
-    private static final int TICK = 1000;
-    private static final int COMPLETE = 10000;
-    public static final String CELEBRATION_FRAGMENT = "CelebrationFragment";
 
     //Features
     private DifficultyToggle difficultyToggle;
     private ScoreCalculator scoreCalculator;
+    private AchievementManager achievementManager;
 
     //Game Variables
     private ConfigManager configManager;
@@ -38,9 +37,7 @@ public class AddGame extends AppCompatActivity {
     private Game currentGame;
     private boolean isEdit;
 
-    //Achievements
-    private String[] themeTitles;
-    private String titleSubLevelOne;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +49,6 @@ public class AddGame extends AppCompatActivity {
         setTitle(getString(R.string.add_game_title));
 
         setupGameObjects();
-        loadCurrentTheme();
         setupFeatures();
     }
 
@@ -77,20 +73,6 @@ public class AddGame extends AppCompatActivity {
         }
     }
 
-    private void loadCurrentTheme() {
-        String theme = configManager.getTheme();
-        if (theme.equals(ThemeSetting.THEME_FITNESS)) {
-            themeTitles = getResources().getStringArray(R.array.theme_fitness_names);
-            titleSubLevelOne = getString(R.string.fitnessLvl0);
-        } else if (theme.equals(ThemeSetting.THEME_SPONGEBOB)) {
-            themeTitles = getResources().getStringArray(R.array.theme_spongebob_names);
-            titleSubLevelOne = getString(R.string.spongeBobLvl0);
-        } else {
-            themeTitles = getResources().getStringArray(R.array.theme_starwars_names);
-            titleSubLevelOne = getString(R.string.starWarsLvl0);
-        }
-    }
-
     private void setupFeatures() {
         View view = findViewById(android.R.id.content).getRootView();
         difficultyToggle = new DifficultyToggle(view);
@@ -98,26 +80,24 @@ public class AddGame extends AppCompatActivity {
         if (isEdit) {
             difficultyToggle.setDifficulty(currentGame.getScaleFactor());
         }
-
         scoreCalculator = new ScoreCalculator(view, getApplicationContext(), currentGame);
+        achievementManager = new AchievementManager(view, configManager.getTheme());
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (scoreCalculator.isReadyForSave()) {
-            String achievementEarned = getAchievementName(scoreCalculator.getTotalScore());
+            int achievementPos = achievementManager.getAchievementPos(
+                    scoreCalculator.getTotalScore(),
+                    scoreCalculator.getNumPlayers(),
+                    gameConfig.getPoorScore(),
+                    gameConfig.getGoodScore(),
+                    difficultyToggle.getScaleFactor());
 
-            saveGame(achievementEarned);
-            celebrate(achievementEarned);
+            saveGame(achievementPos);
+            celebrate(achievementPos);
+            finish();
 
-            new CountDownTimer(COMPLETE, TICK) {
-                public void onTick(long millisUntilFinished) {
-                }
-
-                public void onFinish() {
-                    finish();
-                }
-            }.start();
         } else {
             Toast.makeText(AddGame.this, R.string.addEmptyMsg, Toast.LENGTH_LONG)
                     .show();
@@ -125,38 +105,37 @@ public class AddGame extends AppCompatActivity {
         return true;
     }
 
-    private String getAchievementName(int score) {
-        int index = AchievementCalculator.getScorePlacement(
-                themeTitles.length, scoreCalculator.getNumPlayers(), gameConfig.getPoorScore(),
-                gameConfig.getGoodScore(), score, difficultyToggle.getScaleFactor()
-        );
-        if (index == AchievementCalculator.INDEX_SUB_LEVEL_ONE) {
-            return titleSubLevelOne;
-        } else {
-            return themeTitles[index];
-        }
-    }
-
-    private void saveGame(String achievementEarned) {
+    private void saveGame(int achievementPos) {
         if(isEdit) {
-            currentGame.setAchievementEarned(achievementEarned);
+            currentGame.setAchievementPos(achievementPos);
             currentGame.setScaleFactor(difficultyToggle.getScaleFactor());
             currentGame.setNumOfPlayers(scoreCalculator.getNumPlayers());
             currentGame.setGroupScore(scoreCalculator.getTotalScore());
             currentGame.setPlayerScores(scoreCalculator.getScoresAsArray());
-        } else {
-            Game game = new Game(achievementEarned, scoreCalculator.getNumPlayers(),
-                                 scoreCalculator.getTotalScore(), difficultyToggle.getScaleFactor(),
-                                 scoreCalculator.getScoresAsArray());
+        }
+        else {
+            Game game = new Game(
+                    achievementPos,
+                    scoreCalculator.getNumPlayers(),
+                    scoreCalculator.getTotalScore(),
+                    difficultyToggle.getScaleFactor(),
+                    scoreCalculator.getScoresAsArray());
             gameConfig.addGame(game);
         }
         new SharedPreferenceManager(getApplicationContext()).updateConfigManager(configManager);
     }
 
-    private void celebrate(String achievementEarned) {
-        FragmentManager manager = getSupportFragmentManager();
-        CelebrationFragment dialog = new CelebrationFragment(achievementEarned);
-        dialog.show(manager, CELEBRATION_FRAGMENT);
+    private void celebrate(int achievementPos) {
+        int pointDifference = achievementManager.getPointsToNextLevel(
+                        scoreCalculator.getTotalScore(),
+                        scoreCalculator.getNumPlayers(),
+                        gameConfig.getPoorScore(),
+                        gameConfig.getGoodScore(),
+                        difficultyToggle.getScaleFactor(),
+                        achievementPos);
+
+        Intent intent = CelebrationPage.makeIntent(this, achievementPos, pointDifference);
+        startActivity(intent);
     }
 
     public static Intent makeIntent(Context context,boolean isEdit, int position,int gamePosition) {

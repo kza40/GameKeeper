@@ -76,6 +76,10 @@
     <string name="score_num">Score #</string>
     <string name="input_less_message">Please input a number of 25 or lower</string>
     <string name="edit_game_title">Edit Game</string>
+    <string name="you_got_text">You got</string>
+    <string name="theme_setting">Theme Setting</string>
+    <string name="you_were_n_from">You were \n from</string>
+    <string name="nextachieve">nextAchieve</string>
     <string name="title_about">About</string>
     <string name="tab_title_developers">Developers</string>
     <string name="tab_title_resources">Resources</string>
@@ -99,4 +103,8 @@
     <string name="resources">Images\n\n 1. https://www.freepik.com/premium-vector/neumorphic-ui-ux-design-elements-3d-vector-yellow-stars-rating-system-white-background-abstract-neumorphism-material-design-star-icons-set-achievement-rank-scale-customer-product-rating-review_27250396.htm\n\nSound\n\n 1.</string>
     <string name="default_player_count">3</string>
     <string name="default_score_zero">0</string>
+    <string name="highest_achievement">You got the highest achievement possible!!!</string>
+    <string name="you_were">"You were "</string>
+    <string name="points_away_from">" points away from "</string>
+    <string name="congratulations_message">Congratulations!</string>
 </resources>

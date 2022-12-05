@@ -21,6 +21,14 @@
                 android:value="" />
         </activity>
         <activity
+            android:name=".CelebrationPage"
+            android:exported="false"
+            android:parentActivityName=".ViewGames">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".ThemeSetting"
             android:exported="false"
             android:parentActivityName=".ViewConfigs">

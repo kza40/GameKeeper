@@ -6,8 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,12 +13,10 @@ import androidx.annotation.Nullable;
 
 import java.util.List;
 
-import ca.cmpt276.myapplication.PreviewAchievements;
 import ca.cmpt276.myapplication.R;
 import ca.cmpt276.myapplication.ThemeSetting;
 import ca.cmpt276.myapplication.model.AchievementLevel;
 import ca.cmpt276.myapplication.model.ConfigManager;
-import ca.cmpt276.myapplication.model.Game;
 
 /**
  * AchievementAdapter class enables a complex ListView for previewing the achievement levels of
@@ -43,7 +39,7 @@ public class AchievementAdapter extends ArrayAdapter<AchievementLevel> {
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         convertView = layoutInflater.inflate(resource, parent, false);
 
-        TextView achievementName = convertView.findViewById(R.id.tvAchievementName);
+        TextView achievementName = convertView.findViewById(R.id.tvAchievementName1);
         TextView minScore = convertView.findViewById(R.id.tvMinScore);
 
         final AchievementLevel achievementLevel = getItem(position);

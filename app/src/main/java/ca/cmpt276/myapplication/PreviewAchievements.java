@@ -20,6 +20,7 @@ import ca.cmpt276.myapplication.adapter.AchievementAdapter;
 import ca.cmpt276.myapplication.model.AchievementCalculator;
 import ca.cmpt276.myapplication.model.AchievementLevel;
 import ca.cmpt276.myapplication.model.ConfigManager;
+import ca.cmpt276.myapplication.ui_features.DifficultyToggle;
 
 public class PreviewAchievements extends AppCompatActivity {
     private static final String EXTRA_POOR_SCORE = "ca.cmpt276.myapplication: poor score";
@@ -108,8 +109,7 @@ public class PreviewAchievements extends AppCompatActivity {
 
     private void updateListView(int numPlayers) {
         List<Integer> boundaries = AchievementCalculator
-                            .getBoundaries(themeTitles.length, numPlayers, poorScore, greatScore);
-        AchievementCalculator.applyDifficulty(boundaries, toggle.getScaleFactor());
+                            .getBoundaries(themeTitles.length, numPlayers, poorScore, greatScore, toggle.getScaleFactor());
 
         for(int i = 0; i < themeTitles.length; i++) {
             String value = Integer.toString(boundaries.get(i));
