@@ -7,4 +7,10 @@
         android:title="@string/title_settings"
         app:showAsAction="ifRoom"/>
 
+    <item
+        android:id="@+id/about"
+        android:icon="@drawable/ic_baseline_info_24"
+        android:title="About"
+        app:showAsAction="ifRoom"/>
+
 </menu>
