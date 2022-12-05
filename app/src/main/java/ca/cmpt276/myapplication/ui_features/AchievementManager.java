@@ -63,4 +63,8 @@ public class AchievementManager {
         return titles.length;
     }
 
+    public String[] getTitles() {
+        return titles;
+    }
+
 }
