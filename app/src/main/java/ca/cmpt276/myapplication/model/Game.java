@@ -88,4 +88,8 @@ public class Game {
     public String getPhotoFileName() {
         return photoFileName;
     }
+
+    public void setPhotoFileName(String photoFileName) {
+        this.photoFileName = photoFileName;
+    }
 }

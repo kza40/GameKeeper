@@ -11,7 +11,9 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -42,9 +44,8 @@ public class AddGame extends AppCompatActivity {
     //Constants
     public static final String CONFIG_POSITION = "AddGame: Config position";
     public static final String GAME_POSITION = "AddGame: Game position";
-    private static final int TICK = 1000;
-    private static final int COMPLETE = 10000;
     public static final String CELEBRATION_FRAGMENT = "CelebrationFragment";
+    public static final String DEFAULT_PHOTO_JPG = "photo.jpg";
 
     //Features
     private ImageView imageViewPicture;
@@ -71,18 +72,6 @@ public class AddGame extends AppCompatActivity {
             {
                 Bitmap takenImage = BitmapFactory.decodeFile(camera.photoFile.getAbsolutePath());
                 imageViewPicture.setImageBitmap(takenImage);
-
-                String achievementEarned = getAchievementName(scoreCalculator.getTotalScore());
-                saveGame(achievementEarned);
-                celebrate(achievementEarned);
-//                new CountDownTimer(COMPLETE, TICK) {
-//                    public void onTick(long millisUntilFinished) {
-//                    }
-//
-//                    public void onFinish() {
-//                        finish();
-//                    }
-//                }.start();
             }
         }
     });
@@ -150,25 +139,76 @@ public class AddGame extends AppCompatActivity {
                     imageViewPicture.setImageBitmap(takenImage);
                 }
             }
-            imageViewPicture.setOnClickListener(view2 -> {
-                    Toast.makeText(AddGame.this,"ghehh",Toast.LENGTH_LONG).show();
-                    //camera.askCameraPermission();
-            });
         }
         scoreCalculator = new ScoreCalculator(view, getApplicationContext(), currentGame,isEdit);
+        imageViewPicture.setOnClickListener(view1-> {
+            if(scoreCalculator.isReadyForSave())
+            {
+                camera.askCameraPermission();
+            }
+            else
+            {
+                Toast.makeText(AddGame.this, R.string.addEmptyMsgforCamera, Toast.LENGTH_LONG)
+                        .show();
+            }
+
+        });
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (scoreCalculator.isReadyForSave()) {
-            camera.askCameraPermission();
-        } else {
+            if(camera.photoFileName.equals(DEFAULT_PHOTO_JPG))
+            {
+                if(isEdit)
+                {
+                    if(currentGame.getPhotoFileName().equals(DEFAULT_PHOTO_JPG))
+                    {
+                        showConfirmDialogBox();
+                    }
+                    else
+                    {
+                        String achievementEarned = getAchievementName(scoreCalculator.getTotalScore());
+                        saveGame(achievementEarned);
+                        celebrate(achievementEarned);
+                    }
+                }
+                else
+                {
+                    showConfirmDialogBox();
+                }
+            }
+            else
+            {
+                String achievementEarned = getAchievementName(scoreCalculator.getTotalScore());
+                saveGame(achievementEarned);
+                celebrate(achievementEarned);
+            }
+
+        }
+        else
+        {
             Toast.makeText(AddGame.this, R.string.addEmptyMsg, Toast.LENGTH_LONG)
                     .show();
         }
         return true;
     }
 
+    private void showConfirmDialogBox() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(R.string.confirmDialogPicture)
+                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        String achievementEarned = getAchievementName(scoreCalculator.getTotalScore());
+                        saveGame(achievementEarned);
+                        celebrate(achievementEarned);
+                    }
+                })
+                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                    }
+                }).create().show();
+    }
 
 
     @Override
@@ -202,6 +242,10 @@ public class AddGame extends AppCompatActivity {
             currentGame.setNumOfPlayers(scoreCalculator.getNumPlayers());
             currentGame.setGroupScore(scoreCalculator.getTotalScore());
             currentGame.setPlayerScores(scoreCalculator.getScoresAsArray());
+            if(!camera.photoFileName.equals(DEFAULT_PHOTO_JPG))
+            {
+                currentGame.setPhotoFileName(camera.photoFileName);
+            }
         } else {
             Game game = new Game(achievementEarned, scoreCalculator.getNumPlayers(),
                                  scoreCalculator.getTotalScore(), difficultyToggle.getScaleFactor(),

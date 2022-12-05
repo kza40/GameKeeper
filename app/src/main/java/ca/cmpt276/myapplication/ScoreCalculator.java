@@ -53,17 +53,7 @@ public class ScoreCalculator {
 
     private void setupUI() {
         capturedImage=mView.findViewById(R.id.imageViewSelfie);
-        capturedImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-            }
-        });
-
-        if(!isReadyForSave && !isEdit)
-        {
-            capturedImage.setVisibility(View.GONE);
-        }
         tvTotalScore = mView.findViewById(R.id.tvTotalScore);
         edtPlayerCount = mView.findViewById(R.id.edtNumPlayersDisplay);
 
@@ -141,12 +131,6 @@ public class ScoreCalculator {
         else {
             isReadyForSave = false;
             photoStatusIcon.setImageResource(R.drawable.ic_add_grey);
-        }
-
-        if(isReadyForSave && !isEdit)
-        {
-            capturedImage.setVisibility(View.VISIBLE);
-            capturedImage.setImageResource(R.drawable.starwars1);
         }
     }
 
