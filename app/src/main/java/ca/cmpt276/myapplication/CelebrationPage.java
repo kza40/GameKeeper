@@ -70,13 +70,13 @@ public class CelebrationPage extends AppCompatActivity {
 
         if (theme.equals(ThemeSetting.THEME_FITNESS)) {
             bg.setImageResource(R.drawable.fitness_bg);
-            leftItem.setImageResource(R.drawable.dumbell2);
-            rightItem.setImageResource(R.drawable.dumbell2);
+            leftItem.setImageResource(R.drawable.dumbbell);
+            rightItem.setImageResource(R.drawable.dumbbell);
 
         } else if (theme.equals(ThemeSetting.THEME_SPONGEBOB)) {
             bg.setImageResource(R.drawable.sponge_background);
             leftItem.setImageResource(R.drawable.right_garry);
-            rightItem.setImageResource(R.drawable.left_garry_new);
+            rightItem.setImageResource(R.drawable.mirrored_garry);
 
         } else {
             bg.setImageResource(R.drawable.starwars_background);

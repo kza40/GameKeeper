@@ -82,7 +82,7 @@ public class PreviewAchievements extends AppCompatActivity {
             AchievementLevel newLevel = new AchievementLevel(title);
             achievementLevels.add(newLevel);
         }
-        adapter = new AchievementAdapter(this, R.layout.adapter_view3, achievementLevels);
+        adapter = new AchievementAdapter(this, R.layout.achievement_preview_row, achievementLevels);
         achievementsList.setAdapter(adapter);
     }
 

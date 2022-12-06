@@ -19,7 +19,7 @@
         android:textAlignment="center"
         android:textSize="60sp"
         android:textStyle="bold"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:autoSizeTextType="uniform"
         android:autoSizeStepGranularity="2sp"/>
 
@@ -36,7 +36,7 @@
         android:lineSpacingExtra="20sp"
         android:text="@string/memberNames"
         android:textSize="24sp"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:autoSizeTextType="uniform" />
 
 </RelativeLayout>
