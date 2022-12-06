@@ -57,7 +57,6 @@ public class GameConfigAdapter extends ArrayAdapter<GameConfig> {
         ImageButton btnAchievement=convertView.findViewById(R.id.btnAchievement);
         ImageButton btnEdit=convertView.findViewById(R.id.btnEdit);
         ImageButton btnDelete=convertView.findViewById(R.id.btnDelete);
-//        ImageView ivConfigPhoto=convertView.findViewById(R.id.ivConfigPhoto);
 
         ImageView imageViewConfigPhoto=convertView.findViewById(R.id.ivConfigPhoto);
         File mediaStorageDir = new File(context.getExternalFilesDir(Environment.DIRECTORY_PICTURES), APP_TAG);
@@ -72,13 +71,12 @@ public class GameConfigAdapter extends ArrayAdapter<GameConfig> {
         }
         else
         {
-            imageViewConfigPhoto.setImageResource(R.drawable.img_default);
+            imageViewConfigPhoto.setImageResource(R.drawable.default_config);
         }
 
         title.setText(gameConfig.getConfigTitle());
         poorScore.setText(context.getString(R.string.poor_score_colon)+Integer.toString(gameConfig.getPoorScore()));
         goodScore.setText(context.getString(R.string.good_score_colon)+Integer.toString(gameConfig.getGoodScore()));
-//        ivConfigPhoto.setImageResource();
         setupClickListenersOnButton(gameConfig,parent,position,btnEdit,btnDelete,btnAchievement);
         return convertView;
     }

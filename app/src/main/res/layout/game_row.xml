@@ -115,7 +115,7 @@
                 app:layout_constraintEnd_toStartOf="@+id/vGuideline25p"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/img_default" />
+                app:srcCompat="@drawable/default_game" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/hGuidelineTwoThirds"

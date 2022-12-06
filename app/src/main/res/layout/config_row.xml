@@ -25,15 +25,15 @@
                 android:id="@+id/ivConfigPhoto"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="75"
-                android:scaleType="fitXY"
-                tools:srcCompat="@drawable/img_default" />
+                android:layout_weight="80"
+                android:scaleType="fitCenter"
+                tools:srcCompat="@drawable/default_config" />
 
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="25"
+                android:layout_weight="20"
                 android:weightSum="100">
 
                 <LinearLayout

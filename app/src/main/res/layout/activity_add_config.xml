@@ -104,7 +104,7 @@
         app:layout_constraintStart_toStartOf="@+id/guidelineLeftName"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
         app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/img_default" />
+        app:srcCompat="@drawable/default_config" />
 
     <TextView
         android:id="@+id/tvPhotoHelp"
