@@ -60,6 +60,10 @@ public class AddGame extends AppCompatActivity {
                 Bitmap takenImage = BitmapFactory.decodeFile(camera.photoFile.getAbsolutePath());
                 imageViewPicture.setImageBitmap(takenImage);
             }
+            else
+            {
+                camera.photoFileName= camera.photoFileName.substring(camera.photoFileName.indexOf("_")+1);
+            }
         }
     });
 
