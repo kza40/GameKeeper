@@ -76,7 +76,7 @@ public class CelebrationPage extends AppCompatActivity {
         } else if (theme.equals(ThemeSetting.THEME_SPONGEBOB)) {
             bg.setImageResource(R.drawable.sponge_background);
             leftItem.setImageResource(R.drawable.right_garry);
-            rightItem.setImageResource(R.drawable.left_garry);
+            rightItem.setImageResource(R.drawable.mirrored_garry);
 
         } else {
             bg.setImageResource(R.drawable.starwars_background);
