@@ -18,11 +18,13 @@ import ca.cmpt276.myapplication.ui_features.AchievementManager;
 public class CelebrationPage extends AppCompatActivity {
     private static final String ACHIEVEMENT_POS = "CelebrationPage: Achievement pos";
     private static final String BOUNDARY_DIFFERENCE = "CelebrationPage: nextBoundary difference";
+    private static final String GAME_POSITION="CelebrationPage: Game Position";
 
     private ConfigManager configManager;
     private AchievementManager achievementManager;
     private String theme;
     private int achievementPos;
+    private int gamePos;
     private int nextScoreDifference;
 
     private ImageView ivReload;
@@ -30,6 +32,7 @@ public class CelebrationPage extends AppCompatActivity {
     private TextView tvNextAchievement;
     private ImageView leftItem;
     private ImageView rightItem;
+    private ImageView selfiePhoto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +41,7 @@ public class CelebrationPage extends AppCompatActivity {
 
         nextScoreDifference = getIntent().getIntExtra(BOUNDARY_DIFFERENCE, -1);
         achievementPos = getIntent().getIntExtra(ACHIEVEMENT_POS, -1);
-
+        gamePos=getIntent().getIntExtra(GAME_POSITION,-1);
         configManager = ConfigManager.getInstance();
         tvAchievementEarned = findViewById(R.id.tvAchievementName);
         tvNextAchievement = findViewById(R.id.tvNextAchievementMessage);
@@ -119,10 +122,11 @@ public class CelebrationPage extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public static Intent makeIntent(Context context, int achievementPos, int boundaryDifference) {
+    public static Intent makeIntent(Context context, int achievementPos, int boundaryDifference,int gamePosition) {
         Intent intent = new Intent(context, CelebrationPage.class);
         intent.putExtra(ACHIEVEMENT_POS, achievementPos);
         intent.putExtra(BOUNDARY_DIFFERENCE, boundaryDifference);
+        intent.putExtra(GAME_POSITION,gamePosition);
         return intent;
     }
 

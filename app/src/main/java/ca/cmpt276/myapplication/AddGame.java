@@ -51,6 +51,7 @@ public class AddGame extends AppCompatActivity {
     private GameConfig gameConfig;
     private Game currentGame;
     private boolean isEdit;
+    private int gamePos;
 
     ActivityResultLauncher<Intent> activityLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
         @Override
@@ -96,7 +97,7 @@ public class AddGame extends AppCompatActivity {
         if (intent.getIntExtra(GAME_POSITION, -1) != -1) {
             setTitle(getString(R.string.edit_game_title));
             isEdit = true;
-            int gamePos = intent.getIntExtra(GAME_POSITION, -1);
+            gamePos = intent.getIntExtra(GAME_POSITION, -1);
             currentGame = gameConfig.getGameAtIndex(gamePos);
         }
     }
@@ -239,7 +240,16 @@ public class AddGame extends AppCompatActivity {
                         gameConfig.getGoodScore(),
                         difficultyToggle.getScaleFactor(),
                         achievementPos);
-        Intent intent = CelebrationPage.makeIntent(this, achievementPos, pointDifference);
+        Intent intent;
+        if(isEdit)
+        {
+            intent = CelebrationPage.makeIntent(this, achievementPos, pointDifference,gamePos);
+
+        }
+        else
+        {
+            intent = CelebrationPage.makeIntent(this, achievementPos, pointDifference,gameConfig.getGames().size()-1);
+        }
         startActivity(intent);
     }
 
