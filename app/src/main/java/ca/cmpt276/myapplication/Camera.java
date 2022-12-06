@@ -2,7 +2,6 @@ package ca.cmpt276.myapplication;
 
 import android.Manifest;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -19,12 +18,10 @@ import java.io.File;
 
 public class Camera {
     private final Activity activity;
-    private final Context mContext;
     private final ActivityResultLauncher<Intent> activityResultLauncher;
 
-    public Camera(Activity activity, Context context, ActivityResultLauncher<Intent> activityResultLauncher) {
+    public Camera(Activity activity, ActivityResultLauncher<Intent> activityResultLauncher) {
         this.activity = activity;
-        mContext = context;
         this.activityResultLauncher=activityResultLauncher;
     }
 
@@ -43,6 +40,7 @@ public class Camera {
             openCamera();
         }
     }
+
     public void openCamera() {
         Intent camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         // Create a File reference for future access

@@ -8,31 +8,20 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.FragmentManager;
 
-import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.CountDownTimer;
-import android.os.Environment;
-import android.provider.MediaStore;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.view.View;
 import android.widget.Toast;
 
-import java.io.File;
-
-import ca.cmpt276.myapplication.model.AchievementCalculator;
 import ca.cmpt276.myapplication.model.Game;
 import ca.cmpt276.myapplication.model.GameConfig;
 import ca.cmpt276.myapplication.model.ConfigManager;
@@ -42,6 +31,7 @@ import ca.cmpt276.myapplication.ui_features.DifficultyToggle;
 import ca.cmpt276.myapplication.ui_features.ScoreCalculator;
 
 public class AddGame extends AppCompatActivity {
+
     //Constants
     public static final String CONFIG_POSITION = "AddGame: Config position";
     public static final String GAME_POSITION = "AddGame: Game position";
@@ -49,21 +39,18 @@ public class AddGame extends AppCompatActivity {
     public static final String DEFAULT_PHOTO_JPG = "photo.jpg";
 
     //Features
-    private ImageView imageViewPicture;
     private DifficultyToggle difficultyToggle;
     private ScoreCalculator scoreCalculator;
     private AchievementManager achievementManager;
+
+    private ImageView imageViewPicture;
+    private Camera camera;
 
     //Game Variables
     private ConfigManager configManager;
     private GameConfig gameConfig;
     private Game currentGame;
     private boolean isEdit;
-
-
-
-    Camera camera;
-
 
     ActivityResultLauncher<Intent> activityLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
         @Override
@@ -84,7 +71,7 @@ public class AddGame extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         setTitle(getString(R.string.add_game_title));
-        camera=new Camera(AddGame.this,this,activityLauncher);
+        camera=new Camera(AddGame.this,activityLauncher);
         setupGameObjects();
         setupFeatures();
     }
@@ -119,15 +106,12 @@ public class AddGame extends AppCompatActivity {
 
         if (isEdit) {
             difficultyToggle.setDifficulty(currentGame.getScaleFactor());
-            if (currentGame.getPhotoFileName() != null) {
-                Bitmap takenImage = BitmapFactory.decodeFile(camera.getPhotoFileUri(currentGame.getPhotoFileName()).getAbsolutePath());
-                if (takenImage != null) {
-                    imageViewPicture.setImageBitmap(takenImage);
-                }
-            }
+            setPhoto();
         }
+
         achievementManager = new AchievementManager(view, configManager.getTheme());
         scoreCalculator = new ScoreCalculator(view, getApplicationContext(), currentGame,isEdit);
+
         imageViewPicture.setOnClickListener(view1-> {
             if(scoreCalculator.isReadyForSave())
             {
@@ -138,8 +122,16 @@ public class AddGame extends AppCompatActivity {
                 Toast.makeText(AddGame.this, R.string.addEmptyMsgforCamera, Toast.LENGTH_LONG)
                         .show();
             }
-
         });
+    }
+
+    private void setPhoto() {
+        if (currentGame.getPhotoFileName() != null) {
+            Bitmap takenImage = BitmapFactory.decodeFile(camera.getPhotoFileUri(currentGame.getPhotoFileName()).getAbsolutePath());
+            if (takenImage != null) {
+                imageViewPicture.setImageBitmap(takenImage);
+            }
+        }
     }
 
     @Override
@@ -155,16 +147,7 @@ public class AddGame extends AppCompatActivity {
                     }
                     else
                     {
-                        int achievementPos = achievementManager.getAchievementPos(
-                                scoreCalculator.getTotalScore(),
-                                scoreCalculator.getNumPlayers(),
-                                gameConfig.getPoorScore(),
-                                gameConfig.getGoodScore(),
-                                difficultyToggle.getScaleFactor());
-
-                        saveGame(achievementPos);
-                        celebrate(achievementPos);
-                        finish();
+                        closeActivity();
                     }
                 }
                 else
@@ -174,18 +157,8 @@ public class AddGame extends AppCompatActivity {
             }
             else
             {
-                int achievementPos = achievementManager.getAchievementPos(
-                        scoreCalculator.getTotalScore(),
-                        scoreCalculator.getNumPlayers(),
-                        gameConfig.getPoorScore(),
-                        gameConfig.getGoodScore(),
-                        difficultyToggle.getScaleFactor());
-
-                saveGame(achievementPos);
-                celebrate(achievementPos);
-                finish();
+                closeActivity();
             }
-
         }
         else
         {
@@ -198,19 +171,10 @@ public class AddGame extends AppCompatActivity {
     private void showConfirmDialogBox() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(R.string.confirmDialogPicture)
-                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        String achievementEarned = getAchievementName(scoreCalculator.getTotalScore());
-                        saveGame(achievementEarned);
-                        celebrate(achievementEarned);
-                    }
-                })
-                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                    }
+                .setPositiveButton(R.string.yes, (dialog, id) -> closeActivity())
+                .setNegativeButton(R.string.cancel, (dialog, id) -> {
                 }).create().show();
     }
-
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -224,16 +188,16 @@ public class AddGame extends AppCompatActivity {
         }
     }
 
-    private String getAchievementName(int score) {
-        int index = AchievementCalculator.getScorePlacement(
-                themeTitles.length, scoreCalculator.getNumPlayers(), gameConfig.getPoorScore(),
-                gameConfig.getGoodScore(), score, difficultyToggle.getScaleFactor()
-        );
-        if (index == AchievementCalculator.INDEX_SUB_LEVEL_ONE) {
-            return titleSubLevelOne;
-        } else {
-            return themeTitles[index];
-        }
+    private void closeActivity() {
+        int achievementPos = achievementManager.getAchievementPos(
+                scoreCalculator.getTotalScore(),
+                scoreCalculator.getNumPlayers(),
+                gameConfig.getPoorScore(),
+                gameConfig.getGoodScore(),
+                difficultyToggle.getScaleFactor());
+        saveGame(achievementPos);
+        celebrate(achievementPos);
+        finish();
     }
 
     private void saveGame(int achievementPos) {
@@ -269,7 +233,6 @@ public class AddGame extends AppCompatActivity {
                         gameConfig.getGoodScore(),
                         difficultyToggle.getScaleFactor(),
                         achievementPos);
-
         Intent intent = CelebrationPage.makeIntent(this, achievementPos, pointDifference);
         startActivity(intent);
     }
