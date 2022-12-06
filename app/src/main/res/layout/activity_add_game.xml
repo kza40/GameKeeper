@@ -175,7 +175,6 @@
         android:id="@+id/icon_add"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:background="@drawable/icon_background"
         app:layout_constraintEnd_toEndOf="@+id/imageViewSelfie"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/imageViewSelfie"

@@ -31,15 +31,18 @@ import ca.cmpt276.myapplication.model.SharedPreferenceManager;
 public class AddConfig extends AppCompatActivity {
     public static final String DEFAULT_PHOTO_JPG = "photo.jpg";
 
+    //UI variables
     private EditText edtPoorScore;
     private EditText edtGoodScore;
     private EditText edtConfigName;
     private ImageView ivConfigPhoto;
 
+    // Config variables
     private Boolean isEdit;
     private ConfigManager configManager;
     private GameConfig gameConfig;
 
+    // Feature
     private Camera camera;
 
     ActivityResultLauncher<Intent> activityLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
@@ -49,6 +52,10 @@ public class AddConfig extends AppCompatActivity {
             {
                 Bitmap takenImage = BitmapFactory.decodeFile(camera.photoFile.getAbsolutePath());
                 ivConfigPhoto.setImageBitmap(takenImage);
+            }
+            else
+            {
+                camera.photoFileName= camera.photoFileName.substring(camera.photoFileName.indexOf("_")+1);
             }
         }
     });
@@ -62,12 +69,11 @@ public class AddConfig extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle(getString(R.string.addConfigTitle));
+        setupUI();
 
         configManager = ConfigManager.getInstance();
+        camera = new Camera(AddConfig.this,activityLauncher);
         int position=-1;
-
-        camera=new Camera(AddConfig.this,activityLauncher);
-        setupUIElements();
 
         if(getIntent().getExtras()!=null)
         {
@@ -75,15 +81,33 @@ public class AddConfig extends AppCompatActivity {
             position=getIntent().getIntExtra(AddGame.CONFIG_POSITION,-1);
             gameConfig=configManager.getGameConfigAtIndex(position);
             setTitle(getString(R.string.editConfigTitle) + gameConfig.getConfigTitle());
-            loadInputFields();
-            loadPhoto();
+            loadData();
         }
         else {
             isEdit = false;
         }
     }
 
-    private void loadPhoto() {
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.add_x_menu, menu);
+        return true;
+    }
+
+    private void setupUI() {
+        edtPoorScore = findViewById(R.id.poorScore);
+        edtGoodScore = findViewById(R.id.goodScore);
+        edtConfigName = findViewById(R.id.configName);
+        ivConfigPhoto = findViewById(R.id.configImage);
+        ivConfigPhoto.setOnClickListener(view-> camera.askCameraPermission());
+    }
+
+
+    private void loadData() {
+        edtPoorScore.setText(Integer.toString(gameConfig.getPoorScore()));
+        edtGoodScore.setText(Integer.toString(gameConfig.getGoodScore()));
+        edtConfigName.setText(gameConfig.getConfigTitle());
+
         if (gameConfig.getPhotoFileName() != null) {
             Bitmap takenImage = BitmapFactory.decodeFile(camera.getPhotoFileUri(gameConfig.getPhotoFileName()).getAbsolutePath());
             if (takenImage != null) {
@@ -91,27 +115,7 @@ public class AddConfig extends AppCompatActivity {
             }
         }
         TextView tvPhotoCaption = findViewById(R.id.tvPhotoHelp);
-        tvPhotoCaption.setText("Photo for " + gameConfig.getConfigTitle());
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.add_game_menu, menu);
-        return true;
-    }
-
-    private void loadInputFields() {
-        edtPoorScore.setText(Integer.toString(gameConfig.getPoorScore()));
-        edtGoodScore.setText(Integer.toString(gameConfig.getGoodScore()));
-        edtConfigName.setText(gameConfig.getConfigTitle());
-    }
-
-    private void setupUIElements() {
-        edtPoorScore = findViewById(R.id.poorScore);
-        edtGoodScore = findViewById(R.id.goodScore);
-        edtConfigName = findViewById(R.id.configName);
-        ivConfigPhoto = findViewById(R.id.configImage);
-        ivConfigPhoto.setOnClickListener(view-> camera.askCameraPermission());
+        tvPhotoCaption.setText(getString(R.string.config_photo_caption) + gameConfig.getConfigTitle());
     }
 
     @Override
@@ -120,7 +124,7 @@ public class AddConfig extends AppCompatActivity {
         if (id == android.R.id.home){
             onBackPressed();
             return true;
-        } else if (id == R.id.settings) {      // need to change id to "save"
+        } else if (id == R.id.save) {
             if(isReadyForSave()) {
                 if(camera.photoFileName.equals(DEFAULT_PHOTO_JPG) && !isEdit) {
                     showConfirmDialogBox();
@@ -151,7 +155,7 @@ public class AddConfig extends AppCompatActivity {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 camera.openCamera();
             } else {
-                Toast.makeText(this, "Camera permission required to use Camera.", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, getString(R.string.camera_permission_msg), Toast.LENGTH_LONG).show();
             }
         }
     }

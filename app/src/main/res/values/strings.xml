@@ -16,9 +16,9 @@
     <string name="add_game_title">Add Game</string>
     <string name="you_got">"You got "</string>
     <string name="exclamation">!</string>
-    <string name="addEmptyMsgforCamera">Can not click a picture. One or more fields are empty.</string>
+    <string name="addEmptyMsgforCamera">Can not take photo. One or more fields are empty.</string>
     <string name="addEmptyMsg">Could not save. One or more fields are empty.</string>
-    <string name="confirmDialogPicture">"Are you sure you don't want to click a picture?"</string>
+    <string name="confirmDialogPicture">"Are you sure you don't want to add a photo?"</string>
     <string name="yes">Yes</string>
     <string name="cancel">Cancel</string>
     <string name="configsEmptyStateMsg">Oh... seems like there arent any game configurations yet. Tap the + icon to add one!</string>
@@ -27,7 +27,7 @@
     <string name="total_players">Total Players</string>
     <string name="addConfigTitle">Add Configuration</string>
     <string name="editConfigTitle">"Edit "</string>
-    <string name="viewConfigsTitle">Game Configurations</string>
+    <string name="viewConfigsTitle">Configurations</string>
     <string name="players">" players"</string>
     <string name="poor_score_colon">"Poor Score: "</string>
     <string name="good_score_colon">"Good Score: "</string>
@@ -111,4 +111,7 @@
     <string name="you_were">"You were "</string>
     <string name="points_away_from">" points away from "</string>
     <string name="congratulations_message">Congratulations!</string>
+    <string name="add_config_photo_caption">What does your game look like? Tap the image to take a photo!</string>
+    <string name="config_photo_caption">\"Photo for \"</string>
+    <string name="camera_permission_msg">Camera permission required to use Camera.</string>
 </resources>

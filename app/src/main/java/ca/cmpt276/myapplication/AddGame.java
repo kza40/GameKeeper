@@ -60,6 +60,9 @@ public class AddGame extends AppCompatActivity {
                 Bitmap takenImage = BitmapFactory.decodeFile(camera.photoFile.getAbsolutePath());
                 imageViewPicture.setImageBitmap(takenImage);
             }
+            {
+                camera.photoFileName= camera.photoFileName.substring(camera.photoFileName.indexOf("_")+1);
+            }
         }
     });
 
@@ -77,7 +80,7 @@ public class AddGame extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.add_game_menu, menu);
+        getMenuInflater().inflate(R.menu.add_x_menu, menu);
         return true;
     }
 
