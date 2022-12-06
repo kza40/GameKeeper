@@ -60,6 +60,7 @@ public class AddGame extends AppCompatActivity {
                 Bitmap takenImage = BitmapFactory.decodeFile(camera.photoFile.getAbsolutePath());
                 imageViewPicture.setImageBitmap(takenImage);
             }
+            else
             {
                 camera.photoFileName= camera.photoFileName.substring(camera.photoFileName.indexOf("_")+1);
             }
@@ -70,6 +71,7 @@ public class AddGame extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_game);
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         setTitle(getString(R.string.add_game_title));
