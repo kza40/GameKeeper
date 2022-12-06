@@ -22,6 +22,7 @@
         android:inputType="text"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="#673AB7"
+        app:layout_constrainedWidth="true"
         app:layout_constraintBottom_toTopOf="@+id/poorScore"
         app:layout_constraintEnd_toStartOf="@+id/guidelineRightName"
         app:layout_constraintHorizontal_bias="0.5"
@@ -38,6 +39,7 @@
         android:fontFamily="@font/font_main"
         android:background="@drawable/custom_input"
         android:inputType="number"
+        app:layout_constrainedWidth="true"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         app:layout_constraintBottom_toTopOf="@+id/goodScore"
         app:layout_constraintEnd_toStartOf="@+id/guidelineRightName"
@@ -49,62 +51,73 @@
         android:id="@+id/goodScore"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
-        android:gravity="center"
-        android:ems="10"
-        android:hint="@string/great_score"
-        android:fontFamily="@font/font_main"
         android:background="@drawable/custom_input"
+        android:ems="10"
+        android:fontFamily="@font/font_main"
+        android:gravity="center"
+        android:hint="@string/great_score"
         android:inputType="number"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        app:layout_constraintBottom_toTopOf="@+id/guidelineBottomText"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineBottomBtns"
         app:layout_constraintEnd_toStartOf="@+id/guidelineRightName"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/guidelineLeftName"
         app:layout_constraintTop_toBottomOf="@+id/poorScore" />
-
-    <Button
-        android:id="@+id/saveBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/save"
-        android:fontFamily="@font/font_main"
-        app:layout_constraintBottom_toTopOf="@+id/guidelineBottomBtns"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineRightName"
-        app:layout_constraintTop_toTopOf="@+id/guidelineBottomText" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineLeftName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.25" />
+        app:layout_constraintGuide_percent="0.15" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineRightName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.75" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineBottomText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.55" />
+        app:layout_constraintGuide_percent="0.85" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineTopText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.15" />
+        app:layout_constraintGuide_percent="0.45" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineBottomBtns"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.75" />
+        app:layout_constraintGuide_percent="0.85" />
+
+    <ImageView
+        android:id="@+id/configImage"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toTopOf="@+id/tvPhotoHelp"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineRightName"
+        app:layout_constraintStart_toStartOf="@+id/guidelineLeftName"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/default_config" />
+
+    <TextView
+        android:id="@+id/tvPhotoHelp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/font_main"
+        android:gravity="center"
+        android:text="@string/add_config_photo_caption"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineTopText"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineRightName"
+        app:layout_constraintStart_toStartOf="@+id/guidelineLeftName"
+        app:layout_constraintTop_toBottomOf="@+id/configImage" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

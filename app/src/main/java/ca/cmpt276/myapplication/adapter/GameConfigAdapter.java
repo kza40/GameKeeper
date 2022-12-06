@@ -3,15 +3,22 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Environment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+
+import java.io.File;
 import java.util.List;
 import ca.cmpt276.myapplication.AddConfig;
 import ca.cmpt276.myapplication.PreviewAchievements;
@@ -30,6 +37,7 @@ public class GameConfigAdapter extends ArrayAdapter<GameConfig> {
     private static final String TAG="GamesListAdapter";
     private Context context;
     private int resource;
+    public final String APP_TAG = "MyCustomApp";
 
     public GameConfigAdapter(@NonNull Activity context, int resource, @NonNull List<GameConfig> objects) {
         super(context, resource, objects);
@@ -50,8 +58,23 @@ public class GameConfigAdapter extends ArrayAdapter<GameConfig> {
         ImageButton btnEdit=convertView.findViewById(R.id.btnEdit);
         ImageButton btnDelete=convertView.findViewById(R.id.btnDelete);
 
+        ImageView imageViewConfigPhoto=convertView.findViewById(R.id.ivConfigPhoto);
+        File mediaStorageDir = new File(context.getExternalFilesDir(Environment.DIRECTORY_PICTURES), APP_TAG);
+        if (!mediaStorageDir.exists() && !mediaStorageDir.mkdirs()){
+            Log.d(APP_TAG, "failed to create directory");
+        }
+        File photoFile = new File(mediaStorageDir.getPath() + File.separator + getItem(position).getPhotoFileName());
+        Bitmap takenImage = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
+        if(takenImage!=null)
+        {
+            imageViewConfigPhoto.setImageBitmap(takenImage);
+        }
+        else
+        {
+            imageViewConfigPhoto.setImageResource(R.drawable.default_config);
+        }
 
-        title.setText(gameConfig.getGameTitle());
+        title.setText(gameConfig.getConfigTitle());
         poorScore.setText(context.getString(R.string.poor_score_colon)+Integer.toString(gameConfig.getPoorScore()));
         goodScore.setText(context.getString(R.string.good_score_colon)+Integer.toString(gameConfig.getGoodScore()));
         setupClickListenersOnButton(gameConfig,parent,position,btnEdit,btnDelete,btnAchievement);

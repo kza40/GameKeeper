@@ -82,7 +82,7 @@ public class AddGame extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.add_game_menu, menu);
+        getMenuInflater().inflate(R.menu.add_x_menu, menu);
         return true;
     }
 

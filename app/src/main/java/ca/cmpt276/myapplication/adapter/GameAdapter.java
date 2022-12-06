@@ -79,6 +79,10 @@ public class GameAdapter extends ArrayAdapter<Game> {
         {
             imageViewGamePicture.setImageBitmap(takenImage);
         }
+        else
+        {
+            imageViewGamePicture.setImageResource(R.drawable.default_game);
+        }
 
         float scaleFactor = getItem(position).getScaleFactor();
         if (scaleFactor == EASY_PERCENT) {
