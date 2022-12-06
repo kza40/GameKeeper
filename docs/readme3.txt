@@ -3,3 +3,6 @@
 - To save a game play, enter the number of players, enter the scores and click the save icon on the top right corner
 - To edit a game play click on it and edit the needed fields, click save on the top right corner
 - JUnit test is testing the "AchievementCalculator" model class
+- Click on the dice icon to add a picture
+- You may click on the image to change it
+- Click on the bar chart on the right side of the game config to view its stats
