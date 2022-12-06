@@ -114,7 +114,7 @@
     <string name="points_away_from">" points away from "</string>
     <string name="congratulations_message">Congratulations!</string>
     <string name="add_config_photo_caption">What does your game look like? Tap the image to take a photo!</string>
-    <string name="config_photo_caption">\"Photo for \"</string>
+    <string name="config_photo_caption">"Photo for "</string>
     <string name="camera_permission_msg">Camera permission required to use Camera.</string>
     <string name="achievementStats">Achievement Statistics</string>
     <string name="achievementLevels">Achievement Levels</string>
