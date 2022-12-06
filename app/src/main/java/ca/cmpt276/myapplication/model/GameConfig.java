@@ -17,28 +17,29 @@ import ca.cmpt276.myapplication.ui_features.AchievementManager;
 public class GameConfig implements Iterable<Game>{
     private final List<Game> games = new ArrayList<>();
 
-    private String gameTitle;
+    private String configTitle;
     private int poorScore;
     private int goodScore;
+    private String photoFileName;
     private int[] achievementPosCounter = new int[AchievementManager.NUMBER_OF_ACHIEVEMENT_POS];
 
-
-    public GameConfig(String gameTitle, int poorScore, int goodScore) {
-        this.gameTitle = gameTitle;
+    public GameConfig(String configTitle, int poorScore, int goodScore, String photoFileName) {
+        this.configTitle = configTitle;
         this.poorScore = poorScore;
         this.goodScore = goodScore;
+        this.photoFileName = photoFileName;
     }
 
     public List<Game> getGames() {
         return games;
     }
 
-    public String getGameTitle() {
-        return gameTitle;
+    public String getConfigTitle() {
+        return configTitle;
     }
 
-    public void setGameTitle(String gameTitle) {
-        this.gameTitle = gameTitle;
+    public void setConfigTitle(String configTitle) {
+        this.configTitle = configTitle;
     }
 
     public Game getGameAtIndex(int configPos)
@@ -69,6 +70,13 @@ public class GameConfig implements Iterable<Game>{
     public int[] getAchievementPosCounter() { return achievementPosCounter; }
     public boolean isEmpty(){ return games.isEmpty(); }
 
+    public String getPhotoFileName() {
+        return photoFileName;
+    }
+
+    public void setPhotoFileName(String photoFileName) {
+        this.photoFileName = photoFileName;
+    }
 
     @NonNull
     @Override
