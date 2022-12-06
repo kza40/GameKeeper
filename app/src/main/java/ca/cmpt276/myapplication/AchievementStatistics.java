@@ -11,7 +11,9 @@ import android.view.View;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.Description;
+import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
@@ -26,6 +28,9 @@ import ca.cmpt276.myapplication.ui_features.AchievementManager;
 public class AchievementStatistics extends AppCompatActivity {
     private static final String ACHIEVEMENT_POS_COUNTER = "ca.cmpt276.myapplication: achievementPosCounter";
     private static final String THEME = "ca.cmpt276.myapplication: theme";
+    private static final int[] CHART_COLOURS = { Color.rgb(64, 89, 128), Color.rgb(149, 165, 124), Color.rgb(217, 184, 162),
+            Color.rgb(191, 134, 134), Color.rgb(179, 48, 80), Color.rgb(171, 222, 230), Color.rgb(203,170,203),
+            Color.rgb(173, 247, 182), Color.rgb(171, 196,255) };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,22 +55,20 @@ public class AchievementStatistics extends AppCompatActivity {
         }
 
         //Formatting Bar Chart
-        DecimalValueFormatter formatter = new DecimalValueFormatter();
-        Description description = new Description();
-        description.setEnabled(false);
-        BarDataSet barDataSet = new BarDataSet(achievementData, "Levels");
-        barDataSet.setColors(ColorTemplate.PASTEL_COLORS);
+        BarDataSet barDataSet = new BarDataSet(achievementData, getString(R.string.achievementLevels));
+        barDataSet.setColors(CHART_COLOURS);
         barDataSet.setValueTextColor(Color.BLACK);
         barDataSet.setValueTextSize(16f);
-        //barDataSet.setValueFormatter(formatter);
 
+        DecimalValueFormatter formatter = new DecimalValueFormatter();
         BarData barData = new BarData(barDataSet);
         barData.setValueFormatter(formatter);
 
+        Description description = new Description();
+        description.setEnabled(false);
         barChart.setFitBars(true);
         barChart.setData(barData);
         barChart.setDescription(description);
-        barChart.getLegend().setEnabled(false);
         barChart.animateY(2000);
 
         XAxis xAxis = barChart.getXAxis();
@@ -73,9 +76,25 @@ public class AchievementStatistics extends AppCompatActivity {
         xAxis.setDrawAxisLine(false);
         xAxis.setDrawGridLines(false);
 
+        YAxis yAxisLeft = barChart.getAxisLeft();
+        yAxisLeft.setDrawAxisLine(false);
+        yAxisLeft.setDrawGridLines(false);
+        yAxisLeft.setDrawLabels(false);
+
+        YAxis yAxisRight = barChart.getAxisRight();
+        yAxisRight.setDrawAxisLine(false);
+        yAxisRight.setDrawGridLines(false);
+        yAxisRight.setDrawLabels(false);
+
+        Legend legend = barChart.getLegend();
+        legend.setForm(Legend.LegendForm.LINE);
+        legend.setFormSize(16f);
+        legend.setTextSize(12f);
+
         View view = findViewById(android.R.id.content).getRootView();
         AchievementManager achievementManager = new AchievementManager(view, getIntent().getStringExtra(THEME));
 
+        //Setting xAxis Labels
         xAxis.setValueFormatter(new IndexAxisValueFormatter(achievementManager.getTitles()));
         xAxis.setLabelCount(achievementManager.getNumAchievements());
         xAxis.setLabelRotationAngle(-295);

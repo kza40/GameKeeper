@@ -64,9 +64,7 @@ public class GameConfig implements Iterable<Game>{
 
     public void addGame(Game game) {
         games.add(game);
-        if (game.getAchievementPos() > AchievementCalculator.INDEX_SUB_LEVEL_ONE) {
-            achievementPosCounter[game.getAchievementPos()]++;
-        }
+        achievementPosCounter[game.getAchievementPos()]++;
     }
     public int[] getAchievementPosCounter() { return achievementPosCounter; }
     public boolean isEmpty(){ return games.isEmpty(); }

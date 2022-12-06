@@ -12,7 +12,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import ca.cmpt276.myapplication.model.AchievementCalculator;
 import ca.cmpt276.myapplication.model.Game;
 import ca.cmpt276.myapplication.model.GameConfig;
 import ca.cmpt276.myapplication.model.ConfigManager;
@@ -107,7 +106,9 @@ public class AddGame extends AppCompatActivity {
 
     private void saveGame(int achievementPos) {
         if(isEdit) {
+            gameConfig.getAchievementPosCounter()[currentGame.getAchievementPos()]--;
             currentGame.setAchievementPos(achievementPos);
+            gameConfig.getAchievementPosCounter()[currentGame.getAchievementPos()]++;
             currentGame.setScaleFactor(difficultyToggle.getScaleFactor());
             currentGame.setNumOfPlayers(scoreCalculator.getNumPlayers());
             currentGame.setGroupScore(scoreCalculator.getTotalScore());
