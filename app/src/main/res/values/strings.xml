@@ -88,7 +88,7 @@
     <string name="you_were_n_from">You were \n from</string>
     <string name="nextachieve">nextAchieve</string>
     <string name="title_about">About</string>
-    <string name="tab_title_developers">Developers</string>
+    <string name="tab_title_developers">Developer</string>
     <string name="tab_title_resources">Resources</string>
     <string name="tab_title_help">Help</string>
     <string name="groupName">Aluminium</string>
@@ -107,7 +107,6 @@
     <string name="help_title_editGamePlay">- Editing a game play</string>
     <string name="help_instruction_editGamePlay">1. Click on the game itself\n2. Edit any of the fields\n3. Repeat steps 6-8 in \"Adding a game play\"</string>
     <string name="help_title_deleteGameConfig">- Deleting a game configuration</string>
-    <string name="resources">Images\n\n 1. https://www.freepik.com/premium-vector/neumorphic-ui-ux-design-elements-3d-vector-yellow-stars-rating-system-white-background-abstract-neumorphism-material-design-star-icons-set-achievement-rank-scale-customer-product-rating-review_27250396.htm\n\nSound\n\n 1.</string>
     <string name="default_player_count">3</string>
     <string name="default_score_zero">0</string>
     <string name="highest_achievement">You got the highest achievement possible!!!</string>
@@ -119,4 +118,40 @@
     <string name="camera_permission_msg">Camera permission required to use Camera.</string>
     <string name="achievementStats">Achievement Statistics</string>
     <string name="achievementLevels">Achievement Levels</string>
+    <string name="resources_imagesTitle">Images</string>
+    <string name="resources_soundsTitle">Sounds</string>
+    <string name="resources_stars">1. Stars</string>
+    <string name="resources_starsLink">https://www.freepik.com/premium-vector/neumorphic-ui-ux-design-elements-3d-vector-yellow-stars-rating-system-white-background-abstract-neumorphism-material-design-star-icons-set-achievement-rank-scale-customer-product-rating-review_27250396.htm</string>
+    <string name="resources_starWarsBackground">2. StarWars Background</string>
+    <string name="resources_starWarsBackgroundLink">https://wallpapercave.com/star-wars-phone-wallpapers</string>
+    <string name="resources_fitnessBackground">3. Fitness Background</string>
+    <string name="resources_fitnessBackgroundLink">https://www.pinterest.ca/pin/155022412148238141/</string>
+    <string name="resources_spongeBobBackground">4. SpongeBob Background</string>
+    <string name="resources_SpongeBobBackgroundLink">https://www.peakpx.com/en/hd-wallpaper-desktop-nrvgi</string>
+    <string name="resources_settingsIcon">5. Settings Icon</string>
+    <string name="resources_settingsIconLink">https://www.iconfinder.com/icons/115801/settings_icon</string>
+    <string name="resources_garry">6. Garry</string>
+    <string name="resources_garryLink">https://www.pngegg.com/en/search?q=gary</string>
+    <string name="resources_Lightsaber">7. Lightsaber</string>
+    <string name="resources_lightsaberLink">https://www.nicepng.com/png/full/201-2013145_star-wars-lightsaber-png.png</string>
+    <string name="resources_defaultConfigPhoto">8. Default Config Photo</string>
+    <string name="resources_defaultConfigPhotoLink"><![CDATA[https://media.istockphoto.com/id/1086015802/vector/board-game-icons.jpg?s=612x612&w=0&k=20&c=KfgWqcgx879XbKj197R3oGmNh3nlbXqCAvXwfKJrWXg=]]></string>
+    <string name="resources_defaultGamePhoto">9. Default Game Photo</string>
+    <string name="resources_defaultGamePhotoLink">https://returntofreedom.org/store/wp-content/uploads/default-placeholder.png</string>
+    <string name="resources_achievementStatisticsIcon">10. Achievement Statistics Icon</string>
+    <string name="resources_achievementStatisticsIconLink"><![CDATA[https://www.flaticon.com/free-icon/bar-graph_2214523?term=chart&page=1&position=87&page=1&position=87&related_id=2214523&origin=search#]]></string>
+    <string name="resources_celebration">1. Celebration</string>
+    <string name="resources_celebrationLink">https://www.zapsplat.com/</string>
+    <string name="resources_barbell">11. Barbell</string>
+    <string name="resources_barbellLink">https://cdn-icons-png.flaticon.com/512/2917/2917719.png</string>
+    <string name="resources_fitnessThemeIcon">12. Fitness Theme Icon</string>
+    <string name="resources_fitnessThemeIconLink">https://depositphotos.com/vector-images/workout-icons.html</string>
+    <string name="resources_starWarsThemeIcon">13. StarWars Theme Icon</string>
+    <string name="resources_starWarsThemeIconLink">https://www.vectorstock.com/royalty-free-vector/star-wars-glyph-icon-pack-vector-21505033</string>
+    <string name="resources_spongeBobThemeIcon">14. SpongeBob Theme Icon</string>
+    <string name="resources_spongeBobThemeIconLink">https://vector.me/browse/223959/spongebob_squarepants_vector_pack_faces</string>
+    <string name="resources_developersBackgrund">15. Developers Page Background</string>
+    <string name="resources_developersBackgroundLink">https://wallpaper.dog/dark-purple-gradient-iphone-wallpapers</string>
+    <string name="resources_configEmptyState">16. Config Empty State</string>
+    <string name="resources_configEmptyStateLink">https://www.hongkiat.com/blog/mobile-app-empty-state-designs/</string>
 </resources>
