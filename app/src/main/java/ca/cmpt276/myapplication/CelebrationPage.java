@@ -4,25 +4,37 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Environment;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.File;
+
 import ca.cmpt276.myapplication.model.ConfigManager;
+import ca.cmpt276.myapplication.model.GameConfig;
 import ca.cmpt276.myapplication.ui_features.AchievementManager;
 
 public class CelebrationPage extends AppCompatActivity {
     private static final String ACHIEVEMENT_POS = "CelebrationPage: Achievement pos";
     private static final String BOUNDARY_DIFFERENCE = "CelebrationPage: nextBoundary difference";
+    private static final String GAME_POSITION="CelebrationPage: Game Position";
+    private static final String CONFIG_POSITION="CelebrationPage: Config Position";
+    public final String APP_TAG = "MyCustomApp";
 
     private ConfigManager configManager;
     private AchievementManager achievementManager;
     private String theme;
     private int achievementPos;
+    private int gamePos;
+    private int configPos;
     private int nextScoreDifference;
 
     private ImageView ivReload;
@@ -30,6 +42,7 @@ public class CelebrationPage extends AppCompatActivity {
     private TextView tvNextAchievement;
     private ImageView leftItem;
     private ImageView rightItem;
+    private ImageView selfiePhoto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,12 +51,31 @@ public class CelebrationPage extends AppCompatActivity {
 
         nextScoreDifference = getIntent().getIntExtra(BOUNDARY_DIFFERENCE, -1);
         achievementPos = getIntent().getIntExtra(ACHIEVEMENT_POS, -1);
-
+        gamePos=getIntent().getIntExtra(GAME_POSITION,-1);
+        configPos=getIntent().getIntExtra(CONFIG_POSITION,-1);
         configManager = ConfigManager.getInstance();
         tvAchievementEarned = findViewById(R.id.tvAchievementName);
         tvNextAchievement = findViewById(R.id.tvNextAchievementMessage);
         ivReload = findViewById(R.id.ivReload);
 
+
+        selfiePhoto=findViewById(R.id.ivSelfie);
+
+        File mediaStorageDir = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), APP_TAG);
+        if (!mediaStorageDir.exists() && !mediaStorageDir.mkdirs()){
+            Log.d(APP_TAG, "failed to create directory");
+        }
+        File photoFile = new File(mediaStorageDir.getPath() + File.separator + configManager.getGameConfigAtIndex(configPos).getGameAtIndex(gamePos).getPhotoFileName());
+        Bitmap takenImage = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
+
+        if(takenImage!=null)
+        {
+            selfiePhoto.setImageBitmap(takenImage);
+        }
+        else
+        {
+            selfiePhoto.setImageResource(R.drawable.default_game);
+        }
         setContentTheme();
         View view = findViewById(android.R.id.content).getRootView();
         achievementManager = new AchievementManager(view, theme);
@@ -119,10 +151,12 @@ public class CelebrationPage extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public static Intent makeIntent(Context context, int achievementPos, int boundaryDifference) {
+    public static Intent makeIntent(Context context, int achievementPos, int boundaryDifference,int gamePosition, int configPosition) {
         Intent intent = new Intent(context, CelebrationPage.class);
         intent.putExtra(ACHIEVEMENT_POS, achievementPos);
         intent.putExtra(BOUNDARY_DIFFERENCE, boundaryDifference);
+        intent.putExtra(GAME_POSITION,gamePosition);
+        intent.putExtra(CONFIG_POSITION,configPosition);
         return intent;
     }
 
