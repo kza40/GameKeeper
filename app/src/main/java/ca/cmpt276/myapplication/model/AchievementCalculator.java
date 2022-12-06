@@ -51,22 +51,21 @@ public class AchievementCalculator {
         return boundaries;
     }
 
-    public static int getPointsToNextLevel(int numAchievements, int numPlayers, int poorScore, int greatScore, int totalScore, float scaleFactor, int scorePlacement){
+    public static int getPointsToNextLevel(int numAchievements, int numPlayers, int poorScore, int greatScore, int totalScore, float scaleFactor, int achievementPos){
         List<Integer> boundaries = getBoundaries(numAchievements, numPlayers, poorScore, greatScore, scaleFactor);
 
-        if (scorePlacement == numAchievements - 1) {
-            return abs(boundaries.get(scorePlacement) - totalScore);
+        if (achievementPos == numAchievements) {
+            return 0;
         }
 
-        return abs(boundaries.get(scorePlacement + 1) - totalScore);
+        return abs(boundaries.get(achievementPos) - totalScore);
     }
 
-    public static int getScorePlacement(int numAchievements, int numPlayers, int poorScore, int greatScore, int totalScore, float scaleFactor) {
+    public static int getPosition(int numAchievements, int numPlayers, int poorScore, int greatScore, int totalScore, float scaleFactor) {
         boolean isReversed = false;
         List<Integer> boundaries = getBoundaries(numAchievements, numPlayers, poorScore, greatScore, scaleFactor);
 
         int index = 0;
-        int placement = -1;
 
         if (poorScore > greatScore) {
             isReversed = true;
@@ -79,11 +78,10 @@ public class AchievementCalculator {
             else if (!isReversed && totalScore < boundaries.get(index)) {
                 break;
             }
-            placement++;
             index++;
         }
 
-        return placement;
+        return index;
     }
 
     public static void applyDifficulty(List<Integer> boundaries, float scaleFactor) {

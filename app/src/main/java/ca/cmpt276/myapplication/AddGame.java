@@ -82,7 +82,7 @@ public class AddGame extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.add_game_menu, menu);
+        getMenuInflater().inflate(R.menu.add_x_menu, menu);
         return true;
     }
 
@@ -206,7 +206,9 @@ public class AddGame extends AppCompatActivity {
 
     private void saveGame(int achievementPos) {
         if(isEdit) {
+            gameConfig.getAchievementPosCounter()[currentGame.getAchievementPos()]--;
             currentGame.setAchievementPos(achievementPos);
+            gameConfig.getAchievementPosCounter()[currentGame.getAchievementPos()]++;
             currentGame.setScaleFactor(difficultyToggle.getScaleFactor());
             currentGame.setNumOfPlayers(scoreCalculator.getNumPlayers());
             currentGame.setGroupScore(scoreCalculator.getTotalScore());

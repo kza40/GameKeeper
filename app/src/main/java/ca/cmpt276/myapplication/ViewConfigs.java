@@ -81,9 +81,9 @@ public class ViewConfigs extends AppCompatActivity {
     private void populateListView() {
             List<String> theConfigs = new ArrayList<>();
             for (GameConfig gameConfig : configManager) {
-                theConfigs.add(gameConfig.getGameTitle());
+                theConfigs.add(gameConfig.getConfigTitle());
             }
-            adapter=new GameConfigAdapter(ViewConfigs.this,R.layout.adapter_view,configManager.getGameConfigs());
+            adapter=new GameConfigAdapter(ViewConfigs.this,R.layout.config_row,configManager.getGameConfigs());
             configsList.setAdapter(adapter);
 
     }

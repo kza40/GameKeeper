@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="100"
+    android:descendantFocusability="blocksDescendants">
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="20">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="100">
+
+            <ImageView
+                android:id="@+id/ivConfigPhoto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="80"
+                android:scaleType="fitCenter"
+                tools:srcCompat="@drawable/default_config" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="20"
+                android:weightSum="100">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:weightSum="130">
+
+                    <TextView
+                        android:id="@+id/tvTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_weight="10"
+                        android:text="TextView"
+                        android:fontFamily="@font/font_main"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <ImageButton
+                        android:id="@+id/btnAchievementStats"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_weight="30"
+                        android:background="@color/white"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/graph" />
+
+                    <ImageButton
+                        android:id="@+id/btnAchievement"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_weight="30"
+                        android:background="@color/white"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/achievement" />
+
+                    <ImageButton
+                        android:id="@+id/btnEdit"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_weight="30"
+                        android:background="@color/white"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/edit" />
+
+                    <ImageButton
+                        android:id="@+id/btnDelete"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_weight="30"
+                        android:background="@color/white"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/delete" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:weightSum="100">
+                    <TextView
+                        android:id="@+id/tvPoorScore"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_weight="50"
+                        android:fontFamily="@font/font_main"
+                        android:text="TextView" />
+                    <TextView
+                        android:id="@+id/tvGoodScore"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_weight="50"
+                        android:fontFamily="@font/font_main"
+                        android:text="TextView" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
