@@ -26,6 +26,10 @@ import ca.cmpt276.myapplication.model.DecimalValueFormatter;
 import ca.cmpt276.myapplication.ui_features.AchievementManager;
 
 public class AchievementStatistics extends AppCompatActivity {
+    private BarChart barChart;
+    private ArrayList<BarEntry> achievementData;
+    private int[]achievementPosCounter;
+
     private static final String ACHIEVEMENT_POS_COUNTER = "ca.cmpt276.myapplication: achievementPosCounter";
     private static final String THEME = "ca.cmpt276.myapplication: theme";
     private static final int[] CHART_COLOURS = { Color.rgb(64, 89, 128), Color.rgb(149, 165, 124), Color.rgb(217, 184, 162),
@@ -43,18 +47,24 @@ public class AchievementStatistics extends AppCompatActivity {
         getSupportActionBar().setTitle(R.string.achievementStats);
 
         //Initialize achievementPosCounter from gameConfig class
-        int[] achievementPosCounter;
         Bundle extras = getIntent().getExtras();
         achievementPosCounter = extras.getIntArray(ACHIEVEMENT_POS_COUNTER);
 
-        //Input data into Bar Chart
-        BarChart barChart = findViewById(R.id.barChart);
-        ArrayList<BarEntry> achievementData = new ArrayList<>();
-        for (int i = 0; i < AchievementManager.NUMBER_OF_ACHIEVEMENT_POS; i++) {
-            achievementData.add(new BarEntry(i, achievementPosCounter[i]));
-        }
+        inputDataToChart();
+        setupBarChart();
+        formatChartAxis();
+        setupLegend();
+    }
 
-        //Formatting Bar Chart
+    private void setupLegend() {
+        Legend legend = barChart.getLegend();
+        legend.setForm(Legend.LegendForm.LINE);
+        legend.setFormSize(16f);
+        legend.setTextSize(12f);
+    }
+
+    private void setupBarChart() {
+        barChart = findViewById(R.id.barChart);
         BarDataSet barDataSet = new BarDataSet(achievementData, getString(R.string.achievementLevels));
         barDataSet.setColors(CHART_COLOURS);
         barDataSet.setValueTextColor(Color.BLACK);
@@ -70,7 +80,16 @@ public class AchievementStatistics extends AppCompatActivity {
         barChart.setData(barData);
         barChart.setDescription(description);
         barChart.animateY(2000);
+    }
 
+    private void inputDataToChart() {
+        achievementData = new ArrayList<>();
+        for (int i = 0; i < AchievementManager.NUMBER_OF_ACHIEVEMENT_POS; i++) {
+            achievementData.add(new BarEntry(i, achievementPosCounter[i]));
+        }
+    }
+
+    private void formatChartAxis() {
         XAxis xAxis = barChart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.TOP);
         xAxis.setDrawAxisLine(false);
@@ -86,19 +105,12 @@ public class AchievementStatistics extends AppCompatActivity {
         yAxisRight.setDrawGridLines(false);
         yAxisRight.setDrawLabels(false);
 
-        Legend legend = barChart.getLegend();
-        legend.setForm(Legend.LegendForm.LINE);
-        legend.setFormSize(16f);
-        legend.setTextSize(12f);
-
+        //Setting xAxis Labels
         View view = findViewById(android.R.id.content).getRootView();
         AchievementManager achievementManager = new AchievementManager(view, getIntent().getStringExtra(THEME));
-
-        //Setting xAxis Labels
         xAxis.setValueFormatter(new IndexAxisValueFormatter(achievementManager.getTitles()));
         xAxis.setLabelCount(achievementManager.getNumAchievements());
         xAxis.setLabelRotationAngle(-295);
-
     }
 
     public static Intent makeIntent(Context context, int[] achievementPosCounter, String theme) {
