@@ -206,7 +206,9 @@ public class AddGame extends AppCompatActivity {
 
     private void saveGame(int achievementPos) {
         if(isEdit) {
+            gameConfig.getAchievementPosCounter()[currentGame.getAchievementPos()]--;
             currentGame.setAchievementPos(achievementPos);
+            gameConfig.getAchievementPosCounter()[currentGame.getAchievementPos()]++;
             currentGame.setScaleFactor(difficultyToggle.getScaleFactor());
             currentGame.setNumOfPlayers(scoreCalculator.getNumPlayers());
             currentGame.setGroupScore(scoreCalculator.getTotalScore());

@@ -11,6 +11,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import ca.cmpt276.myapplication.PreviewAchievements;
+import ca.cmpt276.myapplication.ui_features.AchievementManager;
+
 public class GameConfig implements Iterable<Game>{
     private final List<Game> games = new ArrayList<>();
 
@@ -18,6 +21,7 @@ public class GameConfig implements Iterable<Game>{
     private int poorScore;
     private int goodScore;
     private String photoFileName;
+    private int[] achievementPosCounter = new int[AchievementManager.NUMBER_OF_ACHIEVEMENT_POS];
 
     public GameConfig(String configTitle, int poorScore, int goodScore, String photoFileName) {
         this.configTitle = configTitle;
@@ -59,8 +63,11 @@ public class GameConfig implements Iterable<Game>{
         this.goodScore = goodScore;
     }
 
-    public void addGame(Game game) { games.add(game); }
-
+    public void addGame(Game game) {
+        games.add(game);
+        achievementPosCounter[game.getAchievementPos()]++;
+    }
+    public int[] getAchievementPosCounter() { return achievementPosCounter; }
     public boolean isEmpty(){ return games.isEmpty(); }
 
     public String getPhotoFileName() {

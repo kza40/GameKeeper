@@ -33,6 +33,7 @@
     <string name="good_score_colon">"Good Score: "</string>
     <string name="score_colon">"Score: "</string>
     <string-array name="theme_fitness_names">
+        <item>Natural Selected</item>
         <item>Casual Walker</item>
         <item>Treadmill Treader</item>
         <item>Mountain Explorer</item>
@@ -43,6 +44,7 @@
         <item>The Grand Gymmer</item>
     </string-array>
     <string-array name="theme_starwars_names">
+        <item>Jabba the Hut</item>
         <item>Clone Cadet</item>
         <item>The Younglings</item>
         <item>Midshipmans</item>
@@ -53,6 +55,7 @@
         <item>Grand Admiral</item>
     </string-array>
     <string-array name="theme_spongebob_names">
+        <item>Tattletale Strangler</item>
         <item>Crusty Crab</item>
         <item>Naughty Plankton</item>
         <item>Grumpy Squidward</item>
@@ -114,4 +117,6 @@
     <string name="add_config_photo_caption">What does your game look like? Tap the image to take a photo!</string>
     <string name="config_photo_caption">\"Photo for \"</string>
     <string name="camera_permission_msg">Camera permission required to use Camera.</string>
+    <string name="achievementStats">Achievement Statistics</string>
+    <string name="achievementLevels">Achievement Levels</string>
 </resources>

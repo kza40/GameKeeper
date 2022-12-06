@@ -40,7 +40,7 @@
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:weightSum="100">
+                    android:weightSum="130">
 
                     <TextView
                         android:id="@+id/tvTitle"
@@ -51,6 +51,15 @@
                         android:fontFamily="@font/font_main"
                         android:textSize="18sp"
                         android:textStyle="bold" />
+
+                    <ImageButton
+                        android:id="@+id/btnAchievementStats"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_weight="30"
+                        android:background="@color/white"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/graph" />
 
                     <ImageButton
                         android:id="@+id/btnAchievement"
@@ -105,17 +114,8 @@
 
             </LinearLayout>
 
-
         </LinearLayout>
-
-
-
-
-        </LinearLayout>
-
-
-
 
     </LinearLayout>
 
-
+</LinearLayout>
