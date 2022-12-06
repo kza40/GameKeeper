@@ -85,7 +85,7 @@
     <string name="you_were_n_from">You were \n from</string>
     <string name="nextachieve">nextAchieve</string>
     <string name="title_about">About</string>
-    <string name="tab_title_developers">Developers</string>
+    <string name="tab_title_developers">Developer</string>
     <string name="tab_title_resources">Resources</string>
     <string name="tab_title_help">Help</string>
     <string name="groupName">Aluminium</string>
@@ -134,4 +134,16 @@
     <string name="resources_achievementStatisticsIconLink"><![CDATA[https://www.flaticon.com/free-icon/bar-graph_2214523?term=chart&page=1&position=87&page=1&position=87&related_id=2214523&origin=search#]]></string>
     <string name="resources_celebration">1. Celebration</string>
     <string name="resources_celebrationLink">https://www.zapsplat.com/</string>
+    <string name="resources_barbell">11. Barbell</string>
+    <string name="resources_barbellLink">https://cdn-icons-png.flaticon.com/512/2917/2917719.png</string>
+    <string name="resources_fitnessThemeIcon">12. Fitness Theme Icon</string>
+    <string name="resources_fitnessThemeIconLink">https://depositphotos.com/vector-images/workout-icons.html</string>
+    <string name="resources_starWarsThemeIcon">13. StarWars Theme Icon</string>
+    <string name="resources_starWarsThemeIconLink">https://www.vectorstock.com/royalty-free-vector/star-wars-glyph-icon-pack-vector-21505033</string>
+    <string name="resources_spongeBobThemeIcon">14. SpongeBob Theme Icon</string>
+    <string name="resources_spongeBobThemeIconLink">https://vector.me/browse/223959/spongebob_squarepants_vector_pack_faces</string>
+    <string name="resources_developersBackgrund">15. Developers Page Background</string>
+    <string name="resources_developersBackgroundLink">https://wallpaper.dog/dark-purple-gradient-iphone-wallpapers</string>
+    <string name="resources_configEmptyState">16. Config Empty State</string>
+    <string name="resources_configEmptyStateLink">https://www.hongkiat.com/blog/mobile-app-empty-state-designs/</string>
 </resources>
