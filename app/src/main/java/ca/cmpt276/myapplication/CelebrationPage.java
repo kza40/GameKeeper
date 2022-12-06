@@ -4,21 +4,29 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Environment;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.File;
+
 import ca.cmpt276.myapplication.model.ConfigManager;
+import ca.cmpt276.myapplication.model.GameConfig;
 import ca.cmpt276.myapplication.ui_features.AchievementManager;
 
 public class CelebrationPage extends AppCompatActivity {
     private static final String ACHIEVEMENT_POS = "CelebrationPage: Achievement pos";
     private static final String BOUNDARY_DIFFERENCE = "CelebrationPage: nextBoundary difference";
     private static final String GAME_POSITION="CelebrationPage: Game Position";
+    public final String APP_TAG = "MyCustomApp";
 
     private ConfigManager configManager;
     private AchievementManager achievementManager;
@@ -47,6 +55,24 @@ public class CelebrationPage extends AppCompatActivity {
         tvNextAchievement = findViewById(R.id.tvNextAchievementMessage);
         ivReload = findViewById(R.id.ivReload);
 
+
+        selfiePhoto=findViewById(R.id.ivSelfie);
+
+        File mediaStorageDir = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), APP_TAG);
+        if (!mediaStorageDir.exists() && !mediaStorageDir.mkdirs()){
+            Log.d(APP_TAG, "failed to create directory");
+        }
+        File photoFile = new File(mediaStorageDir.getPath() + File.separator + configManager.getGameConfigAtIndex(0).getGameAtIndex(gamePos).getPhotoFileName());
+        Bitmap takenImage = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
+
+        if(takenImage!=null)
+        {
+            selfiePhoto.setImageBitmap(takenImage);
+        }
+        else
+        {
+            selfiePhoto.setImageResource(R.drawable.default_game);
+        }
         setContentTheme();
         View view = findViewById(android.R.id.content).getRootView();
         achievementManager = new AchievementManager(view, theme);
