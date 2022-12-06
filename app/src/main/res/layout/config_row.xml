@@ -8,13 +8,6 @@
     android:weightSum="100"
     android:descendantFocusability="blocksDescendants">
 
-    <!--    <ImageView-->
-    <!--        android:id="@+id/winnerIcon"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="60dp"-->
-    <!--        android:layout_weight="80"-->
-    <!--        tools:srcCompat="@drawable/edit" />-->
-
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -29,8 +22,8 @@
 
             <ImageView
                 android:id="@+id/ivConfigPhoto"
-                android:layout_width="wrap_content"
-                android:layout_height="70dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_weight="80"
                 android:scaleType="fitCenter"
                 tools:srcCompat="@drawable/img_default" />
