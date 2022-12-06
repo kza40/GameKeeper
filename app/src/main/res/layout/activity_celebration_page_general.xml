@@ -179,4 +179,16 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.62" />
 
+    <ImageView
+        android:id="@+id/ivSelfie"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintBottom_toTopOf="@+id/hGuideline20p"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineRightMargin"
+        app:layout_constraintStart_toStartOf="@+id/guidelineLeftMargin"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/default_game" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
