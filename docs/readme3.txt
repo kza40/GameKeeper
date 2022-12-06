@@ -6,3 +6,4 @@
 - Click on the dice icon to add a picture
 - You may click on the image to change it
 - Click on the bar chart on the right side of the game config to view its stats
+- Added optional feature to display image on celebration page
