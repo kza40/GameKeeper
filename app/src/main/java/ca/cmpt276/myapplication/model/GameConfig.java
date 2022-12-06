@@ -67,6 +67,10 @@ public class GameConfig implements Iterable<Game>{
         return photoFileName;
     }
 
+    public void setPhotoFileName(String photoFileName) {
+        this.photoFileName = photoFileName;
+    }
+
     @NonNull
     @Override
     public Iterator<Game> iterator() {

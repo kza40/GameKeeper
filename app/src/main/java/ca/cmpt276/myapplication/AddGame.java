@@ -200,7 +200,6 @@ public class AddGame extends AppCompatActivity {
     }
 
     private void saveGame(int achievementPos) {
->>>>>>>>> Temporary merge branch 2
         if(isEdit) {
             currentGame.setAchievementPos(achievementPos);
             currentGame.setScaleFactor(difficultyToggle.getScaleFactor());
