@@ -66,50 +66,50 @@ public class AchievementCalculatorTest {
     // getScorePlacement - Poor score < Great score
     @Test
     public void testAchievedLevelZero(){
-        assertEquals(-1, AchievementCalculator.getPosition(
+        assertEquals(0, AchievementCalculator.getPosition(
                 8, 1, 55, 625, 54, 100.0f));
     }
 
     @Test
     public void testAchievedLevelOne(){
-        assertEquals(0, AchievementCalculator.getPosition(
+        assertEquals(1, AchievementCalculator.getPosition(
                 8, 1, 55, 625, 55, 100.0f));
     }
 
     @Test
     public void testAchievedLevelEight(){
-        assertEquals(7, AchievementCalculator.getPosition(
+        assertEquals(8, AchievementCalculator.getPosition(
                 8, 1, 55, 625, 625, 100.0f));
     }
 
     @Test
     public void testAchievedLevelEightExceeded(){
-        assertEquals(7, AchievementCalculator.getPosition(
+        assertEquals(8, AchievementCalculator.getPosition(
                 8, 1, 55, 625, 626, 100.0f));
     }
 
     // getScorePlacement - Poor score > Great score
     @Test
     public void testAchievedLevelZeroReversed(){
-        assertEquals(-1, AchievementCalculator.getPosition(
+        assertEquals(0, AchievementCalculator.getPosition(
                 8, 1, 800, 5, 801, 100.0f));
     }
 
     @Test
     public void testAchievedLevelOneReversed(){
-        assertEquals(0, AchievementCalculator.getPosition(
+        assertEquals(1, AchievementCalculator.getPosition(
                 8, 1, 800, 5, 800, 100.0f));
     }
 
     @Test
     public void testAchievedLevelEightReversed(){
-        assertEquals(7, AchievementCalculator.getPosition(
+        assertEquals(8, AchievementCalculator.getPosition(
                 8, 1, 800, 5, 5, 100.0f));
     }
 
     @Test
     public void testAchievedLevelEightExceededReversed(){
-        assertEquals(7, AchievementCalculator.getPosition(
+        assertEquals(8, AchievementCalculator.getPosition(
                 8, 1, 800, 5, 4, 100.0f));
     }
 
