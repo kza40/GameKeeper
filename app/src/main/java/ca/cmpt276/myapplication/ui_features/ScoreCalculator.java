@@ -41,15 +41,20 @@ public class ScoreCalculator {
     private boolean isReadyForSave;
     private int numActiveFields;
     private int totalScore;
+    private ImageView capturedImage;
+    private boolean isEdit;
 
-    public ScoreCalculator(View view, Context context, Game currentGame) {
+    public ScoreCalculator(View view, Context context, Game currentGame,Boolean isEdit) {
         mView = view;
         mContext = context;
         mCurrentGame = currentGame;
+        this.isEdit=isEdit;
         setupUI();
     }
 
     private void setupUI() {
+        capturedImage=mView.findViewById(R.id.imageViewSelfie);
+
         tvTotalScore = mView.findViewById(R.id.tvTotalScore);
         edtPlayerCount = mView.findViewById(R.id.edtNumPlayersDisplay);
 
