@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CelebrationPage"
+    android:background="#eff2f4">
+
+    <ImageView
+        android:id="@+id/ivBackground"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/starwars_background" />
+
+    <ImageView
+        android:id="@+id/ivSetting"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintDimensionRatio="1:1"
+        android:contentDescription="@string/theme_setting"
+        android:onClick="onSettingSelected"
+        app:layout_constraintBottom_toTopOf="@+id/hGuideline20p"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineLeftMargin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/setting_icon" />
+
+    <ImageView
+        android:id="@+id/ivReload"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintBottom_toTopOf="@+id/hGuideline20p"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guidelineRightMargin"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/reload" />
+
+    <ImageView
+        android:id="@+id/leftAnimImage"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        android:rotation="-90"
+        app:layout_constraintBottom_toBottomOf="@+id/guidelineBottomImages"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintStart_toStartOf="@+id/guidelineLeftMargin"
+        app:layout_constraintTop_toTopOf="@+id/guidelineTopImages"
+        app:srcCompat="@drawable/saber_flipped" />
+
+    <ImageView
+        android:id="@+id/rightAnimImage"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:rotation="90"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="@+id/guidelineBottomImages"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineRightMargin"
+        app:layout_constraintTop_toTopOf="@+id/guidelineTopImages"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/saber" />
+
+    <TextView
+        android:id="@+id/tvYouGot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#8888"
+        android:fontFamily="@font/font_main_bold"
+        android:shadowColor="#000000"
+        android:shadowDx="3"
+        android:shadowDy="3"
+        android:shadowRadius="1"
+        android:text="@string/congratulations_message"
+        android:textAlignment="center"
+        android:textColor="#FFDE00"
+        android:textSize="28sp"
+        app:layout_constraintBottom_toTopOf="@+id/hGuideline30p"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/hGuideline20p" />
+
+    <TextView
+        android:id="@+id/tvAchievementName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#8888"
+        android:fontFamily="@font/font_main"
+        android:textColor="#FFDE00"
+        android:shadowColor="#000000"
+        android:shadowDx="3"
+        android:shadowDy="3"
+        android:shadowRadius="1"
+        android:text="You got (achievement awarded)!"
+        android:textAlignment="center"
+        android:textSize="28sp"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineTopImages"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/hGuideline30p" />
+
+    <TextView
+        android:id="@+id/tvNextAchievementMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="You were x points away from (next achievement)"
+        android:fontFamily="@font/font_main"
+        android:textSize="28sp"
+        android:textColor="#FFDE00"
+        android:shadowColor="#000000"
+        android:shadowDx="3"
+        android:shadowDy="3"
+        android:shadowRadius="1"
+        android:textAlignment="center"
+        android:background="#8888"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/hGuideline75p" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineLeftMargin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.25" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/hGuideline20p"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.20" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/hGuideline75p"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.75" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineRightMargin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.75" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/hGuideline30p"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.30" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineTopImages"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.45" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineBottomImages"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.62" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

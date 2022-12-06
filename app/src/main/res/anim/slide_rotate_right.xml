@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:fillAfter="true">
     <rotate
-        android:duration="2000"
+        android:duration="1500"
         android:fromDegrees="360"
         android:pivotX="50%"
         android:pivotY="50%"
@@ -11,7 +11,7 @@
 
     <translate
         android:fromXDelta="0%p"
-        android:toXDelta="-10%p"
-        android:duration="2000" />
+        android:toXDelta="-22%p"
+        android:duration="1500" />
 
 </set>

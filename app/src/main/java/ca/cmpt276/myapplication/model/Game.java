@@ -11,7 +11,7 @@ import java.time.format.DateTimeFormatter;
  */
 
 public class Game {
-    private String achievementEarned;
+    private int achievementPos;
     private int numOfPlayers;
     private int groupScore;
     private float scaleFactor;
@@ -19,9 +19,9 @@ public class Game {
     private String datePlayed;
     private String photoFileName;
 
-    public Game(String achievementEarned, int numOfPlayers, int groupScore, float scaleFactor,String[] playerScores,String photoFileName)
+    public Game(int achievementPos, int numOfPlayers, int groupScore, float scaleFactor,String[] playerScores,String photoFileName)
     {
-        this.achievementEarned = achievementEarned;
+        this.achievementPos = achievementPos;
         this.numOfPlayers = numOfPlayers;
         this.groupScore = groupScore;
         this.scaleFactor = scaleFactor;
@@ -49,8 +49,8 @@ public class Game {
         return datePlayed;
     }
 
-    public String getAchievementEarned() {
-        return achievementEarned;
+    public int getAchievementPos() {
+        return achievementPos;
     }
 
     public int getGroupScore() {
@@ -61,8 +61,8 @@ public class Game {
         return scaleFactor;
     }
 
-    public void setAchievementEarned(String achievementEarned) {
-        this.achievementEarned = achievementEarned;
+    public void setAchievementPos(int achievementPos) {
+        this.achievementPos = achievementPos;
     }
 
     public void setNumOfPlayers(int numOfPlayers) {

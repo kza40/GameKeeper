@@ -37,20 +37,22 @@ import ca.cmpt276.myapplication.model.Game;
 import ca.cmpt276.myapplication.model.GameConfig;
 import ca.cmpt276.myapplication.model.ConfigManager;
 import ca.cmpt276.myapplication.model.SharedPreferenceManager;
+import ca.cmpt276.myapplication.ui_features.AchievementManager;
+import ca.cmpt276.myapplication.ui_features.DifficultyToggle;
+import ca.cmpt276.myapplication.ui_features.ScoreCalculator;
 
 public class AddGame extends AppCompatActivity {
-
-
     //Constants
     public static final String CONFIG_POSITION = "AddGame: Config position";
     public static final String GAME_POSITION = "AddGame: Game position";
-    public static final String CELEBRATION_FRAGMENT = "CelebrationFragment";
+
     public static final String DEFAULT_PHOTO_JPG = "photo.jpg";
 
     //Features
     private ImageView imageViewPicture;
     private DifficultyToggle difficultyToggle;
     private ScoreCalculator scoreCalculator;
+    private AchievementManager achievementManager;
 
     //Game Variables
     private ConfigManager configManager;
@@ -58,9 +60,7 @@ public class AddGame extends AppCompatActivity {
     private Game currentGame;
     private boolean isEdit;
 
-    //Achievements
-    private String[] themeTitles;
-    private String titleSubLevelOne;
+
 
     Camera camera;
 
@@ -80,12 +80,12 @@ public class AddGame extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_game);
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         setTitle(getString(R.string.add_game_title));
         camera=new Camera(AddGame.this,this,activityLauncher);
         setupGameObjects();
-        loadCurrentTheme();
         setupFeatures();
     }
 
@@ -110,20 +110,6 @@ public class AddGame extends AppCompatActivity {
         }
     }
 
-    private void loadCurrentTheme() {
-        String theme = configManager.getTheme();
-        if (theme.equals(ThemeSetting.THEME_FITNESS)) {
-            themeTitles = getResources().getStringArray(R.array.theme_fitness_names);
-            titleSubLevelOne = getString(R.string.fitnessLvl0);
-        } else if (theme.equals(ThemeSetting.THEME_SPONGEBOB)) {
-            themeTitles = getResources().getStringArray(R.array.theme_spongebob_names);
-            titleSubLevelOne = getString(R.string.spongeBobLvl0);
-        } else {
-            themeTitles = getResources().getStringArray(R.array.theme_starwars_names);
-            titleSubLevelOne = getString(R.string.starWarsLvl0);
-        }
-    }
-
     private void setupFeatures() {
         imageViewPicture = findViewById(R.id.imageViewSelfie);
 
@@ -140,6 +126,7 @@ public class AddGame extends AppCompatActivity {
                 }
             }
         }
+        achievementManager = new AchievementManager(view, configManager.getTheme());
         scoreCalculator = new ScoreCalculator(view, getApplicationContext(), currentGame,isEdit);
         imageViewPicture.setOnClickListener(view1-> {
             if(scoreCalculator.isReadyForSave())
@@ -168,9 +155,16 @@ public class AddGame extends AppCompatActivity {
                     }
                     else
                     {
-                        String achievementEarned = getAchievementName(scoreCalculator.getTotalScore());
-                        saveGame(achievementEarned);
-                        celebrate(achievementEarned);
+                        int achievementPos = achievementManager.getAchievementPos(
+                                scoreCalculator.getTotalScore(),
+                                scoreCalculator.getNumPlayers(),
+                                gameConfig.getPoorScore(),
+                                gameConfig.getGoodScore(),
+                                difficultyToggle.getScaleFactor());
+
+                        saveGame(achievementPos);
+                        celebrate(achievementPos);
+                        finish();
                     }
                 }
                 else
@@ -180,9 +174,16 @@ public class AddGame extends AppCompatActivity {
             }
             else
             {
-                String achievementEarned = getAchievementName(scoreCalculator.getTotalScore());
-                saveGame(achievementEarned);
-                celebrate(achievementEarned);
+                int achievementPos = achievementManager.getAchievementPos(
+                        scoreCalculator.getTotalScore(),
+                        scoreCalculator.getNumPlayers(),
+                        gameConfig.getPoorScore(),
+                        gameConfig.getGoodScore(),
+                        difficultyToggle.getScaleFactor());
+
+                saveGame(achievementPos);
+                celebrate(achievementPos);
+                finish();
             }
 
         }
@@ -235,9 +236,9 @@ public class AddGame extends AppCompatActivity {
         }
     }
 
-    private void saveGame(String achievementEarned) {
+    private void saveGame(int achievementPos) {
         if(isEdit) {
-            currentGame.setAchievementEarned(achievementEarned);
+            currentGame.setAchievementPos(achievementPos);
             currentGame.setScaleFactor(difficultyToggle.getScaleFactor());
             currentGame.setNumOfPlayers(scoreCalculator.getNumPlayers());
             currentGame.setGroupScore(scoreCalculator.getTotalScore());
@@ -246,19 +247,31 @@ public class AddGame extends AppCompatActivity {
             {
                 currentGame.setPhotoFileName(camera.photoFileName);
             }
-        } else {
-            Game game = new Game(achievementEarned, scoreCalculator.getNumPlayers(),
-                                 scoreCalculator.getTotalScore(), difficultyToggle.getScaleFactor(),
-                                 scoreCalculator.getScoresAsArray(), camera.photoFileName);
+        }
+        else {
+            Game game = new Game(
+                    achievementPos,
+                    scoreCalculator.getNumPlayers(),
+                    scoreCalculator.getTotalScore(),
+                    difficultyToggle.getScaleFactor(),
+                    scoreCalculator.getScoresAsArray(),
+                    camera.photoFileName);
             gameConfig.addGame(game);
         }
         new SharedPreferenceManager(getApplicationContext()).updateConfigManager(configManager);
     }
 
-    private void celebrate(String achievementEarned) {
-        FragmentManager manager = getSupportFragmentManager();
-        CelebrationFragment dialog = new CelebrationFragment(achievementEarned);
-        dialog.show(manager, CELEBRATION_FRAGMENT);
+    private void celebrate(int achievementPos) {
+        int pointDifference = achievementManager.getPointsToNextLevel(
+                        scoreCalculator.getTotalScore(),
+                        scoreCalculator.getNumPlayers(),
+                        gameConfig.getPoorScore(),
+                        gameConfig.getGoodScore(),
+                        difficultyToggle.getScaleFactor(),
+                        achievementPos);
+
+        Intent intent = CelebrationPage.makeIntent(this, achievementPos, pointDifference);
+        startActivity(intent);
     }
 
     public static Intent makeIntent(Context context,boolean isEdit, int position,int gamePosition) {

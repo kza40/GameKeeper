@@ -21,7 +21,9 @@ import java.io.File;
 import java.util.List;
 
 import ca.cmpt276.myapplication.R;
+import ca.cmpt276.myapplication.model.ConfigManager;
 import ca.cmpt276.myapplication.model.Game;
+import ca.cmpt276.myapplication.ui_features.AchievementManager;
 
 /**
  * GameAdapter class enables a complex ListView for viewing the games within a config.
@@ -46,8 +48,10 @@ public class GameAdapter extends ArrayAdapter<Game> {
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         convertView = layoutInflater.inflate(resource, parent, false);
 
+        AchievementManager achievementManager = new AchievementManager(convertView, ConfigManager.getInstance().getTheme());
         TextView achievementView = convertView.findViewById(R.id.tvAchievement);
-        achievementView.setText(getItem(position).getAchievementEarned());
+        String achievementName = achievementManager.getAchievementAtIndex(getItem(position).getAchievementPos());
+        achievementView.setText(achievementName);
 
         TextView dateView = convertView.findViewById(R.id.tvDate);
         dateView.setText(getItem(position).getDatePlayed());
