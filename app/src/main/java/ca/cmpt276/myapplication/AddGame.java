@@ -52,6 +52,7 @@ public class AddGame extends AppCompatActivity {
     private Game currentGame;
     private boolean isEdit;
     private int gamePos;
+    private int configPos;
 
     ActivityResultLauncher<Intent> activityLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
         @Override
@@ -89,7 +90,7 @@ public class AddGame extends AppCompatActivity {
 
     private void setupGameObjects() {
         Intent intent = getIntent();
-        int configPos = intent.getIntExtra(CONFIG_POSITION, -1);
+        configPos = intent.getIntExtra(CONFIG_POSITION, -1);
         configManager = ConfigManager.getInstance();
         gameConfig = configManager.getGameConfigAtIndex(configPos);
         isEdit = false;
@@ -243,12 +244,12 @@ public class AddGame extends AppCompatActivity {
         Intent intent;
         if(isEdit)
         {
-            intent = CelebrationPage.makeIntent(this, achievementPos, pointDifference,gamePos);
+            intent = CelebrationPage.makeIntent(this, achievementPos, pointDifference,gamePos,configPos);
 
         }
         else
         {
-            intent = CelebrationPage.makeIntent(this, achievementPos, pointDifference,gameConfig.getGames().size()-1);
+            intent = CelebrationPage.makeIntent(this, achievementPos, pointDifference,gameConfig.getGames().size()-1,configPos);
         }
         startActivity(intent);
     }
