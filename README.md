@@ -3,8 +3,8 @@ This project was done with a team of 4 people over 6 weeks.
 Roles changed which each iteration (3 iterations) using agile method.
 
 My roles over these 6 weeks (2 weeks each) were the following:
-Repo Manager
-Scrum Master
+Repo Manager,
+Scrum Master,
 Team Member
 
 
