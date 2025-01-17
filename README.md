@@ -47,8 +47,7 @@ This project utilized Agile methodology over three iterations, with roles rotati
 - **Scrum Master**: Facilitated team meetings, managed sprints, and ensured tasks were on track.
 - **Team Member**: Contributed to coding, testing, and feature implementation.
 
-## Optional Features
-- Display an image on the celebration page for enhanced user engagement.
+
 
 ## Acknowledgments
 GameKeeper was built with collaboration, creativity, and dedication from the entire team. Special thanks to Agile principles for guiding the iterative development process and ensuring a successful project.
