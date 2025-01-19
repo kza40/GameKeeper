@@ -11,6 +11,34 @@ GameKeeper is an intuitive application designed to help players manage and track
 - **View Gameplay Stats**: Access detailed stats via the bar chart in the Game Configs activity.
 - **Celebrate Achievements**: Display a celebratory image on the celebration page.
 
+## Visual Demos
+
+### 1. Achievements Based on Difficulty Level
+GameKeeper rewards players with achievements represented by stars (1 to 3) based on the difficulty level of the gameplay.  
+![GameKeeper2](https://github.com/user-attachments/assets/d2abdb87-1a31-4019-b955-30935a13672e)
+
+
+---
+
+### 2. Theme Customization
+Players can personalize the application by selecting from different themes to suit their preferences.  
+![GameKeeper1](https://github.com/user-attachments/assets/643b641e-584c-402c-ab9b-3a8aa2a48ac0)
+
+
+---
+
+### 3. Game Listings Overview
+A clear and organized list of saved gameplays, including player numbers, scores, and associated pictures.  
+![GameKeeper3](https://github.com/user-attachments/assets/66699758-ac69-46a8-b9e8-b324b14cdd79)
+
+
+
+### Technologies Used
+- Java
+- Android Studio
+- JUnit for testing
+- Git for version control
+
 ## How to Run the Application
 
 ### Initial Setup
